@@ -5,7 +5,11 @@ export interface Registration {
   event_year: number
   student_id: string
   name: string
+  email: string | null
+  phone: string | null
   class: string
+  birth_date: string | null
+  gender: string | null
   created_at: string
 }
 
@@ -14,29 +18,24 @@ export interface RegistrationInsert {
   student_id: string
   name: string
   class: string
+  email?: string
+  phone?: string
+  birth_date?: string
+  gender?: string
 }
 
 export interface SurveyResponse {
   id: string
   event_year: number
-  rating: number | null
-  found_info_useful: boolean | null
-  would_participate: boolean | null
+  donation_count: string | null
+  how_found: string | null
   comment: string | null
   created_at: string
 }
 
 export interface SurveyInsert {
   event_year: number
-  rating: number | null
-  found_info_useful: boolean | null
-  would_participate: boolean | null
-  comment: string | null
-}
-
-export interface AdminStats {
-  totalRegistrations: number
-  averageRating: number | null
-  usefulCount: number
-  wouldParticipateCount: number
+  donation_count: string
+  how_found: string
+  comment?: string
 }

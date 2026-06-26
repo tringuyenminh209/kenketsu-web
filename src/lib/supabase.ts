@@ -68,9 +68,11 @@ export async function fetchAvailableYears(): Promise<number[]> {
 
 // CSV export helper
 export function registrationsToCSV(rows: Registration[]): string {
-  const header = "学生番号,名前,クラス,登録日時\n"
+  const header = "学生番号,名前,所属,メール,電話番号,性別,申込日時\n"
   const body = rows
-    .map((r) => `${r.student_id},${r.name},${r.class},${r.created_at}`)
+    .map((r) =>
+      [r.student_id, r.name, r.class, r.email ?? "", r.phone ?? "", r.gender ?? "", r.created_at].join(",")
+    )
     .join("\n")
   return header + body
 }
