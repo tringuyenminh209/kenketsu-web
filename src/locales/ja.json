@@ -1,0 +1,148 @@
+{
+  "nav": {
+    "about": "献血とは",
+    "info": "基本情報",
+    "precautions": "注意事項",
+    "register": "参加申込",
+    "survey": "アンケート",
+    "flyer": "チラシ印刷",
+    "admin": "管理"
+  },
+  "hero": {
+    "tagline": "あなたの血液が、誰かの命を救う",
+    "eventLabel": "献血ボランティア活動",
+    "date": "{{date}}",
+    "time": "{{time}}",
+    "location": "{{location}}",
+    "locationDetail": "{{locationDetail}}",
+    "capacity": "定員 {{capacity}}名",
+    "cta": "参加を申し込む",
+    "countdown": {
+      "days": "日",
+      "hours": "時間",
+      "minutes": "分",
+      "seconds": "秒",
+      "until": "開催まで",
+      "ended": "イベントは終了しました"
+    }
+  },
+  "about": {
+    "title": "献血とは・献血の意義",
+    "card1": {
+      "title": "命をつなぐ",
+      "body": "1回の献血で最大3人の命を救うことができます。血液は人工的に作ることができないため、献血が唯一の供給源です。"
+    },
+    "card2": {
+      "title": "医療を支える",
+      "body": "がん治療・手術・出産など、年間約500万人が輸血を必要としています。献血は医療の最前線を支える行為です。"
+    },
+    "card3": {
+      "title": "健康チェックになる",
+      "body": "献血後に血液検査の結果を受け取ることができます。自分の健康状態を無料で確認できる機会にもなります。"
+    }
+  },
+  "info": {
+    "title": "献血の基本情報",
+    "typesTitle": "献血の種類",
+    "types": {
+      "whole": {
+        "name": "全血献血",
+        "volume": "200mL / 400mL",
+        "time": "約30〜40分",
+        "interval": "男性 12週間 / 女性 16週間"
+      },
+      "platelet": {
+        "name": "成分献血（血小板）",
+        "volume": "成分のみ採血",
+        "time": "約40〜90分",
+        "interval": "2週間"
+      }
+    },
+    "requirements": "献血の条件",
+    "reqAge": "年齢：16〜69歳（全血）/ 18〜54歳（成分）",
+    "reqWeight": "体重：男性50kg以上 / 女性45kg以上",
+    "reqHealth": "当日の体調が良好であること",
+    "faq": "よくある質問",
+    "faqItems": [
+      { "q": "初めてでも大丈夫ですか？", "a": "はい、スタッフが丁寧にサポートします。" },
+      { "q": "痛みはありますか？", "a": "針を刺す際に少し痛みを感じる場合がありますが、短時間です。" },
+      { "q": "献血後に運動できますか？", "a": "当日の激しい運動は控えてください。" }
+    ]
+  },
+  "precautions": {
+    "title": "参加前の注意事項",
+    "beforeDay": "前日まで",
+    "beforeDayItems": [
+      "十分な睡眠をとる（6時間以上推奨）",
+      "アルコールの摂取を控える",
+      "水分をこまめに摂る"
+    ],
+    "dayOf": "当日",
+    "dayOfItems": [
+      "食事を済ませてから来場する（空腹での献血は禁止）",
+      "水・スポーツドリンクを十分に飲む",
+      "体調不良の場合は無理をしない"
+    ],
+    "prohibited": "以下の場合は献血できません",
+    "prohibitedItems": [
+      "発熱・風邪症状がある",
+      "前日に多量のアルコールを摂取した",
+      "最近に手術・輸血・タトゥーを受けた",
+      "妊娠中・授乳中"
+    ]
+  },
+  "register": {
+    "title": "参加申込",
+    "subtitle": "9月15日の献血ボランティアに参加する方はこちらからお申し込みください。",
+    "studentId": "学生番号",
+    "studentIdPlaceholder": "例：SK3A-001",
+    "name": "名前",
+    "namePlaceholder": "山田 太郎",
+    "class": "クラス",
+    "classPlaceholder": "例：SK3A",
+    "submit": "申し込む",
+    "submitting": "送信中...",
+    "successTitle": "申込を受け付けました！",
+    "successBody": "ご参加ありがとうございます。当日スタッフがお待ちしております。",
+    "successClose": "閉じる",
+    "errorDuplicate": "この学生番号はすでに申込済みです。",
+    "errorGeneral": "エラーが発生しました。もう一度お試しください。",
+    "validation": {
+      "studentIdRequired": "学生番号を入力してください",
+      "nameRequired": "名前を入力してください",
+      "classRequired": "クラスを入力してください"
+    }
+  },
+  "survey": {
+    "title": "アンケート",
+    "subtitle": "このWebサイトの改善にご協力ください。",
+    "ratingLabel": "このサイトの満足度を教えてください",
+    "ratingScale": ["大変不満", "不満", "普通", "満足", "大変満足"],
+    "usefulLabel": "献血に関する情報は役に立ちましたか？",
+    "participateLabel": "今後も献血ボランティアに参加したいですか？",
+    "commentLabel": "ご意見・ご感想（任意）",
+    "commentPlaceholder": "サイトへのご感想をお聞かせください",
+    "submit": "送信する",
+    "submitting": "送信中...",
+    "successTitle": "ご回答ありがとうございました！",
+    "successBody": "いただいたご意見を今後のサイト改善に役立てます。",
+    "yes": "はい",
+    "no": "いいえ"
+  },
+  "flyer": {
+    "title": "献血ボランティア活動",
+    "printBtn": "印刷する",
+    "qrLabel": "詳細・申込はこちら",
+    "organizer": "主催：{{organizer}}"
+  },
+  "footer": {
+    "organizer": "主催：{{organizer}}",
+    "contact": "お問い合わせ：{{contact}}"
+  },
+  "common": {
+    "yes": "はい",
+    "no": "いいえ",
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました"
+  }
+}
