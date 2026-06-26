@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>システム設計書 / 献血イベントWebサイト</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Yu Gothic', 'Meiryo', 'Hiragino Kaku Gothic ProN', sans-serif;
+  font-size: 10.5pt;
+  color: #000;
+  background: #ccc;
+}
+
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 8mm auto;
+  padding: 14mm 16mm 14mm;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+}
+
+/* ── Doc Header ── */
+.doc-header {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 8mm;
+  font-size: 8pt;
+}
+.doc-header td {
+  border: 1px solid #000;
+  padding: 3px 6px;
+  color: #000 !important;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.doc-header .h-type {
+  background: #1a1a1a;
+  color: #fff !important;
+  font-weight: bold;
+  font-size: 9pt;
+  text-align: center;
+  white-space: nowrap;
+  width: 18mm;
+}
+.doc-header .h-title {
+  font-size: 11.5pt;
+  font-weight: bold;
+  text-align: center;
+  width: 44mm;
+}
+.doc-header .h-lbl {
+  background: #e8e8e8;
+  font-weight: bold;
+  white-space: nowrap;
+  width: 18mm;
+}
+
+/* ── Sections ── */
+.section { margin-bottom: 7mm; }
+.sec-title {
+  font-size: 11pt;
+  font-weight: bold;
+  border-left: 4px solid #000;
+  padding: 3px 8px;
+  background: #f0f0f0;
+  margin-bottom: 3mm;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.sub-title {
+  font-size: 9.5pt;
+  font-weight: bold;
+  border-left: 3px solid #555;
+  padding-left: 6px;
+  margin: 4mm 0 2mm;
+}
+
+/* ── Tables ── */
+table.t {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8.5pt;
+  margin-bottom: 3mm;
+}
+table.t th {
+  background: #e8e8e8;
+  border: 1px solid #000;
+  padding: 3px 5px;
+  text-align: center;
+  font-weight: bold;
+  color: #000 !important;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+table.t td {
+  border: 1px solid #777;
+  padding: 3px 5px;
+  vertical-align: top;
+  color: #000 !important;
+}
+.pk-r td { background: #fff9c4; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.fk-r td { background: #d1ecf1; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.pk { color: #b8860b !important; font-weight: bold; text-align: center; }
+.nn { color: #1a3a5c !important; font-weight: bold; text-align: center; }
+.mono { font-family: 'Courier New', monospace; font-size: 7.5pt; }
+.must { color: #c00 !important; font-weight: bold; }
+.shld { color: #a06000 !important; font-weight: bold; }
+.new  { color: #1a7a3c !important; font-weight: bold; }
+
+/* ── Architecture ── */
+.arch {
+  border: 1px solid #bbb;
+  padding: 5mm 4mm 4mm;
+  background: #fafafa;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.arch-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.arch-node { display: flex; flex-direction: column; align-items: center; flex: 1; }
+.arch-box {
+  border: 2px solid #333;
+  padding: 5px 6px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 8pt;
+  width: 100%;
+  background: #fff;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.arch-box.usr { background: #f0f0f0; }
+.arch-box.cf  { background: #fff4e0; border-color: #d07000; }
+.arch-box.vrc { background: #f0e8ff; border-color: #6020c0; }
+.arch-box.sb  { background: #ddf4e8; border-color: #1a7a3c; }
+.arch-note { font-size: 7pt; color: #555; text-align: center; margin-top: 2px; line-height: 1.3; }
+.arch-sep  { font-size: 11pt; color: #444; padding: 0 2mm; flex-shrink: 0; text-align: center; }
+.arch-sep small { display: block; font-size: 6pt; color: #666; white-space: nowrap; }
+
+/* ── Screen flow ── */
+.flow-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 3mm;
+  margin-bottom: 3mm;
+  flex-wrap: nowrap;
+}
+.scr { border: 1px solid #000; padding: 4px 5px; font-size: 7.5pt; text-align: center; min-width: 26mm; flex-shrink: 0; background: #e8e8f8; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.scr.modal { background: #fff0e8; border-style: dashed; }
+.scr.alt   { background: #e8f4e8; }
+.scr.admin { background: #f0e8ff; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.farr { font-size: 11pt; color: #333; align-self: center; flex-shrink: 0; }
+.flbl { font-size: 7.5pt; color: #555; align-self: center; flex-shrink: 0; }
+
+/* ── Code ── */
+.code {
+  background: #1a1a1a;
+  color: #f0f0f0;
+  padding: 3mm 4mm;
+  font-family: 'Courier New', monospace;
+  font-size: 7.5pt;
+  line-height: 1.7;
+  border-radius: 2px;
+  margin-bottom: 3mm;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.code .cm { color: #888; }
+.code .kw { color: #88ddff; }
+.code .st { color: #aaffaa; }
+
+/* ── Footer ── */
+.footer {
+  margin-top: 8mm;
+  border-top: 1px solid #aaa;
+  padding-top: 2px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 7.5pt;
+  color: #555;
+}
+
+/* ── Note box ── */
+.note {
+  background: #fffbe6;
+  border-left: 3px solid #e8a000;
+  padding: 3px 8px;
+  font-size: 8pt;
+  margin: 2mm 0 3mm;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.warn { color: #c00 !important; font-size: 8pt; margin-top: 1mm; }
+
+@media print {
+  body { background: #fff; }
+  .page { margin: 0; box-shadow: none; page-break-after: always; }
+  .page:last-child { page-break-after: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════ PAGE 1: 概要・アーキテクチャ・インフラ ══════ -->
+<div class="page">
+  <table class="doc-header">
+    <tr>
+      <td class="h-type" rowspan="2">システム<br>設計書</td>
+      <td class="h-title" rowspan="2">献血イベントWebサイト</td>
+      <td class="h-lbl">文書番号</td>
+      <td>DOC-SD-KENKETSU-001</td>
+      <td class="h-lbl">最終更新日</td>
+      <td>2026/06/26</td>
+      <td class="h-lbl">バージョン</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <td class="h-lbl">分類</td>
+      <td>基本設計 / インフラ設計</td>
+      <td class="h-lbl">作成者</td>
+      <td>NGUYEN MINH TRI</td>
+      <td class="h-lbl">モード</td>
+      <td>ビジネス</td>
+    </tr>
+  </table>
+
+  <div class="section">
+    <div class="sec-title">■ 1. システム概要</div>
+    <div class="note">📌 本サイトはECC社会貢献センターが毎年継続使用する想定で設計。担当学生の卒業後も先生方のみで運用可能。</div>
+    <table class="t">
+      <tr><th style="width:26%">項目</th><th>内容</th></tr>
+      <tr><td>システム名</td><td>献血イベントWebサイト（kenketsu-web）</td></tr>
+      <tr><td>目的</td><td>献血ボランティアイベントの告知・参加申込・アンケート収集（毎年更新して使用）</td></tr>
+      <tr><td>主な利用者</td><td>学生（参加申込・アンケート）、ECC社会貢献センター教員（管理・データ確認）</td></tr>
+      <tr><td>規模</td><td>Small（1〜2人開発・静的サイト・年次更新型）</td></tr>
+      <tr><td>開発モデル</td><td>ウォーターフォール（初回）→ 以降は年次メンテナンス</td></tr>
+      <tr><td>言語</td><td>日本語</td></tr>
+      <tr><td>年次更新方法</td><td>src/config/event.ts を編集してGitHub push → Vercel自動デプロイ（3分）</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="sec-title">■ 2. システムアーキテクチャ構成図</div>
+    <div class="arch">
+      <div class="arch-flow">
+        <div class="arch-node">
+          <div class="arch-box usr">👤 ユーザー / 先生</div>
+          <div class="arch-note">PC / スマートフォン</div>
+        </div>
+        <div class="arch-sep">→<small>HTTPS</small></div>
+        <div class="arch-node">
+          <div class="arch-box cf">☁ Cloudflare</div>
+          <div class="arch-note">DNS / CDN / SSL<br>DDoS防御（Free）</div>
+        </div>
+        <div class="arch-sep">→<small>HTTPS</small></div>
+        <div class="arch-node">
+          <div class="arch-box vrc">▲ Vercel</div>
+          <div class="arch-note">Static Hosting<br>Auto-deploy from GitHub<br>（Free）</div>
+        </div>
+        <div class="arch-sep">→<small>HTTPS<br>Supabase JS</small></div>
+        <div class="arch-node">
+          <div class="arch-box sb">🗄 Supabase</div>
+          <div class="arch-note">PostgreSQL<br>registrations<br>survey_responses<br>Auth（管理者）</div>
+        </div>
+      </div>
+      <div style="margin-top:3mm; font-size:7.5pt; color:#555; border-top:1px solid #ddd; padding-top:2mm;">
+        <strong>EC2→Vercelに変更した理由:</strong>
+        サーバー保守不要・GitHubにpushするだけで自動デプロイ・無料・担当学生の卒業後も先生のみで運用継続可能。
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-title">■ 3. インフラ・サービス仕様</div>
+    <table class="t">
+      <tr>
+        <th style="width:16%">コンポーネント</th>
+        <th style="width:14%">サービス</th>
+        <th style="width:30%">スペック / プラン</th>
+        <th style="width:16%">月額費用</th>
+        <th>用途</th>
+      </tr>
+      <tr>
+        <td>Hosting</td><td>Vercel</td>
+        <td>Free（100GB帯域/月、無制限デプロイ）</td>
+        <td class="new">$0 ← EC2から変更</td>
+        <td>React静的ファイル配信・自動デプロイ</td>
+      </tr>
+      <tr>
+        <td>DNS / CDN</td><td>Cloudflare</td>
+        <td>Free プラン</td><td>$0</td>
+        <td>DNS管理・SSL・CDNキャッシュ・DDoS防御</td>
+      </tr>
+      <tr>
+        <td>データベース</td><td>Supabase</td>
+        <td>Free（500MB DB、50K月間AU、Auth含む）</td><td>$0</td>
+        <td>参加申込・アンケート保存・管理者認証</td>
+      </tr>
+      <tr>
+        <td>ソースコード</td><td>GitHub</td>
+        <td>Free（Public Repository）</td><td>$0</td>
+        <td>コード管理・Vercelと連携</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align:right; font-weight:bold;">合計</td>
+        <td class="new" style="font-weight:bold;">$0/月</td>
+        <td style="font-size:7.5pt;">旧設計（EC2）は~$10.14/月</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="sec-title">■ 4. 技術スタック</div>
+    <table class="t">
+      <tr><th style="width:22%">レイヤー</th><th style="width:32%">技術</th><th style="width:16%">バージョン</th><th>選定理由</th></tr>
+      <tr><td>FE フレームワーク</td><td>Vite + React + TypeScript</td><td>React 18 / Vite 5</td><td>ビルド高速・Vercel相性最良</td></tr>
+      <tr><td>スタイリング</td><td>Tailwind CSS + shadcn/ui</td><td>Tailwind 3</td><td>日本語対応・コンポーネント豊富</td></tr>
+      <tr><td>ルーティング</td><td>React Router v6</td><td>v6</td><td>/ /flyer /admin の3ルート</td></tr>
+      <tr><td>DB / Auth Client</td><td>@supabase/supabase-js</td><td>v2</td><td>認証・DB・RLSを一括管理</td></tr>
+      <tr><td>Hosting</td><td>Vercel</td><td>—</td><td>GitHub連携・自動デプロイ</td></tr>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span>DOC-SD-KENKETSU-001 v2.0 | 献血イベントWebサイト システム設計書</span>
+    <span>- 1 -</span>
+  </div>
+</div>
+
+
+<!-- ══════ PAGE 2: 機能一覧・画面設計 ══════ -->
+<div class="page">
+  <table class="doc-header">
+    <tr>
+      <td class="h-type" rowspan="2">システム<br>設計書</td>
+      <td class="h-title" rowspan="2">献血イベントWebサイト</td>
+      <td class="h-lbl">文書番号</td>
+      <td colspan="5">DOC-SD-KENKETSU-001 v2.0　2026/06/26　2 / 機能一覧・画面設計</td>
+    </tr>
+    <tr>
+      <td class="h-lbl">ページ</td>
+      <td colspan="5">2 / 機能一覧・画面設計</td>
+    </tr>
+  </table>
+
+  <div class="section">
+    <div class="sec-title">■ 5. 多言語対応（i18n）</div>
+    <div class="note">📌 ECC専門学校には日本語以外の留学生が多いため、4言語に対応する。</div>
+    <table class="t" style="margin-top:3mm;">
+      <tr><th style="width:10%">言語コード</th><th style="width:22%">言語</th><th style="width:20%">対象ユーザー</th><th style="width:30%">フォント（Google Fonts）</th><th>備考</th></tr>
+      <tr><td style="text-align:center;"><strong>ja</strong></td><td>日本語</td><td>日本人学生・先生</td><td class="mono">Noto Sans JP</td><td>デフォルト言語</td></tr>
+      <tr><td style="text-align:center;"><strong>my</strong></td><td>မြန်မာဘာသာ（ミャンマー語）</td><td>ミャンマー人留学生</td><td class="mono">Noto Sans Myanmar</td><td></td></tr>
+      <tr><td style="text-align:center;"><strong>ne</strong></td><td>नेपाली（ネパール語）</td><td>ネパール人留学生</td><td class="mono">Noto Sans Devanagari</td><td></td></tr>
+      <tr><td style="text-align:center;"><strong>zh</strong></td><td>中文简体（中国語簡体）</td><td>中国人留学生</td><td class="mono">Noto Sans SC</td><td></td></tr>
+    </table>
+    <div class="sub-title">実装方針</div>
+    <table class="t">
+      <tr><th style="width:28%">項目</th><th>内容</th></tr>
+      <tr><td>ライブラリ</td><td>i18next + react-i18next</td></tr>
+      <tr><td>翻訳ファイル</td><td><span class="mono">src/locales/ja.json</span>（マスター）、<span class="mono">my.json</span>、<span class="mono">ne.json</span>、<span class="mono">zh.json</span></td></tr>
+      <tr><td>言語セレクター</td><td>Navbarに配置。選択言語は <span class="mono">localStorage</span> に保存し次回アクセス時も維持</td></tr>
+      <tr><td>フォント切替</td><td><span class="mono">&lt;html lang&gt;</span> 属性を言語コードに同期 → CSSで言語別フォントを適用</td></tr>
+      <tr><td>Admin画面</td><td>日本語固定（管理者は先生のみ）</td></tr>
+      <tr><td>コーディングルール</td><td>UIテキストは必ず <span class="mono">t('key')</span> 経由。ハードコード禁止</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="sec-title">■ 7. 機能一覧（MoSCoW）</div>
+    <table class="t">
+      <tr><th style="width:11%">機能ID</th><th style="width:20%">機能名</th><th style="width:40%">概要</th><th style="width:10%">優先度</th><th>備考</th></tr>
+      <tr><td>FUNC-001</td><td>ヒーロー表示</td><td>イベント日時・場所・カウントダウン（event.tsから動的表示）</td><td class="must">Must</td><td>毎年自動反映</td></tr>
+      <tr><td>FUNC-002</td><td>献血の意義説明</td><td>献血の社会的意義・助けられる命の数を表示</td><td class="must">Must</td><td></td></tr>
+      <tr><td>FUNC-003</td><td>基本情報提供</td><td>献血の種類・血液型・所要時間・年齢体重条件</td><td class="must">Must</td><td></td></tr>
+      <tr><td>FUNC-004</td><td>注意事項表示</td><td>前日・当日の注意事項をチェックリスト形式で表示</td><td class="must">Must</td><td></td></tr>
+      <tr><td>FUNC-005</td><td>参加申込フォーム</td><td>学生番号・名前・クラスを入力してSupabaseに送信</td><td class="must">Must</td><td>バリデーション必須</td></tr>
+      <tr><td>FUNC-006</td><td>申込完了モーダル</td><td>送信成功時にモーダルで確認メッセージ表示</td><td class="must">Must</td><td></td></tr>
+      <tr><td>FUNC-007</td><td>アンケートフォーム</td><td>5段階評価・チェックボックス・自由記述をSupabaseに送信</td><td class="must">Must</td><td></td></tr>
+      <tr><td>FUNC-008</td><td>印刷用チラシ</td><td>A4印刷対応チラシ（event.tsから動的表示）</td><td class="must">Must</td><td>@media print対応</td></tr>
+      <tr><td><span class="new">FUNC-009</span></td><td><span class="new">管理画面（Admin）</span></td><td><span class="new">先生向け管理画面：参加者一覧・年度フィルター・CSVエクスポート・アンケート集計</span></td><td class="must new">Must</td><td><span class="new">★新規追加</span></td></tr>
+      <tr><td><span class="new">FUNC-010</span></td><td><span class="new">管理者ログイン</span></td><td><span class="new">Supabase Authによるメール+パスワード認証（先生のみ）</span></td><td class="must new">Must</td><td><span class="new">★新規追加</span></td></tr>
+      <tr><td>FUNC-011</td><td>ナビゲーション</td><td>アンカーリンクによるスムーズスクロール</td><td class="shld">Should</td><td></td></tr>
+      <tr><td>FUNC-012</td><td>レスポンシブ対応</td><td>PC・スマートフォン・タブレット全サイズ対応</td><td class="shld">Should</td><td></td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="sec-title">■ 8. 画面一覧</div>
+    <table class="t">
+      <tr><th style="width:11%">画面ID</th><th style="width:18%">画面名</th><th style="width:18%">URL</th><th style="width:10%">種別</th><th>主な要素</th></tr>
+      <tr><td>SCR-001</td><td>ヒーローセクション</td><td class="mono">/#hero</td><td>情報表示</td><td>イベント日時（event.ts）・場所・カウントダウン・CTAボタン</td></tr>
+      <tr><td>SCR-002</td><td>献血の意義</td><td class="mono">/#about</td><td>情報表示</td><td>意義カード×3（命を救う・医療貢献・健康チェック）</td></tr>
+      <tr><td>SCR-003</td><td>基本情報</td><td class="mono">/#info</td><td>情報表示</td><td>献血種類表・条件・所要時間・よくある質問</td></tr>
+      <tr><td>SCR-004</td><td>注意事項</td><td class="mono">/#precautions</td><td>情報表示</td><td>前日・当日・禁止事項チェックリスト</td></tr>
+      <tr><td>SCR-005</td><td>参加申込フォーム</td><td class="mono">/#register</td><td>入力</td><td>学生番号・名前・クラス・送信ボタン・バリデーション</td></tr>
+      <tr><td>SCR-006</td><td>申込完了モーダル</td><td>（モーダル）</td><td>フィードバック</td><td>「申込を受け付けました」・閉じるボタン</td></tr>
+      <tr><td>SCR-007</td><td>アンケート</td><td class="mono">/#survey</td><td>入力</td><td>5段階評価・チェックボックス×2・自由記述・送信</td></tr>
+      <tr><td>SCR-008</td><td>印刷用チラシ</td><td class="mono">/flyer</td><td>印刷専用</td><td>A4告知デザイン・QRコード枠・印刷ボタン</td></tr>
+      <tr><td class="new">SCR-009</td><td class="new">管理者ログイン</td><td class="mono new">/admin/login</td><td>認証</td><td class="new">メール・パスワード入力・ログインボタン ★新規</td></tr>
+      <tr><td class="new">SCR-010</td><td class="new">管理ダッシュボード</td><td class="mono new">/admin</td><td>管理</td><td class="new">年度選択・参加者一覧テーブル・CSVエクスポート・アンケート集計 ★新規</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="sec-title">■ 9. 画面遷移図</div>
+    <div style="border:1px solid #ccc; padding:5mm; background:#fafafa; -webkit-print-color-adjust:exact; print-color-adjust:exact;">
+
+      <div style="text-align:center; margin-bottom:4mm;">
+        <div style="display:inline-block; border:2px solid #000; padding:3px 16px; background:#1a1a1a; color:#fff; font-size:8.5pt; font-weight:bold; -webkit-print-color-adjust:exact; print-color-adjust:exact;">Navbar（固定）</div>
+        <div style="font-size:7.5pt; color:#555; margin-top:1mm;">各セクションへのアンカーリンク</div>
+      </div>
+
+      <!-- 一般ユーザーフロー -->
+      <div style="font-size:7.5pt; font-weight:bold; color:#555; margin-bottom:1mm;">【一般ユーザー】</div>
+      <div class="flow-row">
+        <div class="scr"><strong>SCR-001</strong><br>Hero<br><span style="font-size:7pt;">#hero</span></div>
+        <div class="farr">→</div>
+        <div class="scr"><strong>SCR-002</strong><br>献血の意義<br><span style="font-size:7pt;">#about</span></div>
+        <div class="farr">→</div>
+        <div class="scr"><strong>SCR-003</strong><br>基本情報<br><span style="font-size:7pt;">#info</span></div>
+        <div class="farr">→</div>
+        <div class="scr"><strong>SCR-004</strong><br>注意事項<br><span style="font-size:7pt;">#precautions</span></div>
+      </div>
+      <div class="flow-row" style="margin-left:8mm;">
+        <div class="flbl">↓ 続き</div>
+        <div class="scr"><strong>SCR-005</strong><br>参加申込<br><span style="font-size:7pt;">#register</span></div>
+        <div class="farr">→</div>
+        <div class="scr modal"><strong>SCR-006</strong><br>完了モーダル</div>
+        <div class="farr">→</div>
+        <div class="scr"><strong>SCR-007</strong><br>アンケート<br><span style="font-size:7pt;">#survey</span></div>
+      </div>
+      <div class="flow-row" style="margin-left:8mm; margin-top:1mm;">
+        <div class="flbl">Navbar「チラシ」</div>
+        <div class="farr">→</div>
+        <div class="scr alt"><strong>SCR-008</strong><br>印刷チラシ<br><span style="font-size:7pt;">/flyer</span></div>
+      </div>
+
+      <!-- 管理者フロー -->
+      <div style="margin-top:4mm; padding-top:3mm; border-top:1px dashed #aaa;">
+        <div style="font-size:7.5pt; font-weight:bold; color:#6020c0; margin-bottom:1mm;">【先生（管理者）】★新規</div>
+        <div class="flow-row">
+          <div class="flbl">直接アクセス</div>
+          <div class="farr">→</div>
+          <div class="scr admin"><strong>SCR-009</strong><br>管理者ログイン<br><span style="font-size:7pt;">/admin/login</span></div>
+          <div class="farr">→</div>
+          <div class="scr admin"><strong>SCR-010</strong><br>管理ダッシュボード<br><span style="font-size:7pt;">/admin</span></div>
+          <div class="farr">→</div>
+          <div class="flbl">CSVエクスポート<br>/ ログアウト</div>
+        </div>
+      </div>
+
+      <div style="margin-top:3mm; font-size:7.5pt; color:#555; border-top:1px solid #ddd; padding-top:2mm;">
+        ※ /admin は認証済みユーザーのみアクセス可。未認証の場合は /admin/login にリダイレクト。
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>DOC-SD-KENKETSU-001 v2.0 | 献血イベントWebサイト システム設計書</span>
+    <span>- 2 -</span>
+  </div>
+</div>
+
+
+<!-- ══════ PAGE 3: DB設計・非機能要件 ══════ -->
+<div class="page">
+  <table class="doc-header">
+    <tr>
+      <td class="h-type" rowspan="2">システム<br>設計書</td>
+      <td class="h-title" rowspan="2">献血イベントWebサイト</td>
+      <td class="h-lbl">文書番号</td>
+      <td colspan="5">DOC-SD-KENKETSU-001 v2.0　2026/06/26</td>
+    </tr>
+    <tr>
+      <td class="h-lbl">ページ</td>
+      <td colspan="5">3 / DB設計・非機能要件</td>
+    </tr>
+  </table>
+
+  <div class="section">
+    <div class="sec-title">■ 8. データベース設計</div>
+
+    <div class="sub-title">8.1 テーブル一覧</div>
+    <table class="t">
+      <tr><th style="width:22%">テーブル名（論理）</th><th style="width:26%">テーブル名（物理）</th><th style="width:12%">種別</th><th>説明</th></tr>
+      <tr><td>参加申込</td><td class="mono">registrations</td><td>トラン</td><td>献血イベントの参加申込データ。<span class="new">event_yearで年度別管理。</span></td></tr>
+      <tr><td>アンケート回答</td><td class="mono">survey_responses</td><td>トラン</td><td>Webサイト改善用アンケートの回答データ。<span class="new">event_yearで年度別管理。</span></td></tr>
+    </table>
+
+    <div class="sub-title">8.2 registrations テーブル定義</div>
+    <table class="t">
+      <tr><th>項番</th><th>列名（論理）</th><th>列名（物理）</th><th>属性</th><th>データ型</th><th>桁数</th><th>PK</th><th>NN</th><th>Default</th><th>備考</th></tr>
+      <tr class="pk-r"><td>1</td><td>ID</td><td class="mono">id</td><td>文字</td><td>UUID</td><td>—</td><td class="pk">●</td><td class="nn">●</td><td class="mono">gen_random_uuid()</td><td>主キー</td></tr>
+      <tr class="new"><td>2</td><td><strong>年度</strong></td><td class="mono"><strong>event_year</strong></td><td>数値</td><td>INTEGER</td><td>—</td><td></td><td class="nn">●</td><td>—</td><td><strong>★新規 例: 2026</strong></td></tr>
+      <tr><td>3</td><td>学生番号</td><td class="mono">student_id</td><td>文字</td><td>VARCHAR</td><td>20</td><td></td><td class="nn">●</td><td>—</td><td>例: SK3A-001</td></tr>
+      <tr><td>4</td><td>名前</td><td class="mono">name</td><td>文字</td><td>TEXT</td><td>—</td><td></td><td class="nn">●</td><td>—</td><td>フルネーム</td></tr>
+      <tr><td>5</td><td>クラス</td><td class="mono">class</td><td>文字</td><td>VARCHAR</td><td>20</td><td></td><td class="nn">●</td><td>—</td><td>例: SK3A</td></tr>
+      <tr><td>6</td><td>登録日時</td><td class="mono">created_at</td><td>日時</td><td>TIMESTAMPTZ</td><td>—</td><td></td><td class="nn">●</td><td class="mono">now()</td><td>自動設定</td></tr>
+    </table>
+
+    <div class="sub-title">8.3 survey_responses テーブル定義</div>
+    <table class="t">
+      <tr><th>項番</th><th>列名（論理）</th><th>列名（物理）</th><th>属性</th><th>データ型</th><th>桁数</th><th>PK</th><th>NN</th><th>Default</th><th>備考</th></tr>
+      <tr class="pk-r"><td>1</td><td>ID</td><td class="mono">id</td><td>文字</td><td>UUID</td><td>—</td><td class="pk">●</td><td class="nn">●</td><td class="mono">gen_random_uuid()</td><td>主キー</td></tr>
+      <tr class="new"><td>2</td><td><strong>年度</strong></td><td class="mono"><strong>event_year</strong></td><td>数値</td><td>INTEGER</td><td>—</td><td></td><td class="nn">●</td><td>—</td><td><strong>★新規</strong></td></tr>
+      <tr><td>3</td><td>満足度評価</td><td class="mono">rating</td><td>数値</td><td>INTEGER</td><td>—</td><td></td><td></td><td>NULL</td><td>1〜5（CHECK制約）</td></tr>
+      <tr><td>4</td><td>情報有用フラグ</td><td class="mono">found_info_useful</td><td>真偽</td><td>BOOLEAN</td><td>—</td><td></td><td></td><td>NULL</td><td></td></tr>
+      <tr><td>5</td><td>参加意欲フラグ</td><td class="mono">would_participate</td><td>真偽</td><td>BOOLEAN</td><td>—</td><td></td><td></td><td>NULL</td><td></td></tr>
+      <tr><td>6</td><td>自由記述</td><td class="mono">comment</td><td>文字</td><td>TEXT</td><td>—</td><td></td><td></td><td>NULL</td><td>任意</td></tr>
+      <tr><td>7</td><td>回答日時</td><td class="mono">created_at</td><td>日時</td><td>TIMESTAMPTZ</td><td>—</td><td></td><td class="nn">●</td><td class="mono">now()</td><td>自動設定</td></tr>
+    </table>
+
+    <div class="sub-title">8.4 RLSポリシー（Row Level Security）</div>
+    <table class="t">
+      <tr><th style="width:26%">テーブル</th><th style="width:12%">操作</th><th style="width:26%">許可ロール</th><th>条件</th></tr>
+      <tr><td class="mono">registrations</td><td>INSERT</td><td>anonymous（全員）</td><td>WITH CHECK (true)</td></tr>
+      <tr><td class="mono">registrations</td><td>SELECT</td><td class="new">authenticated（先生）</td><td class="new">auth.role() = 'authenticated' ★新規</td></tr>
+      <tr><td class="mono">survey_responses</td><td>INSERT</td><td>anonymous（全員）</td><td>WITH CHECK (true)</td></tr>
+      <tr><td class="mono">survey_responses</td><td>SELECT</td><td class="new">authenticated（先生）</td><td class="new">auth.role() = 'authenticated' ★新規</td></tr>
+    </table>
+    <div class="note">📌 管理者（先生）の追加方法: Supabase Dashboard → Authentication → Users → Invite user でメールアドレスを登録するだけ。コード変更不要。</div>
+  </div>
+
+  <div class="section">
+    <div class="sec-title">■ 9. 非機能要件</div>
+    <table class="t">
+      <tr><th style="width:18%">分類</th><th style="width:28%">要件</th><th>目標値 / 対策</th></tr>
+      <tr><td>Performance</td><td>ページ初期表示</td><td>3秒以内（Cloudflare CDN + Vercel Edge Networkで達成見込み）</td></tr>
+      <tr><td>Availability</td><td>稼働率</td><td>Vercel SLA 99.99% / Supabase Free 99.9%</td></tr>
+      <tr><td>Maintainability</td><td>年次更新</td><td>src/config/event.ts を1ファイル編集 → GitHub push → 自動デプロイ</td></tr>
+      <tr><td>Security</td><td>データ保護</td><td>HTTPS強制 / Supabase RLS / 入力バリデーション</td></tr>
+      <tr><td>Security</td><td>管理画面保護</td><td>Supabase Auth（JWT）/ 未認証は/admin/loginにリダイレクト</td></tr>
+      <tr><td>Usability</td><td>先生向け操作性</td><td>管理画面は技術知識不要・ボタン1つでCSVエクスポート</td></tr>
+      <tr><td>Scalability</td><td>同時アクセス</td><td>最大200人同時想定。Vercel + Cloudflare CDNで十分対応可能</td></tr>
+      <tr><td>Cost</td><td>運用コスト</td><td>$0/月（全サービスFreeプラン内）</td></tr>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span>DOC-SD-KENKETSU-001 v2.0 | 献血イベントWebサイト システム設計書</span>
+    <span>- 3 -</span>
+  </div>
+</div>
+
+
+<!-- ══════ PAGE 4: デプロイ・運用手順 ══════ -->
+<div class="page">
+  <table class="doc-header">
+    <tr>
+      <td class="h-type" rowspan="2">システム<br>設計書</td>
+      <td class="h-title" rowspan="2">献血イベントWebサイト</td>
+      <td class="h-lbl">文書番号</td>
+      <td colspan="5">DOC-SD-KENKETSU-001 v2.0　2026/06/26</td>
+    </tr>
+    <tr>
+      <td class="h-lbl">ページ</td>
+      <td colspan="5">4 / デプロイ・年次運用手順</td>
+    </tr>
+  </table>
+
+  <div class="section">
+    <div class="sec-title">■ 10. 初回セットアップ手順（一度だけ）</div>
+
+    <div class="sub-title">10.1 Vercel × GitHub 連携</div>
+    <div class="code">
+<span class="cm"># 1. GitHubにkenketsu-webリポジトリを作成してpush</span><br>
+git remote add origin https://github.com/[username]/kenketsu-web.git<br>
+git push -u origin main<br>
+<br>
+<span class="cm"># 2. vercel.json をプロジェクトルートに作成（SPAルーティング用）</span><br>
+<span class="cm"># { "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }] }</span><br>
+<br>
+<span class="cm"># 3. Vercel.com → Add New Project → Import kenketsu-web</span><br>
+<span class="cm"># 4. Environment Variables に VITE_SUPABASE_URL と VITE_SUPABASE_ANON_KEY を設定</span><br>
+<span class="cm"># 5. Deploy → 完了（以降はpushするたびに自動デプロイ）</span>
+    </div>
+
+    <div class="sub-title">10.2 Cloudflare DNS設定</div>
+    <table class="t" style="margin-bottom:3mm;">
+      <tr><th>タイプ</th><th>名前</th><th>コンテンツ</th><th>プロキシ</th><th>備考</th></tr>
+      <tr><td>CNAME</td><td class="mono">kenketsu</td><td class="mono">cname.vercel-dns.com</td><td>オン（橙雲）</td><td>Vercel提供のCNAME</td></tr>
+    </table>
+
+    <div class="sub-title">10.3 Supabase 管理者ユーザー登録</div>
+    <div class="code">
+<span class="cm"># Supabase Dashboard → Authentication → Users → Invite user</span><br>
+<span class="cm"># 先生のメールアドレスを入力 → 招待メールが届く → パスワード設定</span><br>
+<span class="cm"># 以降は /admin/login からログイン可能</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-title">■ 11. 年次更新手順（先生 or サポート学生が実施）</div>
+    <div class="note">📌 毎年この手順だけでOK。サーバー操作・コマンド実行は不要。</div>
+
+    <table class="t" style="margin-top:3mm;">
+      <tr><th style="width:8%">Step</th><th style="width:20%">担当</th><th style="width:30%">作業内容</th><th>詳細</th></tr>
+      <tr>
+        <td style="text-align:center;">1</td>
+        <td>サポート学生<br>または先生</td>
+        <td>event.tsを編集</td>
+        <td>GitHubのsrc/config/event.tsをブラウザ上で直接編集。年・日時・場所・定員を変更。</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">2</td>
+        <td>自動（Vercel）</td>
+        <td>自動デプロイ</td>
+        <td>GitHubへのCommit検知 → Vercelが自動ビルド・デプロイ（約3分）。操作不要。</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">3</td>
+        <td>先生</td>
+        <td>サイト確認</td>
+        <td>本番URLにアクセスして日時・場所が正しく表示されているか確認。</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">4</td>
+        <td>先生</td>
+        <td>告知・受付開始</td>
+        <td>学生にURLを共有してイベント告知。参加申込が自動でSupabaseに蓄積される。</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">5</td>
+        <td>先生</td>
+        <td>データ確認・CSV出力</td>
+        <td>/admin にログイン → 年度フィルターで当年を選択 → 「CSVエクスポート」ボタンを押す。</td>
+      </tr>
+    </table>
+
+    <div class="sub-title" style="margin-top:4mm;">11.1 event.ts の変更箇所（毎年）</div>
+    <div class="code">
+<span class="cm">// src/config/event.ts — ここだけ毎年変更する</span><br>
+<span class="kw">export const</span> EVENT_CONFIG = {<br>
+&nbsp;&nbsp;year:      <span class="st">2027</span>,                              <span class="cm">// ← 年度を変更</span><br>
+&nbsp;&nbsp;title:     <span class="st">"献血ボランティア活動"</span>,<br>
+&nbsp;&nbsp;date:      <span class="st">"2027年9月○日（○）"</span>,             <span class="cm">// ← 日付を変更</span><br>
+&nbsp;&nbsp;time:      <span class="st">"10:00 〜 16:00"</span>,<br>
+&nbsp;&nbsp;location:  <span class="st">"○○キャンパス ○○号館 1F"</span>,      <span class="cm">// ← 場所を変更</span><br>
+&nbsp;&nbsp;capacity:  <span class="st">50</span>,<br>
+&nbsp;&nbsp;organizer: <span class="st">"ECC社会貢献センター"</span>,<br>
+} <span class="kw">as const</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-title">■ 12. 環境変数</div>
+    <table class="t">
+      <tr><th style="width:48%">変数名</th><th>説明 / 設定場所</th></tr>
+      <tr><td class="mono">VITE_SUPABASE_URL</td><td>Vercel Dashboard → Settings → Env Vars（初回のみ設定）</td></tr>
+      <tr><td class="mono">VITE_SUPABASE_ANON_KEY</td><td>Vercel Dashboard → Settings → Env Vars（初回のみ設定）</td></tr>
+    </table>
+    <div class="warn">⚠ .env.local はローカル開発用。本番環境はVercel Dashboardで管理。Gitにコミットしない。</div>
+  </div>
+
+  <div class="footer">
+    <span>DOC-SD-KENKETSU-001 v2.0 | 献血イベントWebサイト システム設計書</span>
+    <span>- 4 -</span>
+  </div>
+</div>
+
+</body>
+</html>
