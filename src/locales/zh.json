@@ -178,5 +178,12 @@
     "no": "否",
     "loading": "加载中...",
     "error": "发生错误"
+  },
+  "tree": {
+    "title": "参与者之树",
+    "subtitle": "每增加一名报名者，树叶就会增加",
+    "unit": "人",
+    "goalReached": "达成目标！感谢大家",
+    "remaining": "还差{{remaining}}人就满员"
   }
 }

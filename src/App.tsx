@@ -19,6 +19,7 @@ import {
 } from './lib/supabase'
 import type { Registration } from './types'
 import { downloadCSV } from './lib/utils'
+import { BloodTreeProgress } from './components/BloodTreeProgress'
 import './App.css'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
@@ -557,6 +558,8 @@ function UserPage() {
             ))}
           </ul>
         </section>
+
+        <BloodTreeProgress />
 
         <section className="work-area reveal">
           {regSuccess ? (
