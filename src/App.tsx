@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type RefObject } from 'react'
+import { useTranslation } from 'react-i18next'
 import { BrowserRouter, Link, NavLink, Route, Routes } from 'react-router-dom'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
@@ -21,19 +22,6 @@ import { downloadCSV } from './lib/utils'
 import './App.css'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
-
-const eventInfo = [
-  { label: '開催日', value: EVENT_CONFIG.date },
-  { label: '時間', value: EVENT_CONFIG.time },
-  { label: '会場', value: `${EVENT_CONFIG.location} ${EVENT_CONFIG.locationDetail}` },
-  { label: '定員', value: `先着${EVENT_CONFIG.capacity}名` },
-]
-
-const eligibility = [
-  '16歳から69歳まで（65歳以上は献血経験がある方）',
-  '男性45kg以上、女性40kg以上',
-  '当日の体調が良好で、十分な睡眠を取っていること',
-]
 
 const steps = [
   ['事前チェック', '条件と体調を確認'],
@@ -135,6 +123,7 @@ function Icon({ type }: { type: IconType }) {
 
 function SiteHeader({ isAdmin = false }: { isAdmin?: boolean }) {
   const [language, setLanguage] = useState(i18n.language?.slice(0, 2) || 'ja')
+  const { t } = useTranslation()
 
   return (
     <header className="site-header">
@@ -142,23 +131,23 @@ function SiteHeader({ isAdmin = false }: { isAdmin?: boolean }) {
         <span className="brand-mark">+</span>
         <span>
           <strong>Campus Care</strong>
-          <small>献血ボランティアイベント</small>
+          <small>{t('hero.eventLabel')}</small>
         </span>
       </Link>
       <nav className="nav-links" aria-label="メインナビゲーション">
         {isAdmin ? (
           <>
-            <NavLink to="/">ユーザーサイト</NavLink>
-            <NavLink to="/admin">管理</NavLink>
+            <NavLink to="/">{t('nav.userSite')}</NavLink>
+            <NavLink to="/admin">{t('nav.admin')}</NavLink>
           </>
         ) : (
           <>
-            <a href="#knowledge">知る</a>
-            <a href="#benefits">メリット</a>
-            <a href="#info">イベント情報</a>
-            <a href="#register">参加申込</a>
-            <a href="#survey">アンケート</a>
-            <NavLink to="/admin">管理</NavLink>
+            <a href="#knowledge">{t('nav.know')}</a>
+            <a href="#benefits">{t('nav.benefits')}</a>
+            <a href="#info">{t('nav.info')}</a>
+            <a href="#register">{t('nav.register')}</a>
+            <a href="#survey">{t('nav.survey')}</a>
+            <NavLink to="/admin">{t('nav.admin')}</NavLink>
           </>
         )}
       </nav>
@@ -275,6 +264,7 @@ function usePageMotion(rootRef: RefObject<HTMLDivElement | null>) {
 }
 
 function UserPage() {
+  const { t } = useTranslation()
   const [selectedKnowledge, setSelectedKnowledge] = useState(0)
   const [selectedBenefit, setSelectedBenefit] = useState(0)
   const rootRef = useRef<HTMLDivElement>(null)
@@ -283,6 +273,14 @@ function UserPage() {
   usePageMotion(rootRef)
   const activeKnowledge = knowledgeCards[selectedKnowledge]
   const activeBenefit = benefits[selectedBenefit]
+
+  const eventInfo = [
+    { label: t('info.date_label'), value: EVENT_CONFIG.date },
+    { label: t('info.time_label'), value: EVENT_CONFIG.time },
+    { label: t('info.location_label'), value: `${EVENT_CONFIG.location} ${EVENT_CONFIG.locationDetail}` },
+    { label: t('info.capacity_label'), value: t('info.capacity_value', { capacity: EVENT_CONFIG.capacity }) },
+  ]
+  const eligibilityItems = t('precautions.eligibilityItems', { returnObjects: true }) as string[]
 
   // ── 参加申込フォーム ──────────────────────────────
   const [regForm, setRegForm] = useState({
@@ -321,7 +319,7 @@ function UserPage() {
     try {
       const isDuplicate = await checkDuplicateRegistration(regForm.studentId, EVENT_CONFIG.year)
       if (isDuplicate) {
-        setRegError('この学生番号はすでに申込済みです。')
+        setRegError(t('register.errorDuplicate'))
         return
       }
       await insertRegistration({
@@ -336,7 +334,7 @@ function UserPage() {
       })
       setRegSuccess(true)
     } catch {
-      setRegError('エラーが発生しました。もう一度お試しください。')
+      setRegError(t('register.errorGeneral'))
     } finally {
       setRegSubmitting(false)
     }
@@ -355,7 +353,7 @@ function UserPage() {
       })
       setSurveySuccess(true)
     } catch {
-      setSurveyError('エラーが発生しました。もう一度お試しください。')
+      setSurveyError(t('survey.errorGeneral'))
     } finally {
       setSurveySubmitting(false)
     }
@@ -367,27 +365,27 @@ function UserPage() {
       <main id="top">
         <section className="hero-section" aria-labelledby="hero-title">
           <div className="hero-copy">
-            <h1 id="hero-title">献血ボランティアイベント</h1>
-            <p className="hero-lead">知ることから、支える一歩へ。あなたのやさしさが誰かの明日をつくります。</p>
+            <h1 id="hero-title">{t('hero.title')}</h1>
+            <p className="hero-lead">{t('hero.lead')}</p>
             <div className="hero-actions">
-              <a className="button primary" href="#register">参加申込はこちら</a>
-              <a className="button secondary" href="#knowledge">献血について知る</a>
+              <a className="button primary" href="#register">{t('hero.cta')}</a>
+              <a className="button secondary" href="#knowledge">{t('hero.cta2')}</a>
             </div>
             <div className="impact-row" aria-label="イベントの特徴">
               <article>
                 <Icon type="heart" />
-                <strong>命をつなぐ</strong>
-                <span>多くの患者さんを支えます</span>
+                <strong>{t('hero.feature1Title')}</strong>
+                <span>{t('hero.feature1Desc')}</span>
               </article>
               <article>
                 <Icon type="book" />
-                <strong>正しく知る</strong>
-                <span>不安を知識に変えます</span>
+                <strong>{t('hero.feature2Title')}</strong>
+                <span>{t('hero.feature2Desc')}</span>
               </article>
               <article>
                 <Icon type="users" />
-                <strong>みんなで広げる</strong>
-                <span>キャンパスから社会貢献</span>
+                <strong>{t('hero.feature3Title')}</strong>
+                <span>{t('hero.feature3Desc')}</span>
               </article>
             </div>
           </div>
@@ -488,10 +486,10 @@ function UserPage() {
           </article>
         </section>
 
-        <section className="info-strip reveal" id="info" aria-label="イベント情報">
+        <section className="info-strip reveal" id="info" aria-label={t('nav.info')}>
           <div className="section-title compact">
             <Icon type="calendar" />
-            <h2>イベント情報</h2>
+            <h2>{t('nav.info')}</h2>
           </div>
           <dl>
             {eventInfo.map((item) => (
@@ -564,8 +562,8 @@ function UserPage() {
           {regSuccess ? (
             <div className="panel register-panel motion-card success-panel">
               <Icon type="heart" />
-              <h2>申込を受け付けました！</h2>
-              <p>ご参加ありがとうございます。当日スタッフがお待ちしております。</p>
+              <h2>{t('register.successTitle')}</h2>
+              <p>{t('register.successBody')}</p>
             </div>
           ) : (
             <form
@@ -575,55 +573,55 @@ function UserPage() {
             >
               <div className="section-title">
                 <Icon type="users" />
-                <h2>参加申込</h2>
+                <h2>{t('register.title')}</h2>
               </div>
               <div className="form-grid">
                 <label>
-                  氏名 <span>必須</span>
+                  {t('register.name')} <span>{t('register.required')}</span>
                   <input
                     required
-                    placeholder="例）山田 太郎"
+                    placeholder={t('register.namePlaceholder')}
                     value={regForm.name}
                     onChange={(e) => setRegForm({ ...regForm, name: e.target.value })}
                   />
                 </label>
                 <label>
-                  メールアドレス <span>必須</span>
+                  {t('register.email')} <span>{t('register.required')}</span>
                   <input
                     required
                     type="email"
-                    placeholder="example@school.ac.jp"
+                    placeholder={t('register.emailPlaceholder')}
                     value={regForm.email}
                     onChange={(e) => setRegForm({ ...regForm, email: e.target.value })}
                   />
                 </label>
                 <label>
-                  学生番号 / 教職員番号 <span>必須</span>
+                  {t('register.studentId')} <span>{t('register.required')}</span>
                   <input
                     required
-                    placeholder="例）S1234567"
+                    placeholder={t('register.studentIdPlaceholder')}
                     value={regForm.studentId}
                     onChange={(e) => setRegForm({ ...regForm, studentId: e.target.value })}
                   />
                 </label>
                 <label>
-                  電話番号 <span>必須</span>
+                  {t('register.phone')} <span>{t('register.required')}</span>
                   <input
                     required
                     inputMode="tel"
-                    placeholder="090-1234-5678"
+                    placeholder={t('register.phonePlaceholder')}
                     value={regForm.phone}
                     onChange={(e) => setRegForm({ ...regForm, phone: e.target.value })}
                   />
                 </label>
                 <label>
-                  所属 <span>必須</span>
+                  {t('register.department')} <span>{t('register.required')}</span>
                   <select
                     required
                     value={regForm.department}
                     onChange={(e) => setRegForm({ ...regForm, department: e.target.value })}
                   >
-                    <option value="" disabled>選択してください</option>
+                    <option value="" disabled>{t('register.departmentSelect')}</option>
                     <option value="ITカレッジ">ITカレッジ</option>
                     <option value="電子工学科">電子工学科</option>
                     <option value="自動車工学科">自動車工学科</option>
@@ -631,7 +629,7 @@ function UserPage() {
                   </select>
                 </label>
                 <label>
-                  生年月日 <span>必須</span>
+                  {t('register.birthDate')} <span>{t('register.required')}</span>
                   <input
                     required
                     type="date"
@@ -641,8 +639,8 @@ function UserPage() {
                 </label>
               </div>
               <fieldset>
-                <legend>性別</legend>
-                {(['male', 'female', 'other', 'no_answer'] as const).map((val, i) => (
+                <legend>{t('register.gender')}</legend>
+                {(['male', 'female', 'other', 'no_answer'] as const).map((val) => (
                   <label key={val}>
                     <input
                       name="gender"
@@ -651,13 +649,13 @@ function UserPage() {
                       checked={regForm.gender === val}
                       onChange={(e) => setRegForm({ ...regForm, gender: e.target.value })}
                     />
-                    {['男性', '女性', 'その他', '回答しない'][i]}
+                    {t(`register.gender${val === 'male' ? 'Male' : val === 'female' ? 'Female' : val === 'other' ? 'Other' : 'NoAnswer'}`)}
                   </label>
                 ))}
               </fieldset>
               {regError && <p className="error-message">{regError}</p>}
               <button className="button primary wide" type="submit" disabled={regSubmitting}>
-                {regSubmitting ? '送信中...' : '確認画面へ進む'}
+                {regSubmitting ? t('register.submitting') : t('register.submit')}
               </button>
             </form>
           )}
@@ -665,27 +663,25 @@ function UserPage() {
           <aside className="panel gentle-precautions motion-card" id="precautions">
             <div className="section-title calm">
               <Icon type="shield" />
-              <h2>参加前に、無理なく確認しておきたいこと</h2>
+              <h2>{t('precautions.title')}</h2>
             </div>
-            <p className="precaution-intro">
-              これは厳しい注意ではなく、あなた自身の体調を守るための確認です。不安なことがあれば、当日スタッフにそのまま相談してください。
-            </p>
-            <h3>参加前のめやす</h3>
+            <p className="precaution-intro">{t('precautions.intro')}</p>
+            <h3>{t('precautions.eligibilityTitle')}</h3>
             <ul className="check-list">
-              {eligibility.map((item) => (
+              {eligibilityItems.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            <h3>当日はこのくらいで大丈夫です</h3>
-            <p>前日は十分な睡眠を取り、食事を済ませてください。発熱や体調不良がある場合は参加を控えてください。</p>
-            <a className="text-link" href="#survey">参加後アンケートへ</a>
+            <h3>{t('precautions.dayOfTitle')}</h3>
+            <p>{t('precautions.dayOfNote')}</p>
+            <a className="text-link" href="#survey">{t('precautions.toSurvey')}</a>
           </aside>
 
           {surveySuccess ? (
             <div className="panel survey-panel motion-card success-panel">
               <Icon type="heart" />
-              <h2>ご回答ありがとうございました！</h2>
-              <p>いただいたご意見を今後のサイト改善に役立てます。</p>
+              <h2>{t('survey.successTitle')}</h2>
+              <p>{t('survey.successBody')}</p>
             </div>
           ) : (
             <form
@@ -695,43 +691,43 @@ function UserPage() {
             >
               <div className="section-title">
                 <Icon type="heart" />
-                <h2>アンケート</h2>
+                <h2>{t('survey.title')}</h2>
               </div>
               <label>
-                Q1. 献血は何回目ですか？
+                {t('survey.q1Label')}
                 <select
                   value={surveyForm.donationCount}
                   onChange={(e) => setSurveyForm({ ...surveyForm, donationCount: e.target.value })}
                 >
-                  <option value="first">初めて</option>
-                  <option value="few">2〜4回目</option>
-                  <option value="many">5回以上</option>
+                  <option value="first">{t('survey.q1First')}</option>
+                  <option value="few">{t('survey.q1Few')}</option>
+                  <option value="many">{t('survey.q1Many')}</option>
                 </select>
               </label>
               <label>
-                Q2. このイベントを何で知りましたか？
+                {t('survey.q2Label')}
                 <select
                   value={surveyForm.howFound}
                   onChange={(e) => setSurveyForm({ ...surveyForm, howFound: e.target.value })}
                 >
-                  <option value="poster">学校の掲示</option>
-                  <option value="teacher">先生・職員からの案内</option>
-                  <option value="friend">友人からの紹介</option>
-                  <option value="sns">SNS</option>
+                  <option value="poster">{t('survey.q2Poster')}</option>
+                  <option value="teacher">{t('survey.q2Teacher')}</option>
+                  <option value="friend">{t('survey.q2Friend')}</option>
+                  <option value="sns">{t('survey.q2Sns')}</option>
                 </select>
               </label>
               <label>
-                Q3. 不安や質問があれば教えてください
+                {t('survey.q3Label')}
                 <textarea
                   rows={4}
-                  placeholder="例）痛みはありますか？時間はどのくらいですか？"
+                  placeholder={t('survey.q3Placeholder')}
                   value={surveyForm.comment}
                   onChange={(e) => setSurveyForm({ ...surveyForm, comment: e.target.value })}
                 />
               </label>
               {surveyError && <p className="error-message">{surveyError}</p>}
               <button className="button primary wide" type="submit" disabled={surveySubmitting}>
-                {surveySubmitting ? '送信中...' : 'アンケートを送信する'}
+                {surveySubmitting ? t('survey.submitting') : t('survey.submit')}
               </button>
             </form>
           )}
