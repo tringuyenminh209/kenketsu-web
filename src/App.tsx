@@ -20,6 +20,7 @@ import {
 import type { Registration } from './types'
 import { downloadCSV } from './lib/utils'
 import { BloodTreeProgress } from './components/BloodTreeProgress'
+import { ImpactSection } from './components/ImpactSection'
 import './App.css'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
@@ -394,6 +395,8 @@ function UserPage() {
             <img src={heroImage} alt="学校の献血会場で学生が安心して献血に参加している様子" />
           </figure>
         </section>
+
+        <ImpactSection />
 
         <section className="knowledge-section reveal" id="knowledge">
           <div className="knowledge-lead">
