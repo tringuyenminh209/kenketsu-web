@@ -184,6 +184,7 @@
     "subtitle": "申込が増えるたびに、葉が育ちます",
     "unit": "人",
     "goalReached": "目標達成！ありがとうございます",
-    "remaining": "あと{{remaining}}人で満員です"
+    "remaining": "あと{{remaining}}人で満員です",
+    "clickHint": "葉をクリックしてみよう！"
   }
 }
