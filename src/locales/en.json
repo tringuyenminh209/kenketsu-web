@@ -76,9 +76,18 @@
     "reqHealth": "Good health on the day of donation",
     "faq": "FAQ",
     "faqItems": [
-      { "q": "Is it okay if it's my first time?", "a": "Yes, staff will guide you carefully." },
-      { "q": "Does it hurt?", "a": "There may be slight pain when the needle is inserted, but it's brief." },
-      { "q": "Can I exercise after donating?", "a": "Please avoid strenuous exercise on the day of donation." }
+      {
+        "q": "Is it okay if it's my first time?",
+        "a": "Yes, staff will guide you carefully."
+      },
+      {
+        "q": "Does it hurt?",
+        "a": "There may be slight pain when the needle is inserted, but it's brief."
+      },
+      {
+        "q": "Can I exercise after donating?",
+        "a": "Please avoid strenuous exercise on the day of donation."
+      }
     ]
   },
   "precautions": {
@@ -123,7 +132,7 @@
     "studentIdPlaceholder": "e.g. S1234567",
     "phone": "Phone Number",
     "phonePlaceholder": "090-1234-5678",
-    "department": "Department",
+    "department": "Class",
     "departmentSelect": "Please select",
     "birthDate": "Date of Birth",
     "gender": "Gender",
@@ -141,7 +150,11 @@
     "errorGeneral": "An error occurred. Please try again.",
     "subtitle": "Register here to join the blood donation volunteer event on September 15.",
     "class": "Class",
-    "classPlaceholder": "e.g. SK3A"
+    "classPlaceholder": "e.g. SK3A",
+    "departmentPlaceholder": "e.g. IT2A, SK3A, Japanese 1B",
+    "birthDatePlaceholder": "e.g. 2004/04/15",
+    "birthDateHelp": "Type YYYY/MM/DD, YYYY-MM-DD, or YYYYMMDD without opening a calendar.",
+    "errorInvalidBirthDate": "Please enter your date of birth like 2004/04/15."
   },
   "survey": {
     "title": "Survey",
@@ -154,14 +167,34 @@
     "q2Teacher": "Teacher / Staff",
     "q2Friend": "Friend's recommendation",
     "q2Sns": "Social media",
-    "q3Label": "Q3. Do you have any concerns or questions?",
+    "q3Label": "Q3. What made you want to participate?",
     "q3Placeholder": "e.g. Does it hurt? How long does it take?",
     "submit": "Submit Survey",
     "submitting": "Submitting...",
     "successTitle": "Thank You for Your Response!",
     "successBody": "Your feedback will help us improve this site.",
     "errorGeneral": "An error occurred. Please try again.",
-    "subtitle": "Please help us improve this website."
+    "subtitle": "Please help us improve this website.",
+    "q3SaveLife": "I want to support someone's life",
+    "q3SchoolEvent": "Because it is a school event",
+    "q3FirstStep": "I want to try it for the first time",
+    "q3Friend": "I want to join with friends",
+    "q4Label": "Q4. What worries you most before joining?",
+    "q4Pain": "Pain or needles",
+    "q4Time": "How long it takes",
+    "q4Health": "My health condition",
+    "q4None": "Nothing in particular",
+    "q5Label": "Q5. What support would help you feel comfortable?",
+    "q5Staff": "Staff guidance",
+    "q5Guide": "A clear step-by-step guide",
+    "q5Friend": "Waiting with friends",
+    "q5Quiet": "A calm rest area",
+    "q6Label": "Q6. Would you recommend this blood donation activity to friends?",
+    "q6Yes": "Yes, I would",
+    "q6Maybe": "Maybe, after I understand more",
+    "q6NotYet": "Not sure yet",
+    "q7Label": "Q7. Any concerns, questions, or messages?",
+    "q7Placeholder": "Example: It is my first time, so I want to understand the flow better."
   },
   "flyer": {
     "title": "Blood Donation Volunteer Activity",

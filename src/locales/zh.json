@@ -76,9 +76,18 @@
     "reqHealth": "当天身体状况良好",
     "faq": "常见问题",
     "faqItems": [
-      { "q": "第一次也可以吗？", "a": "可以，工作人员会认真地提供帮助。" },
-      { "q": "会疼吗？", "a": "插针时可能会稍微有点疼，但时间很短。" },
-      { "q": "献血后可以运动吗？", "a": "当天请避免剧烈运动。" }
+      {
+        "q": "第一次也可以吗？",
+        "a": "可以，工作人员会认真地提供帮助。"
+      },
+      {
+        "q": "会疼吗？",
+        "a": "插针时可能会稍微有点疼，但时间很短。"
+      },
+      {
+        "q": "献血后可以运动吗？",
+        "a": "当天请避免剧烈运动。"
+      }
     ]
   },
   "precautions": {
@@ -123,7 +132,7 @@
     "studentIdPlaceholder": "例：S1234567",
     "phone": "手机号码",
     "phonePlaceholder": "090-1234-5678",
-    "department": "所属院系",
+    "department": "Class",
     "departmentSelect": "请选择",
     "birthDate": "出生日期",
     "gender": "性别",
@@ -141,7 +150,11 @@
     "errorGeneral": "发生了错误，请重试。",
     "subtitle": "参加献血志愿者活动的同学，请从这里报名。",
     "class": "班级",
-    "classPlaceholder": "例：SK3A"
+    "classPlaceholder": "例：SK3A",
+    "departmentPlaceholder": "e.g. IT2A, SK3A, Japanese 1B",
+    "birthDatePlaceholder": "e.g. 2004/04/15",
+    "birthDateHelp": "Type YYYY/MM/DD, YYYY-MM-DD, or YYYYMMDD without opening a calendar.",
+    "errorInvalidBirthDate": "Please enter your date of birth like 2004/04/15."
   },
   "survey": {
     "title": "问卷调查",
@@ -154,14 +167,34 @@
     "q2Teacher": "老师 / 工作人员告知",
     "q2Friend": "朋友介绍",
     "q2Sns": "社交媒体",
-    "q3Label": "Q3. 如有疑虑或问题，请告诉我们",
+    "q3Label": "Q3. What made you want to participate?",
     "q3Placeholder": "例：会痛吗？大概需要多久？",
     "submit": "提交问卷",
     "submitting": "提交中...",
     "successTitle": "感谢您的回答！",
     "successBody": "我们将把您的意见用于今后的网站改善。",
     "errorGeneral": "发生了错误，请重试。",
-    "subtitle": "请帮助我们改善本网站。"
+    "subtitle": "请帮助我们改善本网站。",
+    "q3SaveLife": "I want to support someone's life",
+    "q3SchoolEvent": "Because it is a school event",
+    "q3FirstStep": "I want to try it for the first time",
+    "q3Friend": "I want to join with friends",
+    "q4Label": "Q4. What worries you most before joining?",
+    "q4Pain": "Pain or needles",
+    "q4Time": "How long it takes",
+    "q4Health": "My health condition",
+    "q4None": "Nothing in particular",
+    "q5Label": "Q5. What support would help you feel comfortable?",
+    "q5Staff": "Staff guidance",
+    "q5Guide": "A clear step-by-step guide",
+    "q5Friend": "Waiting with friends",
+    "q5Quiet": "A calm rest area",
+    "q6Label": "Q6. Would you recommend this blood donation activity to friends?",
+    "q6Yes": "Yes, I would",
+    "q6Maybe": "Maybe, after I understand more",
+    "q6NotYet": "Not sure yet",
+    "q7Label": "Q7. Any concerns, questions, or messages?",
+    "q7Placeholder": "Example: It is my first time, so I want to understand the flow better."
   },
   "flyer": {
     "title": "献血志愿者活动",

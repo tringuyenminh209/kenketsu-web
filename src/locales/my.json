@@ -76,9 +76,18 @@
     "reqHealth": "ထိုနေ့တွင် ကျန်းမာကြံ့ခိုင်ရမည်",
     "faq": "မေးလေ့မေးထရှိသောမေးခွန်းများ",
     "faqItems": [
-      { "q": "ပထမဆုံးအကြိမ်ဆိုလည်း ရပါသလား？", "a": "ဟုတ်ကဲ့၊ ဝန်ထမ်းများက သေချာသောပြုစုမှုဖြင့် ကူညီပေးပါမည်။" },
-      { "q": "နာကျင်မှုရှိပါသလား？", "a": "အပ်ထိုးသောအခါ ခဏအနာကျင်မှုခံစားနိုင်သော်လည်း အချိန်တိုသာဖြစ်သည်။" },
-      { "q": "လှူဒါန်းပြီးနောက် အားကစားလုပ်နိုင်ပါသလား？", "a": "ထိုနေ့ ကြမ်းတမ်းသောအားကစားများ မလုပ်ပါနှင့်။" }
+      {
+        "q": "ပထမဆုံးအကြိမ်ဆိုလည်း ရပါသလား？",
+        "a": "ဟုတ်ကဲ့၊ ဝန်ထမ်းများက သေချာသောပြုစုမှုဖြင့် ကူညီပေးပါမည်။"
+      },
+      {
+        "q": "နာကျင်မှုရှိပါသလား？",
+        "a": "အပ်ထိုးသောအခါ ခဏအနာကျင်မှုခံစားနိုင်သော်လည်း အချိန်တိုသာဖြစ်သည်။"
+      },
+      {
+        "q": "လှူဒါန်းပြီးနောက် အားကစားလုပ်နိုင်ပါသလား？",
+        "a": "ထိုနေ့ ကြမ်းတမ်းသောအားကစားများ မလုပ်ပါနှင့်။"
+      }
     ]
   },
   "precautions": {
@@ -123,7 +132,7 @@
     "studentIdPlaceholder": "ဥပမာ）S1234567",
     "phone": "ဖုန်းနံပါတ်",
     "phonePlaceholder": "090-1234-5678",
-    "department": "ဌာန / အတန်း",
+    "department": "Class",
     "departmentSelect": "ရွေးပါ",
     "birthDate": "မွေးသက္ကရာဇ်",
     "gender": "ကျား / မ",
@@ -141,7 +150,11 @@
     "errorGeneral": "အမှားတစ်ခု ဖြစ်ပေါ်သည်။ ထပ်မံကြိုးစားပါ။",
     "subtitle": "သွေးလှူဒါန်းစေတနာ့ဝန်ထမ်းတွင် ပါဝင်မည့်သူများ ဤနေရာမှ မှတ်ပုံတင်ပါ။",
     "class": "အတန်း",
-    "classPlaceholder": "ဥပမာ：SK3A"
+    "classPlaceholder": "ဥပမာ：SK3A",
+    "departmentPlaceholder": "e.g. IT2A, SK3A, Japanese 1B",
+    "birthDatePlaceholder": "e.g. 2004/04/15",
+    "birthDateHelp": "Type YYYY/MM/DD, YYYY-MM-DD, or YYYYMMDD without opening a calendar.",
+    "errorInvalidBirthDate": "Please enter your date of birth like 2004/04/15."
   },
   "survey": {
     "title": "စစ်တမ်း",
@@ -154,14 +167,34 @@
     "q2Teacher": "ဆရာ / ဝန်ထမ်းမှ",
     "q2Friend": "သူငယ်ချင်းမှ",
     "q2Sns": "ဆိုရှယ်မီဒီယာ",
-    "q3Label": "Q3. မေးချင်သောအရာ သို့မဟုတ် စိုးရိမ်မှုရှိပါသလား?",
+    "q3Label": "Q3. What made you want to participate?",
     "q3Placeholder": "ဥပမာ）နာကျင်မည်လော? ဘယ်လောက်ကြာမည်နည်း?",
     "submit": "စစ်တမ်းပို့ရန်",
     "submitting": "ပို့နေသည်...",
     "successTitle": "တုံ့ပြန်မှုအတွက် ကျေးဇူးတင်ပါသည်！",
     "successBody": "ဆိုဒ်ကို ပိုမိုကောင်းမွန်စေရန် သင်၏ထင်မြင်ချက်ကို အသုံးပြုမည်ဖြစ်သည်။",
     "errorGeneral": "အမှားတစ်ခု ဖြစ်ပေါ်သည်။ ထပ်မံကြိုးစားပါ။",
-    "subtitle": "ဤဝဘ်ဆိုဒ်ကို တိုးတက်ကောင်းမွန်စေရန် ကူညီပါ။"
+    "subtitle": "ဤဝဘ်ဆိုဒ်ကို တိုးတက်ကောင်းမွန်စေရန် ကူညီပါ။",
+    "q3SaveLife": "I want to support someone's life",
+    "q3SchoolEvent": "Because it is a school event",
+    "q3FirstStep": "I want to try it for the first time",
+    "q3Friend": "I want to join with friends",
+    "q4Label": "Q4. What worries you most before joining?",
+    "q4Pain": "Pain or needles",
+    "q4Time": "How long it takes",
+    "q4Health": "My health condition",
+    "q4None": "Nothing in particular",
+    "q5Label": "Q5. What support would help you feel comfortable?",
+    "q5Staff": "Staff guidance",
+    "q5Guide": "A clear step-by-step guide",
+    "q5Friend": "Waiting with friends",
+    "q5Quiet": "A calm rest area",
+    "q6Label": "Q6. Would you recommend this blood donation activity to friends?",
+    "q6Yes": "Yes, I would",
+    "q6Maybe": "Maybe, after I understand more",
+    "q6NotYet": "Not sure yet",
+    "q7Label": "Q7. Any concerns, questions, or messages?",
+    "q7Placeholder": "Example: It is my first time, so I want to understand the flow better."
   },
   "flyer": {
     "title": "သွေးလှူဒါန်းစေတနာ့ဝန်ထမ်းလုပ်ငန်း",

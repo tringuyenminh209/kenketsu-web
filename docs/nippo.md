@@ -87,3 +87,106 @@
 - Paste `supabase/migrations/003_registration_counter.sql` vao Supabase Dashboard SQL Editor de kich hoat realtime tree.
 - Tao Supabase Auth user cho giao vien dang nhap admin.
 - Cap nhat ten nhom va catchphrase khi nhom quyet dinh xong → sua hero tagline va brand name trong App.tsx.
+
+---
+
+## Ngay: 2026-06-28
+
+## Noi dung da hoan thanh
+
+- Cai thien `BloodTreeProgress` thanh diem tuong tac chinh cua trang web:
+  - **GSAP sway animation**: moi la xanh dao dong lien tuc theo gio voi pha lech ngau nhien (staggered), trong sinh dong nhu GIF thuc su.
+  - **Hover tooltip**: hover vao la → la phong to 1.65x + tooltip glassmorphism hien emoji doc nhat + "参加者 #N" (50 emoji khac nhau, privacy-safe vi khong can data that).
+  - **Click sparkle**: click vao la → animation bounce (scale 1.9 → 0.82 → 1.18 → 1) + 10 hat mau bắn ra tu vi tri la.
+  - **Realtime pop-in**: khi co nguoi dang ky moi qua Supabase Realtime → GSAP `back.out(2.2)` pop-in + particle burst tu vi tri la moi.
+  - Su dung `useGSAP` voi `revertOnUpdate: true` va `contextSafe` cho hover/click handlers de dam bao cleanup dung quy tac gsap-react skill.
+  - `transformBox: fill-box` + `transformOrigin: 50% 50%` de scale/rotation dung tam la SVG.
+- Them i18n key `tree.clickHint` vao 4 ngon ngu (ja/my/ne/zh).
+- Them CSS: `.leaf-tooltip` (glassmorphism, fixed position), `.tree-click-hint` (hint text nho duoi cay), `@keyframes tooltipIn`.
+- Luu memory: quy tac viet nippo vao `docs/nippo.md`.
+
+## Kiem tra
+
+- `npm run build`: pass (0 TypeScript error)
+- Vercel deploy: push thanh cong len origin/main
+
+## File da thay doi chinh
+
+- `src/components/BloodTreeProgress.tsx` (viet lai hoan toan)
+- `src/App.css` (them leaf-tooltip, tree-svg-wrap, tree-click-hint styles)
+- `src/locales/ja.json`, `my.json`, `ne.json`, `zh.json` (them tree.clickHint)
+- `.claude/memory/MEMORY.md`, `feedback_nippo.md` (them rule nippo)
+
+## Viec con lai
+
+- Paste `supabase/migrations/003_registration_counter.sql` vao Supabase Dashboard SQL Editor de kich hoat realtime tree va particle burst khi co nguoi dang ky moi.
+- Tao Supabase Auth user cho giao vien dang nhap admin.
+- Cap nhat ten nhom va catchphrase → sua hero tagline va brand name.
+
+---
+
+## Ngay: 2026-06-28 (logo va rule nippo)
+
+## Noi dung da hoan thanh
+
+- Thiet ke logo `Campus Care` dang SVG, gom ban full lockup va compact mark.
+- Dong bo compact mark vao header website va thay favicon mac dinh cua Vite.
+- Commit va push thay doi logo len `main` voi commit `9475075 Add Campus Care logo assets`.
+- Them rule vao `AGENTS.md`: sau khi hoan thanh cong viec co y nghia, can cap nhat mot file nippo duy nhat tai `docs/nippo.md`.
+
+## Kiem tra
+
+- `npm run lint`: pass
+- `npm run build`: pass
+- Kiem tra logo header render thanh cong voi kich thuoc 42x42.
+
+## File da thay doi chinh
+
+- `src/assets/campus-care-logo.svg`
+- `src/assets/campus-care-mark.svg`
+- `public/favicon.svg`
+- `src/App.tsx`
+- `src/App.css`
+- `AGENTS.md`
+- `docs/nippo.md`
+
+## Viec con lai
+
+- Neu can, tao them bien the logo ngang/doc cho poster, slide hoac man hinh admin.
+
+---
+
+## Ngay: 2026-06-28 (form dang ky va survey)
+
+## Noi dung da hoan thanh
+
+- Doi truong `所属` trong form dang ky thanh `クラス` va cho nguoi dung tu nhap class cua minh.
+- Doi `生年月日` tu date picker sang input text nhanh, chap nhan `YYYY/MM/DD`, `YYYY-MM-DD`, hoac `YYYYMMDD`, sau do chuan hoa ve `YYYY-MM-DD` khi gui backend.
+- Them validate loi ngay sinh khong hop le truoc khi gui dang ky.
+- Mo rong phan `アンケート` tu 3 cau hoi thanh 7 cau hoi, gom ly do tham gia, noi lo truoc khi tham gia, ho tro mong muon, kha nang gioi thieu cho ban be va ghi chu tu do.
+- Do backend survey hien chi co 3 cot, cac cau hoi moi duoc dong goi vao `comment` dang key-value de khong can migration ngay.
+- Cap nhat i18n cho `ja`, `en`, `vi`, `my`, `ne`, `zh`; sua loi chu moi bi bien thanh `???` khi ghi locale qua PowerShell.
+
+## Kiem tra
+
+- `npm run lint`: pass
+- `npm run build`: pass
+- Browser QA desktop: class la input, ngay sinh la text input, dropdown `所属` cu khong con, survey co 6 select va 1 textarea.
+- Browser QA mobile 390x844: khong horizontal overflow, form register rong 375px, class/ngay sinh hien dung.
+- Console desktop: khong co app error/warning. Mobile co 1 loi `Browser Use clipboard bridge` tu runtime browser, khong phai app code.
+
+## File da thay doi chinh
+
+- `src/App.tsx`
+- `src/App.css`
+- `src/locales/ja.json`
+- `src/locales/en.json`
+- `src/locales/vi.json`
+- `src/locales/my.json`
+- `src/locales/ne.json`
+- `src/locales/zh.json`
+- `docs/nippo.md`
+
+## Viec con lai
+
+- Neu BE muon phan tich survey chi tiet, can them cot rieng cho `motivation`, `concern`, `preferred_support`, va `recommend` trong Supabase.

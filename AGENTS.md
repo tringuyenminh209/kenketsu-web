@@ -45,3 +45,6 @@ No local git history was available to infer an existing commit convention. Use s
 
 ## Security & Configuration Tips
 The project includes `@supabase/supabase-js`; keep Supabase URLs, anon keys, and service keys out of source files. Store environment-specific values in local `.env` files and document required variable names without committing secrets.
+
+## Agent-Specific Instructions
+After completing meaningful UI, feature, documentation, build, or deployment work, update the single daily report file at `docs/nippo.md`. Keep one consolidated NIPPO document, add the work date inside the file, and summarize completed work, validation commands, changed files, and remaining tasks. Do not create separate NIPPO files unless explicitly requested.

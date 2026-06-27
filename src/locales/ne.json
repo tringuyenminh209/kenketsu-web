@@ -76,9 +76,18 @@
     "reqHealth": "उक्त दिन स्वस्थ हुनुपर्छ",
     "faq": "बारम्बार सोधिने प्रश्नहरू",
     "faqItems": [
-      { "q": "पहिलो पटक भए पनि हुन्छ？", "a": "हो, कर्मचारीहरूले ध्यानपूर्वक सहयोग गर्नेछन्।" },
-      { "q": "दुख्छ？", "a": "सुई घोच्दा अलि दुख्न सक्छ तर छोटो समयमात्र।" },
-      { "q": "दान पछि व्यायाम गर्न सकिन्छ？", "a": "उक्त दिन कठोर व्यायाम नगर्नुहोस्।" }
+      {
+        "q": "पहिलो पटक भए पनि हुन्छ？",
+        "a": "हो, कर्मचारीहरूले ध्यानपूर्वक सहयोग गर्नेछन्।"
+      },
+      {
+        "q": "दुख्छ？",
+        "a": "सुई घोच्दा अलि दुख्न सक्छ तर छोटो समयमात्र।"
+      },
+      {
+        "q": "दान पछि व्यायाम गर्न सकिन्छ？",
+        "a": "उक्त दिन कठोर व्यायाम नगर्नुहोस्।"
+      }
     ]
   },
   "precautions": {
@@ -123,7 +132,7 @@
     "studentIdPlaceholder": "उदा: S1234567",
     "phone": "फोन नम्बर",
     "phonePlaceholder": "090-1234-5678",
-    "department": "सम्बन्धित विभाग",
+    "department": "Class",
     "departmentSelect": "चयन गर्नुस्",
     "birthDate": "जन्म मिति",
     "gender": "लिङ्ग",
@@ -141,7 +150,11 @@
     "errorGeneral": "त्रुटि भयो। फेरि प्रयास गर्नुस्।",
     "subtitle": "रक्तदान स्वयंसेवकमा सहभागी हुने व्यक्तिहरू यहाँबाट दर्ता गर्नुस्।",
     "class": "कक्षा",
-    "classPlaceholder": "उदा：SK3A"
+    "classPlaceholder": "उदा：SK3A",
+    "departmentPlaceholder": "e.g. IT2A, SK3A, Japanese 1B",
+    "birthDatePlaceholder": "e.g. 2004/04/15",
+    "birthDateHelp": "Type YYYY/MM/DD, YYYY-MM-DD, or YYYYMMDD without opening a calendar.",
+    "errorInvalidBirthDate": "Please enter your date of birth like 2004/04/15."
   },
   "survey": {
     "title": "सर्वेक्षण",
@@ -154,14 +167,34 @@
     "q2Teacher": "शिक्षक / कर्मचारीबाट",
     "q2Friend": "साथीबाट",
     "q2Sns": "सोसल मिडिया",
-    "q3Label": "Q3. कुनै प्रश्न वा चिन्ता छ भने बताउनुस्",
+    "q3Label": "Q3. What made you want to participate?",
     "q3Placeholder": "उदा: दुख्छ? कति समय लाग्छ?",
     "submit": "सर्वेक्षण पठाउनुस्",
     "submitting": "पठाउँदै...",
     "successTitle": "उत्तर दिनुभएकोमा धन्यवाद！",
     "successBody": "तपाईंको विचार साइट सुधारमा प्रयोग गरिनेछ।",
     "errorGeneral": "त्रुटि भयो। फेरि प्रयास गर्नुस्।",
-    "subtitle": "यो वेबसाइट सुधार गर्न सहयोग गर्नुहोस्।"
+    "subtitle": "यो वेबसाइट सुधार गर्न सहयोग गर्नुहोस्।",
+    "q3SaveLife": "I want to support someone's life",
+    "q3SchoolEvent": "Because it is a school event",
+    "q3FirstStep": "I want to try it for the first time",
+    "q3Friend": "I want to join with friends",
+    "q4Label": "Q4. What worries you most before joining?",
+    "q4Pain": "Pain or needles",
+    "q4Time": "How long it takes",
+    "q4Health": "My health condition",
+    "q4None": "Nothing in particular",
+    "q5Label": "Q5. What support would help you feel comfortable?",
+    "q5Staff": "Staff guidance",
+    "q5Guide": "A clear step-by-step guide",
+    "q5Friend": "Waiting with friends",
+    "q5Quiet": "A calm rest area",
+    "q6Label": "Q6. Would you recommend this blood donation activity to friends?",
+    "q6Yes": "Yes, I would",
+    "q6Maybe": "Maybe, after I understand more",
+    "q6NotYet": "Not sure yet",
+    "q7Label": "Q7. Any concerns, questions, or messages?",
+    "q7Placeholder": "Example: It is my first time, so I want to understand the flow better."
   },
   "flyer": {
     "title": "रक्तदान स्वयंसेवक गतिविधि",

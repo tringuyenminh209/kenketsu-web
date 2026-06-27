@@ -76,9 +76,18 @@
     "reqHealth": "Sức khỏe tốt vào ngày hiến máu",
     "faq": "Câu hỏi thường gặp",
     "faqItems": [
-      { "q": "Lần đầu có được không?", "a": "Được, nhân viên sẽ hỗ trợ tận tình." },
-      { "q": "Có đau không?", "a": "Có thể hơi đau khi đâm kim, nhưng chỉ trong thời gian ngắn." },
-      { "q": "Sau khi hiến có tập thể thao được không?", "a": "Tránh vận động mạnh trong ngày hiến máu." }
+      {
+        "q": "Lần đầu có được không?",
+        "a": "Được, nhân viên sẽ hỗ trợ tận tình."
+      },
+      {
+        "q": "Có đau không?",
+        "a": "Có thể hơi đau khi đâm kim, nhưng chỉ trong thời gian ngắn."
+      },
+      {
+        "q": "Sau khi hiến có tập thể thao được không?",
+        "a": "Tránh vận động mạnh trong ngày hiến máu."
+      }
     ]
   },
   "precautions": {
@@ -123,7 +132,7 @@
     "studentIdPlaceholder": "VD: S1234567",
     "phone": "Số điện thoại",
     "phonePlaceholder": "090-1234-5678",
-    "department": "Khoa / Bộ phận",
+    "department": "Lop",
     "departmentSelect": "Chọn",
     "birthDate": "Ngày sinh",
     "gender": "Giới tính",
@@ -141,7 +150,11 @@
     "errorGeneral": "Đã xảy ra lỗi. Vui lòng thử lại.",
     "subtitle": "Đăng ký tham gia hoạt động hiến máu tình nguyện ngày 15/9 tại đây.",
     "class": "Lớp",
-    "classPlaceholder": "VD: SK3A"
+    "classPlaceholder": "VD: SK3A",
+    "departmentPlaceholder": "VD: IT2A, SK3A, Japanese 1B",
+    "birthDatePlaceholder": "VD: 2004/04/15",
+    "birthDateHelp": "Co the nhap YYYY/MM/DD, YYYY-MM-DD hoac YYYYMMDD ma khong can mo lich.",
+    "errorInvalidBirthDate": "Hay nhap ngay sinh theo dang 2004/04/15."
   },
   "survey": {
     "title": "Khảo sát",
@@ -154,14 +167,34 @@
     "q2Teacher": "Giáo viên / Nhân viên giới thiệu",
     "q2Friend": "Bạn bè giới thiệu",
     "q2Sns": "Mạng xã hội",
-    "q3Label": "Q3. Bạn có lo lắng hay câu hỏi gì không?",
+    "q3Label": "Q3. Ly do ban muon tham gia la gi?",
     "q3Placeholder": "VD: Có đau không? Mất bao lâu?",
     "submit": "Gửi khảo sát",
     "submitting": "Đang gửi...",
     "successTitle": "Cảm ơn bạn đã trả lời!",
     "successBody": "Ý kiến của bạn sẽ giúp cải thiện trang web.",
     "errorGeneral": "Đã xảy ra lỗi. Vui lòng thử lại.",
-    "subtitle": "Hãy giúp chúng tôi cải thiện trang web này."
+    "subtitle": "Hãy giúp chúng tôi cải thiện trang web này.",
+    "q3SaveLife": "Muon giup do sinh mang cua ai do",
+    "q3SchoolEvent": "Vi day la su kien cua truong",
+    "q3FirstStep": "Muon thu lan dau",
+    "q3Friend": "Muon tham gia cung ban be",
+    "q4Label": "Q4. Truoc khi tham gia ban lo nhat dieu gi?",
+    "q4Pain": "Dau hoac kim tiem",
+    "q4Time": "Thoi gian can thiet",
+    "q4Health": "Tinh trang suc khoe",
+    "q4None": "Khong co lo lang dac biet",
+    "q5Label": "Q5. Ho tro nao trong ngay su kien se giup ban yen tam hon?",
+    "q5Staff": "Nhan vien huong dan",
+    "q5Guide": "Huong dan quy trinh ro rang",
+    "q5Friend": "Cho cung ban be",
+    "q5Quiet": "Noi nghi ngoi yen tinh",
+    "q6Label": "Q6. Ban co muon gioi thieu hoat dong hien mau nay cho ban be khong?",
+    "q6Yes": "Co, muon gioi thieu",
+    "q6Maybe": "Co the, neu hieu ro hon",
+    "q6NotYet": "Chua chac",
+    "q7Label": "Q7. Neu co lo lang, cau hoi hoac loi nhan, hay ghi tai day",
+    "q7Placeholder": "VD: Day la lan dau nen minh muon hieu ro quy trinh hon."
   },
   "flyer": {
     "title": "Hoạt động tình nguyện hiến máu",
