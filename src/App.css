@@ -30,16 +30,11 @@
 }
 
 .brand-mark {
-  display: grid;
-  place-items: center;
   width: 42px;
   height: 42px;
-  border-radius: 50% 50% 50% 12%;
-  background: var(--red);
-  color: white;
-  font-size: 30px;
-  font-weight: 800;
-  line-height: 1;
+  flex: 0 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 14px rgba(206, 0, 23, 0.18));
 }
 
 .brand strong,

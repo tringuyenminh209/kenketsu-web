@@ -1,4 +1,6 @@
-<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Campus Care mark</title>
+  <desc id="desc">A soft red blood drop with a white medical cross.</desc>
   <path d="M52.627 8.301C65.837 27.305 80 42.986 80 61.47C80 79.059 65.614 93.316 48 93.316C30.386 93.316 16 79.059 16 61.47C16 42.986 30.163 27.305 43.373 8.301C45.654 5.018 50.346 5.018 52.627 8.301Z" fill="url(#drop)"/>
   <path d="M52.627 8.301C65.837 27.305 80 42.986 80 61.47C80 79.059 65.614 93.316 48 93.316C30.386 93.316 16 79.059 16 61.47C16 42.986 30.163 27.305 43.373 8.301C45.654 5.018 50.346 5.018 52.627 8.301Z" stroke="#B80018" stroke-width="2"/>
   <path d="M48 34V68" stroke="white" stroke-width="10" stroke-linecap="round"/>

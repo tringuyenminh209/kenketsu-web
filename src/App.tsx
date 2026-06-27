@@ -5,6 +5,7 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import heroImage from './assets/blood-donation-hero.png'
+import logoMark from './assets/campus-care-mark.svg'
 import { EVENT_CONFIG } from './config/event'
 import i18n from './lib/i18n'
 import {
@@ -130,7 +131,7 @@ function SiteHeader({ isAdmin = false }: { isAdmin?: boolean }) {
   return (
     <header className="site-header">
       <Link className="brand" to="/" aria-label="Campus Care top">
-        <span className="brand-mark">+</span>
+        <img className="brand-mark" src={logoMark} alt="" />
         <span>
           <strong>Campus Care</strong>
           <small>{t('hero.eventLabel')}</small>
