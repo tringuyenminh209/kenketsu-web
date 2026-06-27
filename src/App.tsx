@@ -26,6 +26,85 @@ import './App.css'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
+const LANGS = [
+  { code: 'ja', label: '日本語' },
+  { code: 'vi', label: 'Tiếng Việt' },
+  { code: 'en', label: 'English' },
+  { code: 'my', label: 'မြန်မာ' },
+  { code: 'ne', label: 'नेपाली' },
+  { code: 'zh', label: '中文' },
+]
+
+function LanguageSelect() {
+  const [open, setOpen] = useState(false)
+  const [lang, setLang] = useState(i18n.language?.slice(0, 2) || 'ja')
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+    const onMouse = (e: MouseEvent) => {
+      if (!ref.current?.contains(e.target as Node)) setOpen(false)
+    }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('mousedown', onMouse)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onMouse)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
+  const select = (code: string) => {
+    setLang(code)
+    void i18n.changeLanguage(code)
+    setOpen(false)
+  }
+
+  const currentLabel = LANGS.find((l) => l.code === lang)?.label ?? '日本語'
+
+  return (
+    <div className="lang-select" ref={ref}>
+      <button
+        className="lang-select-btn"
+        onClick={() => setOpen((o) => !o)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        type="button"
+      >
+        <svg className="lang-globe" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3.6 9h16.8M3.6 15h16.8M12 3c2.2 2.3 3.4 5.3 3.4 9s-1.2 6.7-3.4 9M12 3C9.8 5.3 8.6 8.3 8.6 12s1.2 6.7 3.4 9" />
+        </svg>
+        <span className="lang-label">{currentLabel}</span>
+        <svg
+          className="lang-chevron"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          style={{ transform: open ? 'rotate(180deg)' : undefined }}
+        >
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </button>
+      {open && (
+        <ul className="lang-panel" role="listbox" aria-label="言語選択">
+          {LANGS.map((l) => (
+            <li
+              key={l.code}
+              role="option"
+              aria-selected={l.code === lang}
+              className={`lang-opt${l.code === lang ? ' is-active' : ''}`}
+              onClick={() => select(l.code)}
+            >
+              {l.label}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
+}
+
 function normalizeBirthDateInput(value: string) {
   const trimmed = value.trim()
   const compact = trimmed.replace(/[./\-\s]/g, '')
@@ -142,7 +221,6 @@ function Icon({ type }: { type: IconType }) {
 }
 
 function SiteHeader({ isAdmin = false }: { isAdmin?: boolean }) {
-  const [language, setLanguage] = useState(i18n.language?.slice(0, 2) || 'ja')
   const { t } = useTranslation()
 
   return (
@@ -171,25 +249,7 @@ function SiteHeader({ isAdmin = false }: { isAdmin?: boolean }) {
           </>
         )}
       </nav>
-      <label className="language-select" aria-label="言語切替">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3.6 9h16.8M3.6 15h16.8M12 3c2.2 2.3 3.4 5.3 3.4 9s-1.2 6.7-3.4 9M12 3C9.8 5.3 8.6 8.3 8.6 12s1.2 6.7 3.4 9" />
-        </svg>
-        <select
-          value={language}
-          onChange={(e) => {
-            setLanguage(e.target.value)
-            i18n.changeLanguage(e.target.value)
-          }}
-        >
-          <option value="ja">日本語</option>
-          <option value="vi">Tiếng Việt</option>
-          <option value="en">English</option>
-          <option value="my">Myanmar</option>
-          <option value="ne">Nepali</option>
-          <option value="zh">中文</option>
-        </select>
-      </label>
+      <LanguageSelect />
     </header>
   )
 }
@@ -345,14 +405,14 @@ function UserPage() {
     setRegSubmitting(true)
     setRegError(null)
     try {
-      const isDuplicate = await checkDuplicateRegistration(regForm.studentId, EVENT_CONFIG.year)
-      if (isDuplicate) {
-        setRegError(t('register.errorDuplicate'))
-        return
-      }
       const normalizedBirthDate = normalizeBirthDateInput(regForm.birthDate)
       if (!normalizedBirthDate) {
         setRegError(t('register.errorInvalidBirthDate'))
+        return
+      }
+      const isDuplicate = await checkDuplicateRegistration(regForm.studentId, EVENT_CONFIG.year)
+      if (isDuplicate) {
+        setRegError(t('register.errorDuplicate'))
         return
       }
       await insertRegistration({
