@@ -6,6 +6,8 @@ import ja from "../locales/ja.json"
 import my from "../locales/my.json"
 import ne from "../locales/ne.json"
 import zh from "../locales/zh.json"
+import vi from "../locales/vi.json"
+import en from "../locales/en.json"
 
 i18n
   .use(LanguageDetector)
@@ -16,9 +18,11 @@ i18n
       my: { translation: my },
       ne: { translation: ne },
       zh: { translation: zh },
+      vi: { translation: vi },
+      en: { translation: en },
     },
     fallbackLng: "ja",
-    supportedLngs: ["ja", "my", "ne", "zh"],
+    supportedLngs: ["ja", "my", "ne", "zh", "vi", "en"],
     detection: {
       order: ["localStorage", "navigator"],
       caches: ["localStorage"],

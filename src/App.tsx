@@ -26,6 +26,23 @@ import './App.css'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
+function normalizeBirthDateInput(value: string) {
+  const trimmed = value.trim()
+  const compact = trimmed.replace(/[./\-\s]/g, '')
+  const match = compact.match(/^(\d{4})(\d{2})(\d{2})$/)
+
+  if (!match) return null
+
+  const [, year, month, day] = match
+  const date = new Date(Number(year), Number(month) - 1, Number(day))
+  const isValidDate =
+    date.getFullYear() === Number(year) &&
+    date.getMonth() === Number(month) - 1 &&
+    date.getDate() === Number(day)
+
+  return isValidDate ? `${year}-${month}-${day}` : null
+}
+
 const steps = [
   ['事前チェック', '条件と体調を確認'],
   ['問診・検査', 'スタッフが安全を確認'],
@@ -166,6 +183,8 @@ function SiteHeader({ isAdmin = false }: { isAdmin?: boolean }) {
           }}
         >
           <option value="ja">日本語</option>
+          <option value="vi">Tiếng Việt</option>
+          <option value="en">English</option>
           <option value="my">Myanmar</option>
           <option value="ne">Nepali</option>
           <option value="zh">中文</option>
@@ -295,7 +314,13 @@ function UserPage() {
 
   // ── アンケートフォーム ────────────────────────────
   const [surveyForm, setSurveyForm] = useState({
-    donationCount: 'first', howFound: 'poster', comment: '',
+    donationCount: 'first',
+    howFound: 'poster',
+    motivation: 'save_life',
+    concern: 'pain',
+    preferredSupport: 'staff',
+    recommend: 'yes',
+    comment: '',
   })
   const [surveySubmitting, setSurveySubmitting] = useState(false)
   const [surveySuccess, setSurveySuccess] = useState(false)
@@ -325,6 +350,11 @@ function UserPage() {
         setRegError(t('register.errorDuplicate'))
         return
       }
+      const normalizedBirthDate = normalizeBirthDateInput(regForm.birthDate)
+      if (!normalizedBirthDate) {
+        setRegError(t('register.errorInvalidBirthDate'))
+        return
+      }
       await insertRegistration({
         event_year: EVENT_CONFIG.year,
         student_id: regForm.studentId,
@@ -332,7 +362,7 @@ function UserPage() {
         class: regForm.department,
         email: regForm.email || undefined,
         phone: regForm.phone || undefined,
-        birth_date: regForm.birthDate || undefined,
+        birth_date: normalizedBirthDate,
         gender: regForm.gender || undefined,
       })
       setRegSuccess(true)
@@ -348,11 +378,19 @@ function UserPage() {
     setSurveySubmitting(true)
     setSurveyError(null)
     try {
+      const structuredComment = [
+        `motivation=${surveyForm.motivation}`,
+        `concern=${surveyForm.concern}`,
+        `preferred_support=${surveyForm.preferredSupport}`,
+        `recommend=${surveyForm.recommend}`,
+        surveyForm.comment ? `free_comment=${surveyForm.comment}` : '',
+      ].filter(Boolean).join('\n')
+
       await insertSurvey({
         event_year: EVENT_CONFIG.year,
         donation_count: surveyForm.donationCount,
         how_found: surveyForm.howFound,
-        comment: surveyForm.comment || undefined,
+        comment: structuredComment || undefined,
       })
       setSurveySuccess(true)
     } catch {
@@ -623,26 +661,23 @@ function UserPage() {
                 </label>
                 <label>
                   {t('register.department')} <span>{t('register.required')}</span>
-                  <select
+                  <input
                     required
+                    placeholder={t('register.departmentPlaceholder')}
                     value={regForm.department}
                     onChange={(e) => setRegForm({ ...regForm, department: e.target.value })}
-                  >
-                    <option value="" disabled>{t('register.departmentSelect')}</option>
-                    <option value="ITカレッジ">ITカレッジ</option>
-                    <option value="電子工学科">電子工学科</option>
-                    <option value="自動車工学科">自動車工学科</option>
-                    <option value="教職員">教職員</option>
-                  </select>
+                  />
                 </label>
                 <label>
                   {t('register.birthDate')} <span>{t('register.required')}</span>
                   <input
                     required
-                    type="date"
+                    inputMode="numeric"
+                    placeholder={t('register.birthDatePlaceholder')}
                     value={regForm.birthDate}
                     onChange={(e) => setRegForm({ ...regForm, birthDate: e.target.value })}
                   />
+                  <small className="input-hint">{t('register.birthDateHelp')}</small>
                 </label>
               </div>
               <fieldset>
@@ -725,9 +760,56 @@ function UserPage() {
               </label>
               <label>
                 {t('survey.q3Label')}
+                <select
+                  value={surveyForm.motivation}
+                  onChange={(e) => setSurveyForm({ ...surveyForm, motivation: e.target.value })}
+                >
+                  <option value="save_life">{t('survey.q3SaveLife')}</option>
+                  <option value="school_event">{t('survey.q3SchoolEvent')}</option>
+                  <option value="first_step">{t('survey.q3FirstStep')}</option>
+                  <option value="friend">{t('survey.q3Friend')}</option>
+                </select>
+              </label>
+              <label>
+                {t('survey.q4Label')}
+                <select
+                  value={surveyForm.concern}
+                  onChange={(e) => setSurveyForm({ ...surveyForm, concern: e.target.value })}
+                >
+                  <option value="pain">{t('survey.q4Pain')}</option>
+                  <option value="time">{t('survey.q4Time')}</option>
+                  <option value="health">{t('survey.q4Health')}</option>
+                  <option value="none">{t('survey.q4None')}</option>
+                </select>
+              </label>
+              <label>
+                {t('survey.q5Label')}
+                <select
+                  value={surveyForm.preferredSupport}
+                  onChange={(e) => setSurveyForm({ ...surveyForm, preferredSupport: e.target.value })}
+                >
+                  <option value="staff">{t('survey.q5Staff')}</option>
+                  <option value="guide">{t('survey.q5Guide')}</option>
+                  <option value="friend">{t('survey.q5Friend')}</option>
+                  <option value="quiet">{t('survey.q5Quiet')}</option>
+                </select>
+              </label>
+              <label>
+                {t('survey.q6Label')}
+                <select
+                  value={surveyForm.recommend}
+                  onChange={(e) => setSurveyForm({ ...surveyForm, recommend: e.target.value })}
+                >
+                  <option value="yes">{t('survey.q6Yes')}</option>
+                  <option value="maybe">{t('survey.q6Maybe')}</option>
+                  <option value="not_yet">{t('survey.q6NotYet')}</option>
+                </select>
+              </label>
+              <label>
+                {t('survey.q7Label')}
                 <textarea
                   rows={4}
-                  placeholder={t('survey.q3Placeholder')}
+                  placeholder={t('survey.q7Placeholder')}
                   value={surveyForm.comment}
                   onChange={(e) => setSurveyForm({ ...surveyForm, comment: e.target.value })}
                 />

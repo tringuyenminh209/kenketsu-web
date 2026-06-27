@@ -1,0 +1,190 @@
+{
+  "nav": {
+    "know": "Learn",
+    "benefits": "Benefits",
+    "info": "Event Info",
+    "register": "Register",
+    "survey": "Survey",
+    "admin": "Admin",
+    "userSite": "User Site",
+    "about": "About Blood Donation",
+    "precautions": "Precautions",
+    "flyer": "Print Flyer"
+  },
+  "hero": {
+    "title": "Blood Donation Volunteer Event",
+    "lead": "From awareness to action. Your kindness creates tomorrow for someone.",
+    "cta": "Register Now",
+    "cta2": "Learn About Blood Donation",
+    "feature1Title": "Save Lives",
+    "feature1Desc": "Support multiple patients with one donation",
+    "feature2Title": "Know the Facts",
+    "feature2Desc": "Turn anxiety into knowledge",
+    "feature3Title": "Give Together",
+    "feature3Desc": "Contribute to society from campus",
+    "tagline": "Your blood can save someone's life",
+    "eventLabel": "Blood Donation Volunteer Activity",
+    "countdown": {
+      "days": "days",
+      "hours": "hours",
+      "minutes": "min",
+      "seconds": "sec",
+      "until": "Until the event",
+      "ended": "The event has ended"
+    }
+  },
+  "about": {
+    "title": "What Is Blood Donation & Why It Matters",
+    "card1": {
+      "title": "Save Lives",
+      "body": "One donation can save up to 3 lives. Since blood cannot be manufactured artificially, donation is the only source."
+    },
+    "card2": {
+      "title": "Support Healthcare",
+      "body": "Cancer treatment, surgery, childbirth — around 5 million people need blood transfusions each year. Donation supports frontline medicine."
+    },
+    "card3": {
+      "title": "Free Health Check",
+      "body": "After donating, you receive your blood test results. It's also a free opportunity to check your own health status."
+    }
+  },
+  "info": {
+    "date_label": "Date",
+    "time_label": "Time",
+    "location_label": "Venue",
+    "capacity_label": "Capacity",
+    "capacity_value": "First {{capacity}} applicants",
+    "title": "Basic Information",
+    "typesTitle": "Types of Blood Donation",
+    "types": {
+      "whole": {
+        "name": "Whole Blood Donation",
+        "volume": "200mL / 400mL",
+        "time": "Approx. 30–40 min",
+        "interval": "Male 12 weeks / Female 16 weeks"
+      },
+      "platelet": {
+        "name": "Apheresis (Platelets)",
+        "volume": "Components only",
+        "time": "Approx. 40–90 min",
+        "interval": "2 weeks"
+      }
+    },
+    "requirements": "Eligibility Requirements",
+    "reqAge": "Age: 16–69 (whole blood) / 18–54 (apheresis)",
+    "reqWeight": "Weight: Male 50kg+ / Female 45kg+",
+    "reqHealth": "Good health on the day of donation",
+    "faq": "FAQ",
+    "faqItems": [
+      { "q": "Is it okay if it's my first time?", "a": "Yes, staff will guide you carefully." },
+      { "q": "Does it hurt?", "a": "There may be slight pain when the needle is inserted, but it's brief." },
+      { "q": "Can I exercise after donating?", "a": "Please avoid strenuous exercise on the day of donation." }
+    ]
+  },
+  "precautions": {
+    "title": "Things to Check Before Participating",
+    "intro": "These are not strict rules — they're to protect your own health. If you have any concerns, feel free to ask staff on the day.",
+    "eligibilityTitle": "Eligibility Guidelines",
+    "eligibilityItems": [
+      "Ages 16 to 69 (65+ requires prior donation experience)",
+      "Male 45kg+, Female 40kg+",
+      "Good health and adequate sleep on the day"
+    ],
+    "dayOfTitle": "On the day, this is fine",
+    "dayOfNote": "Get enough sleep and eat before coming. If you have a fever or feel unwell, please refrain from participating.",
+    "toSurvey": "Go to post-participation survey",
+    "beforeDay": "The day before",
+    "beforeDayItems": [
+      "Get enough sleep (6+ hours recommended)",
+      "Avoid alcohol",
+      "Stay well hydrated"
+    ],
+    "dayOf": "On the day",
+    "dayOfItems": [
+      "Eat before coming (donating on an empty stomach is prohibited)",
+      "Drink plenty of water or sports drinks",
+      "Don't push yourself if you feel unwell"
+    ],
+    "prohibited": "You cannot donate blood if",
+    "prohibitedItems": [
+      "You have a fever or cold symptoms",
+      "You drank heavily the night before",
+      "You recently had surgery, a transfusion, or a tattoo",
+      "You are pregnant or breastfeeding"
+    ]
+  },
+  "register": {
+    "title": "Registration",
+    "name": "Full Name",
+    "namePlaceholder": "e.g. Taro Yamada",
+    "email": "Email Address",
+    "emailPlaceholder": "example@school.ac.jp",
+    "studentId": "Student / Staff ID",
+    "studentIdPlaceholder": "e.g. S1234567",
+    "phone": "Phone Number",
+    "phonePlaceholder": "090-1234-5678",
+    "department": "Department",
+    "departmentSelect": "Please select",
+    "birthDate": "Date of Birth",
+    "gender": "Gender",
+    "genderMale": "Male",
+    "genderFemale": "Female",
+    "genderOther": "Other",
+    "genderNoAnswer": "Prefer not to say",
+    "required": "Required",
+    "submit": "Continue to Confirm",
+    "submitting": "Submitting...",
+    "successTitle": "Registration Received!",
+    "successBody": "Thank you for joining. Staff will be waiting for you on the day.",
+    "successClose": "Close",
+    "errorDuplicate": "This student ID has already been registered.",
+    "errorGeneral": "An error occurred. Please try again.",
+    "subtitle": "Register here to join the blood donation volunteer event on September 15.",
+    "class": "Class",
+    "classPlaceholder": "e.g. SK3A"
+  },
+  "survey": {
+    "title": "Survey",
+    "q1Label": "Q1. How many times have you donated blood?",
+    "q1First": "First time",
+    "q1Few": "2–4 times",
+    "q1Many": "5 or more",
+    "q2Label": "Q2. How did you find out about this event?",
+    "q2Poster": "School notice board",
+    "q2Teacher": "Teacher / Staff",
+    "q2Friend": "Friend's recommendation",
+    "q2Sns": "Social media",
+    "q3Label": "Q3. Do you have any concerns or questions?",
+    "q3Placeholder": "e.g. Does it hurt? How long does it take?",
+    "submit": "Submit Survey",
+    "submitting": "Submitting...",
+    "successTitle": "Thank You for Your Response!",
+    "successBody": "Your feedback will help us improve this site.",
+    "errorGeneral": "An error occurred. Please try again.",
+    "subtitle": "Please help us improve this website."
+  },
+  "flyer": {
+    "title": "Blood Donation Volunteer Activity",
+    "printBtn": "Print Flyer",
+    "qrLabel": "Details & Registration Here",
+    "organizer": "Organizer: {{organizer}}"
+  },
+  "footer": {
+    "organizer": "Organizer: {{organizer}}",
+    "contact": "Contact: {{contact}}"
+  },
+  "common": {
+    "yes": "Yes",
+    "no": "No",
+    "loading": "Loading...",
+    "error": "An error occurred"
+  },
+  "tree": {
+    "title": "Participant Tree",
+    "subtitle": "A new leaf grows with every registration",
+    "unit": "people",
+    "goalReached": "Goal reached! Thank you everyone!",
+    "remaining": "{{remaining}} spots remaining",
+    "clickHint": "Try clicking on a leaf!"
+  }
+}

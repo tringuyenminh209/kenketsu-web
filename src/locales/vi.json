@@ -1,0 +1,190 @@
+{
+  "nav": {
+    "know": "Tìm hiểu",
+    "benefits": "Lợi ích",
+    "info": "Thông tin",
+    "register": "Đăng ký",
+    "survey": "Khảo sát",
+    "admin": "Quản lý",
+    "userSite": "Trang người dùng",
+    "about": "Hiến máu là gì",
+    "precautions": "Lưu ý",
+    "flyer": "In tờ rơi"
+  },
+  "hero": {
+    "title": "Sự kiện tình nguyện hiến máu",
+    "lead": "Từ hiểu biết đến hành động. Sự tốt bụng của bạn tạo nên ngày mai cho ai đó.",
+    "cta": "Đăng ký tham gia",
+    "cta2": "Tìm hiểu về hiến máu",
+    "feature1Title": "Kết nối sự sống",
+    "feature1Desc": "Hỗ trợ nhiều bệnh nhân cùng lúc",
+    "feature2Title": "Hiểu đúng",
+    "feature2Desc": "Biến lo lắng thành kiến thức",
+    "feature3Title": "Lan tỏa cùng nhau",
+    "feature3Desc": "Đóng góp cho xã hội từ campus",
+    "tagline": "Máu của bạn có thể cứu sống ai đó",
+    "eventLabel": "Hoạt động tình nguyện hiến máu",
+    "countdown": {
+      "days": "ngày",
+      "hours": "giờ",
+      "minutes": "phút",
+      "seconds": "giây",
+      "until": "Còn lại đến sự kiện",
+      "ended": "Sự kiện đã kết thúc"
+    }
+  },
+  "about": {
+    "title": "Hiến máu là gì & Ý nghĩa của hiến máu",
+    "card1": {
+      "title": "Kết nối sự sống",
+      "body": "Mỗi lần hiến máu có thể cứu sống tới 3 người. Máu không thể tạo ra nhân tạo, nên hiến máu là nguồn cung duy nhất."
+    },
+    "card2": {
+      "title": "Hỗ trợ y tế",
+      "body": "Điều trị ung thư, phẫu thuật, sinh con... khoảng 5 triệu người mỗi năm cần truyền máu. Hiến máu là hành động hỗ trợ tuyến đầu y tế."
+    },
+    "card3": {
+      "title": "Kiểm tra sức khỏe",
+      "body": "Sau khi hiến máu bạn nhận được kết quả xét nghiệm máu. Đây cũng là cơ hội kiểm tra tình trạng sức khỏe của mình miễn phí."
+    }
+  },
+  "info": {
+    "date_label": "Ngày tổ chức",
+    "time_label": "Thời gian",
+    "location_label": "Địa điểm",
+    "capacity_label": "Số lượng",
+    "capacity_value": "{{capacity}} người (đăng ký trước)",
+    "title": "Thông tin cơ bản về hiến máu",
+    "typesTitle": "Các loại hiến máu",
+    "types": {
+      "whole": {
+        "name": "Hiến máu toàn phần",
+        "volume": "200mL / 400mL",
+        "time": "Khoảng 30~40 phút",
+        "interval": "Nam 12 tuần / Nữ 16 tuần"
+      },
+      "platelet": {
+        "name": "Hiến thành phần (tiểu cầu)",
+        "volume": "Chỉ lấy thành phần",
+        "time": "Khoảng 40~90 phút",
+        "interval": "2 tuần"
+      }
+    },
+    "requirements": "Điều kiện hiến máu",
+    "reqAge": "Tuổi: 16~69 (toàn phần) / 18~54 (thành phần)",
+    "reqWeight": "Cân nặng: Nam từ 50kg / Nữ từ 45kg",
+    "reqHealth": "Sức khỏe tốt vào ngày hiến máu",
+    "faq": "Câu hỏi thường gặp",
+    "faqItems": [
+      { "q": "Lần đầu có được không?", "a": "Được, nhân viên sẽ hỗ trợ tận tình." },
+      { "q": "Có đau không?", "a": "Có thể hơi đau khi đâm kim, nhưng chỉ trong thời gian ngắn." },
+      { "q": "Sau khi hiến có tập thể thao được không?", "a": "Tránh vận động mạnh trong ngày hiến máu." }
+    ]
+  },
+  "precautions": {
+    "title": "Những điều cần kiểm tra trước khi tham gia",
+    "intro": "Đây không phải những quy định khắt khe, mà là để bảo vệ sức khỏe của chính bạn. Nếu có thắc mắc, hãy hỏi trực tiếp nhân viên vào ngày sự kiện.",
+    "eligibilityTitle": "Tiêu chuẩn trước khi tham gia",
+    "eligibilityItems": [
+      "Từ 16 đến 69 tuổi (từ 65 tuổi cần có kinh nghiệm hiến máu trước)",
+      "Nam từ 45kg, Nữ từ 40kg",
+      "Sức khỏe tốt và đã ngủ đủ giấc vào ngày sự kiện"
+    ],
+    "dayOfTitle": "Ngày sự kiện như thế này là ổn",
+    "dayOfNote": "Hãy ngủ đủ giấc và ăn trước khi đến. Nếu bị sốt hoặc không khỏe, hãy tạm hoãn tham gia.",
+    "toSurvey": "Đến khảo sát sau tham gia",
+    "beforeDay": "Trước ngày sự kiện",
+    "beforeDayItems": [
+      "Ngủ đủ giấc (khuyến nghị 6 tiếng trở lên)",
+      "Hạn chế uống rượu bia",
+      "Uống đủ nước thường xuyên"
+    ],
+    "dayOf": "Ngày sự kiện",
+    "dayOfItems": [
+      "Ăn trước khi đến (không hiến máu khi đói)",
+      "Uống đủ nước hoặc nước điện giải",
+      "Không cố gắng khi cảm thấy không khỏe"
+    ],
+    "prohibited": "Không được hiến máu trong các trường hợp sau",
+    "prohibitedItems": [
+      "Đang sốt hoặc có triệu chứng cảm",
+      "Uống nhiều rượu tối hôm trước",
+      "Mới phẫu thuật, truyền máu, xăm hình gần đây",
+      "Đang mang thai hoặc cho con bú"
+    ]
+  },
+  "register": {
+    "title": "Đăng ký tham gia",
+    "name": "Họ tên",
+    "namePlaceholder": "VD: Nguyễn Văn A",
+    "email": "Email",
+    "emailPlaceholder": "example@school.ac.jp",
+    "studentId": "Mã sinh viên / Mã nhân viên",
+    "studentIdPlaceholder": "VD: S1234567",
+    "phone": "Số điện thoại",
+    "phonePlaceholder": "090-1234-5678",
+    "department": "Khoa / Bộ phận",
+    "departmentSelect": "Chọn",
+    "birthDate": "Ngày sinh",
+    "gender": "Giới tính",
+    "genderMale": "Nam",
+    "genderFemale": "Nữ",
+    "genderOther": "Khác",
+    "genderNoAnswer": "Không trả lời",
+    "required": "Bắt buộc",
+    "submit": "Xem xác nhận",
+    "submitting": "Đang gửi...",
+    "successTitle": "Đã nhận đăng ký!",
+    "successBody": "Cảm ơn bạn đã tham gia. Nhân viên sẽ chờ đón bạn vào ngày sự kiện.",
+    "successClose": "Đóng",
+    "errorDuplicate": "Mã sinh viên này đã đăng ký rồi.",
+    "errorGeneral": "Đã xảy ra lỗi. Vui lòng thử lại.",
+    "subtitle": "Đăng ký tham gia hoạt động hiến máu tình nguyện ngày 15/9 tại đây.",
+    "class": "Lớp",
+    "classPlaceholder": "VD: SK3A"
+  },
+  "survey": {
+    "title": "Khảo sát",
+    "q1Label": "Q1. Đây là lần hiến máu thứ mấy của bạn?",
+    "q1First": "Lần đầu",
+    "q1Few": "2~4 lần",
+    "q1Many": "5 lần trở lên",
+    "q2Label": "Q2. Bạn biết sự kiện này qua đâu?",
+    "q2Poster": "Bảng thông báo trường",
+    "q2Teacher": "Giáo viên / Nhân viên giới thiệu",
+    "q2Friend": "Bạn bè giới thiệu",
+    "q2Sns": "Mạng xã hội",
+    "q3Label": "Q3. Bạn có lo lắng hay câu hỏi gì không?",
+    "q3Placeholder": "VD: Có đau không? Mất bao lâu?",
+    "submit": "Gửi khảo sát",
+    "submitting": "Đang gửi...",
+    "successTitle": "Cảm ơn bạn đã trả lời!",
+    "successBody": "Ý kiến của bạn sẽ giúp cải thiện trang web.",
+    "errorGeneral": "Đã xảy ra lỗi. Vui lòng thử lại.",
+    "subtitle": "Hãy giúp chúng tôi cải thiện trang web này."
+  },
+  "flyer": {
+    "title": "Hoạt động tình nguyện hiến máu",
+    "printBtn": "In tờ rơi",
+    "qrLabel": "Chi tiết & đăng ký tại đây",
+    "organizer": "Tổ chức: {{organizer}}"
+  },
+  "footer": {
+    "organizer": "Tổ chức: {{organizer}}",
+    "contact": "Liên hệ: {{contact}}"
+  },
+  "common": {
+    "yes": "Có",
+    "no": "Không",
+    "loading": "Đang tải...",
+    "error": "Đã xảy ra lỗi"
+  },
+  "tree": {
+    "title": "Cây tham gia",
+    "subtitle": "Mỗi lần đăng ký, một chiếc lá mới mọc lên",
+    "unit": "người",
+    "goalReached": "Đã đạt mục tiêu! Cảm ơn mọi người",
+    "remaining": "Còn {{remaining}} chỗ trống",
+    "clickHint": "Hãy thử nhấn vào lá nhé!"
+  }
+}
