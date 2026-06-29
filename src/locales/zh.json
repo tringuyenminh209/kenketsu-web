@@ -236,6 +236,8 @@
     "clickHint": "点击叶子试试吧！",
     "leafAriaLabel": "第 {{n}} 片叶子",
     "participantNum": "参与者 #{{n}}",
+    "beFirst": "成为第一片叶子？",
+    "beFIrstBtn": "立即报名",
     "loveMessage": {
       "0": "您的善良，点亮了他人的明天。",
       "1": "衷心感谢您迈出这勇敢的一步。",

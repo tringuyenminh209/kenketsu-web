@@ -40,6 +40,12 @@ const SPARK_COLORS = [
   '#2196f3', '#e91e63', '#9c27b0', '#00bcd4',
 ]
 
+const MILESTONES = [
+  { count: Math.round(GOAL * 0.2), icon: '🌱' },
+  { count: Math.round(GOAL * 0.5), icon: '🌿' },
+  { count: GOAL, icon: '🌳' },
+]
+
 function playCrystalSound() {
   try {
     const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext
@@ -79,6 +85,9 @@ export function BloodTreeProgress() {
   const { t } = useTranslation()
   const [count, setCount] = useState<number | null>(null)
   const [prevCount, setPrevCount] = useState(0)
+  const [animatedCount, setAnimatedCount] = useState(0)
+  const animatedCountRef = useRef(0)
+  const hasAnimatedRef = useRef(false)
   const [tooltip, setTooltip] = useState<TooltipState>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const particleLayerRef = useRef<SVGGElement>(null)
@@ -120,6 +129,50 @@ export function BloodTreeProgress() {
       void supabase.removeChannel(ch)
     }
   }, [])
+
+  useEffect(() => {
+    if (count === null) return
+
+    const animateTo = (from: number, to: number, dur: number) => {
+      const obj = { val: from }
+      gsap.to(obj, {
+        val: to,
+        duration: dur,
+        ease: 'power2.out',
+        onUpdate: () => {
+          const v = Math.round(obj.val)
+          animatedCountRef.current = v
+          setAnimatedCount(v)
+        },
+      })
+    }
+
+    if (!hasAnimatedRef.current) {
+      const el = containerRef.current
+      if (!el) return
+      const { top, bottom } = el.getBoundingClientRect()
+      if (top < window.innerHeight && bottom > 0) {
+        hasAnimatedRef.current = true
+        animateTo(0, count, count > 0 ? 1.4 : 0)
+      } else {
+        const obs = new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) {
+              hasAnimatedRef.current = true
+              animateTo(0, count, count > 0 ? 1.4 : 0)
+              obs.disconnect()
+            }
+          },
+          { threshold: 0.3 },
+        )
+        obs.observe(el)
+        return () => obs.disconnect()
+      }
+    } else {
+      animateTo(animatedCountRef.current, count, 0.7)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [count])
 
   const spawnParticles = (cx: number, cy: number) => {
     const layer = particleLayerRef.current
@@ -223,7 +276,11 @@ export function BloodTreeProgress() {
   const remaining = Math.max(GOAL - displayCount, 0)
 
   return (
-    <section className="tree-section reveal" id="progress">
+    <section
+      className="tree-section reveal"
+      id="progress"
+      style={{ '--tree-fill': pct / 100 } as React.CSSProperties}
+    >
       <div ref={containerRef} style={{ position: 'relative' }}>
         {tooltip !== null && displayCount > tooltip.index && (
           <div
@@ -369,14 +426,27 @@ export function BloodTreeProgress() {
 
           <div className="tree-stats">
             <div className="tree-count-display">
-              <span className="tree-count-num">{displayCount}</span>
+              <span className="tree-count-num">{animatedCount}</span>
               <span className="tree-count-sep"> / </span>
               <span className="tree-count-goal">{GOAL}</span>
               <span className="tree-count-unit">{t('tree.unit')}</span>
             </div>
-            <div className="tree-progress-wrap">
-              <div className="tree-progress-bar">
-                <div className="tree-progress-fill" style={{ width: `${pct}%` }} />
+            <div className="tree-progress-section">
+              <div className="tree-progress-outer">
+                <div className="tree-progress-bar">
+                  <div className="tree-progress-fill" style={{ width: `${pct}%` }} />
+                </div>
+                <div className="tree-milestone-row" aria-hidden="true">
+                  {MILESTONES.map((m) => (
+                    <div
+                      key={m.count}
+                      className={`tree-ms-item ${displayCount >= m.count ? 'reached' : ''}`}
+                      style={{ left: `${(m.count / GOAL) * 100}%` }}
+                    >
+                      <span className="tree-ms-icon">{m.icon}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
               <span className="tree-progress-pct">{Math.round(pct)}%</span>
             </div>
@@ -384,6 +454,14 @@ export function BloodTreeProgress() {
               <p className="tree-goal-badge">{t('tree.goalReached')}</p>
             ) : (
               <p className="tree-remaining">{t('tree.remaining', { remaining })}</p>
+            )}
+            {displayCount === 0 && count !== null && (
+              <div className="tree-empty-cta">
+                <p className="tree-empty-msg">{t('tree.beFirst')}</p>
+                <a href="#register" className="tree-empty-btn">
+                  {t('tree.beFIrstBtn')} →
+                </a>
+              </div>
             )}
           </div>
         </div>

@@ -236,6 +236,8 @@
     "clickHint": "Hãy thử nhấn vào lá nhé!",
     "leafAriaLabel": "Lá thứ {{n}}",
     "participantNum": "Người tham gia #{{n}}",
+    "beFirst": "Bạn có muốn là chiếc lá đầu tiên không?",
+    "beFIrstBtn": "Đăng ký ngay",
     "loveMessage": {
       "0": "Lòng tốt của bạn tạo nên ngày mai cho ai đó.",
       "1": "Chân thành cảm ơn sự dũng cảm bước lên của bạn.",

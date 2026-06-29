@@ -236,6 +236,8 @@
     "clickHint": "Try clicking on a leaf!",
     "leafAriaLabel": "Leaf {{n}}",
     "participantNum": "Participant #{{n}}",
+    "beFirst": "Be the very first leaf!",
+    "beFIrstBtn": "Register now",
     "loveMessage": {
       "0": "Your kindness shapes someone's tomorrow.",
       "1": "Heartfelt thanks for your courage to take the step.",
