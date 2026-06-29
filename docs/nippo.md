@@ -47,6 +47,36 @@
 - Noi form dang ky va khao sat voi backend/Supabase khi BE san sang.
 - Hoan thien logic doi ngon ngu thuc te.
 - Dich noi dung `zh.json` sang tieng Trung that, hien tai moi la fallback.
+
+---
+
+## Ngay: 2026-06-29
+
+## Noi dung da hoan thanh
+
+- Hoan thanh refactor `App.tsx`: xoa ~480 dong code trung lap (Icon, SiteHeader, usePageMotion, AdminPage, LanguageSelect da bi duplicate), tach ra `src/lib/shared.tsx` va `src/pages/AdminPage.tsx`.
+- Code-split route `/admin` bang `React.lazy()` + `Suspense`: AdminPage thanh chunk rieng ~4.79 kB, giam bundle chinh.
+- Them inline form validation cho truong `studentId` va `birthDate`: chi hien thi chi bao sau lan nhap dau tien (pattern `fieldTouched`), icon check/cross va mau vien xanh/do.
+- Them accessibility cho cay la `BloodTreeProgress`: them `tabIndex`, `role="button"`, `aria-label` (dung i18n key `tree.leafAriaLabel`), `onKeyDown` (Enter/Space) cho cac la active.
+- Them key `tree.leafAriaLabel` vao 6 file locale: ja, vi, en, my, ne, zh.
+- Fix loi encoding trong `vi.json` va `zh.json`: mang `steps[]` (3 phan tu) va mot so key trong `reason` bi thay ky tu dau bang `?` do loi UTF-8 khi tao ban dich.
+- Da push 3 commits len GitHub, Vercel tu dong deploy.
+
+## Kiem tra
+
+- `npm run build`: pass, AdminPage la chunk rieng
+- Validation chi hien thi sau keystroke dau tien, khong hien khi load trang
+- Leaf a11y: co the Tab den tung la, Enter/Space bam duoc
+- Locale: khong con ky tu `?` trong vi.json va zh.json
+
+## File da thay doi chinh
+
+- `src/App.tsx`
+- `src/App.css`
+- `src/lib/shared.tsx` (file moi)
+- `src/pages/AdminPage.tsx` (file moi)
+- `src/components/BloodTreeProgress.tsx`
+- `src/locales/ja.json`, `vi.json`, `en.json`, `my.json`, `ne.json`, `zh.json`
 - Kiem tra lai tren dien thoai that truoc khi nop/deploy.
 - Ket noi admin auth, CSV export va print preview voi backend.
 
