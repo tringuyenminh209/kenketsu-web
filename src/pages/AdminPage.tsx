@@ -6,6 +6,7 @@ import {
   fetchRegistrations,
   fetchSurveys,
   getSession,
+  parseStructuredComment,
   registrationsToCSV,
   signInAdmin,
   signOutAdmin,
@@ -180,26 +181,36 @@ export default function AdminPage() {
                     <th>所属</th>
                     <th>メール</th>
                     <th>電話番号</th>
+                    <th>生年月日</th>
+                    <th>性別</th>
                   </tr>
                 </thead>
                 <tbody>
                   {registrations.length === 0 ? (
                     <tr>
-                      <td colSpan={6} style={{ textAlign: 'center', padding: '2rem' }}>
+                      <td colSpan={8} style={{ textAlign: 'center', padding: '2rem' }}>
                         申込データがありません
                       </td>
                     </tr>
                   ) : (
-                    registrations.map((row) => (
-                      <tr key={row.id}>
-                        <td>{new Date(row.created_at).toLocaleString('ja-JP')}</td>
-                        <td>{row.student_id}</td>
-                        <td>{row.name}</td>
-                        <td>{row.class}</td>
-                        <td>{row.email ?? '—'}</td>
-                        <td>{row.phone ?? '—'}</td>
-                      </tr>
-                    ))
+                    registrations.map((row) => {
+                      const genderLabel = row.gender === 'male' ? '男性' :
+                                          row.gender === 'female' ? '女性' :
+                                          row.gender === 'other' ? 'その他' :
+                                          row.gender === 'no_answer' ? '回答しない' : row.gender ?? '—';
+                      return (
+                        <tr key={row.id}>
+                          <td>{new Date(row.created_at).toLocaleString('ja-JP')}</td>
+                          <td>{row.student_id}</td>
+                          <td>{row.name}</td>
+                          <td>{row.class}</td>
+                          <td>{row.email ?? '—'}</td>
+                          <td>{row.phone ?? '—'}</td>
+                          <td>{row.birth_date ?? '—'}</td>
+                          <td>{genderLabel}</td>
+                        </tr>
+                      )
+                    })
                   )}
                 </tbody>
               </table>
@@ -241,25 +252,38 @@ export default function AdminPage() {
                       </td>
                     </tr>
                   ) : (
-                    surveys.map((row) => (
-                      <tr key={row.id}>
-                        <td>{new Date(row.created_at).toLocaleString('ja-JP')}</td>
-                        <td>
-                          {row.donation_count === 'first' ? '初めて' :
-                           row.donation_count === 'few' ? '2〜4回' :
-                           row.donation_count === 'many' ? '5回以上' : row.donation_count ?? '—'}
-                        </td>
-                        <td>
-                          {row.how_found === 'poster' ? 'ポスター' :
-                           row.how_found === 'teacher' ? '先生の紹介' :
-                           row.how_found === 'friend' ? '友人の紹介' :
-                           row.how_found === 'sns' ? 'SNS' : row.how_found ?? '—'}
-                        </td>
-                        <td style={{ whiteSpace: 'pre-line', fontSize: '0.85rem', textAlign: 'left' }}>
-                          {row.comment ?? '—'}
-                        </td>
-                      </tr>
-                    ))
+                    surveys.map((row) => {
+                      const parsed = parseStructuredComment(row.comment)
+                      return (
+                        <tr key={row.id}>
+                          <td>{new Date(row.created_at).toLocaleString('ja-JP')}</td>
+                          <td>
+                            {row.donation_count === 'first' ? '初めて' :
+                             row.donation_count === 'few' ? '2〜4回' :
+                             row.donation_count === 'many' ? '5回以上' : row.donation_count ?? '—'}
+                          </td>
+                          <td>
+                            {row.how_found === 'poster' ? 'ポスター' :
+                             row.how_found === 'teacher' ? '先生の紹介' :
+                             row.how_found === 'friend' ? '友人の紹介' :
+                             row.how_found === 'sns' ? 'SNS' : row.how_found ?? '—'}
+                          </td>
+                          <td style={{ textAlign: 'left', padding: '0.75rem 1rem' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '0.8rem', lineHeight: '1.4' }}>
+                              {parsed.motivation !== '—' && <div><strong>理由:</strong> {parsed.motivation}</div>}
+                              {parsed.concern !== '—' && <div><strong>不安:</strong> {parsed.concern}</div>}
+                              {parsed.preferredSupport !== '—' && <div><strong>サポート:</strong> {parsed.preferredSupport}</div>}
+                              {parsed.recommend !== '—' && <div><strong>お勧め:</strong> {parsed.recommend}</div>}
+                              {parsed.freeComment !== '—' && (
+                                <div style={{ borderTop: '1px dashed #eee', paddingTop: '4px', marginTop: '2px' }}>
+                                  <strong>コメント:</strong> {parsed.freeComment}
+                                </div>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
+                      )
+                    })
                   )}
                 </tbody>
               </table>
