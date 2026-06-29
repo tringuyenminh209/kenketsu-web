@@ -30,5 +30,12 @@ i18n
     },
     interpolation: { escapeValue: false },
   })
+  .then(() => {
+    document.documentElement.lang = i18n.language?.slice(0, 2) || 'ja'
+  })
+
+i18n.on('languageChanged', (lng) => {
+  document.documentElement.lang = lng.slice(0, 2)
+})
 
 export default i18n
