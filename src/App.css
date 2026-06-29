@@ -146,6 +146,7 @@
   background: #fff;
   box-shadow: 0 12px 32px rgba(16, 24, 40, 0.12);
   animation: panelIn 0.14s ease-out;
+  line-height: 1.5;
 }
 
 @keyframes panelIn {
@@ -159,6 +160,7 @@
   padding: 9px 18px;
   font-size: 13px;
   font-weight: 700;
+  line-height: 1.5;
   color: var(--ink);
   cursor: pointer;
   transition: background 100ms ease;
