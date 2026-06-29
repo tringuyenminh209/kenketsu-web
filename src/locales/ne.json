@@ -304,20 +304,41 @@
       "चिन्तित साथीसँगै व्याख्यान सुन्नुस्",
       "अर्को पटक पनि जारी रहने रक्तदान संस्कृति बनाउनुस्"
     ],
-    "imageAlt": "विद्यार्थीहरू रक्तदान कार्यक्रममा आत्मविश्वासका साथ सहभागी हुँदै"
+    "imageAlt": "विद्यार्थीहरू रक्तदान कार्यक्रममा आत्मविश्वासका साथ सहभागी हुँदै",
+    "stepReadMore": "See photo and details",
+    "processDetailLabel": "What staff check",
+    "processImageAlt": "Safety check image for {{title}}"
   },
   "steps": [
     {
-      "title": "पूर्व-जाँच",
-      "text": "पात्रता र स्वास्थ्य समीक्षा"
+      "title": "Pre-check",
+      "text": "Confirm eligibility and health",
+      "detail": "Before donation, staff confirm that your condition is suitable for donating safely that day.",
+      "checks": [
+        "Age and weight requirements",
+        "Sleep, meals, fever, and current condition",
+        "Past donation interval and medication status"
+      ]
     },
     {
-      "title": "अन्तर्वार्ता र परीक्षण",
-      "text": "कर्मचारीले सुरक्षा पुष्टि गर्छन्"
+      "title": "Interview & test",
+      "text": "Staff confirm safety",
+      "detail": "A short interview and screening help protect both the donor and the patients who receive blood.",
+      "checks": [
+        "Health questionnaire review",
+        "Blood pressure and basic condition check",
+        "Small screening test when needed"
+      ]
     },
     {
-      "title": "रक्तदान",
-      "text": "लगभग १०–१५ मिनेटमा सम्पन्न"
+      "title": "Blood donation",
+      "text": "Completed in about 10-15 min",
+      "detail": "During donation, staff stay nearby and monitor your condition. You can speak up immediately if you feel unwell.",
+      "checks": [
+        "Comfortable reclining position",
+        "Staff monitoring during collection",
+        "Rest and hydration after donation"
+      ]
     }
   ],
   "pledge": {
@@ -330,7 +351,8 @@
   },
   "footerCta": {
     "title": "क्याम्पसमा सबै मिलेर रक्तदानलाई समर्थन गरौँ।",
-    "cta": "दर्तामा फर्कनुहोस्"
+    "cta": "दर्तामा फर्कनुहोस्",
+    "aiImageNote": "Some images on this website are AI-generated illustrations and may differ from the actual venue or people."
   },
   "impact": {
     "stats": {

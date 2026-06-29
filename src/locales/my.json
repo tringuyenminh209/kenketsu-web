@@ -304,20 +304,41 @@
       "စိုးရိမ်သောသူငယ်ချင်းနှင့်အတူ ရှင်းလင်းချက်နားထောင်ပါ",
       "နောက်တစ်ကြိမ်ဆက်ကာ သွေးလှူဒါန်းယဉ်ကျေးမှုကို ထူထောင်ပါ"
     ],
-    "imageAlt": "ကျောင်းသားများ သွေးလှူဒါန်းရာနေရာတွင် သက်တောင့်သက်သာ ပါဝင်နေသည့်ပုံ"
+    "imageAlt": "ကျောင်းသားများ သွေးလှူဒါန်းရာနေရာတွင် သက်တောင့်သက်သာ ပါဝင်နေသည့်ပုံ",
+    "stepReadMore": "See photo and details",
+    "processDetailLabel": "What staff check",
+    "processImageAlt": "Safety check image for {{title}}"
   },
   "steps": [
     {
-      "title": "ကြိုတင်စစ်ဆေးမှု",
-      "text": "အရည်အချင်းနှင့် ကျန်းမာရေး စစ်ဆေးသည်"
+      "title": "Pre-check",
+      "text": "Confirm eligibility and health",
+      "detail": "Before donation, staff confirm that your condition is suitable for donating safely that day.",
+      "checks": [
+        "Age and weight requirements",
+        "Sleep, meals, fever, and current condition",
+        "Past donation interval and medication status"
+      ]
     },
     {
-      "title": "မေးမြန်းခြင်း စစ်ဆေးခြင်း",
-      "text": "ဝန်ထမ်းများ ဘေးကင်းမှု စစ်ဆေးသည်"
+      "title": "Interview & test",
+      "text": "Staff confirm safety",
+      "detail": "A short interview and screening help protect both the donor and the patients who receive blood.",
+      "checks": [
+        "Health questionnaire review",
+        "Blood pressure and basic condition check",
+        "Small screening test when needed"
+      ]
     },
     {
-      "title": "သွေးထုတ်ယူမှု",
-      "text": "မိနစ် ၁၀~၁၅ ခန့်ဖြင့် ပြီးဆုံးသည်"
+      "title": "Blood donation",
+      "text": "Completed in about 10-15 min",
+      "detail": "During donation, staff stay nearby and monitor your condition. You can speak up immediately if you feel unwell.",
+      "checks": [
+        "Comfortable reclining position",
+        "Staff monitoring during collection",
+        "Rest and hydration after donation"
+      ]
     }
   ],
   "pledge": {
@@ -330,7 +351,8 @@
   },
   "footerCta": {
     "title": "တစ်ယောက်တည်းမဟုတ်ဘဲ ကျောင်းတစ်ရပ်လုံး သွေးလှူဒါန်းကို ပံ့ပိုးကြပါ။",
-    "cta": "မှတ်ပုံတင်ရာသို့ ပြန်သွားပါ"
+    "cta": "မှတ်ပုံတင်ရာသို့ ပြန်သွားပါ",
+    "aiImageNote": "Some images on this website are AI-generated illustrations and may differ from the actual venue or people."
   },
   "impact": {
     "stats": {

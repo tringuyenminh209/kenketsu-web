@@ -319,20 +319,41 @@
       "Listen to explanations alongside anxious friends",
       "Build a donation culture that continues next time"
     ],
-    "imageAlt": "Students comfortably participating in a blood donation event"
+    "imageAlt": "Students comfortably participating in a blood donation event",
+    "stepReadMore": "See photo and details",
+    "processDetailLabel": "What staff check",
+    "processImageAlt": "Safety check image for {{title}}"
   },
   "steps": [
     {
       "title": "Pre-check",
-      "text": "Review eligibility and health"
+      "text": "Confirm eligibility and health",
+      "detail": "Before donation, staff confirm that your condition is suitable for donating safely that day.",
+      "checks": [
+        "Age and weight requirements",
+        "Sleep, meals, fever, and current condition",
+        "Past donation interval and medication status"
+      ]
     },
     {
-      "title": "Interview & Test",
-      "text": "Staff confirm your safety"
+      "title": "Interview & test",
+      "text": "Staff confirm safety",
+      "detail": "A short interview and screening help protect both the donor and the patients who receive blood.",
+      "checks": [
+        "Health questionnaire review",
+        "Blood pressure and basic condition check",
+        "Small screening test when needed"
+      ]
     },
     {
-      "title": "Donation",
-      "text": "Completed in about 10–15 min"
+      "title": "Blood donation",
+      "text": "Completed in about 10-15 min",
+      "detail": "During donation, staff stay nearby and monitor your condition. You can speak up immediately if you feel unwell.",
+      "checks": [
+        "Comfortable reclining position",
+        "Staff monitoring during collection",
+        "Rest and hydration after donation"
+      ]
     }
   ],
   "pledge": {
@@ -345,7 +366,8 @@
   },
   "footerCta": {
     "title": "Together on campus — let's support blood donation.",
-    "cta": "Back to registration"
+    "cta": "Back to registration",
+    "aiImageNote": "Some images on this website are AI-generated illustrations and may differ from the actual venue or people."
   },
   "impact": {
     "stats": {

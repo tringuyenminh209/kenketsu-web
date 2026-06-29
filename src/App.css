@@ -962,40 +962,113 @@ a:focus-visible {
   gap: 10px;
   padding: 0;
   margin: 22px 0 0;
-  list-style: none;
 }
 
-.step-list li {
+.step-card {
   display: grid;
   align-content: start;
   gap: 5px;
   min-height: 76px;
+  width: 100%;
   padding: 16px;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: #fbfcfd;
+  text-align: left;
+  cursor: pointer;
   transition:
     border-color 200ms ease,
+    background 200ms ease,
     transform 200ms ease,
     box-shadow 200ms ease;
 }
 
-.step-list li:hover {
+.step-card:hover,
+.step-card.is-active {
   border-color: rgba(206, 0, 23, 0.26);
+  background: #fff7f7;
   box-shadow: 0 14px 28px rgba(16, 24, 40, 0.08);
   transform: translateY(-2px);
 }
 
-.step-list span {
+.step-card span {
   color: var(--ink);
   font-size: 14px;
   font-weight: 800;
 }
 
-.step-list small {
+.step-card small {
   color: var(--muted);
   font-size: 12px;
   line-height: 1.45;
+}
+
+.step-card em {
+  width: fit-content;
+  margin-top: 4px;
+  color: var(--red);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.process-detail {
+  display: grid;
+  gap: 16px;
+  margin-top: 18px;
+  padding: 14px;
+  border: 1px solid rgba(206, 0, 23, 0.18);
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 18px 38px rgba(16, 24, 40, 0.06);
+}
+
+.process-detail img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.process-detail h3 {
+  margin: 0 0 8px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.process-detail p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.process-detail ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.process-detail li {
+  position: relative;
+  padding-left: 20px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.process-detail li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--green);
 }
 
 .work-area {
@@ -1387,6 +1460,15 @@ th {
   font-size: clamp(28px, 3vw, 48px);
   line-height: 1.18;
   letter-spacing: -0.03em;
+}
+
+.ai-image-note {
+  max-width: 720px;
+  margin: 16px 0 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.7;
 }
 
 .final-cta .button.primary {

@@ -319,20 +319,41 @@
       "Lắng nghe giải thích cùng bạn bè lo lắng",
       "Xây dựng văn hóa hiến máu tiếp tục cho lần sau"
     ],
-    "imageAlt": "Sinh viên thoải mái tham gia sự kiện hiến máu"
+    "imageAlt": "Sinh viên thoải mái tham gia sự kiện hiến máu",
+    "stepReadMore": "Xem anh va chi tiet",
+    "processDetailLabel": "Noi dung duoc kiem tra",
+    "processImageAlt": "Hinh minh hoa kiem tra an toan cho {{title}}"
   },
   "steps": [
     {
-      "title": "Kiểm tra trước",
-      "text": "Xác nhận điều kiện và sức khỏe"
+      "title": "Kiem tra truoc",
+      "text": "Xac nhan dieu kien va suc khoe",
+      "detail": "Truoc khi hien mau, nhan vien se xac nhan tinh trang trong ngay co phu hop de tham gia an toan hay khong.",
+      "checks": [
+        "Dieu kien tuoi va can nang",
+        "Ngu, an uong, sot va tinh trang trong ngay",
+        "Thuoc dang dung va khoang cach tu lan hien mau truoc"
+      ]
     },
     {
-      "title": "Phỏng vấn & xét nghiệm",
-      "text": "Nhân viên xác nhận an toàn"
+      "title": "Phong van & xet nghiem",
+      "text": "Nhan vien xac nhan an toan",
+      "detail": "Phan hoi dap va kiem tra ngan giup bao ve ca nguoi hien mau va benh nhan nhan mau.",
+      "checks": [
+        "Noi dung bang hoi suc khoe",
+        "Huyet ap va tinh trang co ban",
+        "Kiem tra nho khi can thiet"
+      ]
     },
     {
-      "title": "Lấy máu",
-      "text": "Hoàn thành trong khoảng 10-15 phút"
+      "title": "Lay mau",
+      "text": "Hoan thanh khoang 10-15 phut",
+      "detail": "Trong luc lay mau, nhan vien luon o gan de theo doi. Neu thay khong khoe, ban co the bao ngay lap tuc.",
+      "checks": [
+        "Tu the nam ghe thoai mai",
+        "Nhan vien theo doi trong luc lay mau",
+        "Nghi ngoi va bo sung nuoc sau khi xong"
+      ]
     }
   ],
   "pledge": {
@@ -345,7 +366,8 @@
   },
   "footerCta": {
     "title": "Cùng nhau tại campus — hãy ủng hộ hiến máu.",
-    "cta": "Quay lại đăng ký"
+    "cta": "Quay lại đăng ký",
+    "aiImageNote": "Mot so hinh anh tren website la hinh minh hoa duoc tao bang AI, co the khac voi dia diem va con nguoi thuc te."
   },
   "impact": {
     "stats": {

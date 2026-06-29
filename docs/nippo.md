@@ -205,6 +205,8 @@
 - Them thong tin `献血記念品`: nguoi hop tac hien mau se nhan qua ky niem tu Lions Club.
 - Them link App Store va Google Play cho ung dung Labrad de nguoi dung co the bam truc tiep thay vi quet QR.
 - Tao va gan 4 anh minh hoa rieng cho cac card `輸血が必要な人たちの現実`: cap cuu/phau thuat, ung thu/huyet hoc, sinh san/tre so sinh, benh man tinh/dieu tri dai han.
+- Cai thien section `安全で安心の献血`: bien 3 buoc `事前チェック`, `問診・検査`, `採血` thanh card co the bam, moi buoc co anh minh hoa, noi dung detail va danh sach cac muc duoc kiem tra.
+- Them chu thich o footer de nguoi dung biet mot so hinh anh tren website la hinh minh hoa duoc tao bang AI, co the khac voi dia diem/nhan vat thuc te.
 - Cap nhat `src/config/event.ts` de phan event info va flyer/preview dung cung mot nguon du lieu.
 
 ## Kiem tra
@@ -222,6 +224,9 @@
 - `src/assets/impact/impact-cancer-treatment.webp`
 - `src/assets/impact/impact-maternity-newborn.webp`
 - `src/assets/impact/impact-long-term-care.webp`
+- `src/assets/process/process-precheck.webp`
+- `src/assets/process/process-interview-test.webp`
+- `src/assets/process/process-donation.webp`
 - `src/locales/ja.json`
 - `src/locales/en.json`
 - `src/locales/vi.json`

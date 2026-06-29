@@ -10,6 +10,9 @@ import benefitLifeSupportImage from './assets/benefit-life-support.webp'
 import benefitCampusSolidarityImage from './assets/benefit-campus-solidarity.webp'
 import benefitSocialContributionImage from './assets/benefit-social-contribution.webp'
 import reasonSafetyImage from './assets/reason-safety.webp'
+import processPrecheckImage from './assets/process/process-precheck.webp'
+import processInterviewImage from './assets/process/process-interview-test.webp'
+import processDonationImage from './assets/process/process-donation.webp'
 import { EVENT_CONFIG } from './config/event'
 import { Icon, SiteHeader, usePageMotion } from './lib/shared'
 import { checkDuplicateRegistration, insertRegistration, insertSurvey } from './lib/supabase'
@@ -41,11 +44,13 @@ const KNOWLEDGE_IMAGE_POSITIONS = ['center', 'right center', 'center top'] as co
 const BENEFIT_IMAGE_POSITIONS = ['center', 'right center', 'center top', 'left center'] as const
 const KNOWLEDGE_IMAGES = [knowledgeInfrastructureImage, knowledgeMultiplePatientsImage, knowledgeYouthImage]
 const BENEFIT_IMAGES = [benefitHealthCheckImage, benefitLifeSupportImage, benefitCampusSolidarityImage, benefitSocialContributionImage]
+const PROCESS_IMAGES = [processPrecheckImage, processInterviewImage, processDonationImage]
 
 function UserPage() {
   const { t } = useTranslation()
   const [selectedKnowledge, setSelectedKnowledge] = useState(0)
   const [selectedBenefit, setSelectedBenefit] = useState(0)
+  const [selectedProcessStep, setSelectedProcessStep] = useState(0)
   const rootRef = useRef<HTMLDivElement>(null)
   const knowledgeDetailRef = useRef<HTMLElement>(null)
   const benefitDetailRef = useRef<HTMLElement>(null)
@@ -57,11 +62,14 @@ function UserPage() {
   const benefits = (t('benefits.cards', { returnObjects: true }) as { title: string; text: string; detail: string }[]).map(
     (card, i) => ({ ...card, imagePosition: BENEFIT_IMAGE_POSITIONS[i], image: BENEFIT_IMAGES[i] }),
   )
-  const steps = t('steps', { returnObjects: true }) as { title: string; text: string }[]
+  const steps = (t('steps', { returnObjects: true }) as { title: string; text: string; detail: string; checks: string[] }[]).map(
+    (step, i) => ({ ...step, image: PROCESS_IMAGES[i] }),
+  )
   const pledgeItems = t('pledge.items', { returnObjects: true }) as string[]
 
   const activeKnowledge = knowledgeCards[selectedKnowledge]
   const activeBenefit = benefits[selectedBenefit]
+  const activeProcessStep = steps[selectedProcessStep]
 
   const eventInfo = [
     { label: t('info.date_label'), value: t('info.date_value') },
@@ -361,14 +369,34 @@ function UserPage() {
               <h2>{t('reason.processTitle')}</h2>
             </div>
             <p className="reason-note">{t('reason.processNote')}</p>
-            <ol className="step-list">
-              {steps.map(({ title, text }) => (
-                <li key={title}>
+            <div className="step-list" role="list">
+              {steps.map(({ title, text }, index) => (
+                <button
+                  className={`step-card ${selectedProcessStep === index ? 'is-active' : ''}`}
+                  key={title}
+                  type="button"
+                  onClick={() => setSelectedProcessStep(index)}
+                  aria-pressed={selectedProcessStep === index}
+                >
                   <span>{title}</span>
                   <small>{text}</small>
-                </li>
+                  <em>{t('reason.stepReadMore')}</em>
+                </button>
               ))}
-            </ol>
+            </div>
+            <article className="process-detail" aria-live="polite">
+              <img src={activeProcessStep.image} alt={t('reason.processImageAlt', { title: activeProcessStep.title })} />
+              <div>
+                <span className="detail-label">{t('reason.processDetailLabel')}</span>
+                <h3>{activeProcessStep.title}</h3>
+                <p>{activeProcessStep.detail}</p>
+                <ul>
+                  {activeProcessStep.checks.map((check) => (
+                    <li key={check}>{check}</li>
+                  ))}
+                </ul>
+              </div>
+            </article>
           </article>
           <article className="reason-community motion-card">
             <Icon type="users" />
@@ -635,7 +663,10 @@ function UserPage() {
         </section>
 
         <footer className="final-cta reveal">
-          <h2>{t('footerCta.title')}</h2>
+          <div>
+            <h2>{t('footerCta.title')}</h2>
+            <p className="ai-image-note">{t('footerCta.aiImageNote')}</p>
+          </div>
           <a className="button primary" href="#register">{t('footerCta.cta')}</a>
         </footer>
       </main>

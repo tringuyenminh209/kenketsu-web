@@ -319,20 +319,41 @@
       "陪同担心的朋友一起听说明",
       "营造下次还能继续的献血文化"
     ],
-    "imageAlt": "学生在献血活动中安心参与的样子"
+    "imageAlt": "学生在献血活动中安心参与的样子",
+    "stepReadMore": "See photo and details",
+    "processDetailLabel": "What staff check",
+    "processImageAlt": "Safety check image for {{title}}"
   },
   "steps": [
     {
-      "title": "事前确认",
-      "text": "确认条件和身体状况"
+      "title": "Pre-check",
+      "text": "Confirm eligibility and health",
+      "detail": "Before donation, staff confirm that your condition is suitable for donating safely that day.",
+      "checks": [
+        "Age and weight requirements",
+        "Sleep, meals, fever, and current condition",
+        "Past donation interval and medication status"
+      ]
     },
     {
-      "title": "问诊·检查",
-      "text": "工作人员确认安全"
+      "title": "Interview & test",
+      "text": "Staff confirm safety",
+      "detail": "A short interview and screening help protect both the donor and the patients who receive blood.",
+      "checks": [
+        "Health questionnaire review",
+        "Blood pressure and basic condition check",
+        "Small screening test when needed"
+      ]
     },
     {
-      "title": "采血",
-      "text": "约10-15分钟完成"
+      "title": "Blood donation",
+      "text": "Completed in about 10-15 min",
+      "detail": "During donation, staff stay nearby and monitor your condition. You can speak up immediately if you feel unwell.",
+      "checks": [
+        "Comfortable reclining position",
+        "Staff monitoring during collection",
+        "Rest and hydration after donation"
+      ]
     }
   ],
   "pledge": {
@@ -345,7 +366,8 @@
   },
   "footerCta": {
     "title": "不是一个人，而是整个校园共同支撑献血。",
-    "cta": "返回报名"
+    "cta": "返回报名",
+    "aiImageNote": "Some images on this website are AI-generated illustrations and may differ from the actual venue or people."
   },
   "impact": {
     "stats": {
