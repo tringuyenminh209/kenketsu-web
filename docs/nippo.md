@@ -293,6 +293,11 @@
 - Gỡ bỏ liên kết truy cập Admin (`t('nav.admin')` / "管理") trên thanh Header dành cho người dùng thông thường để đảm bảo tính bảo mật và tối ưu giao diện. Trong chế độ Admin (`isAdmin = true`), liên kết này vẫn hiển thị đầy đủ để điều hướng bình thường.
 - Tích hợp thêm phần hiển thị bảng **Dữ liệu khảo sát (アンケート回答データ)** vào trong `src/pages/AdminPage.tsx` dưới dạng bảng biểu trực quan.
 - Thêm tính năng xuất CSV (`surveysToCSV` & `fetchSurveys` trong `src/lib/supabase.ts`) cho dữ liệu khảo sát riêng biệt, giúp các giáo viên dễ dàng theo dõi, thống kê và tải dữ liệu khảo sát trực tiếp từ trang Admin Dashboard.
+- **Cải tiến và đồng bộ hóa toàn diện dữ liệu Đăng ký & Khảo sát**:
+  - Bổ sung cột **生年月日 (Ngày sinh)** và **性別 (Giới tính)** vào bảng hiển thị và tệp xuất CSV của dữ liệu đăng ký trong Admin Dashboard (do trước đó bị thiếu).
+  - Tự động biên dịch mã giới tính (`male` -> `男性`, `female` -> `女性`...) trực quan trên bảng và CSV.
+  - Phân tích cú pháp chuỗi cấu trúc của câu hỏi khảo sát (`motivation`, `concern`, `preferred_support`, `recommend`, `comment`) để hiển thị tách biệt rõ ràng từng câu trả lời trong bảng admin, thay vì để chuỗi thô.
+  - Thiết lập xuất CSV khảo sát đầy đủ 8 cột riêng biệt cho mỗi câu hỏi khảo sát giúp giáo viên phân tích và vẽ biểu đồ dễ dàng trong Excel.
 
 ## Kiem tra
 
