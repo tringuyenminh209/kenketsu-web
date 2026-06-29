@@ -307,6 +307,7 @@ export function BloodTreeProgress() {
                     ref={(el) => {
                       leafRefs.current[i] = el
                     }}
+                    className={`tree-leaf-group ${active ? 'is-active' : ''}`}
                     transform={`translate(${cx},${cy}) rotate(${rot})`}
                     style={{ cursor: active ? 'pointer' : 'default' }}
                     tabIndex={active ? 0 : -1}
