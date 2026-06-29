@@ -174,6 +174,20 @@ export function BloodTreeProgress() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count])
 
+  useEffect(() => {
+    if (!tooltip) return
+    const handleDocumentClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      if (!target.closest('.tree-leaf-group')) {
+        setTooltip(null)
+      }
+    }
+    document.addEventListener('click', handleDocumentClick)
+    return () => {
+      document.removeEventListener('click', handleDocumentClick)
+    }
+  }, [tooltip])
+
   const spawnParticles = (cx: number, cy: number) => {
     const layer = particleLayerRef.current
     if (!layer) return
@@ -258,7 +272,7 @@ export function BloodTreeProgress() {
     setTooltip(null)
   })
 
-  const handleLeafClick = contextSafe((index: number) => {
+  const handleLeafClick = contextSafe((index: number, clientX?: number, clientY?: number) => {
     const el = leafRefs.current[index]
     if (!el) return
     gsap.timeline()
@@ -269,6 +283,10 @@ export function BloodTreeProgress() {
     const [cx, cy] = LEAF_DATA[index]
     spawnParticles(cx, cy)
     playCrystalSound()
+
+    if (clientX !== undefined && clientY !== undefined) {
+      setTooltip({ index, x: clientX, y: clientY })
+    }
   })
 
   const displayCount = count ?? 0
@@ -378,7 +396,7 @@ export function BloodTreeProgress() {
                           : undefined
                       }
                       onMouseLeave={active ? () => handleLeafLeave(i) : undefined}
-                      onClick={active ? () => handleLeafClick(i) : undefined}
+                      onClick={active ? (e) => handleLeafClick(i, e.clientX, e.clientY) : undefined}
                       onKeyDown={
                         active
                           ? (e) => {
