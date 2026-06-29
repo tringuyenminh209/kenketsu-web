@@ -320,39 +320,39 @@
       "营造下次还能继续的献血文化"
     ],
     "imageAlt": "学生在献血活动中安心参与的样子",
-    "stepReadMore": "See photo and details",
-    "processDetailLabel": "What staff check",
-    "processImageAlt": "Safety check image for {{title}}"
+    "stepReadMore": "查看照片和详情",
+    "processDetailLabel": "工作人员确认的内容",
+    "processImageAlt": "{{title}}的安全确认示意图"
   },
   "steps": [
     {
-      "title": "Pre-check",
-      "text": "Confirm eligibility and health",
-      "detail": "Before donation, staff confirm that your condition is suitable for donating safely that day.",
+      "title": "事前检查",
+      "text": "确认条件与身体状态",
+      "detail": "献血前，工作人员会确认当天身体状况是否适合安全献血。",
       "checks": [
-        "Age and weight requirements",
-        "Sleep, meals, fever, and current condition",
-        "Past donation interval and medication status"
+        "年龄、体重等主要基准",
+        "睡眠、饮食、发烧及当天体况",
+        "用药情况及距上次献血的间隔"
       ]
     },
     {
-      "title": "Interview & test",
-      "text": "Staff confirm safety",
-      "detail": "A short interview and screening help protect both the donor and the patients who receive blood.",
+      "title": "问诊・检查",
+      "text": "工作人员确认安全",
+      "detail": "通过问诊和简单检查，保障献血者和血液接受患者双方的安全。",
       "checks": [
-        "Health questionnaire review",
-        "Blood pressure and basic condition check",
-        "Small screening test when needed"
+        "健康状态问诊内容",
+        "血压、脉搏及基本体况",
+        "必要时检查血色素量等指标"
       ]
     },
     {
-      "title": "Blood donation",
-      "text": "Completed in about 10-15 min",
-      "detail": "During donation, staff stay nearby and monitor your condition. You can speak up immediately if you feel unwell.",
+      "title": "采血",
+      "text": "约10-15分钟完成",
+      "detail": "采血过程中工作人员会在旁监护。如有不适或疼痛加剧，可随时告知。",
       "checks": [
-        "Comfortable reclining position",
-        "Staff monitoring during collection",
-        "Rest and hydration after donation"
+        "在躺椅上保持舒适姿势",
+        "采血期间工作人员全程监护",
+        "结束后休息并补充水分"
       ]
     }
   ],
