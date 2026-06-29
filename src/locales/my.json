@@ -140,11 +140,11 @@
   "register": {
     "title": "ပါဝင်မှတ်ပုံတင်ခြင်း",
     "name": "အမည်",
-    "namePlaceholder": "ဥပမာ）ကိုသန်း",
+    "namePlaceholder": "ဥပမာ）Ko Than",
     "email": "အီးမေးလ်လိပ်စာ",
-    "emailPlaceholder": "example@school.ac.jp",
+    "emailPlaceholder": "example@ecc.ac.jp",
     "studentId": "ကျောင်းသားနံပါတ် / ဝန်ထမ်းနံပါတ်",
-    "studentIdPlaceholder": "ဥပမာ）S1234567",
+    "studentIdPlaceholder": "ဥပမာ）2240000",
     "phone": "ဖုန်းနံပါတ်",
     "phonePlaceholder": "090-1234-5678",
     "department": "အတန်း",
@@ -233,7 +233,8 @@
     "unit": "ဦး",
     "goalReached": "ရည်မှန်းချက် ရောက်ပြီ! ကျေးဇူးတင်ပါသည်",
     "remaining": "နောက်ထပ် {{remaining}} ဦး ဖြည့်ပြည့်သည်",
-    "clickHint": "ရွက်ကို နှိပ်ကြည့်ပါ！"
+    "clickHint": "ရွက်ကို နှိပ်ကြည့်ပါ！",
+    "leafAriaLabel": "{{n}} ခုမြောက် ရွက်"
   },
   "lastYear": {
     "badge": "မနှစ်က လှုပ်ရှားမှု",

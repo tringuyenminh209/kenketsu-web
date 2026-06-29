@@ -140,11 +140,11 @@
   "register": {
     "title": "参加申込",
     "name": "氏名",
-    "namePlaceholder": "例）山田 太郎",
+    "namePlaceholder": "例）Yamada Taro",
     "email": "メールアドレス",
-    "emailPlaceholder": "example@school.ac.jp",
+    "emailPlaceholder": "example@ecc.ac.jp",
     "studentId": "学生番号 / 教職員番号",
-    "studentIdPlaceholder": "例）S1234567",
+    "studentIdPlaceholder": "例）2240000",
     "phone": "電話番号",
     "phonePlaceholder": "090-1234-5678",
     "department": "クラス",
@@ -233,7 +233,8 @@
     "unit": "人",
     "goalReached": "目標達成！ありがとうございます",
     "remaining": "あと{{remaining}}人で満員です",
-    "clickHint": "葉をクリックしてみよう！"
+    "clickHint": "葉をクリックしてみよう！",
+    "leafAriaLabel": "参加者 {{n}} 番目の葉"
   },
   "lastYear": {
     "badge": "昨年の記録",

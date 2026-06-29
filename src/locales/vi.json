@@ -140,11 +140,11 @@
   "register": {
     "title": "Đăng ký tham gia",
     "name": "Họ tên",
-    "namePlaceholder": "VD: Nguyễn Văn A",
+    "namePlaceholder": "VD: Nguyen Van A",
     "email": "Email",
-    "emailPlaceholder": "example@school.ac.jp",
+    "emailPlaceholder": "example@ecc.ac.jp",
     "studentId": "Mã sinh viên / Mã nhân viên",
-    "studentIdPlaceholder": "VD: S1234567",
+    "studentIdPlaceholder": "VD: 2240000",
     "phone": "Số điện thoại",
     "phonePlaceholder": "090-1234-5678",
     "department": "Lớp",
@@ -233,7 +233,8 @@
     "unit": "người",
     "goalReached": "Đã đạt mục tiêu! Cảm ơn mọi người",
     "remaining": "Còn {{remaining}} chỗ trống",
-    "clickHint": "Hãy thử nhấn vào lá nhé!"
+    "clickHint": "Hãy thử nhấn vào lá nhé!",
+    "leafAriaLabel": "Lá thứ {{n}}"
   },
   "lastYear": {
     "badge": "Hoạt động năm ngoái",

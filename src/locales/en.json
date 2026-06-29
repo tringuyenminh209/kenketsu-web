@@ -142,9 +142,9 @@
     "name": "Full Name",
     "namePlaceholder": "e.g. Taro Yamada",
     "email": "Email Address",
-    "emailPlaceholder": "example@school.ac.jp",
+    "emailPlaceholder": "example@ecc.ac.jp",
     "studentId": "Student / Staff ID",
-    "studentIdPlaceholder": "e.g. S1234567",
+    "studentIdPlaceholder": "e.g. 2240000",
     "phone": "Phone Number",
     "phonePlaceholder": "090-1234-5678",
     "department": "Class",
@@ -233,7 +233,8 @@
     "unit": "people",
     "goalReached": "Goal reached! Thank you everyone!",
     "remaining": "{{remaining}} spots remaining",
-    "clickHint": "Try clicking on a leaf!"
+    "clickHint": "Try clicking on a leaf!",
+    "leafAriaLabel": "Leaf {{n}}"
   },
   "lastYear": {
     "badge": "Last Year's Event",

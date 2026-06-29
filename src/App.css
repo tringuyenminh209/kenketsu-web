@@ -1053,6 +1053,31 @@ textarea {
   padding: 12px;
 }
 
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrap input {
+  flex: 1;
+  padding-right: 36px;
+}
+
+.field-indicator {
+  position: absolute;
+  right: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.field-indicator.ok { color: #2e7d32; }
+.field-indicator.ng { color: #c62828; }
+
+label.field-valid input { border-color: #66bb6a; }
+label.field-invalid input { border-color: #e57373; }
+
 fieldset {
   display: flex;
   flex-wrap: wrap;

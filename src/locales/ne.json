@@ -131,11 +131,11 @@
   "register": {
     "title": "सहभागिता दर्ता",
     "name": "नाम",
-    "namePlaceholder": "उदा: राम बहादुर",
+    "namePlaceholder": "उदा: Ram Bahadur",
     "email": "इमेल ठेगाना",
-    "emailPlaceholder": "example@school.ac.jp",
+    "emailPlaceholder": "example@ecc.ac.jp",
     "studentId": "विद्यार्थी / कर्मचारी नम्बर",
-    "studentIdPlaceholder": "उदा: S1234567",
+    "studentIdPlaceholder": "उदा: 2240000",
     "phone": "फोन नम्बर",
     "phonePlaceholder": "090-1234-5678",
     "department": "कक्षा",
@@ -224,7 +224,8 @@
     "unit": "जना",
     "goalReached": "लक्ष्य पूरा! धन्यवाद",
     "remaining": "अझै {{remaining}} जना बाँकी छन्",
-    "clickHint": "पातमा क्लिक गर्नुहोस्！"
+    "clickHint": "पातमा क्लिक गर्नुहोस्！",
+    "leafAriaLabel": "{{n}} नम्बरको पात"
   },
   "lastYear": {
     "badge": "गत वर्षको गतिविधि",

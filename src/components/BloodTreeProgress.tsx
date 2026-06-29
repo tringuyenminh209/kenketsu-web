@@ -259,6 +259,9 @@ export function BloodTreeProgress() {
                     }}
                     transform={`translate(${cx},${cy}) rotate(${rot})`}
                     style={{ cursor: active ? 'pointer' : 'default' }}
+                    tabIndex={active ? 0 : -1}
+                    role={active ? 'button' : undefined}
+                    aria-label={active ? t('tree.leafAriaLabel', { n: i + 1 }) : undefined}
                     onMouseEnter={
                       active
                         ? (e) => handleLeafEnter(i, e.clientX, e.clientY)
@@ -266,6 +269,16 @@ export function BloodTreeProgress() {
                     }
                     onMouseLeave={active ? () => handleLeafLeave(i) : undefined}
                     onClick={active ? () => handleLeafClick(i) : undefined}
+                    onKeyDown={
+                      active
+                        ? (e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault()
+                              handleLeafClick(i)
+                            }
+                          }
+                        : undefined
+                    }
                   >
                     <ellipse
                       cx={0}
