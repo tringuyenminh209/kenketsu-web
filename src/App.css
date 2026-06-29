@@ -1928,7 +1928,9 @@ th {
 /* ── Foreign Student Section ───────────────────────── */
 .fs-section {
   padding: 64px 72px;
-  background: #fffafa;
+  background:
+    linear-gradient(180deg, #ffffff, #fff8f8),
+    white;
   border-bottom: 1px solid var(--line-red);
 }
 
@@ -1943,43 +1945,62 @@ th {
   line-height: 1.6;
 }
 
+/* ── Rule cards — same shadow/hover as reason-grid article ── */
 .fs-rules {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin-bottom: 32px;
+  gap: 16px;
+  margin-bottom: 36px;
 }
 
 .fs-rule-card {
   display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 18px 16px;
-  border-radius: 8px;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px 22px;
+  border-radius: 12px;
   background: white;
   border: 1px solid var(--border);
-  border-left: 3px solid;
+  box-shadow: 0 18px 46px rgba(16, 24, 40, 0.045);
+  transition:
+    background 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms ease;
 }
 
-.fs-rule-card .icon {
+.fs-rule-card:hover {
+  background: #fffafa;
+  box-shadow: 0 22px 56px rgba(206, 0, 23, 0.1);
+  transform: translateY(-2px);
+}
+
+.fs-rule-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-  margin-top: 1px;
 }
 
-.fs-rule-card--green { border-left-color: var(--green); }
-.fs-rule-card--green .icon { color: var(--green); }
+.fs-rule-icon-wrap .icon {
+  width: 22px;
+  height: 22px;
+}
 
-.fs-rule-card--amber { border-left-color: #b45309; }
-.fs-rule-card--amber .icon { color: #b45309; }
+.fs-rule-card--green .fs-rule-icon-wrap { background: rgba(0, 135, 90, 0.1); }
+.fs-rule-card--green .fs-rule-icon-wrap .icon { color: var(--green); }
 
-.fs-rule-card--red { border-left-color: var(--red); }
-.fs-rule-card--red .icon { color: var(--red); }
+.fs-rule-card--amber .fs-rule-icon-wrap { background: rgba(180, 83, 9, 0.1); }
+.fs-rule-card--amber .fs-rule-icon-wrap .icon { color: #b45309; }
+
+.fs-rule-card--red .fs-rule-icon-wrap { background: rgba(206, 0, 23, 0.08); }
+.fs-rule-card--red .fs-rule-icon-wrap .icon { color: var(--red); }
 
 .fs-rule-card h3 {
-  margin: 0 0 5px;
-  font-size: 13px;
+  margin: 0 0 6px;
+  font-size: 14px;
   font-weight: 800;
   color: var(--ink);
   line-height: 1.3;
@@ -1987,28 +2008,30 @@ th {
 
 .fs-rule-card p {
   margin: 0;
-  font-size: 12px;
+  font-size: 12.5px;
   color: var(--muted);
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
+/* ── Country table ── */
 .fs-table-wrap {
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
   background: white;
   margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(16, 24, 40, 0.04);
 }
 
 .fs-table-title {
   margin: 0;
-  padding: 11px 20px;
+  padding: 13px 24px;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--muted);
   background: #f9fafb;
   border-bottom: 1px solid var(--border);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -2019,21 +2042,21 @@ th {
 
 .fs-country-row {
   display: grid;
-  grid-template-columns: 160px 1fr;
+  grid-template-columns: 175px 1fr;
   gap: 12px;
-  padding: 13px 20px;
+  padding: 15px 24px;
   border-bottom: 1px solid var(--border);
   align-items: start;
+  transition: background 0.12s;
 }
 
-.fs-country-row:last-child {
-  border-bottom: none;
-}
+.fs-country-row:hover { background: #faf5f5; }
+.fs-country-row:last-child { border-bottom: none; }
 
 .fs-country-name {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
   padding-top: 1px;
 }
 
@@ -2041,21 +2064,21 @@ th {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 28px;
-  height: 18px;
-  padding: 0 4px;
+  min-width: 32px;
+  height: 20px;
+  padding: 0 5px;
   background: var(--soft);
   border: 1px solid var(--line-red);
-  border-radius: 3px;
+  border-radius: 4px;
   font-size: 10px;
   font-weight: 900;
   color: var(--red);
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   flex-shrink: 0;
 }
 
 .fs-country-name strong {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--ink);
 }
@@ -2063,7 +2086,7 @@ th {
 .fs-region-list {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
 }
 
 .fs-region-item {
@@ -2074,7 +2097,7 @@ th {
 }
 
 .fs-region-label {
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--ink);
   flex: 1;
 }
@@ -2083,9 +2106,9 @@ th {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 2px 9px;
-  border-radius: 4px;
-  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 5px;
+  font-size: 11.5px;
   font-weight: 700;
   white-space: nowrap;
   flex-shrink: 0;
@@ -2101,33 +2124,14 @@ th {
   flex-shrink: 0;
 }
 
-.fs-status--ok {
-  color: var(--green-dark);
-  background: rgba(0, 108, 74, 0.06);
-  border-color: rgba(0, 108, 74, 0.22);
-}
-
-.fs-status--wait {
-  color: #92400e;
-  background: rgba(146, 64, 14, 0.06);
-  border-color: rgba(146, 64, 14, 0.22);
-}
-
-.fs-status--check {
-  color: #c2410c;
-  background: rgba(194, 65, 12, 0.06);
-  border-color: rgba(194, 65, 12, 0.22);
-}
-
-.fs-status--lifting {
-  color: #1e40af;
-  background: rgba(30, 64, 175, 0.06);
-  border-color: rgba(30, 64, 175, 0.22);
-}
+.fs-status--ok { color: var(--green-dark); background: rgba(0,108,74,0.07); border-color: rgba(0,108,74,0.22); }
+.fs-status--wait { color: #92400e; background: rgba(146,64,14,0.07); border-color: rgba(146,64,14,0.22); }
+.fs-status--check { color: #c2410c; background: rgba(194,65,12,0.07); border-color: rgba(194,65,12,0.22); }
+.fs-status--lifting { color: #1e40af; background: rgba(30,64,175,0.07); border-color: rgba(30,64,175,0.22); }
 
 .fs-table-note {
   margin: 0;
-  padding: 9px 20px;
+  padding: 10px 24px;
   font-size: 11px;
   color: var(--muted);
   background: #f9fafb;
@@ -2135,51 +2139,65 @@ th {
   line-height: 1.5;
 }
 
+/* ── Footer row ── */
 .fs-footer {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 16px;
 }
 
 .fs-lang-note,
 .fs-cta {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  padding: 18px 20px;
-  border-radius: 8px;
-  background: white;
-  border: 1px solid var(--border);
+  gap: 14px;
+  padding: 22px 22px;
+  border-radius: 12px;
 }
 
-.fs-lang-note .icon {
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-  color: var(--muted);
-  margin-top: 2px;
+.fs-lang-note {
+  background: white;
+  border: 1px solid var(--border);
+  box-shadow: 0 18px 46px rgba(16, 24, 40, 0.04);
 }
 
 .fs-cta {
-  border-color: var(--line-red);
-  background: var(--soft);
+  background:
+    radial-gradient(circle at 90% 10%, rgba(206, 0, 23, 0.07), transparent 55%),
+    #fff5f5;
+  border: 1.5px solid var(--line-red);
+  box-shadow: 0 4px 20px rgba(206, 0, 23, 0.08);
 }
 
-.fs-cta .icon {
+.fs-note-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.fs-note-icon-wrap .icon {
   width: 20px;
   height: 20px;
-  color: var(--red);
-  margin-top: 2px;
 }
+
+.fs-note-icon-wrap--neutral { background: rgba(102, 112, 133, 0.1); }
+.fs-note-icon-wrap--neutral .icon { color: var(--muted); }
+
+.fs-note-icon-wrap--red { background: rgba(206, 0, 23, 0.1); }
+.fs-note-icon-wrap--red .icon { color: var(--red); }
 
 .fs-lang-note strong,
 .fs-cta strong {
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--ink);
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 }
 
 .fs-cta strong { color: var(--red); }
@@ -2187,34 +2205,20 @@ th {
 .fs-lang-note p,
 .fs-cta p {
   margin: 0;
-  font-size: 12px;
+  font-size: 12.5px;
   color: var(--muted);
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 @media (max-width: 840px) {
-  .fs-section {
-    padding: 52px 28px;
-  }
-
-  .fs-rules {
-    grid-template-columns: 1fr;
-  }
-
-  .fs-footer {
-    grid-template-columns: 1fr;
-  }
+  .fs-section { padding: 52px 28px; }
+  .fs-rules { grid-template-columns: 1fr; }
+  .fs-footer { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 540px) {
-  .fs-country-row {
-    grid-template-columns: 1fr;
-    gap: 6px;
-  }
-
-  .fs-region-item {
-    flex-wrap: wrap;
-  }
+  .fs-country-row { grid-template-columns: 1fr; gap: 6px; }
+  .fs-region-item { flex-wrap: wrap; }
 }
 
 /* ── Tree Progress Section ─────────────────────────── */
