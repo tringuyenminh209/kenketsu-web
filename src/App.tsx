@@ -737,7 +737,6 @@ function UserPage() {
                     value={regForm.birthDate}
                     onChange={(e) => setRegForm({ ...regForm, birthDate: e.target.value })}
                   />
-                  <small className="input-hint">{t('register.birthDateHelp')}</small>
                 </label>
               </div>
               <fieldset>

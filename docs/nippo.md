@@ -162,6 +162,7 @@
 
 - Doi truong `所属` trong form dang ky thanh `クラス` va cho nguoi dung tu nhap class cua minh.
 - Doi `生年月日` tu date picker sang input text nhanh, chap nhan `YYYY/MM/DD`, `YYYY-MM-DD`, hoac `YYYYMMDD`, sau do chuan hoa ve `YYYY-MM-DD` khi gui backend.
+- Bo dong helper text duoi o `生年月日` de form gon hon theo feedback moi.
 - Them validate loi ngay sinh khong hop le truoc khi gui dang ky.
 - Mo rong phan `アンケート` tu 3 cau hoi thanh 7 cau hoi, gom ly do tham gia, noi lo truoc khi tham gia, ho tro mong muon, kha nang gioi thieu cho ban be va ghi chu tu do.
 - Do backend survey hien chi co 3 cot, cac cau hoi moi duoc dong goi vao `comment` dang key-value de khong can migration ngay.
