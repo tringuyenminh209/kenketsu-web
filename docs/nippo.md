@@ -280,13 +280,29 @@
 - `npm run build`: pass
 - Tập lệnh kiểm tra tự động locales: pass (đồng bộ 100% với 233 khóa)
 
-## File da thay doi chinh
-
-- `src/locales/ja.json`
-- `src/locales/en.json`
-- `src/locales/vi.json`
-- `src/locales/zh.json`
 - `src/locales/my.json`
 - `src/locales/ne.json`
+- `docs/nippo.md`
+
+---
+
+## Ngay: 2026-06-29 (session 3 - tich hop bang khao sat trong admin va go link admin tren user header)
+
+## Noi dung da hoan thanh
+
+- Gỡ bỏ liên kết truy cập Admin (`t('nav.admin')` / "管理") trên thanh Header dành cho người dùng thông thường để đảm bảo tính bảo mật và tối ưu giao diện. Trong chế độ Admin (`isAdmin = true`), liên kết này vẫn hiển thị đầy đủ để điều hướng bình thường.
+- Tích hợp thêm phần hiển thị bảng **Dữ liệu khảo sát (アンケート回答データ)** vào trong `src/pages/AdminPage.tsx` dưới dạng bảng biểu trực quan.
+- Thêm tính năng xuất CSV (`surveysToCSV` & `fetchSurveys` trong `src/lib/supabase.ts`) cho dữ liệu khảo sát riêng biệt, giúp các giáo viên dễ dàng theo dõi, thống kê và tải dữ liệu khảo sát trực tiếp từ trang Admin Dashboard.
+
+## Kiem tra
+
+- `npm run lint`: pass (oxlint)
+- `npm run build`: pass
+
+## File da thay doi chinh
+
+- `src/lib/shared.tsx`
+- `src/lib/supabase.ts`
+- `src/pages/AdminPage.tsx`
 - `docs/nippo.md`
 

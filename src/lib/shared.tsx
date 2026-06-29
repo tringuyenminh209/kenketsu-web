@@ -142,7 +142,6 @@ export function SiteHeader({ isAdmin = false }: { isAdmin?: boolean }) {
             <a href="#info">{t('nav.info')}</a>
             <a href="#register">{t('nav.register')}</a>
             <a href="#survey">{t('nav.survey')}</a>
-            <NavLink to="/admin">{t('nav.admin')}</NavLink>
           </>
         )}
       </nav>
