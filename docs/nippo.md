@@ -204,6 +204,7 @@
 - Them ghi chu: dat lich truoc se rut ngan thoi gian thu tuc hien mau.
 - Them thong tin `献血記念品`: nguoi hop tac hien mau se nhan qua ky niem tu Lions Club.
 - Them link App Store va Google Play cho ung dung Labrad de nguoi dung co the bam truc tiep thay vi quet QR.
+- Tao va gan 4 anh minh hoa rieng cho cac card `輸血が必要な人たちの現実`: cap cuu/phau thuat, ung thu/huyet hoc, sinh san/tre so sinh, benh man tinh/dieu tri dai han.
 - Cap nhat `src/config/event.ts` de phan event info va flyer/preview dung cung mot nguon du lieu.
 
 ## Kiem tra
@@ -216,6 +217,11 @@
 - `src/config/event.ts`
 - `src/App.tsx`
 - `src/App.css`
+- `src/components/ImpactSection.tsx`
+- `src/assets/impact/impact-emergency-surgery.webp`
+- `src/assets/impact/impact-cancer-treatment.webp`
+- `src/assets/impact/impact-maternity-newborn.webp`
+- `src/assets/impact/impact-long-term-care.webp`
 - `src/locales/ja.json`
 - `src/locales/en.json`
 - `src/locales/vi.json`
@@ -223,3 +229,29 @@
 - `src/locales/ne.json`
 - `src/locales/zh.json`
 - `docs/nippo.md`
+
+---
+
+## Ngay: 2026-06-29 (ra soat va hoan thien da ngon ngu)
+
+## Noi dung da hoan thanh
+
+- Them dau tieng Viet day du cho cac nhan bi thieu trong `src/locales/vi.json` (sponsor_label, reservation_label, gift_label, appLinks*).
+- Dich cac chuoi appLinks lien quan den ung dung Labrad sang tieng Trung (`zh.json`), tieng Myanmar (`my.json`), va tieng Nepal (`ne.json`).
+- Bo sung 3 khoa dich con thieu ve appLinks vao tep tin tieng Nepal (`ne.json`).
+- Chay script Node.js kiem tra tinh nhat quan cua cac khoa dich (dat 192/192 khoa tren ca 6 ngon ngu).
+- Toi uu hoa mot so tu khoa tieng Viet trong `src/locales/vi.json` sang tong giong hoc duong phu hop va truyen cam hung hon (doi "Cay tham gia" -> "Cay nhan ai", "Tieu chuan..." -> "Mot so luu y...", "Cơ hoi kiem tra..." -> "Cơ hoi lang nghe cơ the", "Cam giac ho tro..." -> "Niem vui se chia su song").
+
+## Kiem tra
+
+- `npm run lint`: pass (oxlint)
+- `npm run build`: pass
+
+## File da thay doi chinh
+
+- `src/locales/vi.json`
+- `src/locales/zh.json`
+- `src/locales/my.json`
+- `src/locales/ne.json`
+- `docs/nippo.md`
+

@@ -92,17 +92,17 @@
         "a": "Tránh vận động mạnh trong ngày hiến máu."
       }
     ],
-    "sponsor_label": "Don vi tai tro",
-    "reservation_label": "Luu y dat lich",
-    "gift_label": "Qua luu niem hien mau",
-    "appLinksLabel": "Link ung dung Labrad",
-    "appLinksTitle": "Dat lich truoc bang ung dung Labrad",
-    "appLinksText": "Dung de quan ly the hien mau va dat lich truoc."
+    "sponsor_label": "Đơn vị tài trợ",
+    "reservation_label": "Lưu ý đặt lịch",
+    "gift_label": "Quà lưu niệm hiến máu",
+    "appLinksLabel": "Liên kết ứng dụng Labrad",
+    "appLinksTitle": "Đặt lịch trước bằng ứng dụng Labrad",
+    "appLinksText": "Dùng để quản lý thẻ hiến máu và đặt lịch trước."
   },
   "precautions": {
     "title": "Những điều cần kiểm tra trước khi tham gia",
     "intro": "Đây không phải những quy định khắt khe, mà là để bảo vệ sức khỏe của chính bạn. Nếu có thắc mắc, hãy hỏi trực tiếp nhân viên vào ngày sự kiện.",
-    "eligibilityTitle": "Tiêu chuẩn trước khi tham gia",
+    "eligibilityTitle": "Một số lưu ý trước khi đăng ký",
     "eligibilityItems": [
       "Từ 16 đến 69 tuổi (từ 65 tuổi cần có kinh nghiệm hiến máu trước)",
       "Nam từ 45kg, Nữ từ 40kg",
@@ -222,7 +222,7 @@
     "error": "Đã xảy ra lỗi"
   },
   "tree": {
-    "title": "Cây tham gia",
+    "title": "Cây nhân ái",
     "subtitle": "Mỗi lần đăng ký, một chiếc lá mới mọc lên",
     "unit": "người",
     "goalReached": "Đã đạt mục tiêu! Cảm ơn mọi người",
@@ -263,12 +263,12 @@
     "imageAlt": "Hình minh họa cho {{title}}",
     "cards": [
       {
-        "title": "Cơ hội kiểm tra sức khỏe",
+        "title": "Cơ hội lắng nghe cơ thể",
         "text": "Kiểm tra trước khi hiến giúp nâng cao nhận thức về sức khỏe của bản thân.",
         "detail": "Trước khi hiến máu, tình trạng sức khỏe, giấc ngủ, ăn uống và huyết áp được xem xét. Đây không chỉ để xác định đủ điều kiện — mà còn là cơ hội tốt để nhìn lại thói quen sống của mình."
       },
       {
-        "title": "Cảm giác hỗ trợ sự sống",
+        "title": "Niềm vui sẻ chia sự sống",
         "text": "Một hành động nhỏ trong thời gian ngắn trở thành sức mạnh thực sự hỗ trợ điều trị và phục hồi của ai đó.",
         "detail": "Máu không thể tạo ra nhân tạo hay bảo quản lâu dài. Sự đóng góp của bạn trở thành hỗ trợ thiết thực cho những người cần truyền máu trong phẫu thuật, tai nạn, sinh con hay điều trị ung thư."
       },

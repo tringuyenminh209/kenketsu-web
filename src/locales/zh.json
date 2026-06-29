@@ -95,9 +95,9 @@
     "sponsor_label": "赞助方",
     "reservation_label": "预约须知",
     "gift_label": "献血纪念品",
-    "appLinksLabel": "Labrad app links",
-    "appLinksTitle": "Reserve ahead with the Labrad app",
-    "appLinksText": "Use it for blood donation card management and advance reservations."
+    "appLinksLabel": "Labrad 应用程序链接",
+    "appLinksTitle": "通过 Labrad 应用程序提前预约",
+    "appLinksText": "用于献血卡管理和提前预约。"
   },
   "precautions": {
     "title": "参加前请轻松确认的事项",

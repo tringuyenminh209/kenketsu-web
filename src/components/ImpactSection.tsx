@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
-import heroImage from '../assets/blood-donation-hero.png'
+import emergencySurgeryImage from '../assets/impact/impact-emergency-surgery.webp'
+import cancerTreatmentImage from '../assets/impact/impact-cancer-treatment.webp'
+import maternityNewbornImage from '../assets/impact/impact-maternity-newborn.webp'
+import longTermCareImage from '../assets/impact/impact-long-term-care.webp'
 
 function CountUp({ to, active, duration = 1400 }: { to: number; active: boolean; duration?: number }) {
   const [val, setVal] = useState(0)
@@ -22,24 +25,28 @@ const WHO_NEEDS = [
     title: '手術・緊急救命',
     body: '交通事故や急な手術では短時間で大量の血液が必要になります。血がなければ助けられない命があります。',
     overlay: 'linear-gradient(160deg, rgba(160,10,10,0.80) 0%, rgba(80,0,0,0.85) 100%)',
+    image: emergencySurgeryImage,
     bgPos: 'center top',
   },
   {
     title: 'がん・血液疾患',
     body: '抗がん剤治療や白血病では、血小板や赤血球の継続的な補充が治療の前提条件になります。',
     overlay: 'linear-gradient(160deg, rgba(90,10,140,0.80) 0%, rgba(40,0,80,0.85) 100%)',
+    image: cancerTreatmentImage,
     bgPos: 'right center',
   },
   {
     title: '出産・新生児',
     body: '分娩時の大量出血や、早産で生まれた赤ちゃんへの輸血は、命を守るための最前線です。',
     overlay: 'linear-gradient(160deg, rgba(10,60,140,0.80) 0%, rgba(0,30,90,0.85) 100%)',
+    image: maternityNewbornImage,
     bgPos: 'left center',
   },
   {
     title: '慢性疾患・長期治療',
     body: '腎臓病・再生不良性貧血など、長期にわたる治療を続けるために血液が定期的に必要です。',
     overlay: 'linear-gradient(160deg, rgba(10,90,60,0.80) 0%, rgba(0,50,30,0.85) 100%)',
+    image: longTermCareImage,
     bgPos: 'center bottom',
   },
 ]
@@ -167,7 +174,7 @@ export function ImpactSection() {
             >
               <div
                 className="who-card-photo"
-                style={{ backgroundImage: `url(${heroImage})` }}
+                style={{ backgroundImage: `url(${item.image})` }}
               />
               <div className="who-card-overlay" />
               <div className="who-card-body">
