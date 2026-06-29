@@ -9,7 +9,8 @@
     "userSite": "User Site",
     "about": "About Blood Donation",
     "precautions": "Precautions",
-    "flyer": "Print Flyer"
+    "flyer": "Print Flyer",
+    "ariaLabel": "Main Navigation"
   },
   "hero": {
     "title": "Blood Donation Volunteer Event",
@@ -24,6 +25,8 @@
     "feature3Desc": "Contribute to society from campus",
     "tagline": "Your blood can save someone's life",
     "eventLabel": "Blood Donation Volunteer Activity",
+    "imageAlt": "Students comfortably participating in a blood donation event at a campus venue",
+    "featuresAriaLabel": "Event features",
     "countdown": {
       "days": "days",
       "hours": "hours",
@@ -88,7 +91,13 @@
         "q": "Can I exercise after donating?",
         "a": "Please avoid strenuous exercise on the day of donation."
       }
-    ]
+    ],
+    "sponsor_label": "Sponsors",
+    "reservation_label": "Reservation note",
+    "gift_label": "Donation gift",
+    "appLinksLabel": "Labrad app links",
+    "appLinksTitle": "Reserve ahead with the Labrad app",
+    "appLinksText": "Use it for blood donation card management and advance reservations."
   },
   "precautions": {
     "title": "Things to Check Before Participating",
@@ -219,5 +228,101 @@
     "goalReached": "Goal reached! Thank you everyone!",
     "remaining": "{{remaining}} spots remaining",
     "clickHint": "Try clicking on a leaf!"
+  },
+  "knowledge": {
+    "sectionTitle": "Knowing about blood donation is the first step to saving lives.",
+    "sectionBody": "Blood donation isn't just for special people. With the right knowledge, anxiety fades, and everyone — whether they donate or share the word — becomes part of supporting local healthcare.",
+    "readMore": "Read more",
+    "currentLabel": "Currently reading",
+    "seeContributions": "See what blood donation can contribute",
+    "imageAlt": "Illustration for {{title}}",
+    "cards": [
+      {
+        "title": "Blood Donation: Society's Medical Infrastructure",
+        "text": "Surgery, heavy bleeding in childbirth, cancer treatment — situations requiring transfusions arise daily. Blood cannot be manufactured artificially or stored long-term.",
+        "detail": "Hospitals need transfusions every day. Since blood can't be made in a factory like medicine, community cooperation is what sustains the medical field."
+      },
+      {
+        "title": "One Donation Reaches Multiple Patients",
+        "text": "Donated blood is separated by component — red cells, platelets, plasma — and delivered to patients who need each part.",
+        "detail": "Because donated blood is split into components, a single donation can benefit multiple patients in different treatments."
+      },
+      {
+        "title": "Young Participation Protects the Future",
+        "text": "As the population ages, donors decrease while those needing transfusions increase. Student participation helps sustain local healthcare.",
+        "detail": "When young people learn about blood donation and build a culture of participation, they become a force protecting tomorrow's healthcare. Even if you don't donate today, sharing awareness is a powerful first step."
+      }
+    ]
+  },
+  "benefits": {
+    "sectionTitle": "Benefits of Donating and Your Contribution to Society",
+    "sectionHelper": "Select a card to see a detailed explanation with a photo.",
+    "seeMore": "See details",
+    "currentLabel": "Currently selected",
+    "toRegister": "Understood — go to registration",
+    "imageAlt": "Illustration for {{title}}",
+    "cards": [
+      {
+        "title": "A Reason to Check Your Health",
+        "text": "Registration checks and pre-screening raise your awareness of your own health.",
+        "detail": "Before donating, your condition, sleep, diet, and blood pressure are reviewed. It's not just about eligibility — it's a valuable opportunity to reflect on your own lifestyle and health."
+      },
+      {
+        "title": "The Feeling of Supporting Life",
+        "text": "A short act of cooperation becomes a real force supporting someone's treatment or recovery.",
+        "detail": "Blood cannot be made artificially or stored long-term. Your contribution becomes real, practical support for people who need transfusions in surgery, accidents, childbirth, or cancer treatment."
+      },
+      {
+        "title": "Campus Solidarity",
+        "text": "Participating with friends and faculty spreads a culture of mutual support.",
+        "detail": "Going alone can be daunting, but with a friend or teacher it's easier. Approaching it as a campus event creates an atmosphere where 'helping those in need' becomes natural for everyone."
+      },
+      {
+        "title": "Your First Step in Social Contribution",
+        "text": "No special preparation needed — you can support healthcare right from your campus.",
+        "detail": "Social contribution doesn't require grand efforts. Participating locally and sharing accurate information with those around you is an important act that sustains community healthcare."
+      }
+    ]
+  },
+  "reason": {
+    "whyTitle": "Why Is Blood Donation Needed?",
+    "whyBody": "Blood cannot be manufactured artificially and cannot be stored for long. That's why daily cooperation is needed to support people who require transfusions for surgery and medical treatment.",
+    "whyLink": "Learn about benefits and contributions",
+    "processTitle": "Safe and Reassuring Donation",
+    "processNote": "So that first-timers can understand the process, staff will walk you through each step on the day. Feel free to ask questions anytime.",
+    "communityTitle": "Community Contribution Together",
+    "communityBody": "Those who can donate do so; those who can't still contribute by sharing information. One person's action spreads compassion across the entire campus.",
+    "communityItems": [
+      "Share accurate information with friends",
+      "Listen to explanations alongside anxious friends",
+      "Build a donation culture that continues next time"
+    ],
+    "imageAlt": "Students comfortably participating in a blood donation event"
+  },
+  "steps": [
+    {
+      "title": "Pre-check",
+      "text": "Review eligibility and health"
+    },
+    {
+      "title": "Interview & Test",
+      "text": "Staff confirm your safety"
+    },
+    {
+      "title": "Donation",
+      "text": "Completed in about 10–15 min"
+    }
+  ],
+  "pledge": {
+    "title": "Spreading a Blood Donation Culture from Campus",
+    "items": [
+      "Learn the facts and don't carry anxiety alone",
+      "Those who can — take the first step; those who can't — spread the word",
+      "Make blood donation an ongoing culture of care, not just a one-time event"
+    ]
+  },
+  "footerCta": {
+    "title": "Together on campus — let's support blood donation.",
+    "cta": "Back to registration"
   }
 }

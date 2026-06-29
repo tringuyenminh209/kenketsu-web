@@ -191,3 +191,35 @@
 ## Viec con lai
 
 - Neu BE muon phan tich survey chi tiet, can them cot rieng cho `motivation`, `concern`, `preferred_support`, va `recommend` trong Supabase.
+
+---
+
+## Ngay: 2026-06-29 (sua dia diem su kien)
+
+## Noi dung da hoan thanh
+
+- Sua dia diem su kien theo anh poster: `ECCコンピュータ専門学校 1号館 1階ラウンジ`.
+- Sua ngay gio theo anh poster: `2026年9月15日（火）`, `9:30〜11:30 / 12:30〜16:30`.
+- Them thong tin `協賛`: `大阪曾根崎ライオンズクラブ / 大阪西ライオンズクラブ`.
+- Them ghi chu: dat lich truoc se rut ngan thoi gian thu tuc hien mau.
+- Them thong tin `献血記念品`: nguoi hop tac hien mau se nhan qua ky niem tu Lions Club.
+- Them link App Store va Google Play cho ung dung Labrad de nguoi dung co the bam truc tiep thay vi quet QR.
+- Cap nhat `src/config/event.ts` de phan event info va flyer/preview dung cung mot nguon du lieu.
+
+## Kiem tra
+
+- `npm run lint`: pass
+- `npm run build`: pass
+
+## File da thay doi chinh
+
+- `src/config/event.ts`
+- `src/App.tsx`
+- `src/App.css`
+- `src/locales/ja.json`
+- `src/locales/en.json`
+- `src/locales/vi.json`
+- `src/locales/my.json`
+- `src/locales/ne.json`
+- `src/locales/zh.json`
+- `docs/nippo.md`

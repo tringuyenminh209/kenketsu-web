@@ -9,7 +9,8 @@
     "userSite": "返回用户页面",
     "about": "献血是什么",
     "precautions": "注意事项",
-    "flyer": "传单打印"
+    "flyer": "传单打印",
+    "ariaLabel": "主导航"
   },
   "hero": {
     "title": "献血志愿者活动",
@@ -24,6 +25,8 @@
     "feature3Desc": "从校园到社会贡献",
     "tagline": "您的血液可以拯救某人的生命",
     "eventLabel": "献血志愿者活动",
+    "imageAlt": "学生在校园献血活动中安心参与的样子",
+    "featuresAriaLabel": "活动特色",
     "countdown": {
       "days": "天",
       "hours": "小时",
@@ -88,7 +91,13 @@
         "q": "献血后可以运动吗？",
         "a": "当天请避免剧烈运动。"
       }
-    ]
+    ],
+    "sponsor_label": "赞助方",
+    "reservation_label": "预约须知",
+    "gift_label": "献血纪念品",
+    "appLinksLabel": "Labrad app links",
+    "appLinksTitle": "Reserve ahead with the Labrad app",
+    "appLinksText": "Use it for blood donation card management and advance reservations."
   },
   "precautions": {
     "title": "参加前请轻松确认的事项",
@@ -132,7 +141,7 @@
     "studentIdPlaceholder": "例：S1234567",
     "phone": "手机号码",
     "phonePlaceholder": "090-1234-5678",
-    "department": "Class",
+    "department": "班级",
     "departmentSelect": "请选择",
     "birthDate": "出生日期",
     "gender": "性别",
@@ -151,10 +160,10 @@
     "subtitle": "参加献血志愿者活动的同学，请从这里报名。",
     "class": "班级",
     "classPlaceholder": "例：SK3A",
-    "departmentPlaceholder": "e.g. IT2A, SK3A, Japanese 1B",
-    "birthDatePlaceholder": "e.g. 2004/04/15",
-    "birthDateHelp": "Type YYYY/MM/DD, YYYY-MM-DD, or YYYYMMDD without opening a calendar.",
-    "errorInvalidBirthDate": "Please enter your date of birth like 2004/04/15."
+    "departmentPlaceholder": "例：IT2A、SK3A、Japanese 1B",
+    "birthDatePlaceholder": "例：2004/04/15",
+    "birthDateHelp": "可以直接输入 YYYY/MM/DD、YYYY-MM-DD 或 YYYYMMDD，无需打开日历。",
+    "errorInvalidBirthDate": "请按 2004/04/15 的格式输入出生日期。"
   },
   "survey": {
     "title": "问卷调查",
@@ -167,7 +176,7 @@
     "q2Teacher": "老师 / 工作人员告知",
     "q2Friend": "朋友介绍",
     "q2Sns": "社交媒体",
-    "q3Label": "Q3. What made you want to participate?",
+    "q3Label": "Q3. 您想要参加的原因是什么？",
     "q3Placeholder": "例：会痛吗？大概需要多久？",
     "submit": "提交问卷",
     "submitting": "提交中...",
@@ -175,26 +184,26 @@
     "successBody": "我们将把您的意见用于今后的网站改善。",
     "errorGeneral": "发生了错误，请重试。",
     "subtitle": "请帮助我们改善本网站。",
-    "q3SaveLife": "I want to support someone's life",
-    "q3SchoolEvent": "Because it is a school event",
-    "q3FirstStep": "I want to try it for the first time",
-    "q3Friend": "I want to join with friends",
-    "q4Label": "Q4. What worries you most before joining?",
-    "q4Pain": "Pain or needles",
-    "q4Time": "How long it takes",
-    "q4Health": "My health condition",
-    "q4None": "Nothing in particular",
-    "q5Label": "Q5. What support would help you feel comfortable?",
-    "q5Staff": "Staff guidance",
-    "q5Guide": "A clear step-by-step guide",
-    "q5Friend": "Waiting with friends",
-    "q5Quiet": "A calm rest area",
-    "q6Label": "Q6. Would you recommend this blood donation activity to friends?",
-    "q6Yes": "Yes, I would",
-    "q6Maybe": "Maybe, after I understand more",
-    "q6NotYet": "Not sure yet",
-    "q7Label": "Q7. Any concerns, questions, or messages?",
-    "q7Placeholder": "Example: It is my first time, so I want to understand the flow better."
+    "q3SaveLife": "我想要支持某人的生命",
+    "q3SchoolEvent": "因为这是学校活动",
+    "q3FirstStep": "我想第一次尝试",
+    "q3Friend": "我想和朋友一起参加",
+    "q4Label": "Q4. 参加前您最担心什么？",
+    "q4Pain": "疼痛或针头",
+    "q4Time": "需要多长时间",
+    "q4Health": "我的健康状况",
+    "q4None": "没有特别担心的",
+    "q5Label": "Q5. 什么样的支持能让您感到安心？",
+    "q5Staff": "工作人员指导",
+    "q5Guide": "清晰的步骤指南",
+    "q5Friend": "和朋友一起等待",
+    "q5Quiet": "安静的休息区",
+    "q6Label": "Q6. 您会向朋友推荐这次献血活动吗？",
+    "q6Yes": "是的，会推荐",
+    "q6Maybe": "可能，在了解更多之后",
+    "q6NotYet": "还不确定",
+    "q7Label": "Q7. 如有担忧、问题或留言，请写在这里",
+    "q7Placeholder": "例如：这是我第一次参加，所以想更好地了解流程。"
   },
   "flyer": {
     "title": "献血志愿者活动",
@@ -219,5 +228,101 @@
     "goalReached": "达成目标！感谢大家",
     "remaining": "还差{{remaining}}人就满员",
     "clickHint": "点击叶子试试吧！"
+  },
+  "knowledge": {
+    "sectionTitle": "了解献血，是守护生命的第一步。",
+    "sectionBody": "献血不只是特别的人才能做的事。有了正确的知识，不安会减少，无论是参与献血还是传播信息的人，都成为支撑地方医疗的伙伴。",
+    "readMore": "详细了解",
+    "currentLabel": "正在阅读的内容",
+    "seeContributions": "查看献血能做的贡献",
+    "imageAlt": "{{title}}的说明图像",
+    "cards": [
+      {
+        "title": "献血：支撑医疗的社会基础",
+        "text": "手术、分娩大量出血、癌症治疗……每天都有需要输血的情况。血液无法人工制造，也无法长期保存。",
+        "detail": "医院每天都有需要输血的治疗。由于血液不能像药物一样在工厂制造，社区的协作是支撑医疗现场的根本。"
+      },
+      {
+        "title": "一次献血惠及多位患者",
+        "text": "献出的血液会按成分分离——红细胞、血小板、血浆——分别送到有需要的患者处。",
+        "detail": "因为献出的血液会被分成各种成分使用，一个人的献血可以惠及多位接受不同治疗的患者。"
+      },
+      {
+        "title": "年轻一代的参与守护未来",
+        "text": "随着人口老龄化，献血者减少而需要输血的人增加。学生的参与有助于维持地方医疗。",
+        "detail": "当年轻一代了解献血并培养参与文化时，将成为守护未来医疗的力量。即使今天无法献血，传播正确信息也是有力的第一步。"
+      }
+    ]
+  },
+  "benefits": {
+    "sectionTitle": "献血带来的好处与对社会的贡献",
+    "sectionHelper": "选择感兴趣的卡片，即可查看配有图片的详细说明。",
+    "seeMore": "查看详情",
+    "currentLabel": "当前选中的内容",
+    "toRegister": "了解后前往报名",
+    "imageAlt": "{{title}}的说明图像",
+    "cards": [
+      {
+        "title": "重新审视自己身体状况的机会",
+        "text": "通过受理时的确认和事前检查，提高对健康的意识。",
+        "detail": "献血前会确认身体状况、睡眠、饮食和血压。这不只是判断能否献血，也是审视自己生活习惯和健康状态的好机会。"
+      },
+      {
+        "title": "支撑生命的实感",
+        "text": "短暂的协助，成为支撑某人治疗或康复的真实力量。",
+        "detail": "血液无法人工制造，也无法长期保存。您的协助将成为支撑需要输血的手术、事故、分娩、癌症治疗患者的现实力量。"
+      },
+      {
+        "title": "校园的凝聚力",
+        "text": "与朋友和教职员工一起参与，能够扩展互助文化。",
+        "detail": "一个人可能会不安，但与朋友或老师一起参与就容易多了。以活动形式参与，让整个学校形成「支援有困难的人」的氛围。"
+      },
+      {
+        "title": "社会贡献的第一步",
+        "text": "无需特别准备，就能在身边的地方参与医疗支援。",
+        "detail": "社会贡献不仅限于大型活动。在身边的校园参与并将正确信息传递给周围的人，也是支撑地方医疗的重要行动。"
+      }
+    ]
+  },
+  "reason": {
+    "whyTitle": "为什么需要献血？",
+    "whyBody": "血液无法人工制造，也无法长期保存。正因如此，需要日常的协作来支持需要输血进行手术和治疗的患者。",
+    "whyLink": "详细了解好处与贡献",
+    "processTitle": "安全放心的献血",
+    "processNote": "为了让初次参与者也能理解流程，当天工作人员会逐一确认。有任何疑问都可以当场询问。",
+    "communityTitle": "大家共同支撑社会贡献",
+    "communityBody": "能献血的人献血，不能献血的人分享信息也是贡献。一个人的行动，能扩展整个校园的关爱之心。",
+    "communityItems": [
+      "向朋友传递正确信息",
+      "陪同担心的朋友一起听说明",
+      "营造下次还能继续的献血文化"
+    ],
+    "imageAlt": "学生在献血活动中安心参与的样子"
+  },
+  "steps": [
+    {
+      "title": "事前确认",
+      "text": "确认条件和身体状况"
+    },
+    {
+      "title": "问诊·检查",
+      "text": "工作人员确认安全"
+    },
+    {
+      "title": "采血",
+      "text": "约10-15分钟完成"
+    }
+  ],
+  "pledge": {
+    "title": "从校园扩展献血文化",
+    "items": [
+      "了解正确知识，不独自承受不安",
+      "能参与的人迈出第一步，不能参与的人也向周围传递信息",
+      "将献血从一次性活动变成持续关爱的文化"
+    ]
+  },
+  "footerCta": {
+    "title": "不是一个人，而是整个校园共同支撑献血。",
+    "cta": "返回报名"
   }
 }

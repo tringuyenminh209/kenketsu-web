@@ -9,7 +9,8 @@
     "userSite": "Trang người dùng",
     "about": "Hiến máu là gì",
     "precautions": "Lưu ý",
-    "flyer": "In tờ rơi"
+    "flyer": "In tờ rơi",
+    "ariaLabel": "Điều hướng chính"
   },
   "hero": {
     "title": "Sự kiện tình nguyện hiến máu",
@@ -24,6 +25,8 @@
     "feature3Desc": "Đóng góp cho xã hội từ campus",
     "tagline": "Máu của bạn có thể cứu sống ai đó",
     "eventLabel": "Hoạt động tình nguyện hiến máu",
+    "imageAlt": "Sinh viên thoải mái tham gia hiến máu tại hội trường trường học",
+    "featuresAriaLabel": "Điểm nổi bật của sự kiện",
     "countdown": {
       "days": "ngày",
       "hours": "giờ",
@@ -88,7 +91,13 @@
         "q": "Sau khi hiến có tập thể thao được không?",
         "a": "Tránh vận động mạnh trong ngày hiến máu."
       }
-    ]
+    ],
+    "sponsor_label": "Don vi tai tro",
+    "reservation_label": "Luu y dat lich",
+    "gift_label": "Qua luu niem hien mau",
+    "appLinksLabel": "Link ung dung Labrad",
+    "appLinksTitle": "Dat lich truoc bang ung dung Labrad",
+    "appLinksText": "Dung de quan ly the hien mau va dat lich truoc."
   },
   "precautions": {
     "title": "Những điều cần kiểm tra trước khi tham gia",
@@ -132,7 +141,7 @@
     "studentIdPlaceholder": "VD: S1234567",
     "phone": "Số điện thoại",
     "phonePlaceholder": "090-1234-5678",
-    "department": "Lop",
+    "department": "Lớp",
     "departmentSelect": "Chọn",
     "birthDate": "Ngày sinh",
     "gender": "Giới tính",
@@ -153,8 +162,8 @@
     "classPlaceholder": "VD: SK3A",
     "departmentPlaceholder": "VD: IT2A, SK3A, Japanese 1B",
     "birthDatePlaceholder": "VD: 2004/04/15",
-    "birthDateHelp": "Co the nhap YYYY/MM/DD, YYYY-MM-DD hoac YYYYMMDD ma khong can mo lich.",
-    "errorInvalidBirthDate": "Hay nhap ngay sinh theo dang 2004/04/15."
+    "birthDateHelp": "Có thể nhập YYYY/MM/DD, YYYY-MM-DD hoặc YYYYMMDD mà không cần mở lịch.",
+    "errorInvalidBirthDate": "Hãy nhập ngày sinh theo dạng 2004/04/15."
   },
   "survey": {
     "title": "Khảo sát",
@@ -167,7 +176,7 @@
     "q2Teacher": "Giáo viên / Nhân viên giới thiệu",
     "q2Friend": "Bạn bè giới thiệu",
     "q2Sns": "Mạng xã hội",
-    "q3Label": "Q3. Ly do ban muon tham gia la gi?",
+    "q3Label": "Q3. Lý do bạn muốn tham gia là gì?",
     "q3Placeholder": "VD: Có đau không? Mất bao lâu?",
     "submit": "Gửi khảo sát",
     "submitting": "Đang gửi...",
@@ -175,26 +184,26 @@
     "successBody": "Ý kiến của bạn sẽ giúp cải thiện trang web.",
     "errorGeneral": "Đã xảy ra lỗi. Vui lòng thử lại.",
     "subtitle": "Hãy giúp chúng tôi cải thiện trang web này.",
-    "q3SaveLife": "Muon giup do sinh mang cua ai do",
-    "q3SchoolEvent": "Vi day la su kien cua truong",
-    "q3FirstStep": "Muon thu lan dau",
-    "q3Friend": "Muon tham gia cung ban be",
-    "q4Label": "Q4. Truoc khi tham gia ban lo nhat dieu gi?",
-    "q4Pain": "Dau hoac kim tiem",
-    "q4Time": "Thoi gian can thiet",
-    "q4Health": "Tinh trang suc khoe",
-    "q4None": "Khong co lo lang dac biet",
-    "q5Label": "Q5. Ho tro nao trong ngay su kien se giup ban yen tam hon?",
-    "q5Staff": "Nhan vien huong dan",
-    "q5Guide": "Huong dan quy trinh ro rang",
-    "q5Friend": "Cho cung ban be",
-    "q5Quiet": "Noi nghi ngoi yen tinh",
-    "q6Label": "Q6. Ban co muon gioi thieu hoat dong hien mau nay cho ban be khong?",
-    "q6Yes": "Co, muon gioi thieu",
-    "q6Maybe": "Co the, neu hieu ro hon",
-    "q6NotYet": "Chua chac",
-    "q7Label": "Q7. Neu co lo lang, cau hoi hoac loi nhan, hay ghi tai day",
-    "q7Placeholder": "VD: Day la lan dau nen minh muon hieu ro quy trinh hon."
+    "q3SaveLife": "Muốn giúp đỡ sinh mạng của ai đó",
+    "q3SchoolEvent": "Vì đây là sự kiện của trường",
+    "q3FirstStep": "Muốn thử lần đầu",
+    "q3Friend": "Muốn tham gia cùng bạn bè",
+    "q4Label": "Q4. Trước khi tham gia bạn lo nhất điều gì?",
+    "q4Pain": "Đau hoặc kim tiêm",
+    "q4Time": "Thời gian cần thiết",
+    "q4Health": "Tình trạng sức khỏe",
+    "q4None": "Không có lo lắng đặc biệt",
+    "q5Label": "Q5. Hỗ trợ nào trong ngày sự kiện sẽ giúp bạn yên tâm hơn?",
+    "q5Staff": "Nhân viên hướng dẫn",
+    "q5Guide": "Hướng dẫn quy trình rõ ràng",
+    "q5Friend": "Chỗ cùng bạn bè",
+    "q5Quiet": "Nơi nghỉ ngơi yên tĩnh",
+    "q6Label": "Q6. Bạn có muốn giới thiệu hoạt động hiến máu này cho bạn bè không?",
+    "q6Yes": "Có, muốn giới thiệu",
+    "q6Maybe": "Có thể, nếu hiểu rõ hơn",
+    "q6NotYet": "Chưa chắc",
+    "q7Label": "Q7. Nếu có lo lắng, câu hỏi hoặc lời nhắn, hãy ghi tại đây",
+    "q7Placeholder": "VD: Đây là lần đầu nên mình muốn hiểu rõ quy trình hơn."
   },
   "flyer": {
     "title": "Hoạt động tình nguyện hiến máu",
@@ -219,5 +228,101 @@
     "goalReached": "Đã đạt mục tiêu! Cảm ơn mọi người",
     "remaining": "Còn {{remaining}} chỗ trống",
     "clickHint": "Hãy thử nhấn vào lá nhé!"
+  },
+  "knowledge": {
+    "sectionTitle": "Hiểu về hiến máu là bước đầu tiên để cứu sống người khác.",
+    "sectionBody": "Hiến máu không chỉ dành cho người đặc biệt. Khi có kiến thức đúng, nỗi lo sẽ giảm đi, và tất cả — dù hiến máu hay lan tỏa thông tin — đều trở thành người đồng hành trong y tế địa phương.",
+    "readMore": "Đọc thêm",
+    "currentLabel": "Đang xem",
+    "seeContributions": "Xem đóng góp từ hiến máu",
+    "imageAlt": "Hình minh họa cho {{title}}",
+    "cards": [
+      {
+        "title": "Hiến máu: Hạ tầng y tế của xã hội",
+        "text": "Phẫu thuật, chảy máu khi sinh, điều trị ung thư — các tình huống cần truyền máu xảy ra hàng ngày. Máu không thể sản xuất nhân tạo hay bảo quản lâu dài.",
+        "detail": "Bệnh viện cần truyền máu mỗi ngày. Vì máu không thể làm trong nhà máy như thuốc, sự hợp tác của cộng đồng là điều duy trì ngành y tế."
+      },
+      {
+        "title": "Một lần hiến máu đến với nhiều bệnh nhân",
+        "text": "Máu hiến được tách thành các thành phần — hồng cầu, tiểu cầu, huyết tương — và gửi đến bệnh nhân cần từng phần.",
+        "detail": "Vì máu được tách thành các thành phần, một lần hiến có thể giúp ích cho nhiều bệnh nhân khác nhau."
+      },
+      {
+        "title": "Sự tham gia của thế hệ trẻ bảo vệ tương lai",
+        "text": "Dân số già hóa làm giảm người hiến máu trong khi người cần truyền máu tăng lên. Sinh viên tham gia giúp duy trì y tế địa phương.",
+        "detail": "Khi thế hệ trẻ hiểu và xây dựng văn hóa hiến máu, họ trở thành sức mạnh bảo vệ y tế của tương lai. Dù không hiến được hôm nay, chia sẻ thông tin vẫn là bước đầu tiên mạnh mẽ."
+      }
+    ]
+  },
+  "benefits": {
+    "sectionTitle": "Lợi ích của hiến máu và đóng góp cho xã hội",
+    "sectionHelper": "Chọn thẻ để xem giải thích chi tiết kèm hình ảnh.",
+    "seeMore": "Xem chi tiết",
+    "currentLabel": "Đang chọn",
+    "toRegister": "Đã hiểu — đến đăng ký",
+    "imageAlt": "Hình minh họa cho {{title}}",
+    "cards": [
+      {
+        "title": "Cơ hội kiểm tra sức khỏe",
+        "text": "Kiểm tra trước khi hiến giúp nâng cao nhận thức về sức khỏe của bản thân.",
+        "detail": "Trước khi hiến máu, tình trạng sức khỏe, giấc ngủ, ăn uống và huyết áp được xem xét. Đây không chỉ để xác định đủ điều kiện — mà còn là cơ hội tốt để nhìn lại thói quen sống của mình."
+      },
+      {
+        "title": "Cảm giác hỗ trợ sự sống",
+        "text": "Một hành động nhỏ trong thời gian ngắn trở thành sức mạnh thực sự hỗ trợ điều trị và phục hồi của ai đó.",
+        "detail": "Máu không thể tạo ra nhân tạo hay bảo quản lâu dài. Sự đóng góp của bạn trở thành hỗ trợ thiết thực cho những người cần truyền máu trong phẫu thuật, tai nạn, sinh con hay điều trị ung thư."
+      },
+      {
+        "title": "Tinh thần đoàn kết campus",
+        "text": "Tham gia cùng bạn bè và giảng viên lan tỏa văn hóa giúp đỡ lẫn nhau.",
+        "detail": "Một mình có thể ngại, nhưng cùng bạn hay thầy cô thì dễ hơn nhiều. Khi tiếp cận như một sự kiện campus, không khí 'giúp đỡ người cần' trở thành điều tự nhiên với mọi người."
+      },
+      {
+        "title": "Bước đầu tiên đóng góp xã hội",
+        "text": "Không cần chuẩn bị đặc biệt — bạn có thể hỗ trợ y tế ngay từ campus của mình.",
+        "detail": "Đóng góp xã hội không đòi hỏi hành động lớn. Tham gia tại chỗ và chia sẻ thông tin chính xác với xung quanh cũng là hành động quan trọng duy trì y tế cộng đồng."
+      }
+    ]
+  },
+  "reason": {
+    "whyTitle": "Tại sao cần hiến máu?",
+    "whyBody": "Máu không thể tạo ra nhân tạo và không thể bảo quản lâu. Vì vậy, cần sự hợp tác hàng ngày để hỗ trợ những người cần truyền máu trong phẫu thuật và điều trị y tế.",
+    "whyLink": "Tìm hiểu lợi ích và đóng góp",
+    "processTitle": "Hiến máu an toàn và yên tâm",
+    "processNote": "Để người lần đầu hiểu rõ quy trình, nhân viên sẽ hướng dẫn từng bước vào ngày sự kiện. Bạn có thể hỏi bất cứ lúc nào.",
+    "communityTitle": "Cùng nhau đóng góp cho cộng đồng",
+    "communityBody": "Người có thể hiến máu sẽ hiến; người không thể vẫn đóng góp bằng cách chia sẻ thông tin. Hành động của một người lan tỏa lòng tốt khắp campus.",
+    "communityItems": [
+      "Chia sẻ thông tin chính xác với bạn bè",
+      "Lắng nghe giải thích cùng bạn bè lo lắng",
+      "Xây dựng văn hóa hiến máu tiếp tục cho lần sau"
+    ],
+    "imageAlt": "Sinh viên thoải mái tham gia sự kiện hiến máu"
+  },
+  "steps": [
+    {
+      "title": "Kiểm tra trước",
+      "text": "Xác nhận điều kiện và sức khỏe"
+    },
+    {
+      "title": "Phỏng vấn & xét nghiệm",
+      "text": "Nhân viên xác nhận an toàn"
+    },
+    {
+      "title": "Lấy máu",
+      "text": "Hoàn thành trong khoảng 10-15 phút"
+    }
+  ],
+  "pledge": {
+    "title": "Lan tỏa văn hóa hiến máu từ campus",
+    "items": [
+      "Hiểu biết đúng và không ôm nỗi lo một mình",
+      "Người có thể — hãy bước ra; người không thể — hãy lan tỏa thông tin",
+      "Biến hiến máu thành văn hóa quan tâm liên tục, không chỉ là sự kiện một lần"
+    ]
+  },
+  "footerCta": {
+    "title": "Cùng nhau tại campus — hãy ủng hộ hiến máu.",
+    "cta": "Quay lại đăng ký"
   }
 }

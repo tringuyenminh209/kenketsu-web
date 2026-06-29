@@ -122,72 +122,8 @@ function normalizeBirthDateInput(value: string) {
   return isValidDate ? `${year}-${month}-${day}` : null
 }
 
-const steps = [
-  ['事前チェック', '条件と体調を確認'],
-  ['問診・検査', 'スタッフが安全を確認'],
-  ['採血', '約10-15分で完了'],
-]
-
-const knowledgeCards = [
-  {
-    title: '献血は医療を支える社会インフラ',
-    text: '手術、出産時の大量出血、がん治療など、輸血を必要とする場面は日々あります。血液は人工的につくれず、長期保存もできません。',
-    detail:
-      '病院では、毎日のように輸血を必要とする治療があります。血液は薬のように工場でつくれないため、地域の人たちの協力が医療現場を支えています。',
-    imagePosition: 'center',
-  },
-  {
-    title: '一回の協力が複数の患者さんへ',
-    text: '献血された血液は成分ごとに分けられ、赤血球・血小板・血漿などとして必要な患者さんに届けられます。',
-    detail:
-      '献血された血液は、必要な成分ごとに分けて使われます。だから一人の協力が、複数の患者さんの治療につながることがあります。',
-    imagePosition: 'right center',
-  },
-  {
-    title: '若い世代の参加が未来を守る',
-    text: '少子高齢化で献血できる人は減り、輸血を必要とする人は増えます。学生の参加は地域医療の継続につながります。',
-    detail:
-      '若い世代が献血を知り、参加する文化を持つことは、これからの医療を守る力になります。今回参加しなくても、知って伝えることから始められます。',
-    imagePosition: 'center top',
-  },
-]
-
-const benefits = [
-  {
-    title: '自分の体調を見直すきっかけ',
-    text: '受付時の確認や事前チェックを通じて、健康への意識が高まります。',
-    detail:
-      '献血前には体調、睡眠、食事、血圧などを確認します。これは「献血できるか」を判断するだけでなく、自分の生活習慣や健康状態に目を向ける良い機会になります。',
-    imagePosition: 'center',
-  },
-  {
-    title: '命を支える実感',
-    text: '短い時間の協力が、誰かの治療や回復を支える力になります。',
-    detail:
-      '血液は人工的につくることができず、長期保存もできません。あなたの協力は、手術、事故、出産、がん治療などで輸血を必要とする人を支える現実的な力になります。',
-    imagePosition: 'right center',
-  },
-  {
-    title: 'キャンパスの連帯感',
-    text: '友人や教職員と一緒に参加することで、助け合いの文化を広げられます。',
-    detail:
-      '一人では不安でも、友人や先生と一緒なら参加しやすくなります。イベントとして取り組むことで、学校全体に「困っている誰かを支える」空気が生まれます。',
-    imagePosition: 'center top',
-  },
-  {
-    title: '社会貢献の第一歩',
-    text: '難しい準備がなくても、身近な場所から医療支援に参加できます。',
-    detail:
-      '社会貢献は大きな活動だけではありません。身近なキャンパスで参加し、正しい情報を周りに届けることも、地域医療を支える大切な行動です。',
-    imagePosition: 'left center',
-  },
-]
-
-const pledgeItems = [
-  '正しい知識を知り、不安を一人で抱え込まない',
-  '参加できる人は一歩踏み出し、参加できない人も周りへ情報を届ける',
-  '献血を一回のイベントではなく、継続的な思いやりの文化にする',
-]
+const KNOWLEDGE_IMAGE_POSITIONS = ['center', 'right center', 'center top'] as const
+const BENEFIT_IMAGE_POSITIONS = ['center', 'right center', 'center top', 'left center'] as const
 
 type IconType =
   | 'heart'
@@ -232,7 +168,7 @@ function SiteHeader({ isAdmin = false }: { isAdmin?: boolean }) {
           <small>{t('hero.eventLabel')}</small>
         </span>
       </Link>
-      <nav className="nav-links" aria-label="メインナビゲーション">
+      <nav className="nav-links" aria-label={t('nav.ariaLabel')}>
         {isAdmin ? (
           <>
             <NavLink to="/">{t('nav.userSite')}</NavLink>
@@ -353,6 +289,16 @@ function UserPage() {
   const knowledgeDetailRef = useRef<HTMLElement>(null)
   const benefitDetailRef = useRef<HTMLElement>(null)
   usePageMotion(rootRef)
+
+  const knowledgeCards = (t('knowledge.cards', { returnObjects: true }) as { title: string; text: string; detail: string }[]).map(
+    (card, i) => ({ ...card, imagePosition: KNOWLEDGE_IMAGE_POSITIONS[i] }),
+  )
+  const benefits = (t('benefits.cards', { returnObjects: true }) as { title: string; text: string; detail: string }[]).map(
+    (card, i) => ({ ...card, imagePosition: BENEFIT_IMAGE_POSITIONS[i] }),
+  )
+  const steps = t('steps', { returnObjects: true }) as { title: string; text: string }[]
+  const pledgeItems = t('pledge.items', { returnObjects: true }) as string[]
+
   const activeKnowledge = knowledgeCards[selectedKnowledge]
   const activeBenefit = benefits[selectedBenefit]
 
@@ -360,6 +306,9 @@ function UserPage() {
     { label: t('info.date_label'), value: EVENT_CONFIG.date },
     { label: t('info.time_label'), value: EVENT_CONFIG.time },
     { label: t('info.location_label'), value: `${EVENT_CONFIG.location} ${EVENT_CONFIG.locationDetail}` },
+    { label: t('info.sponsor_label'), value: EVENT_CONFIG.sponsor },
+    { label: t('info.reservation_label'), value: EVENT_CONFIG.reservationNote },
+    { label: t('info.gift_label'), value: EVENT_CONFIG.giftNote },
     { label: t('info.capacity_label'), value: t('info.capacity_value', { capacity: EVENT_CONFIG.capacity }) },
   ]
   const eligibilityItems = t('precautions.eligibilityItems', { returnObjects: true }) as string[]
@@ -472,7 +421,7 @@ function UserPage() {
               <a className="button primary" href="#register">{t('hero.cta')}</a>
               <a className="button secondary" href="#knowledge">{t('hero.cta2')}</a>
             </div>
-            <div className="impact-row" aria-label="イベントの特徴">
+            <div className="impact-row" aria-label={t('hero.featuresAriaLabel')}>
               <article>
                 <Icon type="heart" />
                 <strong>{t('hero.feature1Title')}</strong>
@@ -491,7 +440,7 @@ function UserPage() {
             </div>
           </div>
           <figure className="hero-media">
-            <img src={heroImage} alt="学校の献血会場で学生が安心して献血に参加している様子" />
+            <img src={heroImage} alt={t('hero.imageAlt')} />
           </figure>
         </section>
 
@@ -500,10 +449,8 @@ function UserPage() {
         <section className="knowledge-section reveal" id="knowledge">
           <div className="knowledge-lead">
             <Icon type="book" />
-            <h2>献血を知ることは、命を支える準備です。</h2>
-            <p>
-              献血は特別な人だけの活動ではありません。正しい知識を持つことで、不安は小さくなり、参加できる人も、周りへ伝える人も、地域医療を支える仲間になります。
-            </p>
+            <h2>{t('knowledge.sectionTitle')}</h2>
+            <p>{t('knowledge.sectionBody')}</p>
           </div>
           <div className="knowledge-grid">
             {knowledgeCards.map((card, index) => (
@@ -517,7 +464,7 @@ function UserPage() {
                 <span>{String(index + 1).padStart(2, '0')}</span>
                 <strong>{card.title}</strong>
                 <p>{card.text}</p>
-                <small>詳しく読む</small>
+                <small>{t('knowledge.readMore')}</small>
               </button>
             ))}
           </div>
@@ -529,13 +476,13 @@ function UserPage() {
                 backgroundPosition: activeKnowledge.imagePosition,
               }}
               role="img"
-              aria-label={`${activeKnowledge.title}の説明イメージ`}
+              aria-label={t('knowledge.imageAlt', { title: activeKnowledge.title })}
             />
             <div>
-              <span className="detail-label">いま読んでいる内容</span>
+              <span className="detail-label">{t('knowledge.currentLabel')}</span>
               <h3>{activeKnowledge.title}</h3>
               <p>{activeKnowledge.detail}</p>
-              <a className="text-link" href="#benefits">献血でできる貢献も見る</a>
+              <a className="text-link" href="#benefits">{t('knowledge.seeContributions')}</a>
             </div>
           </article>
         </section>
@@ -543,9 +490,9 @@ function UserPage() {
         <section className="benefits-section" id="benefits">
           <div className="section-title">
             <Icon type="spark" />
-            <h2>献血が生むメリットと社会への貢献</h2>
+            <h2>{t('benefits.sectionTitle')}</h2>
           </div>
-          <p className="section-helper">気になるカードを選ぶと、写真と一緒に詳しい説明を確認できます。</p>
+          <p className="section-helper">{t('benefits.sectionHelper')}</p>
           <div className="benefit-list">
             {benefits.map((benefit, index) => (
               <button
@@ -565,7 +512,7 @@ function UserPage() {
                 <span className="benefit-card-body">
                   <strong>{benefit.title}</strong>
                   <p>{benefit.text}</p>
-                  <span className="benefit-card-action">詳しく見る</span>
+                  <span className="benefit-card-action">{t('benefits.seeMore')}</span>
                 </span>
               </button>
             ))}
@@ -578,13 +525,13 @@ function UserPage() {
                 backgroundPosition: activeBenefit.imagePosition,
               }}
               role="img"
-              aria-label={`${activeBenefit.title}の説明イメージ`}
+              aria-label={t('benefits.imageAlt', { title: activeBenefit.title })}
             />
             <div>
-              <span className="detail-label">選択中の内容</span>
+              <span className="detail-label">{t('benefits.currentLabel')}</span>
               <h3>{activeBenefit.title}</h3>
               <p>{activeBenefit.detail}</p>
-              <a className="text-link" href="#register">この内容を理解して参加申込へ進む</a>
+              <a className="text-link" href="#register">{t('benefits.toRegister')}</a>
             </div>
           </article>
         </section>
@@ -602,32 +549,40 @@ function UserPage() {
               </div>
             ))}
           </dl>
+          <div className="app-reservation-links" aria-label={t('info.appLinksLabel')}>
+            <div>
+              <strong>{t('info.appLinksTitle')}</strong>
+              <span>{t('info.appLinksText')}</span>
+            </div>
+            <a href={EVENT_CONFIG.appLinks.appStore} target="_blank" rel="noreferrer">
+              App Store
+            </a>
+            <a href={EVENT_CONFIG.appLinks.googlePlay} target="_blank" rel="noreferrer">
+              Google Play
+            </a>
+          </div>
         </section>
 
         <section className="reason-grid reveal" id="reason">
           <article className="reason-story motion-card">
             <div className="reason-visual">
-              <img src={heroImage} alt="献血会場で学生が安心して参加している様子" />
+              <img src={heroImage} alt={t('reason.imageAlt')} />
             </div>
             <div>
               <Icon type="heart" />
-              <h2>なぜ献血が必要？</h2>
-              <p>
-                血液は人工的につくることができず、長く保存することもできません。だからこそ、手術や治療で輸血を必要とする人のために、日々の協力が必要です。
-              </p>
-              <a href="#benefits">メリットと貢献を詳しく見る</a>
+              <h2>{t('reason.whyTitle')}</h2>
+              <p>{t('reason.whyBody')}</p>
+              <a href="#benefits">{t('reason.whyLink')}</a>
             </div>
           </article>
           <article className="reason-process motion-card">
             <div className="section-title">
               <Icon type="shield" />
-              <h2>安全で安心の献血</h2>
+              <h2>{t('reason.processTitle')}</h2>
             </div>
-            <p className="reason-note">
-              はじめての人でも流れを理解できるよう、当日はスタッフが一つずつ確認します。不安な点はその場で相談できます。
-            </p>
+            <p className="reason-note">{t('reason.processNote')}</p>
             <ol className="step-list">
-              {steps.map(([title, text]) => (
+              {steps.map(({ title, text }) => (
                 <li key={title}>
                   <span>{title}</span>
                   <small>{text}</small>
@@ -637,14 +592,12 @@ function UserPage() {
           </article>
           <article className="reason-community motion-card">
             <Icon type="users" />
-            <h2>みんなで支える社会貢献</h2>
-            <p>
-              参加できる人は献血で、参加できない人も情報共有で貢献できます。一人の行動が、キャンパス全体の思いやりを広げます。
-            </p>
+            <h2>{t('reason.communityTitle')}</h2>
+            <p>{t('reason.communityBody')}</p>
             <ul>
-              <li>友人に正しい情報を伝える</li>
-              <li>不安な人と一緒に説明を聞く</li>
-              <li>次回も続く献血文化をつくる</li>
+              {(t('reason.communityItems', { returnObjects: true }) as string[]).map((item) => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
           </article>
         </section>
@@ -652,7 +605,7 @@ function UserPage() {
         <section className="pledge-section reveal">
           <div>
             <Icon type="heart" />
-            <h2>キャンパスから広げる献血文化</h2>
+            <h2>{t('pledge.title')}</h2>
           </div>
           <ul>
             {pledgeItems.map((item) => (
@@ -882,8 +835,8 @@ function UserPage() {
         </section>
 
         <footer className="final-cta reveal">
-          <h2>一人ではなく、キャンパスみんなで支える献血へ。</h2>
-          <a className="button primary" href="#register">参加申込へ戻る</a>
+          <h2>{t('footerCta.title')}</h2>
+          <a className="button primary" href="#register">{t('footerCta.cta')}</a>
         </footer>
       </main>
     </div>
