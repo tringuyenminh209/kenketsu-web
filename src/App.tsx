@@ -15,7 +15,7 @@ import processInterviewImage from './assets/process/process-interview-test.webp'
 import processDonationImage from './assets/process/process-donation.webp'
 import { EVENT_CONFIG } from './config/event'
 import { Icon, SiteHeader, usePageMotion } from './lib/shared'
-import { checkDuplicateRegistration, insertRegistration, insertSurvey } from './lib/supabase'
+import { checkDuplicateRegistration, insertRegistration, insertSurvey, sendConfirmationEmail } from './lib/supabase'
 import { BloodTreeProgress } from './components/BloodTreeProgress'
 import { ForeignStudentSection } from './components/ForeignStudentSection'
 import { ImpactSection } from './components/ImpactSection'
@@ -147,6 +147,7 @@ function UserPage() {
         birth_date: normalizedBirthDate,
         gender: regForm.gender || undefined,
       })
+      sendConfirmationEmail({ name: regForm.name, email: regForm.email, student_id: regForm.studentId, dept: regForm.department })
       setRegSuccess(true)
     } catch {
       setRegError(t('register.errorGeneral'))
