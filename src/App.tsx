@@ -30,6 +30,7 @@ import type { Registration } from './types'
 import { downloadCSV } from './lib/utils'
 import { BloodTreeProgress } from './components/BloodTreeProgress'
 import { ImpactSection } from './components/ImpactSection'
+import { LastYearSection } from './components/LastYearSection'
 import './App.css'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
@@ -455,6 +456,8 @@ function UserPage() {
         </section>
 
         <ImpactSection />
+
+        <LastYearSection />
 
         <section className="knowledge-section reveal" id="knowledge">
           <div className="knowledge-lead">

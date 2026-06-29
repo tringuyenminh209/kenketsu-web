@@ -235,6 +235,21 @@
     "remaining": "{{remaining}} spots remaining",
     "clickHint": "Try clicking on a leaf!"
   },
+  "lastYear": {
+    "badge": "Last Year's Event",
+    "title": "Here's how our 2025 campus blood drive went.",
+    "summary": "On September 24, 2025, the event was held in the 1st floor lounge of Building 1 at ECC Computer College. Over 30 students and faculty participated, with student volunteers playing an active role.",
+    "captions": [
+      "The 1st floor lounge of Building 1, the event venue.",
+      "The blood donation bus parked next to Building 1, in front of Building 4.",
+      "Up to 3 donors at a time inside the bus. Radio played softly — a relaxed atmosphere.",
+      "During donation, reading the precautions pamphlet and receiving tips from nurses.",
+      "Student volunteers handled pre-registration check-in and guided attendees.",
+      "Student volunteers joined Lions Club members to encourage blood donation."
+    ],
+    "sourceLabel": "Source: ",
+    "sourceLink": "ECC Social Action Center Activity Report"
+  },
   "knowledge": {
     "sectionTitle": "Knowing about blood donation is the first step to saving lives.",
     "sectionBody": "Blood donation isn't just for special people. With the right knowledge, anxiety fades, and everyone — whether they donate or share the word — becomes part of supporting local healthcare.",

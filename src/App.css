@@ -341,6 +341,88 @@ a:focus-visible {
   background: white;
 }
 
+/* Last Year Section */
+.last-year-section {
+  padding: 80px var(--page-px);
+  background: #fafafa;
+}
+.last-year-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.last-year-badge {
+  display: inline-block;
+  background: var(--red);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border-radius: 2px;
+  margin-bottom: 12px;
+}
+.last-year-header h2 {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+.last-year-header p {
+  color: var(--text-sub);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+.last-year-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto 24px;
+}
+.last-year-photo {
+  margin: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eee;
+}
+.last-year-photo img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.last-year-photo:hover img {
+  transform: scale(1.04);
+}
+.last-year-photo figcaption {
+  font-size: 0.78rem;
+  color: var(--text-sub);
+  padding: 8px 10px;
+  line-height: 1.5;
+  background: white;
+}
+.last-year-source {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-sub);
+}
+.last-year-source a {
+  color: var(--red);
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .last-year-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .last-year-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .knowledge-section {
   display: grid;
   grid-template-columns: 0.82fr 1.18fr;

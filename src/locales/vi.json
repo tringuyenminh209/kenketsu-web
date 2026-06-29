@@ -235,6 +235,21 @@
     "remaining": "Còn {{remaining}} chỗ trống",
     "clickHint": "Hãy thử nhấn vào lá nhé!"
   },
+  "lastYear": {
+    "badge": "Hoạt động năm ngoái",
+    "title": "Buổi hiến máu trong trường năm 2025 đã diễn ra như thế này.",
+    "summary": "Ngày 24/9/2025, sự kiện được tổ chức tại sảnh tầng 1 tòa nhà số 1 của ECC. Hơn 30 sinh viên và giáo viên đã tham gia, cùng với các tình nguyện viên sinh viên tích cực hỗ trợ.",
+    "captions": [
+      "Không khí sảnh tầng 1 tòa nhà số 1 — nơi tổ chức sự kiện.",
+      "Xe buýt hiến máu đỗ ngay cạnh tòa nhà số 1, phía trước tòa nhà số 4.",
+      "Mỗi lúc có 3 người hiến máu trên xe. Trong xe phát nhạc, không khí rất thoải mái.",
+      "Trong lúc lấy máu, được đọc tài liệu hướng dẫn và nghe lời khuyên từ y tá.",
+      "Sinh viên tình nguyện phụ trách đăng ký trước và hướng dẫn vào hội trường.",
+      "Sinh viên tình nguyện cùng các thành viên Lions Club kêu gọi mọi người hiến máu."
+    ],
+    "sourceLabel": "Nguồn: ",
+    "sourceLink": "Báo cáo hoạt động ECC Trung tâm Đóng góp Xã hội"
+  },
   "knowledge": {
     "sectionTitle": "Hiểu về hiến máu là bước đầu tiên để cứu sống người khác.",
     "sectionBody": "Hiến máu không chỉ dành cho người đặc biệt. Khi có kiến thức đúng, nỗi lo sẽ giảm đi, và tất cả — dù hiến máu hay lan tỏa thông tin — đều trở thành người đồng hành trong y tế địa phương.",
