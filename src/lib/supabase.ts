@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js"
-import type { Registration, RegistrationInsert, SurveyInsert } from "../types"
+import type { Registration, RegistrationInsert, SurveyInsert, SurveyResponse } from "../types"
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string
@@ -30,6 +30,16 @@ export async function checkDuplicateRegistration(
 export async function insertSurvey(data: SurveyInsert) {
   const { error } = await supabase.from("survey_responses").insert(data)
   if (error) throw error
+}
+
+export async function fetchSurveys(eventYear: number): Promise<SurveyResponse[]> {
+  const { data, error } = await supabase
+    .from("survey_responses")
+    .select("*")
+    .eq("event_year", eventYear)
+    .order("created_at", { ascending: true })
+  if (error) throw error
+  return data ?? []
 }
 
 // ── Admin（要認証） ───────────────────────────────
@@ -73,6 +83,22 @@ export function registrationsToCSV(rows: Registration[]): string {
     .map((r) =>
       [r.student_id, r.name, r.class, r.email ?? "", r.phone ?? "", r.gender ?? "", r.created_at].join(",")
     )
+    .join("\n")
+  return header + body
+}
+
+export function surveysToCSV(rows: SurveyResponse[]): string {
+  const header = "回答日時,献血回数,知ったきっかけ,アンケートコメント\n"
+  const body = rows
+    .map((r) => {
+      const cleanComment = (r.comment ?? "").replace(/"/g, '""');
+      return [
+        r.created_at,
+        r.donation_count ?? "",
+        r.how_found ?? "",
+        `"${cleanComment}"`
+      ].join(",");
+    })
     .join("\n")
   return header + body
 }
