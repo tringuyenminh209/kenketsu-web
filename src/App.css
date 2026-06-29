@@ -2345,6 +2345,18 @@ th {
     padding: 20px;
   }
 
+  .detail-paragraph {
+    font-size: 14.5px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .detail-bullet {
+    font-size: 13.5px;
+    line-height: 1.45;
+    margin: 5px 0 5px 16px;
+  }
+
   .knowledge-detail-image {
     min-height: 190px;
   }
