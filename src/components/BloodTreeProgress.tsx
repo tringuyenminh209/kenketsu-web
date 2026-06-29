@@ -361,53 +361,56 @@ export function BloodTreeProgress() {
                 return (
                   <g
                     key={i}
-                    ref={(el) => {
-                      leafRefs.current[i] = el
-                    }}
-                    className={`tree-leaf-group ${active ? 'is-active' : ''}`}
                     transform={`translate(${cx},${cy}) rotate(${rot})`}
-                    style={{ cursor: active ? 'pointer' : 'default' }}
-                    tabIndex={active ? 0 : -1}
-                    role={active ? 'button' : undefined}
-                    aria-label={active ? t('tree.leafAriaLabel', { n: i + 1 }) : undefined}
-                    onMouseEnter={
-                      active
-                        ? (e) => handleLeafEnter(i, e.clientX, e.clientY)
-                        : undefined
-                    }
-                    onMouseLeave={active ? () => handleLeafLeave(i) : undefined}
-                    onClick={active ? () => handleLeafClick(i) : undefined}
-                    onKeyDown={
-                      active
-                        ? (e) => {
-                            if (e.key === 'Enter' || e.key === ' ') {
-                              e.preventDefault()
-                              handleLeafClick(i)
-                            }
-                          }
-                        : undefined
-                    }
                   >
-                    <ellipse
-                      cx={0}
-                      cy={0}
-                      rx={11}
-                      ry={6.5}
-                      fill={active ? LEAF_COLORS[i % LEAF_COLORS.length] : '#d0d0d0'}
-                      opacity={active ? 0.93 : 0.32}
-                    />
-                    {active && (
-                      <line
-                        x1={-8}
-                        y1={0}
-                        x2={8}
-                        y2={0}
-                        stroke="#1b5e20"
-                        strokeWidth={0.75}
-                        strokeLinecap="round"
-                        opacity={0.4}
+                    <g
+                      ref={(el) => {
+                        leafRefs.current[i] = el
+                      }}
+                      className={`tree-leaf-group ${active ? 'is-active' : ''}`}
+                      style={{ cursor: active ? 'pointer' : 'default' }}
+                      tabIndex={active ? 0 : -1}
+                      role={active ? 'button' : undefined}
+                      aria-label={active ? t('tree.leafAriaLabel', { n: i + 1 }) : undefined}
+                      onMouseEnter={
+                        active
+                          ? (e) => handleLeafEnter(i, e.clientX, e.clientY)
+                          : undefined
+                      }
+                      onMouseLeave={active ? () => handleLeafLeave(i) : undefined}
+                      onClick={active ? () => handleLeafClick(i) : undefined}
+                      onKeyDown={
+                        active
+                          ? (e) => {
+                              if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault()
+                                handleLeafClick(i)
+                              }
+                            }
+                          : undefined
+                      }
+                    >
+                      <ellipse
+                        cx={0}
+                        cy={0}
+                        rx={11}
+                        ry={6.5}
+                        fill={active ? LEAF_COLORS[i % LEAF_COLORS.length] : '#d0d0d0'}
+                        opacity={active ? 0.93 : 0.32}
                       />
-                    )}
+                      {active && (
+                        <line
+                          x1={-8}
+                          y1={0}
+                          x2={8}
+                          y2={0}
+                          stroke="#1b5e20"
+                          strokeWidth={0.75}
+                          strokeLinecap="round"
+                          opacity={0.4}
+                        />
+                      )}
+                    </g>
                   </g>
                 )
               })}
