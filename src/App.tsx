@@ -137,7 +137,9 @@ function UserPage() {
         setRegError(t('register.errorDuplicate'))
         return
       }
+      const registrationId = crypto.randomUUID()
       await insertRegistration({
+        id: registrationId,
         event_year: EVENT_CONFIG.year,
         student_id: regForm.studentId,
         name: regForm.name,
@@ -147,7 +149,7 @@ function UserPage() {
         birth_date: normalizedBirthDate,
         gender: regForm.gender || undefined,
       })
-      sendConfirmationEmail({ name: regForm.name, email: regForm.email, student_id: regForm.studentId, dept: regForm.department })
+      sendConfirmationEmail(registrationId)
       setRegSuccess(true)
     } catch {
       setRegError(t('register.errorGeneral'))

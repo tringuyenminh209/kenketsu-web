@@ -14,6 +14,7 @@ export interface Registration {
 }
 
 export interface RegistrationInsert {
+  id?: string
   event_year: number
   student_id: string
   name: string

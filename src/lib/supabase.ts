@@ -12,13 +12,10 @@ export async function insertRegistration(data: RegistrationInsert) {
   if (error) throw error
 }
 
-export function sendConfirmationEmail(params: {
-  name: string
-  email: string
-  student_id: string
-  dept: string
-}): void {
-  void supabase.functions.invoke("send-confirmation", { body: params })
+export function sendConfirmationEmail(registrationId: string): void {
+  void supabase.functions.invoke("send-confirmation", {
+    body: { registration_id: registrationId },
+  })
 }
 
 export async function checkDuplicateRegistration(

@@ -1,9 +1,27 @@
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2"
+
+const ALLOWED_ORIGIN = Deno.env.get("ALLOWED_ORIGIN") ?? "https://kenketsu-web.vercel.app"
+
 const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Origin": ALLOWED_ORIGIN,
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 }
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+
+// Escape HTML special characters before interpolating into the email template
+const esc = (s: string) =>
+  s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;")
+
 function buildHtml(name: string, studentId: string, dept: string): string {
+  const n = esc(name)
+  const sid = esc(studentId)
+  const d = esc(dept)
   return `<!DOCTYPE html>
 <html lang="ja">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
@@ -20,7 +38,7 @@ function buildHtml(name: string, studentId: string, dept: string): string {
         </tr>
         <tr>
           <td style="padding:36px 40px;">
-            <p style="margin:0 0 20px;font-size:16px;color:#333;">${name} さん</p>
+            <p style="margin:0 0 20px;font-size:16px;color:#333;">${n} さん</p>
             <p style="margin:0 0 24px;font-size:14px;color:#555;line-height:1.8;">
               献血ボランティアイベントへのご参加申込、ありがとうございます。<br>
               以下の内容で受付が完了しました。
@@ -33,15 +51,15 @@ function buildHtml(name: string, studentId: string, dept: string): string {
                 <table cellpadding="0" cellspacing="0">
                   <tr>
                     <td style="padding:4px 0;font-size:13px;color:#888;width:100px;">学生番号</td>
-                    <td style="padding:4px 0;font-size:13px;color:#333;font-weight:600;">${studentId}</td>
+                    <td style="padding:4px 0;font-size:13px;color:#333;font-weight:600;">${sid}</td>
                   </tr>
                   <tr>
                     <td style="padding:4px 0;font-size:13px;color:#888;">氏名</td>
-                    <td style="padding:4px 0;font-size:13px;color:#333;font-weight:600;">${name}</td>
+                    <td style="padding:4px 0;font-size:13px;color:#333;font-weight:600;">${n}</td>
                   </tr>
                   <tr>
                     <td style="padding:4px 0;font-size:13px;color:#888;">所属</td>
-                    <td style="padding:4px 0;font-size:13px;color:#333;font-weight:600;">${dept}</td>
+                    <td style="padding:4px 0;font-size:13px;color:#333;font-weight:600;">${d}</td>
                   </tr>
                 </table>
               </td></tr>
@@ -114,12 +132,35 @@ Deno.serve(async (req) => {
     })
   }
 
-  let name: string, email: string, student_id: string, dept: string
+  let registration_id: string
   try {
-    ;({ name, email, student_id, dept } = await req.json())
+    ;({ registration_id } = await req.json())
+    if (typeof registration_id !== "string" || !UUID_RE.test(registration_id)) {
+      throw new Error("invalid id format")
+    }
   } catch {
     return new Response(JSON.stringify({ error: "Invalid request body" }), {
       status: 400,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    })
+  }
+
+  // Lookup registration server-side — email/name come from DB, not client input
+  const db = createClient(
+    Deno.env.get("SUPABASE_URL")!,
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+  )
+  const windowStart = new Date(Date.now() - 5 * 60 * 1000).toISOString()
+  const { data: reg, error } = await db
+    .from("registrations")
+    .select("email, name, student_id, class, created_at")
+    .eq("id", registration_id)
+    .gte("created_at", windowStart)
+    .maybeSingle()
+
+  if (error || !reg?.email) {
+    return new Response(JSON.stringify({ error: "Registration not found or window expired" }), {
+      status: 404,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     })
   }
@@ -132,9 +173,9 @@ Deno.serve(async (req) => {
     },
     body: JSON.stringify({
       from: `ECC献血ボランティア <${FROM_EMAIL}>`,
-      to: [email],
+      to: [reg.email],
       subject: "【献血ボランティア】参加申込を受け付けました",
-      html: buildHtml(name, student_id, dept),
+      html: buildHtml(reg.name, reg.student_id, reg.class ?? ""),
     }),
   })
 
