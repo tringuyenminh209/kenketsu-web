@@ -234,7 +234,20 @@
     "goalReached": "Goal reached! Thank you everyone!",
     "remaining": "{{remaining}} spots remaining",
     "clickHint": "Try clicking on a leaf!",
-    "leafAriaLabel": "Leaf {{n}}"
+    "leafAriaLabel": "Leaf {{n}}",
+    "participantNum": "Participant #{{n}}",
+    "loveMessage": {
+      "0": "Your kindness shapes someone's tomorrow.",
+      "1": "Heartfelt thanks for your courage to take the step.",
+      "2": "A small step for you is a great rescue for someone.",
+      "3": "A warm heart spreads from here.",
+      "4": "Your donation saves someone's beloved one.",
+      "5": "Thank you for joining the relay of life.",
+      "6": "That kindness will surely bring a smile to someone.",
+      "7": "First-timers or regulars, a place where all hearts gather.",
+      "8": "May the joy of supporting each other spread across campus.",
+      "9": "A noble step that we will never forget."
+    }
   },
   "lastYear": {
     "badge": "Last Year's Event",

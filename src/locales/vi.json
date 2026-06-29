@@ -234,7 +234,20 @@
     "goalReached": "Đã đạt mục tiêu! Cảm ơn mọi người",
     "remaining": "Còn {{remaining}} chỗ trống",
     "clickHint": "Hãy thử nhấn vào lá nhé!",
-    "leafAriaLabel": "Lá thứ {{n}}"
+    "leafAriaLabel": "Lá thứ {{n}}",
+    "participantNum": "Người tham gia #{{n}}",
+    "loveMessage": {
+      "0": "Lòng tốt của bạn tạo nên ngày mai cho ai đó.",
+      "1": "Chân thành cảm ơn sự dũng cảm bước lên của bạn.",
+      "2": "Một bước đi nhỏ của bạn là sự cứu giúp lớn cho ai đó.",
+      "3": "Trái tim ấm áp lan tỏa từ chính nơi đây.",
+      "4": "Giọt máu của bạn cứu sống người thân yêu của ai đó.",
+      "5": "Cảm ơn bạn đã tham gia vào hành trình kết nối sự sống.",
+      "6": "Sự tử tế đó chắc chắn sẽ mang lại nụ cười cho ai đó.",
+      "7": "Dù là lần đầu hay thường xuyên, nơi đây hội tụ mọi tấm lòng.",
+      "8": "Cầu chúc niềm vui sẻ chia lan tỏa khắp khuôn viên trường.",
+      "9": "Một hành động cao đẹp mà chúng tôi sẽ luôn trân quý."
+    }
   },
   "lastYear": {
     "badge": "Hoạt động năm ngoái",

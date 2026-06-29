@@ -40,6 +40,39 @@ const SPARK_COLORS = [
   '#2196f3', '#e91e63', '#9c27b0', '#00bcd4',
 ]
 
+function playCrystalSound() {
+  try {
+    const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext
+    if (!AudioContextClass) return
+    const ctx = new AudioContextClass()
+    const now = ctx.currentTime
+
+    const osc1 = ctx.createOscillator()
+    const osc2 = ctx.createOscillator()
+    const gainNode = ctx.createGain()
+
+    osc1.type = 'sine'
+    osc1.frequency.setValueAtTime(1100 + Math.random() * 300, now)
+
+    osc2.type = 'sine'
+    osc2.frequency.setValueAtTime(2200 + Math.random() * 600, now)
+
+    gainNode.gain.setValueAtTime(0.08, now)
+    gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 1.0)
+
+    osc1.connect(gainNode)
+    osc2.connect(gainNode)
+    gainNode.connect(ctx.destination)
+
+    osc1.start(now)
+    osc2.start(now)
+    osc1.stop(now + 1.0)
+    osc2.stop(now + 1.0)
+  } catch (e) {
+    console.error('Audio synthesis failed', e)
+  }
+}
+
 type TooltipState = { index: number; x: number; y: number } | null
 
 export function BloodTreeProgress() {
@@ -182,6 +215,7 @@ export function BloodTreeProgress() {
       .to(el, { scale: 1, duration: 0.22, ease: 'elastic.out(1, 0.75)' })
     const [cx, cy] = LEAF_DATA[index]
     spawnParticles(cx, cy)
+    playCrystalSound()
   })
 
   const displayCount = count ?? 0
@@ -194,12 +228,28 @@ export function BloodTreeProgress() {
         {tooltip !== null && displayCount > tooltip.index && (
           <div
             className="leaf-tooltip"
-            style={{ left: tooltip.x + 14, top: tooltip.y - 52 }}
+            style={{
+              left: tooltip.x + 14,
+              top: tooltip.y - 72,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              gap: '4px',
+              padding: '8px 14px',
+              borderRadius: '12px',
+              maxWidth: '240px',
+              whiteSpace: 'normal',
+            }}
           >
-            <span className="leaf-tooltip-emoji">
-              {LEAF_EMOJI[tooltip.index % LEAF_EMOJI.length]}
-            </span>
-            <span>参加者 #{tooltip.index + 1}</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 'bold' }}>
+              <span className="leaf-tooltip-emoji">
+                {LEAF_EMOJI[tooltip.index % LEAF_EMOJI.length]}
+              </span>
+              <span>{t('tree.participantNum', { n: tooltip.index + 1 })}</span>
+            </div>
+            <div style={{ fontSize: '0.75rem', opacity: 0.9, fontStyle: 'italic', lineHeight: '1.3' }}>
+              {t(`tree.loveMessage.${tooltip.index % 10}`)}
+            </div>
           </div>
         )}
 
