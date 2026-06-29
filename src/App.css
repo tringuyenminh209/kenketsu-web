@@ -1925,6 +1925,293 @@ th {
   }
 }
 
+/* ── Foreign Student Section ───────────────────────── */
+.fs-section {
+  padding: 80px 24px;
+  background:
+    radial-gradient(circle at 80% 10%, rgba(219, 234, 254, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 10% 90%, rgba(220, 252, 231, 0.3) 0%, transparent 50%),
+    #ffffff;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.fs-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.fs-header {
+  text-align: center;
+}
+
+.fs-globe {
+  font-size: 2.8rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.fs-header h2 {
+  margin: 0 0 10px;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.fs-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.97rem;
+}
+
+/* Rule cards */
+.fs-rules {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.fs-rule-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 18px 16px;
+  border-radius: 14px;
+  border: 1.5px solid;
+}
+
+.fs-rule-card--green {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.fs-rule-card--amber {
+  background: #fffbeb;
+  border-color: #fde68a;
+}
+
+.fs-rule-card--red {
+  background: #fff1f2;
+  border-color: #fecdd3;
+}
+
+.fs-rule-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.fs-rule-card h3 {
+  margin: 0 0 5px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.fs-rule-card p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #4b5563;
+  line-height: 1.55;
+}
+
+/* Country table */
+.fs-table-wrap {
+  background: #f9fafb;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.fs-table-title {
+  margin: 0 0 16px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.fs-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.fs-country-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+
+.fs-country-row:last-child {
+  border-bottom: none;
+}
+
+.fs-country-name {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--ink);
+  padding-top: 2px;
+}
+
+.fs-country-name span {
+  font-size: 1.1rem;
+}
+
+.fs-region-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fs-region-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.fs-region-label {
+  font-size: 0.8rem;
+  color: #374151;
+  flex: 1;
+  min-width: 120px;
+}
+
+.fs-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.fs-status--ok {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.fs-status--wait {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.fs-status--check {
+  background: #fef9c3;
+  color: #713f12;
+}
+
+.fs-status--lifting {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.fs-table-note {
+  margin: 14px 0 0;
+  font-size: 0.76rem;
+  color: #9ca3af;
+  line-height: 1.5;
+}
+
+/* Language note */
+.fs-lang-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 20px;
+  background: #f0f9ff;
+  border: 1.5px solid #bae6fd;
+  border-radius: 12px;
+}
+
+.fs-lang-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.fs-lang-note strong {
+  display: block;
+  font-size: 0.9rem;
+  color: #0c4a6e;
+  margin-bottom: 4px;
+}
+
+.fs-lang-note p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #0369a1;
+  line-height: 1.55;
+}
+
+/* CTA */
+.fs-cta {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px 22px;
+  background: linear-gradient(135deg, #fff7f7 0%, #fff1f2 100%);
+  border: 1.5px solid var(--line-red);
+  border-radius: 14px;
+}
+
+.fs-cta-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.fs-cta strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--red);
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.fs-cta p {
+  margin: 0;
+  font-size: 0.84rem;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 680px) {
+  .fs-rules {
+    grid-template-columns: 1fr;
+  }
+
+  .fs-country-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .fs-country-name {
+    font-size: 0.9rem;
+  }
+
+  .fs-region-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
 /* ── Tree Progress Section ─────────────────────────── */
 .tree-section {
   padding: 100px 24px;

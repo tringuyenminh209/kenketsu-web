@@ -17,6 +17,7 @@ import { EVENT_CONFIG } from './config/event'
 import { Icon, SiteHeader, usePageMotion } from './lib/shared'
 import { checkDuplicateRegistration, insertRegistration, insertSurvey } from './lib/supabase'
 import { BloodTreeProgress } from './components/BloodTreeProgress'
+import { ForeignStudentSection } from './components/ForeignStudentSection'
 import { ImpactSection } from './components/ImpactSection'
 import { LastYearSection } from './components/LastYearSection'
 import './App.css'
@@ -423,6 +424,8 @@ function UserPage() {
         </section>
 
         <BloodTreeProgress />
+
+        <ForeignStudentSection />
 
         <section className="work-area reveal">
           {regSuccess ? (
