@@ -2143,7 +2143,8 @@ th {
 
 @media (max-width: 760px) {
   .site-header {
-    position: static;
+    position: relative;
+    z-index: 100;
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
     gap: 12px;
