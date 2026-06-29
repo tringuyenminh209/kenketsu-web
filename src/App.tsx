@@ -5,6 +5,14 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import heroImage from './assets/blood-donation-hero.png'
+import knowledgeInfrastructureImage from './assets/knowledge-infrastructure.webp'
+import knowledgeMultiplePatientsImage from './assets/knowledge-multiple-patients.webp'
+import knowledgeYouthImage from './assets/knowledge-youth.webp'
+import benefitHealthCheckImage from './assets/benefit-health-check.webp'
+import benefitLifeSupportImage from './assets/benefit-life-support.webp'
+import benefitCampusSolidarityImage from './assets/benefit-campus-solidarity.webp'
+import benefitSocialContributionImage from './assets/benefit-social-contribution.webp'
+import reasonSafetyImage from './assets/reason-safety.webp'
 import logoMark from './assets/campus-care-mark.svg'
 import { EVENT_CONFIG } from './config/event'
 import i18n from './lib/i18n'
@@ -124,6 +132,8 @@ function normalizeBirthDateInput(value: string) {
 
 const KNOWLEDGE_IMAGE_POSITIONS = ['center', 'right center', 'center top'] as const
 const BENEFIT_IMAGE_POSITIONS = ['center', 'right center', 'center top', 'left center'] as const
+const KNOWLEDGE_IMAGES = [knowledgeInfrastructureImage, knowledgeMultiplePatientsImage, knowledgeYouthImage]
+const BENEFIT_IMAGES = [benefitHealthCheckImage, benefitLifeSupportImage, benefitCampusSolidarityImage, benefitSocialContributionImage]
 
 type IconType =
   | 'heart'
@@ -291,10 +301,10 @@ function UserPage() {
   usePageMotion(rootRef)
 
   const knowledgeCards = (t('knowledge.cards', { returnObjects: true }) as { title: string; text: string; detail: string }[]).map(
-    (card, i) => ({ ...card, imagePosition: KNOWLEDGE_IMAGE_POSITIONS[i] }),
+    (card, i) => ({ ...card, imagePosition: KNOWLEDGE_IMAGE_POSITIONS[i], image: KNOWLEDGE_IMAGES[i] }),
   )
   const benefits = (t('benefits.cards', { returnObjects: true }) as { title: string; text: string; detail: string }[]).map(
-    (card, i) => ({ ...card, imagePosition: BENEFIT_IMAGE_POSITIONS[i] }),
+    (card, i) => ({ ...card, imagePosition: BENEFIT_IMAGE_POSITIONS[i], image: BENEFIT_IMAGES[i] }),
   )
   const steps = t('steps', { returnObjects: true }) as { title: string; text: string }[]
   const pledgeItems = t('pledge.items', { returnObjects: true }) as string[]
@@ -303,12 +313,12 @@ function UserPage() {
   const activeBenefit = benefits[selectedBenefit]
 
   const eventInfo = [
-    { label: t('info.date_label'), value: EVENT_CONFIG.date },
-    { label: t('info.time_label'), value: EVENT_CONFIG.time },
-    { label: t('info.location_label'), value: `${EVENT_CONFIG.location} ${EVENT_CONFIG.locationDetail}` },
-    { label: t('info.sponsor_label'), value: EVENT_CONFIG.sponsor },
-    { label: t('info.reservation_label'), value: EVENT_CONFIG.reservationNote },
-    { label: t('info.gift_label'), value: EVENT_CONFIG.giftNote },
+    { label: t('info.date_label'), value: t('info.date_value') },
+    { label: t('info.time_label'), value: t('info.time_value') },
+    { label: t('info.location_label'), value: t('info.location_value') },
+    { label: t('info.sponsor_label'), value: t('info.sponsor_value') },
+    { label: t('info.reservation_label'), value: t('info.reservation_value') },
+    { label: t('info.gift_label'), value: t('info.gift_value') },
     { label: t('info.capacity_label'), value: t('info.capacity_value', { capacity: EVENT_CONFIG.capacity }) },
   ]
   const eligibilityItems = t('precautions.eligibilityItems', { returnObjects: true }) as string[]
@@ -472,7 +482,7 @@ function UserPage() {
             <div
               className="knowledge-detail-image"
               style={{
-                backgroundImage: `url(${heroImage})`,
+                backgroundImage: `url(${activeKnowledge.image})`,
                 backgroundPosition: activeKnowledge.imagePosition,
               }}
               role="img"
@@ -505,7 +515,7 @@ function UserPage() {
                 <span
                   className="benefit-thumb"
                   style={{
-                    backgroundImage: `url(${heroImage})`,
+                    backgroundImage: `url(${benefit.image})`,
                     backgroundPosition: benefit.imagePosition,
                   }}
                 />
@@ -521,7 +531,7 @@ function UserPage() {
             <div
               className="benefit-detail-image"
               style={{
-                backgroundImage: `url(${heroImage})`,
+                backgroundImage: `url(${activeBenefit.image})`,
                 backgroundPosition: activeBenefit.imagePosition,
               }}
               role="img"
@@ -566,7 +576,7 @@ function UserPage() {
         <section className="reason-grid reveal" id="reason">
           <article className="reason-story motion-card">
             <div className="reason-visual">
-              <img src={heroImage} alt={t('reason.imageAlt')} />
+              <img src={reasonSafetyImage} alt={t('reason.imageAlt')} />
             </div>
             <div>
               <Icon type="heart" />

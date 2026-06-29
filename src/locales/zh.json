@@ -97,7 +97,13 @@
     "gift_label": "献血纪念品",
     "appLinksLabel": "Labrad 应用程序链接",
     "appLinksTitle": "通过 Labrad 应用程序提前预约",
-    "appLinksText": "用于献血卡管理和提前预约。"
+    "appLinksText": "用于献血卡管理和提前预约。",
+    "date_value": "2026年9月15日（星期二）",
+    "time_value": "9:30〜11:30 / 12:30〜16:30",
+    "location_value": "ECC电脑专业学校 1号馆 1楼大厅",
+    "sponsor_value": "大阪曾根崎狮子会 / 大阪西狮子会",
+    "reservation_value": "提前预约可以缩短献血手续的办理时间",
+    "gift_value": "为协助献血的人士，狮子会将赠送「献血纪念品」"
   },
   "precautions": {
     "title": "参加前请轻松确认的事项",
@@ -324,5 +330,77 @@
   "footerCta": {
     "title": "不是一个人，而是整个校园共同支撑献血。",
     "cta": "返回报名"
+  },
+  "impact": {
+    "stats": {
+      "save_title": "一次献血可挽救",
+      "save_to": "3",
+      "save_unit": "人",
+      "save_desc": "血液会被按成分分离并用于多位患者",
+      "platelet_title": "血小板保存期限",
+      "platelet_to": "4",
+      "platelet_unit": "天",
+      "platelet_desc": "因此每天都需要新的献血",
+      "annual_title": "每年需要输血的人数",
+      "annual_to": "500",
+      "annual_unit": "万人",
+      "annual_desc": "支撑着手术、癌症、分娩、事故等日常医疗"
+    },
+    "who_needs": {
+      "eyebrow": "您的血液会送到谁身边？",
+      "title": "需要输血患者的现实",
+      "desc": "“医院”和“手术”绝非与己无关。每天都有数千人需要输血。",
+      "cards": [
+        {
+          "title": "手术·紧急救命",
+          "body": "交通事故或紧急手术需要在短时间内输入大量血液。没有血液，有些生命就无法获救。"
+        },
+        {
+          "title": "癌症·血液疾病",
+          "body": "在化疗和白血病治疗中，持续补充血小板和红细胞是治疗的前提条件。"
+        },
+        {
+          "title": "分娩·新生儿",
+          "body": "分娩时的大出血，以及对早产儿的输血，是守护生命的最前线。"
+        },
+        {
+          "title": "慢性疾病·长期治疗",
+          "body": "肾脏疾病、再生障碍性贫血等患者为了维持长期治疗，需要定期输血。"
+        }
+      ]
+    },
+    "journey": {
+      "eyebrow": "从献血到送达患者手中",
+      "title": "您的血液送达之前",
+      "steps": [
+        {
+          "title": "受理·问诊",
+          "sub": "确认身体状况与体重（约5分钟）"
+        },
+        {
+          "title": "采血",
+          "sub": "全血采集约需10至15分钟"
+        },
+        {
+          "title": "检查·成分分离",
+          "sub": "24小时内进行安全确认并分离"
+        },
+        {
+          "title": "送达患者手中",
+          "sub": "送往全国的医院与手术室"
+        }
+      ]
+    },
+    "trust": {
+      "label": "本次活动是与官方机构合作的安全献血活动",
+      "redcross_org": "日本红十字会",
+      "redcross_dept": "山口县红十字血液中心",
+      "redcross_role": "血液管理·安全保障",
+      "school_org": "ECC电脑专业学校",
+      "school_dept": "山口学园 ECC专业学校",
+      "school_role": "场地提供·共办",
+      "hotline_org": "献血咨询窗口",
+      "hotline_role": "周一至周六 9:00〜17:30（免费）"
+    }
   }
 }

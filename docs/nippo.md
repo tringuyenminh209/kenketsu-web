@@ -239,8 +239,10 @@
 - Them dau tieng Viet day du cho cac nhan bi thieu trong `src/locales/vi.json` (sponsor_label, reservation_label, gift_label, appLinks*).
 - Dich cac chuoi appLinks lien quan den ung dung Labrad sang tieng Trung (`zh.json`), tieng Myanmar (`my.json`), va tieng Nepal (`ne.json`).
 - Bo sung 3 khoa dich con thieu ve appLinks vao tep tin tieng Nepal (`ne.json`).
-- Chay script Node.js kiem tra tinh nhat quan cua cac khoa dich (dat 192/192 khoa tren ca 6 ngon ngu).
 - Toi uu hoa mot so tu khoa tieng Viet trong `src/locales/vi.json` sang tong giong hoc duong phu hop va truyen cam hung hon (doi "Cay tham gia" -> "Cay nhan ai", "Tieu chuan..." -> "Mot so luu y...", "Cơ hoi kiem tra..." -> "Cơ hoi lang nghe cơ the", "Cam giac ho tro..." -> "Niem vui se chia su song").
+- Dịch toàn bộ giá trị cấu hình sự kiện động (ngày giờ, địa điểm, nhà tài trợ, lưu ý đặt lịch, quà lưu niệm) từ `EVENT_CONFIG` sang cả 6 ngôn ngữ.
+- Cập nhật `src/App.tsx` sử dụng hàm dịch `t()` để hiển thị thông tin sự kiện đa ngôn ngữ chuẩn xác.
+- Tích hợp đa ngôn ngữ toàn diện vào component `ImpactSection.tsx`: dịch toàn bộ các mảng dữ liệu cứng `WHO_NEEDS` và `JOURNEY` sang cả 6 ngôn ngữ; dịch phần thống kê số liệu (stats), biểu đồ quy trình (journey) và liên kết chính thức (trust) ở cuối trang; tự động định dạng số liệu đếm số theo chuẩn quốc tế (đạt 226/226 khóa dịch đồng bộ).
 
 ## Kiem tra
 
@@ -249,6 +251,10 @@
 
 ## File da thay doi chinh
 
+- `src/App.tsx`
+- `src/components/ImpactSection.tsx`
+- `src/locales/ja.json`
+- `src/locales/en.json`
 - `src/locales/vi.json`
 - `src/locales/zh.json`
 - `src/locales/my.json`

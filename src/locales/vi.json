@@ -97,7 +97,13 @@
     "gift_label": "Quà lưu niệm hiến máu",
     "appLinksLabel": "Liên kết ứng dụng Labrad",
     "appLinksTitle": "Đặt lịch trước bằng ứng dụng Labrad",
-    "appLinksText": "Dùng để quản lý thẻ hiến máu và đặt lịch trước."
+    "appLinksText": "Dùng để quản lý thẻ hiến máu và đặt lịch trước.",
+    "date_value": "Thứ Ba, ngày 15 tháng 9 năm 2026",
+    "time_value": "9:30~11:30 / 12:30~16:30",
+    "location_value": "Trường Cao đẳng Công nghệ thông tin ECC, Tòa nhà 1, Sảnh tầng 1",
+    "sponsor_value": "Osaka Sonezaki Lions Club / Osaka Nishi Lions Club",
+    "reservation_value": "Đặt lịch trước sẽ giúp rút ngắn thời gian làm thủ tục hiến máu.",
+    "gift_value": "Người tham gia hiến máu sẽ nhận được quà lưu niệm từ Lions Club."
   },
   "precautions": {
     "title": "Những điều cần kiểm tra trước khi tham gia",
@@ -324,5 +330,77 @@
   "footerCta": {
     "title": "Cùng nhau tại campus — hãy ủng hộ hiến máu.",
     "cta": "Quay lại đăng ký"
+  },
+  "impact": {
+    "stats": {
+      "save_title": "Mỗi lần hiến máu cứu được",
+      "save_to": "3",
+      "save_unit": "người",
+      "save_desc": "Máu được tách thành các thành phần để truyền cho nhiều bệnh nhân.",
+      "platelet_title": "Hạn bảo quản tiểu cầu",
+      "platelet_to": "4",
+      "platelet_unit": "ngày",
+      "platelet_desc": "Vì vậy, cần có lượng máu hiến mới mỗi ngày.",
+      "annual_title": "Số người cần truyền máu hàng năm",
+      "annual_to": "5",
+      "annual_unit": "triệu người",
+      "annual_desc": "Hỗ trợ y tế hàng ngày như phẫu thuật, ung thư, sinh nở, tai nạn."
+    },
+    "who_needs": {
+      "eyebrow": "Máu của bạn sẽ truyền cho ai?",
+      "title": "Thực tế của những người cần truyền máu",
+      "desc": "Chuyện \"bệnh viện\" hay \"phẫu thuật\" không phải là việc của ai khác. Mỗi ngày, hàng ngàn người cần được truyền máu để duy trì sự sống.",
+      "cards": [
+        {
+          "title": "Phẫu thuật & Cấp cứu",
+          "body": "Tai nạn giao thông hoặc các ca mổ khẩn cấp cần một lượng máu lớn trong thời gian ngắn. Không có máu, những sinh mệnh đó không thể cứu sống."
+        },
+        {
+          "title": "Ung thư & Bệnh về máu",
+          "body": "Trong hóa trị liệu hay điều trị ung thư máu, việc bổ sung liên tục tiểu cầu và hồng cầu là điều kiện tiên quyết để tiếp tục điều trị."
+        },
+        {
+          "title": "Sinh nở & Trẻ sơ sinh",
+          "body": "Băng huyết khi sinh hoặc truyền máu cho các bé sinh non là những cuộc chiến giành giật sự sống ngay trên tuyến đầu y tế."
+        },
+        {
+          "title": "Bệnh mãn tính & Điều trị dài hạn",
+          "body": "Các bệnh nhân suy thận, thiếu máu bất sản tủy... cần truyền máu định kỳ để duy trì cuộc sống và tiếp tục điều trị dài hạn."
+        }
+      ]
+    },
+    "journey": {
+      "eyebrow": "Hành trình từ người hiến đến người nhận",
+      "title": "Máu của bạn đi về đâu?",
+      "steps": [
+        {
+          "title": "Đăng ký & Khám sơ bộ",
+          "sub": "Kiểm tra sức khỏe và cân nặng (khoảng 5 phút)"
+        },
+        {
+          "title": "Hiến máu",
+          "sub": "Thu nhận máu toàn phần (khoảng 10-15 phút)"
+        },
+        {
+          "title": "Xét nghiệm & Tách thành phần",
+          "sub": "Kiểm tra an toàn và tách chiết trong vòng 24 giờ"
+        },
+        {
+          "title": "Đến với bệnh nhân",
+          "sub": "Chuyển tới các bệnh viện và phòng mổ trên toàn quốc"
+        }
+      ]
+    },
+    "trust": {
+      "label": "Sự kiện hiến máu an toàn được liên kết với các cơ quan chính thức",
+      "redcross_org": "Hội Chữ thập đỏ Nhật Bản",
+      "redcross_dept": "Trung tâm truyền máu Chữ thập đỏ tỉnh Yamaguchi",
+      "redcross_role": "Quản lý & Bảo đảm an toàn máu",
+      "school_org": "Trường Cao đẳng Công nghệ thông tin ECC",
+      "school_dept": "Học viện Yamaguchi - Trường chuyên môn ECC",
+      "school_role": "Cung cấp địa điểm & Đồng tổ chức",
+      "hotline_org": "Đường dây nóng hỗ trợ hiến máu",
+      "hotline_role": "Thứ Hai - Thứ Bảy: 9:00 - 17:30 (Miễn phí)"
+    }
   }
 }

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import emergencySurgeryImage from '../assets/impact/impact-emergency-surgery.webp'
 import cancerTreatmentImage from '../assets/impact/impact-cancer-treatment.webp'
 import maternityNewbornImage from '../assets/impact/impact-maternity-newborn.webp'
@@ -17,45 +18,35 @@ function CountUp({ to, active, duration = 1400 }: { to: number; active: boolean;
     }
     requestAnimationFrame(tick)
   }, [to, duration, active])
-  return <>{val.toLocaleString('ja-JP')}</>
+  return <>{val.toLocaleString()}</>
 }
 
-const WHO_NEEDS = [
+const WHO_NEEDS_META = [
   {
-    title: '手術・緊急救命',
-    body: '交通事故や急な手術では短時間で大量の血液が必要になります。血がなければ助けられない命があります。',
     overlay: 'linear-gradient(160deg, rgba(160,10,10,0.80) 0%, rgba(80,0,0,0.85) 100%)',
     image: emergencySurgeryImage,
     bgPos: 'center top',
   },
   {
-    title: 'がん・血液疾患',
-    body: '抗がん剤治療や白血病では、血小板や赤血球の継続的な補充が治療の前提条件になります。',
     overlay: 'linear-gradient(160deg, rgba(90,10,140,0.80) 0%, rgba(40,0,80,0.85) 100%)',
     image: cancerTreatmentImage,
     bgPos: 'right center',
   },
   {
-    title: '出産・新生児',
-    body: '分娩時の大量出血や、早産で生まれた赤ちゃんへの輸血は、命を守るための最前線です。',
     overlay: 'linear-gradient(160deg, rgba(10,60,140,0.80) 0%, rgba(0,30,90,0.85) 100%)',
     image: maternityNewbornImage,
     bgPos: 'left center',
   },
   {
-    title: '慢性疾患・長期治療',
-    body: '腎臓病・再生不良性貧血など、長期にわたる治療を続けるために血液が定期的に必要です。',
     overlay: 'linear-gradient(160deg, rgba(10,90,60,0.80) 0%, rgba(0,50,30,0.85) 100%)',
     image: longTermCareImage,
     bgPos: 'center bottom',
   },
 ]
 
-const JOURNEY = [
+const JOURNEY_META = [
   {
     num: '01',
-    title: '受付・問診',
-    sub: '体調・体重を確認（約5分）',
     icon: (
       <svg viewBox="0 0 40 40" aria-hidden="true">
         <circle cx="20" cy="13" r="7" strokeWidth="2.5" />
@@ -65,8 +56,6 @@ const JOURNEY = [
   },
   {
     num: '02',
-    title: '採血',
-    sub: '全血で約10〜15分',
     icon: (
       <svg viewBox="0 0 40 40" aria-hidden="true">
         <path d="M20 4C20 4 10 16 10 24a10 10 0 0 0 20 0C30 16 20 4 20 4Z" strokeWidth="2.5" strokeLinejoin="round" />
@@ -76,8 +65,6 @@ const JOURNEY = [
   },
   {
     num: '03',
-    title: '検査・成分分離',
-    sub: '24時間以内に安全確認',
     icon: (
       <svg viewBox="0 0 40 40" aria-hidden="true">
         <path d="M15 5v16l-6 10a2 2 0 0 0 1.7 3h18.6A2 2 0 0 0 31 31L25 21V5" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -89,8 +76,6 @@ const JOURNEY = [
   },
   {
     num: '04',
-    title: '患者さんへ届く',
-    sub: '全国の病院・手術室へ',
     icon: (
       <svg viewBox="0 0 40 40" aria-hidden="true">
         <rect x="5" y="18" width="30" height="18" rx="2" strokeWidth="2.5" />
@@ -102,8 +87,9 @@ const JOURNEY = [
 ]
 
 function RedCrossLogo() {
+  const { t } = useTranslation()
   return (
-    <svg className="trust-redcross-logo" viewBox="0 0 48 48" aria-label="日本赤十字社">
+    <svg className="trust-redcross-logo" viewBox="0 0 48 48" aria-label={t('impact.trust.redcross_org')}>
       <rect width="48" height="48" rx="4" fill="#ce0017" />
       <rect x="18" y="8" width="12" height="32" fill="white" />
       <rect x="8" y="18" width="32" height="12" fill="white" />
@@ -112,6 +98,7 @@ function RedCrossLogo() {
 }
 
 export function ImpactSection() {
+  const { t } = useTranslation()
   const statsRef = useRef<HTMLDivElement>(null)
   const [statsActive, setStatsActive] = useState(false)
 
@@ -126,47 +113,55 @@ export function ImpactSection() {
     return () => observer.disconnect()
   }, [])
 
+  const whoNeeds = (t('impact.who_needs.cards', { returnObjects: true }) as { title: string; body: string }[]).map(
+    (card, i) => ({ ...card, ...WHO_NEEDS_META[i] })
+  )
+
+  const journey = (t('impact.journey.steps', { returnObjects: true }) as { title: string; sub: string }[]).map(
+    (step, i) => ({ ...step, ...JOURNEY_META[i] })
+  )
+
   return (
     <>
       {/* ── Stat numbers ─────────────────────────── */}
       <div className="impact-stats reveal" ref={statsRef}>
         <div className="impact-stat-inner">
-          <p className="impact-stat-eyebrow">1回の献血で救える</p>
+          <p className="impact-stat-eyebrow">{t('impact.stats.save_title')}</p>
           <div className="impact-stat-num">
-            <CountUp to={3} active={statsActive} duration={900} />
-            <span className="impact-stat-unit">人</span>
+            <CountUp to={Number(t('impact.stats.save_to'))} active={statsActive} duration={900} />
+            <span className="impact-stat-unit">{t('impact.stats.save_unit')}</span>
           </div>
-          <p className="impact-stat-desc">血液は成分に分けて複数の患者さんに使われます</p>
+          <p className="impact-stat-desc">{t('impact.stats.save_desc')}</p>
         </div>
         <div className="impact-stat-divider" />
         <div className="impact-stat-inner">
-          <p className="impact-stat-eyebrow">血小板の保存期限</p>
+          <p className="impact-stat-eyebrow">{t('impact.stats.platelet_title')}</p>
           <div className="impact-stat-num">
-            <CountUp to={4} active={statsActive} duration={700} />
-            <span className="impact-stat-unit">日</span>
+            <CountUp to={Number(t('impact.stats.platelet_to'))} active={statsActive} duration={700} />
+            <span className="impact-stat-unit">{t('impact.stats.platelet_unit')}</span>
           </div>
-          <p className="impact-stat-desc">だから毎日、新しい献血が必要とされています</p>
+          <p className="impact-stat-desc">{t('impact.stats.platelet_desc')}</p>
         </div>
         <div className="impact-stat-divider" />
         <div className="impact-stat-inner">
-          <p className="impact-stat-eyebrow">年間輸血が必要な人</p>
+          <p className="impact-stat-eyebrow">{t('impact.stats.annual_title')}</p>
           <div className="impact-stat-num">
-            <CountUp to={500} active={statsActive} duration={1400} />
-            <span className="impact-stat-unit">万人</span>
+            <CountUp to={Number(t('impact.stats.annual_to'))} active={statsActive} duration={1400} />
+            <span className="impact-stat-unit">{t('impact.stats.annual_unit')}</span>
           </div>
-          <p className="impact-stat-desc">手術・がん・出産・事故など日常の医療を支えています</p>
+          <p className="impact-stat-desc">{t('impact.stats.annual_desc')}</p>
         </div>
       </div>
 
       {/* ── Who needs blood ──────────────────────── */}
       <section className="impact-who reveal">
         <div className="impact-who-lead">
-          <span className="impact-label">あなたの血は、誰のもとへ？</span>
-          <h2>輸血が必要な人たちの現実</h2>
-          <p>「病院」「手術」というのは他人事ではありません。毎日、何千人もの人が輸血を必要としています。</p>
+          <span className="impact-label">{t('impact.who_needs.eyebrow')}</span>
+          <h2>{t('impact.who_needs.title')}</h2>
+          <p>{t('impact.who_needs.desc')}</p>
         </div>
         <div className="impact-who-grid">
-          {WHO_NEEDS.map((item) => (
+          {whoNeeds.map((item) => (
             <div
               key={item.title}
               className="who-card"
@@ -189,17 +184,17 @@ export function ImpactSection() {
       {/* ── Journey ──────────────────────────────── */}
       <section className="impact-journey reveal">
         <div className="impact-label-wrap">
-          <span className="impact-label">献血から患者さんの元へ</span>
-          <h2>あなたの血が届くまで</h2>
+          <span className="impact-label">{t('impact.journey.eyebrow')}</span>
+          <h2>{t('impact.journey.title')}</h2>
         </div>
         <div className="journey-steps">
-          {JOURNEY.map((step, i) => (
+          {journey.map((step, i) => (
             <div className="journey-step" key={step.num}>
               <div className="journey-icon">{step.icon}</div>
               <div className="journey-num">{step.num}</div>
               <strong>{step.title}</strong>
               <p>{step.sub}</p>
-              {i < JOURNEY.length - 1 && <div className="journey-arrow" aria-hidden="true" />}
+              {i < journey.length - 1 && <div className="journey-arrow" aria-hidden="true" />}
             </div>
           ))}
         </div>
@@ -207,14 +202,14 @@ export function ImpactSection() {
 
       {/* ── Trust ────────────────────────────────── */}
       <section className="impact-trust reveal">
-        <p className="impact-trust-label">このイベントは正式な機関と連携した安全な献血活動です</p>
+        <p className="impact-trust-label">{t('impact.trust.label')}</p>
         <div className="trust-orgs">
           <div className="trust-org">
             <RedCrossLogo />
             <div>
-              <strong>日本赤十字社</strong>
-              <span>山口県赤十字血液センター</span>
-              <span className="trust-role">血液管理・安全保証</span>
+              <strong>{t('impact.trust.redcross_org')}</strong>
+              <span>{t('impact.trust.redcross_dept')}</span>
+              <span className="trust-role">{t('impact.trust.redcross_role')}</span>
             </div>
           </div>
           <div className="trust-divider" />
@@ -227,9 +222,9 @@ export function ImpactSection() {
               </svg>
             </div>
             <div>
-              <strong>ECC コンピュータ専門学校</strong>
-              <span>山口学園 ECC専門学校</span>
-              <span className="trust-role">会場提供・共催</span>
+              <strong>{t('impact.trust.school_org')}</strong>
+              <span>{t('impact.trust.school_dept')}</span>
+              <span className="trust-role">{t('impact.trust.school_role')}</span>
             </div>
           </div>
           <div className="trust-divider" />
@@ -240,9 +235,9 @@ export function ImpactSection() {
               </svg>
             </div>
             <div>
-              <strong>献血相談窓口</strong>
+              <strong>{t('impact.trust.hotline_org')}</strong>
               <a className="trust-phone" href="tel:0120326759">0120-326-759</a>
-              <span className="trust-role">月〜土 9:00〜17:30（無料）</span>
+              <span className="trust-role">{t('impact.trust.hotline_role')}</span>
             </div>
           </div>
         </div>

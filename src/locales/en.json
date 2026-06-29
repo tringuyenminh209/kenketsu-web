@@ -97,7 +97,13 @@
     "gift_label": "Donation gift",
     "appLinksLabel": "Labrad app links",
     "appLinksTitle": "Reserve ahead with the Labrad app",
-    "appLinksText": "Use it for blood donation card management and advance reservations."
+    "appLinksText": "Use it for blood donation card management and advance reservations.",
+    "date_value": "Tuesday, September 15, 2026",
+    "time_value": "9:30–11:30 / 12:30–16:30",
+    "location_value": "ECC Computer College Building 1, 1F Lounge",
+    "sponsor_value": "Osaka Sonezaki Lions Club / Osaka Nishi Lions Club",
+    "reservation_value": "Making a reservation will shorten the time required for blood donation procedures.",
+    "gift_value": "Those who cooperate with blood donation will receive a 'commemorative gift' from the Lions Club."
   },
   "precautions": {
     "title": "Things to Check Before Participating",
@@ -324,5 +330,77 @@
   "footerCta": {
     "title": "Together on campus — let's support blood donation.",
     "cta": "Back to registration"
+  },
+  "impact": {
+    "stats": {
+      "save_title": "Saves with one donation",
+      "save_to": "3",
+      "save_unit": "people",
+      "save_desc": "Blood is split into components to treat multiple patients.",
+      "platelet_title": "Platelet storage limit",
+      "platelet_to": "4",
+      "platelet_unit": "days",
+      "platelet_desc": "That's why new blood donations are needed every single day.",
+      "annual_title": "People needing blood annually",
+      "annual_to": "5",
+      "annual_unit": "million",
+      "annual_desc": "Supporting daily medicine like surgeries, cancer, birth, and accidents."
+    },
+    "who_needs": {
+      "eyebrow": "Where does your blood go?",
+      "title": "The Reality of Those Who Need Transfusions",
+      "desc": "\"Hospitals\" and \"surgeries\" are not someone else's business. Every day, thousands of people need blood transfusions.",
+      "cards": [
+        {
+          "title": "Surgery & Emergency",
+          "body": "Traffic accidents and sudden surgeries require large amounts of blood in a short time. Without blood, lives cannot be saved."
+        },
+        {
+          "title": "Cancer & Blood Diseases",
+          "body": "In chemotherapy and leukemia treatments, continuous replenishment of platelets and red cells is a prerequisite for treatment."
+        },
+        {
+          "title": "Childbirth & Newborns",
+          "body": "Heavy bleeding during delivery and transfusions for premature babies are at the very front line of saving lives."
+        },
+        {
+          "title": "Chronic Illness & Long-term Care",
+          "body": "Patients with kidney disease or aplastic anemia require regular blood transfusions to sustain their ongoing treatments."
+        }
+      ]
+    },
+    "journey": {
+      "eyebrow": "From donor to patient",
+      "title": "Until Your Blood Arrives",
+      "steps": [
+        {
+          "title": "Reception & Check-up",
+          "sub": "Confirm health condition and weight (approx. 5 min)"
+        },
+        {
+          "title": "Blood Donation",
+          "sub": "Whole blood collection takes approx. 10–15 min"
+        },
+        {
+          "title": "Testing & Separation",
+          "sub": "Safety confirmation and component separation within 24 hours"
+        },
+        {
+          "title": "Delivery to Patients",
+          "sub": "Sent to hospitals and operating rooms nationwide"
+        }
+      ]
+    },
+    "trust": {
+      "label": "This event is a safe blood donation activity in partnership with official organizations",
+      "redcross_org": "Japanese Red Cross Society",
+      "redcross_dept": "Yamaguchi Red Cross Blood Center",
+      "redcross_role": "Blood Management & Safety Assurance",
+      "school_org": "ECC College of Computer Studies",
+      "school_dept": "Yamaguchi Gakuen ECC College",
+      "school_role": "Venue Provider & Co-organizer",
+      "hotline_org": "Donation Consultation Hotline",
+      "hotline_role": "Mon–Sat 9:00–17:30 (Free of charge)"
+    }
   }
 }
