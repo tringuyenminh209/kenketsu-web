@@ -316,3 +316,53 @@
 - `src/pages/AdminPage.tsx`
 - `docs/nippo.md`
 
+---
+
+## Ngay: 2026-06-29 (session 4 - bo sung da ngon ngu cho quy trinh hien mau)
+
+## Noi dung da hoan thanh
+
+- Bo sung ban dich day du cho phan `安全で安心の献血` / quy trinh hien mau o cac locale `vi`, `my`, `ne`, `zh`.
+- Thay cac fallback tieng Anh trong `stepReadMore`, `processDetailLabel`, `processImageAlt` va 3 buoc `Pre-check`, `Interview & test`, `Blood donation`.
+- Chinh tieng Viet co dau cho cac card quy trinh de nguoi dung doc tu nhien hon.
+
+## Kiem tra
+
+- Kiem tra JSON locales parse hop le.
+- `npm run lint`: pass.
+- `npm run build`: pass.
+
+## File da thay doi chinh
+
+- `src/locales/vi.json`
+- `src/locales/my.json`
+- `src/locales/ne.json`
+- `src/locales/zh.json`
+- `docs/nippo.md`
+
+---
+
+## Ngay: 2026-06-29 (session 5 - bo sung tuong tac cho cay nhan ai)
+
+## Noi dung da hoan thanh
+
+- Tích hợp tính năng **Thông điệp yêu thương (Love Messages)** đa ngôn ngữ vào các lá cây trong `BloodTreeProgress.tsx`. Khi di chuột (hover) vào mỗi chiếc lá hoạt động, người dùng sẽ thấy số hiệu người tham gia và một lời nhắn truyền cảm hứng ngẫu nhiên được bản địa hóa tương ứng (ở cả 6 ngôn ngữ).
+- Tích hợp hiệu ứng **Âm thanh pha lê (Crystal Sound)** tự tổng hợp thông qua Web Audio API khi nhấp chuột (click) vào các chiếc lá trên Cây Nhân Ái, tạo cảm giác tương tác sinh động, thú vị mà không làm tăng dung lượng tải trang.
+- Cập nhật 11 khóa dịch mới liên quan đến thông điệp yêu thương (`loveMessage.*` và `participantNum`) trên toàn bộ 6 tệp ngôn ngữ, đạt trạng thái đồng bộ 100% (248/248 khóa).
+
+## Kiem tra
+
+- Chạy linter (`npm run lint`): pass.
+- Chạy build (`npm run build`): pass.
+
+## File da thay doi chinh
+
+- `src/components/BloodTreeProgress.tsx`
+- `src/locales/ja.json`
+- `src/locales/en.json`
+- `src/locales/vi.json`
+- `src/locales/zh.json`
+- `src/locales/my.json`
+- `src/locales/ne.json`
+- `docs/nippo.md`
+
