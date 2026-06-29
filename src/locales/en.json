@@ -262,17 +262,17 @@
       {
         "title": "Blood Donation: Society's Medical Infrastructure",
         "text": "Surgery, heavy bleeding in childbirth, cancer treatment — situations requiring transfusions arise daily. Blood cannot be manufactured artificially or stored long-term.",
-        "detail": "Donated blood has a very short shelf life: red blood cells last for only 21 days, and platelets can only be stored for 4 days. Because blood cannot be artificially manufactured or synthetically formulated, regular and continuous donations from the community are the only way to support daily emergency surgeries and cancer therapies in local hospitals."
+        "detail": "Donated blood has a very short shelf life and cannot be stored long-term.\n- Red blood cells: Lasts up to 21 days\n- Platelets: Lasts only 4 days\nBecause blood cannot be artificially manufactured, steady and continuous donations from the community are the only way to support daily emergency surgeries and cancer treatments in hospitals."
       },
       {
         "title": "One Donation Reaches Multiple Patients",
         "text": "Donated blood is separated by component — red cells, platelets, plasma — and delivered to patients who need each part.",
-        "detail": "Once collected, whole blood is processed through centrifugation to split it into three major components: Red Blood Cells (used for trauma and surgeries), Platelets (critical for blood cancer and leukemia patients to prevent bleeding), and Plasma (for severe burn victims). Thanks to this advanced medical separation, your single donation can save up to three different lives."
+        "detail": "Donated blood is separated into three main components using centrifuge technology to help different patients:\n- Red blood cells: Used for surgeries and trauma emergency transfusions\n- Platelets: Used to stop bleeding in patients with leukemia or cancer\n- Plasma: Used for treating severe burns and large-scale disasters\nThanks to this advanced separation method, your single donation can save the lives of up to three different patients."
       },
       {
         "title": "Young Participation Protects the Future",
         "text": "As the population ages, donors decrease while those needing transfusions increase. Student participation helps sustain local healthcare.",
-        "detail": "Due to Japan's aging population, the number of young donors (aged 10s to 20s) has decreased by nearly 50% over the past 20 years, while the medical demand for blood transfusions among older generations continues to rise. Active participation from students is vital to prevent future healthcare shortages. Even if you cannot donate today, sharing information is a huge contribution."
+        "detail": "With Japan's declining birthrate and aging population, securing a stable blood supply is a major challenge.\n- Youth participation: The number of teen and 20s donors has halved in the past 20 years\n- Transfusion demand: Continues to increase as the elderly population grows\nActive participation from students is crucial to preventing a collapse in future local medical services. Even if you cannot donate today, sharing this information helps immensely."
       }
     ]
   },

@@ -544,9 +544,20 @@ a:focus-visible {
   letter-spacing: -0.03em;
 }
 
-.knowledge-detail p {
+.detail-paragraph {
   color: var(--muted);
-  font-size: 15px;
+  font-size: 15.5px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.detail-bullet {
+  color: var(--ink);
+  font-size: 14.5px;
+  line-height: 1.5;
+  margin: 6px 0 6px 20px;
+  list-style-type: disc;
+  font-weight: 500;
 }
 
 .benefits-section {

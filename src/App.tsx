@@ -247,7 +247,14 @@ function UserPage() {
             <div>
               <span className="detail-label">{t('knowledge.currentLabel')}</span>
               <h3>{activeKnowledge.title}</h3>
-              <p>{activeKnowledge.detail}</p>
+              <div className="knowledge-detail-content">
+                {activeKnowledge.detail.split('\n').map((line, idx) => {
+                  if (line.trim().startsWith('- ')) {
+                    return <li key={idx} className="detail-bullet">{line.trim().substring(2)}</li>
+                  }
+                  return <p key={idx} className="detail-paragraph">{line}</p>
+                })}
+              </div>
               <a className="text-link" href="#benefits">{t('knowledge.seeContributions')}</a>
             </div>
           </article>
@@ -296,7 +303,14 @@ function UserPage() {
             <div>
               <span className="detail-label">{t('benefits.currentLabel')}</span>
               <h3>{activeBenefit.title}</h3>
-              <p>{activeBenefit.detail}</p>
+              <div className="benefit-detail-content">
+                {activeBenefit.detail.split('\n').map((line, idx) => {
+                  if (line.trim().startsWith('- ')) {
+                    return <li key={idx} className="detail-bullet">{line.trim().substring(2)}</li>
+                  }
+                  return <p key={idx} className="detail-paragraph">{line}</p>
+                })}
+              </div>
               <a className="text-link" href="#register">{t('benefits.toRegister')}</a>
             </div>
           </article>
