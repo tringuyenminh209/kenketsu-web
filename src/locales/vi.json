@@ -1,4 +1,4 @@
-{
+﻿{
   "nav": {
     "know": "Tìm hiểu",
     "benefits": "Lợi ích",
@@ -290,7 +290,8 @@
     "langTitle": "Phỏng vấn chỉ bằng tiếng Nhật",
     "langBody": "Bảng câu hỏi và phỏng vấn bác sĩ đều bằng tiếng Nhật. Nếu lo lắng, hãy hỏi nhân viên trước.",
     "ctaTitle": "Có thắc mắc? Hỏi nhân viên ngay!",
-    "ctaBody": "Nếu không chắc mình có đủ điều kiện không, hãy hỏi nhân viên trước khi đăng ký hoặc vào ngày sự kiện."
+    "ctaBody": "Nếu không chắc mình có đủ điều kiện không, hãy hỏi nhân viên trước khi đăng ký hoặc vào ngày sự kiện.",
+    "officialLink": "Xem trang chính thức Hội Chữ thập đỏ Nhật Bản"
   },
   "lastYear": {
     "badge": "Hoạt động năm ngoái",

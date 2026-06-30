@@ -2365,10 +2365,32 @@ th {
 
 .fs-lang-note p,
 .fs-cta p {
-  margin: 0;
+  margin: 0 0 10px;
   font-size: 12.5px;
   color: var(--muted);
   line-height: 1.65;
+}
+
+.fs-official-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--red);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.fs-official-link:hover {
+  opacity: 0.75;
+  text-decoration: underline;
+}
+
+.fs-official-link svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
 }
 
 @media (max-width: 840px) {

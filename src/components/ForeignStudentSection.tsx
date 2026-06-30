@@ -1,6 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import { Icon } from '../lib/shared'
 
+const JRCS_URL = 'https://www.jrc.or.jp/donation/'
+
 type Status = 'ok' | 'wait' | 'check' | 'lifting'
 
 const ROWS: { code: string; nameKey: string; regions: { labelKey: string; status: Status }[] }[] = [
@@ -128,6 +130,15 @@ export function ForeignStudentSection() {
             <div>
               <strong>{t('fs.ctaTitle')}</strong>
               <p>{t('fs.ctaBody')}</p>
+              <a
+                href={JRCS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="fs-official-link"
+              >
+                {t('fs.officialLink')}
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+              </a>
             </div>
           </div>
         </div>
