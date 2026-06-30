@@ -539,3 +539,29 @@
 - `src/locales/id.json`
 - `docs/nippo.md`
 
+---
+
+## Ngay: 2026-06-30 (session 11 - bo sung 3 ngon ngu: Han, Thai, Sri Lanka)
+
+## Noi dung da hoan thanh
+
+- **Bổ sung 3 ngôn ngữ mới**:
+  * Tích hợp **Hàn Quốc (한국어)**, **Thái Lan (ภาษาไทย)**, và **Sri Lanka (සිංහල)** vào hệ thống.
+  * Tạo mới 3 tệp dịch tương ứng: `src/locales/ko.json`, `src/locales/th.json`, và `src/locales/si.json` với đầy đủ **361 khóa dịch** đồng bộ 100% với các ngôn ngữ khác.
+  * Cấu hình tệp `src/lib/i18n.ts` để nạp tài nguyên dịch của 3 ngôn ngữ này, nâng tổng số ngôn ngữ hỗ trợ lên 12 ngôn ngữ.
+  * Cập nhật danh sách `LANGS` trong `src/lib/shared.tsx` để hiển thị tùy chọn trên giao diện chọn ngôn ngữ của Header.
+
+## Kiem tra
+
+- Chạy linter (`npm run lint`): pass.
+- Chạy build (`npm run build`): pass.
+
+## File da thay doi chinh
+
+- `src/lib/i18n.ts`
+- `src/lib/shared.tsx`
+- `src/locales/ko.json`
+- `src/locales/th.json`
+- `src/locales/si.json`
+- `docs/nippo.md`
+
