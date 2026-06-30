@@ -565,3 +565,26 @@
 - `src/locales/si.json`
 - `docs/nippo.md`
 
+---
+
+## Ngay: 2026-06-30 (session 12 - cau hinh SEO va xac minh Google Search Console)
+
+## Noi dung da hoan thanh
+
+- **Cấu hình SEO**:
+  * Tạo tệp `public/robots.txt` cho phép các công cụ tìm kiếm thu thập dữ liệu và khai báo đường dẫn Sitemap.
+  * Tạo tệp `public/sitemap.xml` để liệt kê cấu trúc và tần suất cập nhật trang web.
+- **Xác minh Google Search Console**:
+  * Chèn thẻ `<meta name="google-site-verification" content="X-cAfr-MioYxYMOO1tJ5_mr_uRUHSyI1I94J0eee-ww" />` vào thẻ `<head>` của tệp `index.html` theo yêu cầu từ Google Search Console để xác minh quyền sở hữu trang web.
+
+## Kiem tra
+
+- Chạy build (`npm run build`): pass.
+
+## File da thay doi chinh
+
+- `index.html`
+- `public/robots.txt`
+- `public/sitemap.xml`
+- `docs/nippo.md`
+
