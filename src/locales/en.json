@@ -491,5 +491,17 @@
       "hotline_org": "Donation Consultation Hotline",
       "hotline_role": "Mon–Sat 9:00–17:30 (Free of charge)"
     }
+  },
+  "faqSection": {
+    "title": "Before participating, let's ease your anxieties",
+    "subtitle": "We answer common questions for those considering blood donation for the first time.",
+    "q1": "Is there any risk of contracting an infection through blood donation?",
+    "a1": "We always use brand new, disposable needles for blood collection. Since a new needle is opened for each person, there is absolutely no contact with anyone else's blood. Please participate with peace of mind.",
+    "q2": "Is the blood really delivered to people who need it?",
+    "a2": "Donated blood is strictly tested and managed at the Japanese Red Cross Society's blood centers. It is reliably delivered to patients who actually need transfusions for surgeries, cancer treatments, childbirth, etc.",
+    "q3": "Will I feel unwell after blood donation?",
+    "a3": "In rare cases, you may feel slightly unwell immediately after donating, but our staff will fully support you. Please eat and sleep well on the day, and rest for 15 to 30 minutes after donating.",
+    "q4": "Is the privacy of the blood donor protected?",
+    "a4": "Blood test results and personal information are strictly managed and will never be provided to third parties. They are handled appropriately based on the Japanese Red Cross Society's personal info protection policy."
   }
 }

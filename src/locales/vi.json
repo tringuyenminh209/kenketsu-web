@@ -491,5 +491,17 @@
       "hotline_org": "Đường dây nóng hỗ trợ hiến máu",
       "hotline_role": "Thứ Hai - Thứ Bảy: 9:00 - 17:30 (Miễn phí)"
     }
+  },
+  "faqSection": {
+    "title": "Giải tỏa lo lắng trước khi tham gia hiến máu",
+    "subtitle": "Giải đáp các câu hỏi thường gặp dành cho những ai lần đầu cân nhắc hiến máu.",
+    "q1": "Hiến máu có bị lây nhiễm bệnh hay không?",
+    "a1": "Chúng tôi luôn sử dụng kim lấy máu mới hoàn toàn và dùng một lần. Mỗi người sẽ được bóc một cây kim mới riêng biệt, hoàn toàn không tiếp xúc với máu của người khác. Xin hãy an tâm tham gia.",
+    "q2": "Máu hiến tặng có thực sự được chuyển đến người cần không?",
+    "a2": "Máu hiến tặng được kiểm tra và quản lý nghiêm ngặt tại trung tâm máu của Hội Chữ thập đỏ Nhật Bản. Nguồn máu sẽ được chuyển giao chắc chắn đến những bệnh nhân cần truyền máu trong phẫu thuật, điều trị ung thư, sinh nở, v.v.",
+    "q3": "Sau khi hiến máu có bị mệt hay ảnh hưởng sức khỏe không?",
+    "a3": "Một số ít trường hợp có thể cảm thấy hơi mệt ngay sau khi hiến, nhưng nhân viên y tế sẽ hỗ trợ bạn chu đáo. Hãy ăn uống đầy đủ và ngủ ngon trước ngày hiến máu, đồng thời nghỉ ngơi từ 15-30 phút sau khi hiến.",
+    "q4": "Thông tin cá nhân và kết quả máu hiến có được bảo mật không?",
+    "a4": "Kết quả xét nghiệm máu và thông tin cá nhân được quản lý nghiêm ngặt và không bao giờ được cung cấp cho bên thứ ba. Tất cả được xử lý thích đáng tuân theo chính sách bảo vệ thông tin cá nhân của Hội Chữ thập đỏ Nhật Bản."
   }
 }

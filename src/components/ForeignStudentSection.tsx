@@ -75,8 +75,10 @@ export function ForeignStudentSection() {
 
         <div className="fs-rules">
           {RULES.map(({ iconType, titleKey, bodyKey, mod }) => (
-            <div key={titleKey} className={`fs-rule-card fs-rule-card--${mod}`}>
-              <Icon type={iconType} />
+            <div key={titleKey} className={`fs-rule-card fs-rule-card--${mod} motion-card`}>
+              <div className="fs-rule-icon-wrap">
+                <Icon type={iconType} />
+              </div>
               <div>
                 <h3>{t(titleKey)}</h3>
                 <p>{t(bodyKey)}</p>
@@ -85,7 +87,7 @@ export function ForeignStudentSection() {
           ))}
         </div>
 
-        <div className="fs-table-wrap">
+        <div className="fs-table-wrap motion-card">
           <p className="fs-table-title">{t('fs.tableTitle')}</p>
           <div className="fs-table" role="list">
             {ROWS.map((country) => (
@@ -111,15 +113,19 @@ export function ForeignStudentSection() {
         </div>
 
         <div className="fs-footer">
-          <div className="fs-lang-note">
-            <Icon type="users" />
+          <div className="fs-lang-note motion-card">
+            <div className="fs-note-icon-wrap fs-note-icon-wrap--neutral">
+              <Icon type="users" />
+            </div>
             <div>
               <strong>{t('fs.langTitle')}</strong>
               <p>{t('fs.langBody')}</p>
             </div>
           </div>
-          <div className="fs-cta">
-            <Icon type="heart" />
+          <div className="fs-cta motion-card">
+            <div className="fs-note-icon-wrap fs-note-icon-wrap--red">
+              <Icon type="heart" />
+            </div>
             <div>
               <strong>{t('fs.ctaTitle')}</strong>
               <p>{t('fs.ctaBody')}</p>

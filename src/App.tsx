@@ -20,6 +20,7 @@ import { BloodTreeProgress } from './components/BloodTreeProgress'
 import { ForeignStudentSection } from './components/ForeignStudentSection'
 import { ImpactSection } from './components/ImpactSection'
 import { LastYearSection } from './components/LastYearSection'
+import { LottieIcon } from './components/LottieIcon'
 import './App.css'
 
 const AdminPage = lazy(() => import('./pages/AdminPage'))
@@ -211,17 +212,17 @@ function UserPage() {
             </div>
             <div className="impact-row" aria-label={t('hero.featuresAriaLabel')}>
               <article>
-                <Icon type="heart" />
+                <LottieIcon src="/animations/heartbeat.json" size={36} />
                 <strong>{t('hero.feature1Title')}</strong>
                 <span>{t('hero.feature1Desc')}</span>
               </article>
               <article>
-                <Icon type="book" />
+                <Icon type="spark" />
                 <strong>{t('hero.feature2Title')}</strong>
                 <span>{t('hero.feature2Desc')}</span>
               </article>
               <article>
-                <Icon type="users" />
+                <Icon type="globe" />
                 <strong>{t('hero.feature3Title')}</strong>
                 <span>{t('hero.feature3Desc')}</span>
               </article>
@@ -229,12 +230,69 @@ function UserPage() {
           </div>
           <figure className="hero-media">
             <img src={heroImage} alt={t('hero.imageAlt')} />
+            <div className="hero-lottie-badge">
+              <LottieIcon src="/animations/blood-drop.json" size={72} />
+            </div>
           </figure>
         </section>
 
+        {/* Quick-access nav — saiseikai style */}
+        <nav className="quick-access" aria-label="クイックアクセス">
+          {([
+            { href: '#register', icon: 'users' as const, label: '参加申込', sub: '申込フォームへ' },
+            { href: '#info', icon: 'calendar' as const, label: 'イベント情報', sub: '日時・場所・持ち物' },
+            { href: '#precautions', icon: 'shield' as const, label: '注意事項', sub: '当日までの準備' },
+            { href: '#knowledge', icon: 'book' as const, label: '献血とは', sub: '仕組みと意義' },
+          ] as const).map(({ href, icon, label, sub }) => (
+            <a key={href} href={href} className="qa-card">
+              <div className="qa-icon">
+                <Icon type={icon} />
+              </div>
+              <div className="qa-text">
+                <strong>{label}</strong>
+                <span>{sub}</span>
+              </div>
+              <span className="qa-arrow">→</span>
+            </a>
+          ))}
+        </nav>
+
         <ImpactSection />
 
-        <LastYearSection />
+        {/* ② FAQ — 不安解消 */}
+        <section className="faq-section reveal" id="faq">
+          <div className="section-title">
+            <Icon type="shield" />
+            <h2>{t('faqSection.title')}</h2>
+          </div>
+          <p className="section-helper">{t('faqSection.subtitle')}</p>
+          <div className="faq-list">
+            {([
+              {
+                q: t('faqSection.q1'),
+                a: t('faqSection.a1'),
+                icon: 'shield' as const,
+              },
+              {
+                q: t('faqSection.q2'),
+                a: t('faqSection.a2'),
+                icon: 'heart' as const,
+              },
+              {
+                q: t('faqSection.q3'),
+                a: t('faqSection.a3'),
+                icon: 'users' as const,
+              },
+              {
+                q: t('faqSection.q4'),
+                a: t('faqSection.a4'),
+                icon: 'book' as const,
+              },
+            ] as const).map(({ q, a, icon }, i) => (
+              <FaqItem key={i} q={q} a={a} icon={icon} />
+            ))}
+          </div>
+        </section>
 
         <section className="knowledge-section reveal" id="knowledge">
           <div className="knowledge-lead">
@@ -437,6 +495,9 @@ function UserPage() {
             ))}
           </ul>
         </section>
+
+        {/* ⑤ 去年の活動 — 登録前に信頼感を高める */}
+        <LastYearSection />
 
         <BloodTreeProgress />
 
@@ -797,6 +858,27 @@ function UserPage() {
             </div>
           </div>
         )}
+    </div>
+  )
+}
+
+type IconType = 'shield' | 'heart' | 'users' | 'book' | 'calendar' | 'spark' | 'alert'
+
+function FaqItem({ q, a, icon }: { q: string; a: string; icon: IconType }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className={`faq-item ${open ? 'is-open' : ''}`}>
+      <button
+        className="faq-q"
+        type="button"
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+      >
+        <span className="faq-icon-wrap"><Icon type={icon} /></span>
+        <span>{q}</span>
+        <span className="faq-chevron">{open ? '−' : '+'}</span>
+      </button>
+      {open && <div className="faq-a"><p>{a}</p></div>}
     </div>
   )
 }

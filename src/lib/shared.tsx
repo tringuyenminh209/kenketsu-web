@@ -98,6 +98,7 @@ export type IconType =
   | 'book'
   | 'spark'
   | 'chart'
+  | 'globe'
 
 export function Icon({ type }: { type: IconType }) {
   const paths: Record<IconType, string> = {
@@ -110,6 +111,7 @@ export function Icon({ type }: { type: IconType }) {
     book: 'M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Zm0 0V21m4-14h8m-8 4h8',
     spark: 'M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2Zm7 13 1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3Z',
     chart: 'M4 19V5m0 14h16M8 16v-5m4 5V8m4 8v-7',
+    globe: 'M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2ZM2 12h20M12 2c-2.76 0-5 4.48-5 10s2.24 10 5 10 5-4.48 5-10S14.76 2 12 2Z',
   }
   return (
     <svg className="icon" viewBox="0 0 24 24" aria-hidden="true">

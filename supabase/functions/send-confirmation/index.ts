@@ -180,6 +180,9 @@ Deno.serve(async (req) => {
   })
 
   const data = await res.json()
+  if (!res.ok) {
+    console.error("[send-confirmation] Resend error", res.status, JSON.stringify(data))
+  }
   return new Response(JSON.stringify(data), {
     status: res.ok ? 200 : 500,
     headers: { ...corsHeaders, "Content-Type": "application/json" },
