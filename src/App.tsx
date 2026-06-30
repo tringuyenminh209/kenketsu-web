@@ -516,7 +516,7 @@ function UserPage() {
             <h3>{t('precautions.dayOfTitle')}</h3>
             <p>{t('precautions.dayOfNote')}</p>
             <button className="eligibility-btn" type="button" onClick={() => setShowEligibility(true)}>
-              献血基準の詳細を見る →
+              {t('precautions.detailsBtn')}
             </button>
           </aside>
 

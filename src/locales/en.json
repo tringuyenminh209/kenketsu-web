@@ -135,7 +135,8 @@
       "You drank heavily the night before",
       "You recently had surgery, a transfusion, or a tattoo",
       "You are pregnant or breastfeeding"
-    ]
+    ],
+    "detailsBtn": "View blood donation standards in detail →"
   },
   "register": {
     "title": "Registration",
