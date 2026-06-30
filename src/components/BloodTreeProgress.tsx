@@ -105,9 +105,9 @@ function TreeIllustration({ stage }: { stage: -1 | 0 | 1 | 2 | 3 }) {
       <path d="M148,188 Q160,168 168,148" stroke={trunkColor} fill="none" strokeWidth="4" strokeLinecap="round" />
       <line x1="148" y1="188" x2="148" y2="148" stroke={trunkColor} strokeWidth="3" strokeLinecap="round" />
 
-      {/* Canopy — all circles share the goo filter so they merge into organic blobs */}
       {stage >= 0 && (
-        <g filter="url(#canopy-goo)">
+        <g className="canopy-group">
+          <g filter="url(#canopy-goo)">
           {/* Stage 0+: 3 puffs at branch tips */}
           <circle cx="40"  cy="138" r="30" fill="#ce0017" />
           <circle cx="260" cy="138" r="30" fill="#ce0017" />
@@ -143,16 +143,15 @@ function TreeIllustration({ stage }: { stage: -1 | 0 | 1 | 2 | 3 }) {
               <circle cx="148" cy="90"  r="30" fill="#ef5350" />
             </>
           )}
+          </g>
+          {stage >= 3 && (
+            <>
+              <Heart cx={40}  cy={138} s={0.45} />
+              <Heart cx={260} cy={138} s={0.45} />
+              <Heart cx={148} cy={90}  s={0.55} />
+            </>
+          )}
         </g>
-      )}
-
-      {/* Hearts rendered outside the filter so they stay crisp */}
-      {stage >= 3 && (
-        <>
-          <Heart cx={40}  cy={138} s={0.45} />
-          <Heart cx={260} cy={138} s={0.45} />
-          <Heart cx={148} cy={90}  s={0.55} />
-        </>
       )}
     </svg>
   )
@@ -162,6 +161,7 @@ export function BloodTreeProgress() {
   const { t } = useTranslation()
   const [count, setCount] = useState<number | null>(null)
   const [visible, setVisible] = useState(false)
+  const [previewStage, setPreviewStage] = useState<null | 0 | 1 | 2 | 3>(null)
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
@@ -206,9 +206,10 @@ export function BloodTreeProgress() {
   const displayCount = count ?? 0
   const animatedCount = useCountUp(visible && count !== null ? count : null)
   const stage = getStageIndex(displayCount)
+  const renderStage = previewStage ?? stage
   const pct = Math.min((displayCount / GOAL) * 100, 100)
   const remaining = Math.max(GOAL - displayCount, 0)
-  const stageInfo = stage >= 0 ? STAGES[stage] : null
+  const stageInfo = renderStage >= 0 ? STAGES[renderStage] : null
 
   return (
     <section
@@ -223,12 +224,13 @@ export function BloodTreeProgress() {
       </div>
 
       <div className="tree-body">
-        <div key={stage} className="tree-illustration">
-          <TreeIllustration stage={stage} />
+        <div key={renderStage} className="tree-illustration">
+          <TreeIllustration stage={renderStage} />
           {stageInfo && (
             <p className="tree-stage-badge">
               <span role="img" aria-hidden="true">{stageInfo.icon}</span>
               {t(stageInfo.labelKey)}
+              {previewStage !== null && <span className="tree-preview-tag">PREVIEW</span>}
             </p>
           )}
         </div>
@@ -246,16 +248,23 @@ export function BloodTreeProgress() {
               <div className="tree-progress-bar">
                 <div className="tree-progress-fill" style={{ width: `${pct}%` }} />
               </div>
-              <div className="tree-milestone-row" aria-hidden="true">
-                {MILESTONES.map((m) => (
-                  <div
-                    key={m.count}
-                    className={`tree-ms-item ${displayCount >= m.count ? 'reached' : ''}`}
-                    style={{ left: `${(m.count / GOAL) * 100}%` }}
-                  >
-                    <span className="tree-ms-icon">{m.icon}</span>
-                  </div>
-                ))}
+              <div className="tree-milestone-row">
+                {MILESTONES.map((m, i) => {
+                  const msStage = i as 0 | 1 | 2 | 3
+                  return (
+                    <div
+                      key={m.count}
+                      className={`tree-ms-item ${displayCount >= m.count ? 'reached' : ''} ${previewStage === msStage ? 'previewing' : ''}`}
+                      style={{ left: `${(m.count / GOAL) * 100}%` }}
+                      onClick={() => setPreviewStage(prev => prev === msStage ? null : msStage)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => { if (e.key === 'Enter') setPreviewStage(prev => prev === msStage ? null : msStage) }}
+                    >
+                      <span className="tree-ms-icon">{m.icon}</span>
+                    </div>
+                  )
+                })}
               </div>
             </div>
             <span className="tree-progress-pct">{Math.round(pct)}%</span>
