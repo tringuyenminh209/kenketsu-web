@@ -1,0 +1,582 @@
+{
+  "nav": {
+    "know": "O'rganish",
+    "benefits": "Foydalari",
+    "info": "Tadbirlar",
+    "register": "Ro'yxatdan o'tish",
+    "survey": "So'rovnoma",
+    "admin": "Admin",
+    "userSite": "Foydalanuvchi sayti",
+    "about": "Donorlik haqida",
+    "precautions": "Ehtiyot choralari",
+    "flyer": "Flayer chop etish",
+    "ariaLabel": "Asosiy navigatsiya"
+  },
+  "hero": {
+    "title": "Qon topshirish xayriya tadbiri",
+    "lead": "Anglashdan harakatga. Sizning mehribonligingiz kimningdir ertangi kunini yaratadi.",
+    "cta": "Hozir ro'yxatdan o'ting",
+    "cta2": "Donorlik haqida bilib oling",
+    "feature1Title": "Hayotni qutqaring",
+    "feature1Desc": "Bir marta topshirish bilan bir nechta bemorga yordam bering",
+    "feature2Title": "Haqiqatni biling",
+    "feature2Desc": "Xavotirlarni bilimga aylantiring",
+    "feature3Title": "Birgalikda yordam bering",
+    "feature3Desc": "Kampusdan turib jamiyatga hissa qo'shing",
+    "tagline": "Sizning qoningiz kimningdir hayotini saqlab qolishi mumkin",
+    "eventLabel": "Qon topshirish xayriya harakati",
+    "imageAlt": "Talabalar kampusdagi qon topshirish tadbirida qulay ishtirok etmoqdalar",
+    "featuresAriaLabel": "Tadbir xususiyatlari",
+    "countdown": {
+      "days": "kun",
+      "hours": "soat",
+      "minutes": "daqiqa",
+      "seconds": "soniya",
+      "until": "Tadbir boshlanishigacha",
+      "ended": "Tadbir yakunlandi"
+    }
+  },
+  "about": {
+    "title": "Qon topshirish nima va u nima uchun muhim",
+    "card1": {
+      "title": "Hayotni qutqaring",
+      "body": "Bir marta qon topshirish 3 tagacha hayotni saqlab qolishi mumkin. Qon sun'iy ravishda ishlab chiqarilmagani uchun donorlik yagona manba hisoblanadi."
+    },
+    "card2": {
+      "title": "Tibbiyotni qo'llab-quvvatlang",
+      "body": "Saraton kasalligini davolash, jarrohlik amaliyoti, tug'ruq — har yili 5 millionga yaqin odam qon quyishga muhtoj. Donorlik tibbiyotning oldingi safini qo'llab-quvvatlaydi."
+    },
+    "card3": {
+      "title": "Bepul tibbiy ko'rik",
+      "body": "Qon topshirgandan so'ng siz qon tahlili natijalarini olasiz. Bu o'zingizning sog'lig'ingizni tekshirish uchun bepul imkoniyatdir."
+    }
+  },
+  "info": {
+    "date_label": "Sana",
+    "time_label": "Vaqt",
+    "location_label": "Joy",
+    "capacity_label": "Sig'im",
+    "capacity_value": "Birinchi {{capacity}} ta ariza beruvchi",
+    "title": "Asosiy ma'lumotlar",
+    "typesTitle": "Qon topshirish turlari",
+    "types": {
+      "whole": {
+        "name": "To'liq qon topshirish",
+        "volume": "200ml / 400ml",
+        "time": "Taxminan 30–40 daqiqa",
+        "interval": "Erkaklar 12 hafta / Ayollar 16 hafta"
+      },
+      "platelet": {
+        "name": "Aferez (Trombotsit/Plazma)",
+        "volume": "Faqat komponentlar",
+        "time": "Taxminan 40–90 daqiqa",
+        "interval": "2 hafta"
+      }
+    },
+    "requirements": "Ishtirok etish talablari",
+    "reqAge": "Yosh: 16–69 yosh (to'liq qon) / 18–54 yosh (aferez)",
+    "reqWeight": "Vazn: Erkaklar 50kg+ / Ayollar 45kg+",
+    "reqHealth": "Tadbir kuni sog'liq yaxshi holatda bo'lishi",
+    "faq": "Ko'p beriladigan savollar",
+    "faqItems": [
+      {
+        "q": "Birinchi marta bo'lsa ham maylimi?",
+        "a": "Ha, xodimlar sizga ehtiyotkorlik bilan yo'l-yo'riq ko'rsatishadi."
+      },
+      {
+        "q": "Og'riqli bo'ladimi?",
+        "a": "Igna kiritilganda ozgina og'riq bo'lishi mumkin, ammo bu juda qisqa davom etadi."
+      },
+      {
+        "q": "Qon topshirgandan keyin sport bilan shug'ullansam bo'ladimi?",
+        "a": "Iltimos, qon topshirgan kuni og'ir jismoniy mashqlardan saqlaning."
+      }
+    ],
+    "sponsor_label": "Homiylar",
+    "reservation_label": "Bron qilish eslatmasi",
+    "gift_label": "Donorlik sovg'asi",
+    "appLinksLabel": "Labrad ilovasi havolalari",
+    "appLinksTitle": "Labrad ilovasi orqali oldindan bron qiling",
+    "appLinksText": "Undan qon topshirish kartasini boshqarish va oldindan bron qilish uchun foydalaning.",
+    "date_value": "Seshanba, 15-sentabr, 2026-yil",
+    "time_value": "9:30–11:30 / 12:30–16:30",
+    "location_value": "ECC Computer College 1-bino, 1-qavat Lounge",
+    "sponsor_value": "Osaka Sonezaki Lions Club / Osaka Nishi Lions Club",
+    "reservation_value": "Oldindan bron qilish qon topshirish jarayonlari uchun talab qilinadigan vaqtni qisqartiradi.",
+    "gift_value": "Qon topshirishda hamkorlik qilganlar Lions Club tomonidan esdalik sovg'asi oladilar."
+  },
+  "precautions": {
+    "title": "Ishtirok etishdan oldin tekshirilishi kerak bo'lgan narsalar",
+    "intro": "Bu qat'iy qoidalar emas — bular sizning sog'lig'ingizni saqlash uchundir. Agar sizda xavotirlar bo'lsa, tadbir kuni xodimlardan so'rashdan tortinmang.",
+    "eligibilityTitle": "Ishtirok etish mezonlari",
+    "eligibilityItems": [
+      "Yosh: 16 dan 69 yoshgacha (65 yoshdan oshganlar uchun oldin qon topshirganlik tajribasi talab etiladi)",
+      "Erkaklar 45kg+, Ayollar 40kg+",
+      "Tadbir kuni sog'liq yaxshi bo'lishi va yetarli darajada uxlash"
+    ],
+    "dayOfTitle": "Tadbir kuni bularga amal qiling",
+    "dayOfNote": "Kelishdan oldin yetarlicha uxlang va ovqatlaning. Agar isitmangiz bo'lsa yoki o'zingizni yomon his qilsangiz, iltimos ishtirok etishdan tiyiling.",
+    "toSurvey": "Ishtirok etgandan keyingi so'rovnomaga o'tish",
+    "beforeDay": "Bir kun oldin",
+    "beforeDayItems": [
+      "Yetarlicha uxlang (kamida 6 soat tavsiya etiladi)",
+      "Spirtli ichimliklardan saqlaning",
+      "Ko'p suyuqlik iching"
+    ],
+    "dayOf": "Tadbir kuni",
+    "dayOfItems": [
+      "Kelishdan oldin ovqatlaning (och qoringa qon topshirish taqiqlanadi)",
+      "Ko'p miqdorda suv yoki sport ichimliklarini iching",
+      "O'zingizni yomon his qilsangiz, o'zingizni majburlamang"
+    ],
+    "prohibited": "Quyidagi hollarda qon topshira olmaysiz",
+    "prohibitedItems": [
+      "Isitma yoki shamollash alomatlari bo'lsa",
+      "O'tgan kechasi ko'p spirtli ichimlik ichilgan bo'lsa",
+      "Yaqinda jarrohlik amaliyoti, qon quyish yoki tatuirovka qilingan bo'lsa",
+      "Homiladorlik yoki emizish davrida"
+    ],
+    "detailsBtn": "Batafsil qon topshirish standartlarini ko'rish →"
+  },
+  "register": {
+    "title": "Ro'yxatdan o'tish",
+    "name": "To'liq ism",
+    "namePlaceholder": "masalan, Taro Yamada",
+    "email": "Elektron pochta manzili",
+    "emailPlaceholder": "example@ecc.ac.jp",
+    "studentId": "Talaba / Xodim ID",
+    "studentIdPlaceholder": "masalan, 2240000",
+    "phone": "Telefon raqami",
+    "phonePlaceholder": "090-1234-5678",
+    "department": "Sinf",
+    "departmentSelect": "Iltimos tanlang",
+    "birthDate": "Tug'ilgan sana",
+    "gender": "Jins",
+    "genderMale": "Erkak",
+    "genderFemale": "Ayol",
+    "genderOther": "Boshqa",
+    "genderNoAnswer": "Ko'rsatishni xohlamayman",
+    "required": "Majburiy",
+    "submit": "Tasdiqlashga o'tish",
+    "submitting": "Yuborilmoqda...",
+    "successTitle": "Ro'yxatdan o'tish qabul qilindi!",
+    "successBody": "Ishtirok etganingiz uchun rahmat. Xodimlarimiz sizni tadbir kuni kutishadi.",
+    "successClose": "Yopish",
+    "errorDuplicate": "Ushbu talaba ID raqami allaqachon ro'yxatdan o'tgan.",
+    "errorGeneral": "Xatolik yuz berdi. Qayta urinib ko'ring.",
+    "subtitle": "15-sentabrdagi qon topshirish xayriya tadbirida ishtirok etish uchun shu yerda ro'yxatdan o'ting.",
+    "class": "Sinf",
+    "classPlaceholder": "masalan, SK3A",
+    "departmentPlaceholder": "masalan, IT2A, SK3A, Yapon tili 1B",
+    "birthDatePlaceholder": "masalan, 2004/04/15",
+    "birthDateHelp": "Kalendarni ochmasdan YYYY/MM/DD, YYYY-MM-DD yoki YYYYMMDD shaklida yozing.",
+    "errorInvalidBirthDate": "Iltimos, tug'ilgan sanangizni 2004/04/15 kabi kiriting."
+  },
+  "survey": {
+    "title": "So'rovnoma",
+    "q1Label": "Necha marta qon topshirgansiz?",
+    "q1First": "Birinchi marta",
+    "q1Few": "2–4 marta",
+    "q1Many": "5 marta yoki undan ko'p",
+    "q2Label": "Tadbir haqida qanday bildingiz?",
+    "q2Poster": "Maktab e'lonlar taxtasi",
+    "q2Teacher": "O'qituvchi / Xodim",
+    "q2Friend": "Do'stimning tavsiyasi",
+    "q2Sns": "Ijtimoiy tarmoqlar",
+    "q3Label": "Ishtirok etishingizga nima sabab bo'ldi?",
+    "q3Placeholder": "masalan, Og'riydimi? Qancha vaqt oladi?",
+    "submit": "So'rovnomani yuborish",
+    "submitting": "Yuborilmoqda...",
+    "successTitle": "Javobingiz uchun rahmat!",
+    "successBody": "Sizning fikr-mulohazalaringiz ushbu saytni yaxshilashga yordam beradi.",
+    "errorGeneral": "Xatolik yuz berdi. Qayta urinib ko'ring.",
+    "subtitle": "Iltimos, ushbu veb-saytni yaxshilashga yordam bering.",
+    "q3SaveLife": "Kimningdir hayotini qo'llab-quvvatlashni xohlayman",
+    "q3SchoolEvent": "Chunki bu maktab tadbiri",
+    "q3FirstStep": "Birinchi marta sinab ko'rmoqchiman",
+    "q3Friend": "Do'stlarim bilan birga qo'shilmoqchiman",
+    "q4Label": "Qo'shilishdan oldin sizni eng ko'p nima xavotirga solmoqda?",
+    "q4Pain": "Og'riq yoki ignalar",
+    "q4Time": "Qancha vaqt ketishi",
+    "q4Health": "Sog'lig'im holati",
+    "q4None": "Hech qanday alohida xavotir yo'q",
+    "q5Label": "Qanday yordam sizni qulay his qilishingizga yordam beradi?",
+    "q5Staff": "Xodimlar yo'l-yo'rig'i",
+    "q5Guide": "Bosqichma-bosqich aniq qo'llanma",
+    "q5Friend": "Do'stlar bilan birga kutish",
+    "q5Quiet": "Tinch dam olish joyi",
+    "q6Label": "Ushbu qon topshirish tadbirini do'stlaringizga tavsiya qilgan bo'larmidingiz?",
+    "q6Yes": "Ha, albatta",
+    "q6Maybe": "Balki, ko'proq ma'lumotga ega bo'lganimdan keyin",
+    "q6NotYet": "Hali ishonchim komil emas",
+    "q7Label": "Biror xavotir, savol yoki xabar bormi?",
+    "q7Placeholder": "Masalan: Birinchi martam bo'lgani uchun, jarayonni yaxshiroq tushunmoqchiman."
+  },
+  "flyer": {
+    "title": "Qon topshirish xayriya tadbiri",
+    "printBtn": "Flayer chop etish",
+    "qrLabel": "Batafsil ma'lumot va ro'yxatdan o'tish shu yerda",
+    "organizer": "Tashkilotchi: {{organizer}}"
+  },
+  "footer": {
+    "organizer": "Tashkilotchi: {{organizer}}",
+    "contact": "Aloqa: {{contact}}"
+  },
+  "common": {
+    "yes": "Ha",
+    "no": "Yo'q",
+    "loading": "Yuklanmoqda...",
+    "error": "Xatolik yuz berdi"
+  },
+  "tree": {
+    "title": "Ishtirokchilar daraxti",
+    "subtitle": "Har bir ro'yxatdan o'tish bilan yangi barg o'sib chiqadi",
+    "unit": "kishi",
+    "goalReached": "Maqsadga erishildi! Hammaga rahmat!",
+    "remaining": "Yana {{remaining}} ta bo'sh joy qoldi",
+    "clickHint": "Barglardan birini bosib ko'ring!",
+    "leafAriaLabel": "Barg {{n}}",
+    "participantNum": "Ishtirokchi #{{n}}",
+    "beFirst": "Birinchi barg bo'ling!",
+    "beFIrstBtn": "Hozir ro'yxatdan o'ting",
+    "loveMessage": {
+      "0": "Sizning mehribonligingiz kimningdir ertangi kunini belgilaydi.",
+      "1": "Qadam tashlashga jasorat ko'rsatganingiz uchun samimiy rahmat.",
+      "2": "Siz uchun kichik qadam, kimdir uchun katta yordamdir.",
+      "3": "Issiq qalb shu yerdan keng tarqaladi.",
+      "4": "Siz topshirgan qon kimningdir aziz insonini qutqaradi.",
+      "5": "Hayot estafetasiga qo'shilganingiz uchun rahmat.",
+      "6": "Ushbu mehribonlik albatta kimningdir yuziga tabassum olib keladi.",
+      "7": "Birinchi marta yoki doimiy donorlar, barcha qalblar jam bo'lgan joy.",
+      "8": "Bir-biringizni qo'llab-quvvatlash quvonchi butun kampusga tarqalsin.",
+      "9": "Biz hech qachon unutmaydigan olijanob qadam."
+    }
+  },
+  "fs": {
+    "title": "Chet ellik va xalqaro talabalar uchun",
+    "subtitle": "Ishtirok etish shartlari fuqarolik va kelib chiqqan hududga qarab farq qiladi. Ro'yxatdan o'tishdan oldin tekshiring.",
+    "r1_title": "Sizni ishtirok etishingizni mamnuniyat bilan kutib qolamiz!",
+    "r1_body": "Agar siz Yaponiyada qonuniy ravishda istiqomat qilsangiz va shifokor suhbatiga yapon tilida javob bera olsangiz, ishtirok etishingiz mumkin!",
+    "r2_title": "Yaponiyaga kelganiga 4 haftadan oshgan bo'lishi",
+    "r2_body": "Qaysi davlatdan kelganingizdan qat'i nazar, agar Yaponiyaga kelganingizga 4 haftadan oshgan bo'lsa, qon topshirish uchun ro'yxatdan o'tishingiz mumkin.",
+    "r3_title": "Bezgak tarqalgan hududlar bo'yicha tekshiruv",
+    "r3_body": "Agar bezgak xavfi bo'lgan qishloq yoki tog'li hududlarda yashagan bo'lsangiz, Yaponiyaga qaytganingizdan keyin 1-3 yil kutishingiz kerak bo'lishi mumkin.",
+    "tableTitle": "Kelib chiqqan hudud bo'yicha ko'rsatmalar",
+    "tableNote": "※ Bu faqat umumiy qo'llanma. Tadbir kuni xodimlardan batafsil ma'lumot oling.",
+    "statusOk": "4 haftadan keyin OK",
+    "statusWait": "1–3 yil kutish",
+    "statusCheck": "Xodimlardan aniqlang",
+    "statusLifting": "Cheklovlar 2026-yil kuzidan yumshatiladi",
+    "vn_name": "Vyetnam",
+    "vn_urban": "Xanoy, Xoshimin va yirik shaharlar",
+    "vn_rural": "Qishloq hududlari, Markaziy tog'liklar",
+    "mm_name": "Myanma",
+    "mm_city": "Yangon markazi",
+    "mm_rural": "Boshqa hududlar",
+    "ne_name": "Nepal",
+    "ne_city": "Katmandu vodiysi",
+    "ne_rural": "Teray viloyati",
+    "cn_name": "Xitoy",
+    "cn_city": "Pekin, Shanxay va yirik shaharlar",
+    "cn_rural": "Yunnan, Xaynan va janubiy hududlar",
+    "af_name": "Afrika va Lotin Amerikasi",
+    "af_all": "Barcha hududlar (batafsil ma'lumotni xodimlardan so'rang)",
+    "eu_name": "Yevropa davlatlari",
+    "eu_all": "Buyuk Britaniya, Fransiya, Germaniya va boshqalar (cheklovlar 2026-yil kuzidan yumshatiladi)",
+    "langTitle": "Suhbat faqat yapon tilida olib boriladi",
+    "langBody": "So'rovnoma va shifokor ko'rigi yapon tilida bo'ladi. Agar ishonchingiz komil bo'lmasa, xodimlardan oldindan so'rang.",
+    "ctaTitle": "Ishonchingiz komil emasmi? Xodimlarimizdan so'rang!",
+    "ctaBody": "Agar qon topshirish huquqiga ega ekanligingizga ishonchingiz komil bo'lmasa, ro'yxatdan o'tishdan oldin yoki tadbir kuni xodimlardan so'rashdan tortinmang."
+  },
+  "lastYear": {
+    "badge": "O'tgan yilgi tadbir",
+    "title": "2025-yildagi kampus qon topshirish tadbirimiz shunday o'tdi.",
+    "summary": "2025-yil 24-sentabrda tadbir ECC Computer College 1-bino 1-qavatidagi dam olish zalida bo'lib o'tdi. 30 dan ortiq talaba va o'qituvchilar ishtirok etdi, ko'ngilli talabalar faol rol o'ynadi.",
+    "captions": [
+      "1-bino 1-qavatdagi dam olish zali, tadbir bo'lib o'tgan joy.",
+      "1-bino yonida, 4-bino ro'parasida to'xtab turgan qon topshirish avtobusi.",
+      "Avtobus ichida bir vaqtning o'zida 3 nafargacha donor qabul qilindi. Radio past ovozda yangradi — tinch muhit.",
+      "Qon topshirish jarayonida ehtiyot choralari flayerini o'qish va hamshiralardan maslahatlar olish.",
+      "Ko'ngilli talabalar ro'yxatdan o'tishni boshqardilar va ishtirokchilarni yo'naltirdilar.",
+      "Ko'ngilli talabalar qon topshirishni targ'ib qilish uchun Lions Club a'zolariga qo'shildilar."
+    ],
+    "sourceLabel": "Manba: ",
+    "sourceLink": "ECC Ijtimoiy faoliyat markazining hisoboti"
+  },
+  "knowledge": {
+    "sectionTitle": "Qon topshirish haqida bilish — hayotni saqlab qolishning birinchi qadami.",
+    "sectionBody": "Qon topshirish faqat maxsus odamlar uchun emas. To'g'ri bilim bilan xavotir yo'qoladi va har bir kishi — qon topshiradimi yoki ma'lumot ulashadimi — mahalliy tibbiyotni qo'llab-quvvatlashning bir qismiga aylanadi.",
+    "readMore": "Batafsil o'qish",
+    "currentLabel": "Hozir o'qilmoqda",
+    "seeContributions": "Qon topshirish qanday hissa qo'shishini ko'ring",
+    "imageAlt": "{{title}} uchun illyustratsiya",
+    "cards": [
+      {
+        "title": "Qon topshirish: Jamiyatning tibbiy infratuzilmasi",
+        "text": "Jarrohlik, tug'ruq paytidagi kuchli qon ketish, saraton kasalligini davolash — qon quyishni talab qiladigan holatlar har kuni yuzaga keladi. Qonni sun'iy ravishda yaratib bo'lmaydi.",
+        "detail": "Topshirilgan qonning yaroqlilik muddati juda qisqa va uni uzoq vaqt saqlab bo'lmaydi.\n- Qizil qon hujayralari: 21 kungacha saqlanadi\n- Trombotsitlar: Faqat 4 kun saqlanadi\nQonni sun'iy ravishda ishlab chiqarib bo'lmagani sababli, shifoxonalardagi kundalik favqulodda operatsiyalar va saraton muolajalarini qo'llab-quvvatlashning yagona yo'li jamoatchilik tomonidan muntazam qon topshirishdir."
+      },
+      {
+        "title": "Bitta donorlik ko'plab bemorlarga yetib boradi",
+        "text": "Topshirilgan qon komponentlarga — qizil hujayralar, trombotsitlar, plazma — bo'linadi va har bir qismga muhtoj bo'lgan bemorlarga yetkaziladi.",
+        "detail": "Topshirilgan qon turli bemorlarga yordam berish uchun sentrifuga texnologiyasi yordamida uchta asosiy komponentga bo'linadi:\n- Qizil qon hujayralari: Jarrohlik va jarohatlardagi favqulodda qon quyish uchun ishlatiladi\n- Trombotsitlar: Leykemiya yoki saraton bilan og'rigan bemorlarda qon ketishini to'xtatish uchun ishlatiladi\n- Plazma: Og'ir kuyishlarni davolash va yirik tabiiy ofatlar paytida ishlatiladi\nUshbu ilg'or bo'lish usuli tufayli sizning bitta donorligingiz uch xil bemorning hayotini saqlab qolishi mumkin."
+      },
+      {
+        "title": "Yoshlarning ishtiroki kelajakni himoya qiladi",
+        "text": "Aholi qarishi bilan donorlar kamayadi, qon quyishga muhtojlar esa ko'payadi. Talabalar ishtiroki mahalliy tibbiyotni saqlab qolishga yordam beradi.",
+        "detail": "Yaponiyada tug'ilish darajasi pasayishi va aholining qarishi sababli barqaror qon zaxirasini ta'minlash katta vazifadir.\n- Yoshlar ishtiroki: O'smirlar va 20 yoshdagi donorlar soni so'nggi 20 yilda ikki baravar kamaydi\n- Qon quyishga talab: Keksalar aholi soni ortishi bilan o'sishda davom etmoqda\nKelajakda tibbiy xizmatlar inqirozining oldini olish uchun talabalarning faol ishtiroki juda muhimdir. Bugun qon topshira olmasangiz ham, ushbu ma'lumotni ulashishingiz katta yordam beradi."
+      }
+    ]
+  },
+  "benefits": {
+    "sectionTitle": "Qon topshirishning afzalliklari va sizning jamiyatga qo'shgan hissangiz",
+    "sectionHelper": "Rasm bilan batafsil tushuntirishni ko'rish uchun kartani tanlang.",
+    "seeMore": "Tafsilotlarni ko'rish",
+    "currentLabel": "Hozir tanlangan",
+    "toRegister": "Tushunarli — ro'yxatdan o'tishga o'tish",
+    "imageAlt": "{{title}} uchun illyustratsiya",
+    "cards": [
+      {
+        "title": "Sog'lig'ingizni tekshirish uchun sabab",
+        "text": "Ro'yxatdan o'tish va dastlabki tekshiruvlar o'z sog'lig'ingizga bo'lgan e'tiboringizni oshiradi.",
+        "detail": "Qon topshirishdan oldin sizning holatingiz, uyqungiz, ovqatlanishingiz va qon bosimingiz tekshiriladi. Bu nafaqat muvofiqlik, balki o'z turmush tarzingiz va sog'lig'ingiz haqida o'ylash uchun ajoyib imkoniyatdir."
+      },
+      {
+        "title": "Hayotni qo'llab-quvvatlash hissi",
+        "text": "Qisqa muddatli hamkorlik kimningdir davolanishi yoki sog'ayishi uchun haqiqiy kuchga aylanadi.",
+        "detail": "Qonni sun'iy qilib bo'lmaydi va uzoq saqlab bo'lmaydi. Sizning hissangiz jarrohlik, baxtsiz hodisa, tug'ruq yoki saraton muolajalarida qon quyishga muhtoj bo'lganlar uchun amaliy yordam bo'ladi."
+      },
+      {
+        "title": "Kampusdagi hamjihatlik",
+        "text": "Do'stlar va o'qituvchilar bilan birga ishtirok etish o'zaro yordam madaniyatini yoyadi.",
+        "detail": "Yolg'iz borish qo'rqinchli bo'lishi mumkin, ammo do'st yoki o'qituvchi bilan osonroq. Bunga kampus tadbiri sifatida yondashish 'muhtojlarga yordam berish' har bir kishi uchun tabiiy holga aylanadigan muhitni yaratadi."
+      },
+      {
+        "title": "Ijtimoiy hissa qo'shishdagi birinchi qadamingiz",
+        "text": "Hech qanday maxsus tayyorgarlik kerak emas — siz tibbiyotni to'g'ridan-to'g'ri kampusdan turib qo'llab-quvvatlaysiz.",
+        "detail": "Ijtimoiy hissa qo'shish katta harakatlarni talab qilmaydi. Mahalliy miqyosda ishtirok etish va atrofingizdagilar bilan aniq ma'lumotlarni ulashish jamiyat sog'lig'ini saqlaydigan muhim harakatdir."
+      }
+    ]
+  },
+  "reason": {
+    "whyTitle": "Nima uchun qon topshirish kerak?",
+    "whyBody": "Qonni sun'iy tayyorlab bo'lmaydi va uni uzoq saqlash imkonsiz. Shu sababli, operatsiyalar va muolajalar uchun qon quyishga muhtojlarni qo'llab-quvvatlash uchun har kuni hamkorlik zarur.",
+    "whyLink": "Afzalliklar va hissalar haqida bilib oling",
+    "processTitle": "Xavfsiz va xotirjam donorlik",
+    "processNote": "Birinchi marta topshirayotganlar jarayonni tushunishlari uchun xodimlarimiz har bir bosqichda yordam berishadi. Istalgan vaqtda savol berishingiz mumkin.",
+    "communityTitle": "Jamiyat bilan birgalikda hissa qo'shish",
+    "communityBody": "Qon topshira oladiganlar topshirishadi; topshira olmaydiganlar esa ma'lumot ulashish orqali yordam berishadi. Bir kishining harakati butun kampusga mehr-oqibat tarqatadi.",
+    "communityItems": [
+      "Do'stlaringiz bilan to'g'ri ma'lumotlarni ulashing",
+      "Xavotirlanayotgan do'stingiz bilan birga tushuntirishlarni tinglang",
+      "Kelgusida ham davom etadigan donorlik madaniyatini yarating"
+    ],
+    "imageAlt": "Talabalar qon topshirish tadbirida qulay ishtirok etmoqdalar",
+    "stepReadMore": "Rasm va tafsilotlarni ko'rish",
+    "processDetailLabel": "Xodimlar nimalarni tekshiradi",
+    "processImageAlt": "{{title}} uchun xavfsizlik tekshiruvi tasviri"
+  },
+  "steps": [
+    {
+      "title": "Dastlabki tekshiruv",
+      "text": "Muvofiqlik va sog'liqni tekshirish",
+      "detail": "Qon topshirishdan oldin, xodimlar o'sha kuni xavfsiz qon topshirishingiz uchun sog'lig'ingiz mos kelishini tasdiqlaydilar.",
+      "checks": [
+        "Yosh va vazn talablari",
+        "Uyqu, ovqatlanish, isitma va hozirgi holat",
+        "Avvalgi qon topshirish oralig'i va dori qabul qilish holati"
+      ]
+    },
+    {
+      "title": "Suhbat va tahlil",
+      "text": "Xavfsizlikni tasdiqlash",
+      "detail": "Qisqa suhbat va qon tahlili ham donor, ham qon qabul qiladigan bemor xavfsizligini ta'minlashga yordam beradi.",
+      "checks": [
+        "Sog'liqni saqlash so'rovnomasini ko'rib chiqish",
+        "Qon bosimi va umumiy holatni tekshirish",
+        "Zarur bo'lsa, kichik qon tahlili"
+      ]
+    },
+    {
+      "title": "Qon topshirish",
+      "text": "Taxminan 10-15 daqiqada yakunlanadi",
+      "detail": "Qon topshirish jarayonida xodimlar sizga yaqin joyda bo'lib, holatingizni kuzatib turadilar. O'zingizni noqulay his qilsangiz, darhol xabar berishingiz mumkin.",
+      "checks": [
+        "Qulay yotgan holat",
+        "Qon olish paytida xodimlarning nazorati",
+        "Qon topshirgandan keyin dam olish va suyuqlik ichish"
+      ]
+    }
+  ],
+  "pledge": {
+    "title": "Kampusda qon topshirish madaniyatini yoyish",
+    "items": [
+      "Haqiqatni biling va xavotirlarni yolg'iz ko'tarmang",
+      "Qila oladiganlar — birinchi qadamni tashlang; qila olmaydiganlar — ma'lumot ulashing",
+      "Qon topshirishni bir martalik emas, balki doimiy g'amxo'rlik madaniyatiga aylantiring"
+    ]
+  },
+  "footerCta": {
+    "title": "Kampusda birgalikda — qon topshirishni qo'llab-quvvatlaylik.",
+    "cta": "Ro'yxatdan o'tishga qaytish",
+    "aiImageNote": "Ushbu veb-saytdagi ba'zi tasvirlar sun'iy intellekt tomonidan yaratilgan illyustratsiyalar bo'lib, haqiqiy tadbir joyi yoki odamlardan farq qilishi mumkin."
+  },
+  "impact": {
+    "stats": {
+      "save_title": "Bir marta donorlik bilan saqlab qolinadi",
+      "save_to": "3",
+      "save_unit": "kishi",
+      "save_desc": "Qon bir nechta bemorni davolash uchun komponentlarga bo'linadi.",
+      "platelet_title": "Trombotsitlarni saqlash muddati",
+      "platelet_to": "4",
+      "platelet_unit": "kun",
+      "platelet_desc": "Shu sababli har kuni yangi qon topshirishlar talab etiladi.",
+      "annual_title": "Har yili qon quyishga muhtojlar",
+      "annual_to": "5",
+      "annual_unit": "million",
+      "annual_desc": "Jarrohlik, saraton, tug'ruq va baxtsiz hodisalar kabi kundalik tibbiyotni qo'llab-quvvatlaydi."
+    },
+    "who_needs": {
+      "eyebrow": "Sizning qoningiz qayerga boradi?",
+      "title": "Qon quyishga muhtojlarning haqiqati",
+      "desc": "\"Kasalxonalar\" va \"operatsiyalar\" begona mavzular emas. Har kuni minglab odamlar qon quyishga muhtoj bo'lishadi.",
+      "cards": [
+        {
+          "title": "Jarrohlik va favqulodda holatlar",
+          "body": "Yo'l-transport hodisalari va kutilmagan operatsiyalar qisqa vaqt ichida katta miqdorda qon talab qiladi. Qonsiz hayotni saqlab bo'lmaydi."
+        },
+        {
+          "title": "Saraton va qon kasalliklari",
+          "body": "Kimyoviy terapiya va leykemiya muolajalarida trombotsitlar va qizil hujayralarni muntazam ravishda to'ldirib turish davolanishning shartidir."
+        },
+        {
+          "title": "Tug'ruq va chaqaloqlar",
+          "body": "Tug'ruq paytidagi og'ir qon ketish va muddatidan oldin tug'ilgan chaqaloqlar uchun qon quyish hayotni saqlab qolishning eng oldingi chizig'idir."
+        },
+        {
+          "title": "Surunkali kasalliklar va uzoq muddatli parvarish",
+          "body": "Buyrak kasalligi yoki aplastik anemiya bilan og'rigan bemorlar muolajalarini davom ettirish uchun muntazam qon quyishga muhtoj."
+        }
+      ]
+    },
+    "journey": {
+      "eyebrow": "Donordan bemorgacha",
+      "title": "Qoningiz yetib borguncha",
+      "steps": [
+        {
+          "title": "Qabul qilish va ko'rik",
+          "sub": "Sog'liq holati va vaznni tasdiqlash (taxminan 5 daqiqa)"
+        },
+        {
+          "title": "Qon topshirish",
+          "sub": "To'liq qon topshirish taxminan 10–15 daqiqa davom etadi"
+        },
+        {
+          "title": "Tekshirish va bo'lish",
+          "sub": "Xavfsizlikni tasdiqlash va 24 soat ichida komponentlarga ajratish"
+        },
+        {
+          "title": "Bemorlarga yetkazish",
+          "sub": "Butun mamlakat bo'ylab shifoxonalar va operatsiya xonalariga yuboriladi"
+        }
+      ]
+    },
+    "trust": {
+      "label": "Ushbu tadbir rasmiy tashkilotlar bilan hamkorlikda xavfsiz qon topshirish faoliyati hisoblanadi",
+      "redcross_org": "Yaponiya Qizil Yarim Oy Jamiyati",
+      "redcross_dept": "Yamaguchi Qizil Yarim Oy qon markazi",
+      "redcross_role": "Qon nazorati va xavfsizlikni ta'minlash",
+      "school_org": "ECC College of Computer Studies",
+      "school_dept": "Yamaguchi Gakuen ECC kolleji",
+      "school_role": "Joy taqdim etuvchi va hamkor tashkilotchi",
+      "hotline_org": "Donorlik maslahat liniyasi",
+      "hotline_role": "Dush–Shanba 9:00–17:30 (Bepul)"
+    }
+  },
+  "faqSection": {
+    "title": "Ishtirok etishdan oldin xavotirlaringizni kamaytiraylik",
+    "subtitle": "Birinchi marta qon topshirish haqida o'ylayotganlar uchun umumiy savollarga javob beramiz.",
+    "q1": "Qon topshirish orqali infeksiya yuqtirish xavfi bormi?",
+    "a1": "Biz har doim yangi, bir martalik ignalardan foydalanamiz. Har bir kishi uchun yangi igna ochilgani sababli, boshqa birovning qoni bilan aloqa qilish mutlaqo imkonsizdir. Xotirjam ishtirok eting.",
+    "q2": "Qon haqiqatan ham muhtoj odamlarga yetib boradimi?",
+    "a2": "Topshirilgan qon Yaponiya Qizil Yarim Oy Jamiyatining qon markazlarida qat'iy tekshiriladi va boshqariladi. U operatsiyalar, saraton muolajalari, tug'ruqlar uchun transfuziyaga muhtoj bemorlarga ishonchli yetkaziladi.",
+    "q3": "Qon topshirgandan keyin o'zimni yomon his qilamanmi?",
+    "a3": "Kamdan-kam hollarda, topshirgandan so'ng darhol o'zingizni biroz noqulay his qilishingiz mumkin, ammo xodimlarimiz sizni to'liq qo'llab-quvvatlaydi. Tadbir kuni yaxshi uxlang va ovqatlaning, topshirgandan keyin 15-30 daqiqa dam oling.",
+    "q4": "Donorning shaxsiy ma'lumotlari himoyalanganmi?",
+    "a4": "Qon tahlillari natijalari va shaxsiy ma'lumotlar qat'iy nazorat qilinadi va hech qachon uchinchi shaxslarga berilmaydi. Ular Yaponiya Qizil Yarim Oy Jamiyatining shaxsiy ma'lumotlarni himoya qilish siyosati asosida qayta ishlanadi."
+  },
+  "quickAccess": {
+    "ariaLabel": "Tezkor kirish",
+    "register": {
+      "label": "Ro'yxatdan o'tish",
+      "sub": "Formaga o'tish"
+    },
+    "info": {
+      "label": "Tadbir haqida",
+      "sub": "Sana, joy, talablar"
+    },
+    "precautions": {
+      "label": "Ehtiyot choralari",
+      "sub": "Tayyorgarlik"
+    },
+    "about": {
+      "label": "Donorlik nima",
+      "sub": "Mohiyati va ahamiyati"
+    }
+  },
+  "eligibility": {
+    "title": "Qon topshirish standartlari",
+    "closeAria": "Yopish",
+    "colType": "Donorlik turi",
+    "colWhole": "To'liq qon",
+    "colComponent": "Komponent",
+    "colPlasma": "Plazma",
+    "colPlatelet": "Trombotsit",
+    "rowVolume": "Bir martalik miqdor",
+    "rowAge": "Yosh chegarasi",
+    "rowWeight": "Vazn chegarasi",
+    "rowBpMax": "Maksimal qon bosimi",
+    "rowBpMin": "Minimal qon bosimi",
+    "rowPulse": "Nafas urishi",
+    "rowTemp": "Tana harorati",
+    "rowHemoglobin": "Gemoglobin miqdori",
+    "rowPlateletCount": "Trombotsitlar soni",
+    "rowInterval": "Donorlik oralig'i<br /><small>(Avvalgi donorlikka nisbatan)</small>",
+    "rowAnnualVolume": "Yillik umumiy miqdor<br /><small>(Yiliga 52 hafta deb hisoblaganda)</small>",
+    "rowAnnualCount": "Yillik donorlik soni<br /><small>(Yiliga 52 hafta deb hisoblaganda)</small>",
+    "rowCommon": "Umumiy cheklovlar",
+    "cellVolumePlasma": "600ml va undan kam<br /><small>(Aylanma qon hajmining 12% doirasida)</small>",
+    "cellAge200": "16-69 yosh",
+    "cellAge400": "Erkaklar: 17-69 yosh<br />Ayollar: 18-69 yosh",
+    "cellAgePlasma": "18-69 yosh",
+    "cellAgePlatelet": "Erkaklar: 18-69 yosh<br />Ayollar: 18-54 yosh",
+    "cellAgeNote": "Eslatma: 65-69 yoshli donorlar faqat 60 yoshidan 65 yoshigacha bo'lgan davrda qon topshirgan bo'lsalar qabul qilinadilar.",
+    "cellWeight200": "Erkaklar: 45kg yoki undan ko'p<br />Ayollar: 40kg yoki undan ko'p",
+    "cellWeight400": "Erkaklar va ayollar 50kg yoki undan ko'p",
+    "cellWeightPlasma": "Erkaklar: 45kg yoki undan ko'p<br />Ayollar: 40kg yoki undan ko'p",
+    "cellBpMax": "90mmHg va undan yuqori, 180mmHg dan kam",
+    "cellBpMin": "50mmHg va undan yuqori, 110mmHg dan kam",
+    "cellPulse": "daqiqasiga 40 dan 100 martagacha",
+    "cellTemp": "37.5°C dan kam",
+    "cellHemo200": "Erkaklar: 12.5g/dL yoki undan ko'p<br />Ayollar: 12.0g/dL yoki undan ko'p",
+    "cellHemo400": "Erkaklar: 13.0g/dL yoki undan ko'p<br />Ayollar: 12.5g/dL yoki undan ko'p",
+    "cellHemoPlasma": "12.0g/dL yoki undan ko'p<br /><small>(Normal qizil qon ko'rsatkichlariga* ega ayollar uchun 11.5g/dL yoki undan ko'p)<br />*MCV: 81-100fL / MCH: 26-35pg / MCHC: 31-36%</small>",
+    "cellHemoPlatelet": "12.0g/dL yoki undan ko'p",
+    "cellPlateletCountVal": "150,000-600,000 /μL",
+    "cellInterval200": "200ml to'liq",
+    "cellInterval200Val": "Ikki jins uchun ham 4 haftadan keyin haftaning o'sha kunidan boshlab",
+    "cellInterval400": "400ml to'liq",
+    "cellInterval400Val": "Erkaklar: 12 haftadan so'ng,<br />Ayollar: 16 haftadan so'ng (haftaning o'sha kuni)",
+    "cellInterval400ValPlasma": "Ikki jins uchun ham 8 haftadan keyin haftaning o'sha kunidan boshlab",
+    "cellIntervalPlasma": "Plazma komponenti",
+    "cellIntervalPlasmaVal": "Ikki jins uchun ham 2 haftadan keyin haftaning o'sha kunidan boshlab",
+    "cellIntervalPlatelet": "Trombotsit komponenti",
+    "cellIntervalPlateletVal": "Plazma yig'ilmagan bo'lsa, 1 haftadan keyin mumkin. Agar 4 hafta ichida 4 marta topshirilgan bo'lsa, keyingi safargacha 4 hafta kutiladi.",
+    "cellAnnualVolumeVal": "200ml va 400ml to'liq qon birlashtirilganda:<br />Erkaklar: 1,200ml doirasida / Ayollar: 800ml doirasida",
+    "cellAnnualCount200": "Erkaklar: 6 martagacha<br />Ayollar: 4 martagacha",
+    "cellAnnualCount400": "Erkaklar: 3 martagacha<br />Ayollar: 2 martagacha",
+    "cellAnnualCountComponent": "Jami 24 marta doirasida (1 ta trombotsit donorligi 2 ta deb hisoblanib plazma bilan birga)",
+    "cellCommonVal": "Quyidagi shaxslardan qon olinmaydi:<br />1. Homilador ayollar yoki oxirgi 6 oy ichida homilador bo'lganlar.<br />2. Qon topshirish natijasida og'irlashishi mumkin bo'lgan yurak-qon tomir, qon kasalliklari bo'lganlar.<br />3. Isitmasi bor yoki sog'lig'i yomon holatdagi shaxslar.",
+    "footerNote": "* Vaqt oralig'i oxirgi qon topshirilgan kundan boshlab hisoblanadi."
+  }
+}

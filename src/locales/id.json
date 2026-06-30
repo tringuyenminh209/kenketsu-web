@@ -1,0 +1,582 @@
+{
+  "nav": {
+    "know": "Belajar",
+    "benefits": "Manfaat",
+    "info": "Info Acara",
+    "register": "Daftar",
+    "survey": "Survei",
+    "admin": "Admin",
+    "userSite": "Situs Pengguna",
+    "about": "Tentang Donor",
+    "precautions": "Pencegahan",
+    "flyer": "Cetak Brosur",
+    "ariaLabel": "Navigasi Utama"
+  },
+  "hero": {
+    "title": "Kegiatan Sukarelawan Donor Darah",
+    "lead": "Dari kesadaran menuju tindakan. Kebaikan Anda menciptakan hari esok bagi seseorang.",
+    "cta": "Daftar Sekarang",
+    "cta2": "Pelajari Donor Darah",
+    "feature1Title": "Selamatkan Nyawa",
+    "feature1Desc": "Bantu banyak pasien dengan sekali donor",
+    "feature2Title": "Pahami Faktanya",
+    "feature2Desc": "Ubah kecemasan menjadi pengetahuan",
+    "feature3Title": "Berbagi Bersama",
+    "feature3Desc": "Berkontribusi pada masyarakat dari kampus",
+    "tagline": "Darah Anda dapat menyelamatkan nyawa seseorang",
+    "eventLabel": "Aktivitas Sukarelawan Donor Darah",
+    "imageAlt": "Mahasiswa berpartisipasi dengan nyaman dalam acara donor darah di kampus",
+    "featuresAriaLabel": "Fitur acara",
+    "countdown": {
+      "days": "hari",
+      "hours": "jam",
+      "minutes": "menit",
+      "seconds": "detik",
+      "until": "Hingga acara dimulai",
+      "ended": "Acara telah berakhir"
+    }
+  },
+  "about": {
+    "title": "Apa Itu Donor Darah & Mengapa Ini Penting",
+    "card1": {
+      "title": "Selamatkan Nyawa",
+      "body": "Satu donor darah dapat menyelamatkan hingga 3 nyawa. Karena darah tidak dapat dibuat secara buatan, donor adalah satu-satunya sumber."
+    },
+    "card2": {
+      "title": "Dukung Layanan Kesehatan",
+      "body": "Pengobatan kanker, operasi, persalinan — sekitar 5 juta orang membutuhkan transfusi darah setiap tahun. Donor darah mendukung garda depan medis."
+    },
+    "card3": {
+      "title": "Pemeriksaan Kesehatan Gratis",
+      "body": "Setelah berdonor, Anda menerima hasil tes darah Anda. Ini juga kesempatan gratis untuk memeriksa status kesehatan Anda sendiri."
+    }
+  },
+  "info": {
+    "date_label": "Tanggal",
+    "time_label": "Waktu",
+    "location_label": "Tempat",
+    "capacity_label": "Kapasitas",
+    "capacity_value": "{{capacity}} pendaftar pertama",
+    "title": "Informasi Dasar",
+    "typesTitle": "Jenis Donor Darah",
+    "types": {
+      "whole": {
+        "name": "Donor Darah Lengkap (Whole Blood)",
+        "volume": "200mL / 400mL",
+        "time": "Sekitar 30–40 menit",
+        "interval": "Pria 12 minggu / Wanita 16 minggu"
+      },
+      "platelet": {
+        "name": "Aferesis (Trombosit/Plasma)",
+        "volume": "Hanya komponen",
+        "time": "Sekitar 40–90 menit",
+        "interval": "2 minggu"
+      }
+    },
+    "requirements": "Persyaratan Kelayakan",
+    "reqAge": "Usia: 16–69 tahun (darah lengkap) / 18–54 tahun (aferesis)",
+    "reqWeight": "Berat Badan: Pria 50kg+ / Wanita 45kg+",
+    "reqHealth": "Sehat pada hari donor darah",
+    "faq": "Pertanyaan Umum (FAQ)",
+    "faqItems": [
+      {
+        "q": "Apakah tidak apa-apa jika ini pertama kalinya bagi saya?",
+        "a": "Ya, staf akan memandu Anda dengan hati-hati."
+      },
+      {
+        "q": "Apakah itu menyakitkan?",
+        "a": "Mungkin ada sedikit rasa sakit saat jarum dimasukkan, tetapi itu hanya sebentar."
+      },
+      {
+        "q": "Bolehkah saya berolahraga setelah berdonor?",
+        "a": "Harap hindari olahraga berat pada hari berdonor darah."
+      }
+    ],
+    "sponsor_label": "Sponsor",
+    "reservation_label": "Catatan reservasi",
+    "gift_label": "Hadiah donor",
+    "appLinksLabel": "Tautan aplikasi Labrad",
+    "appLinksTitle": "Pesan lebih awal dengan aplikasi Labrad",
+    "appLinksText": "Gunakan untuk manajemen kartu donor darah dan reservasi di muka.",
+    "date_value": "Selasa, 15 September 2026",
+    "time_value": "9:30–11:30 / 12:30–16:30",
+    "location_value": "ECC Computer College Gedung 1, Lounge Lantai 1",
+    "sponsor_value": "Osaka Sonezaki Lions Club / Osaka Nishi Lions Club",
+    "reservation_value": "Melakukan reservasi akan mempersingkat waktu yang dibutuhkan untuk prosedur donor darah.",
+    "gift_value": "Mereka yang bekerja sama dalam donor darah akan menerima 'hadiah kenang-kenangan' dari Lions Club."
+  },
+  "precautions": {
+    "title": "Hal yang Perlu Diperiksa Sebelum Berpartisipasi",
+    "intro": "Ini bukan aturan ketat — ini untuk melindungi kesehatan Anda sendiri. Jika Anda memiliki kekhawatiran, jangan ragu untuk bertanya kepada staf pada hari H.",
+    "eligibilityTitle": "Panduan Kelayakan",
+    "eligibilityItems": [
+      "Usia 16 hingga 69 tahun (usia 65+ memerlukan pengalaman donor sebelumnya)",
+      "Pria 45kg+, Wanita 40kg+",
+      "Sehat dan cukup tidur pada hari H"
+    ],
+    "dayOfTitle": "Pada hari H, hal ini baik dilakukan",
+    "dayOfNote": "Tidur yang cukup dan makan sebelum datang. Jika Anda demam atau merasa tidak enak badan, harap urungkan niat untuk berpartisipasi.",
+    "toSurvey": "Beralih ke survei pasca-partisipasi",
+    "beforeDay": "Sehari sebelum",
+    "beforeDayItems": [
+      "Tidur yang cukup (disarankan 6+ jam)",
+      "Hindari alkohol",
+      "Tetap terhidrasi dengan baik"
+    ],
+    "dayOf": "Pada hari H",
+    "dayOfItems": [
+      "Makan sebelum datang (donor darah saat perut kosong dilarang)",
+      "Minum banyak air atau minuman olahraga",
+      "Jangan memaksakan diri jika merasa tidak enak badan"
+    ],
+    "prohibited": "Anda tidak dapat mendonorkan darah jika",
+    "prohibitedItems": [
+      "Anda demam atau memiliki gejala pilek",
+      "Anda minum alkohol berlebihan pada malam sebelumnya",
+      "Anda baru saja menjalani operasi, transfusi, atau tato",
+      "Anda sedang hamil atau menyusui"
+    ],
+    "detailsBtn": "Lihat detail standar donor darah →"
+  },
+  "register": {
+    "title": "Pendaftaran",
+    "name": "Nama Lengkap",
+    "namePlaceholder": "mis. Taro Yamada",
+    "email": "Alamat Email",
+    "emailPlaceholder": "example@ecc.ac.jp",
+    "studentId": "ID Mahasiswa / Staf",
+    "studentIdPlaceholder": "mis. 2240000",
+    "phone": "Nomor Telepon",
+    "phonePlaceholder": "090-1234-5678",
+    "department": "Kelas",
+    "departmentSelect": "Silakan pilih",
+    "birthDate": "Tanggal Lahir",
+    "gender": "Jenis Kelamin",
+    "genderMale": "Pria",
+    "genderFemale": "Wanita",
+    "genderOther": "Lainnya",
+    "genderNoAnswer": "Tidak ingin menyebutkan",
+    "required": "Wajib",
+    "submit": "Lanjutkan ke Konfirmasi",
+    "submitting": "Mengirimkan...",
+    "successTitle": "Pendaftaran Diterima!",
+    "successBody": "Terima kasih telah bergabung. Staf kami akan menunggu Anda di hari H.",
+    "successClose": "Tutup",
+    "errorDuplicate": "ID mahasiswa ini sudah terdaftar sebelumnya.",
+    "errorGeneral": "Terjadi kesalahan. Silakan coba lagi.",
+    "subtitle": "Daftar di sini untuk mengikuti acara sukarelawan donor darah pada tanggal 15 September.",
+    "class": "Kelas",
+    "classPlaceholder": "mis. SK3A",
+    "departmentPlaceholder": "mis. IT2A, SK3A, Bahasa Jepang 1B",
+    "birthDatePlaceholder": "mis. 2004/04/15",
+    "birthDateHelp": "Ketik YYYY/MM/DD, YYYY-MM-DD, atau YYYYMMDD tanpa membuka kalender.",
+    "errorInvalidBirthDate": "Harap masukkan tanggal lahir Anda seperti format 2004/04/15."
+  },
+  "survey": {
+    "title": "Survei",
+    "q1Label": "Berapa kali Anda telah mendonorkan darah?",
+    "q1First": "Pertama kali",
+    "q1Few": "2–4 kali",
+    "q1Many": "5 kali atau lebih",
+    "q2Label": "Bagaimana Anda mengetahui tentang acara ini?",
+    "q2Poster": "Papan pengumuman sekolah",
+    "q2Teacher": "Guru / Staf sekolah",
+    "q2Friend": "Rekomendasi teman",
+    "q2Sns": "Media sosial",
+    "q3Label": "Apa yang membuat Anda ingin berpartisipasi?",
+    "q3Placeholder": "mis. Apakah sakit? Berapa lama waktu yang dibutuhkan?",
+    "submit": "Kirim Survei",
+    "submitting": "Mengirimkan...",
+    "successTitle": "Terima Kasih atas Tanggapan Anda!",
+    "successBody": "Umpan balik Anda akan membantu kami meningkatkan situs ini.",
+    "errorGeneral": "Terjadi kesalahan. Silakan coba lagi.",
+    "subtitle": "Harap bantu kami meningkatkan situs web ini.",
+    "q3SaveLife": "Saya ingin mendukung kehidupan seseorang",
+    "q3SchoolEvent": "Karena ini adalah acara sekolah",
+    "q3FirstStep": "Saya ingin mencobanya untuk pertama kali",
+    "q3Friend": "Saya ingin bergabung bersama teman-teman",
+    "q4Label": "Apa yang paling Anda khawatirkan sebelum bergabung?",
+    "q4Pain": "Rasa sakit atau jarum suntik",
+    "q4Time": "Lama waktu yang dibutuhkan",
+    "q4Health": "Kondisi kesehatan saya",
+    "q4None": "Tidak ada yang khusus",
+    "q5Label": "Dukungan apa yang akan membantu Anda merasa nyaman?",
+    "q5Staff": "Panduan dari staf",
+    "q5Guide": "Panduan langkah demi langkah yang jelas",
+    "q5Friend": "Menunggu bersama teman-teman",
+    "q5Quiet": "Area istirahat yang tenang",
+    "q6Label": "Apakah Anda akan merekomendasikan aktivitas donor darah ini kepada teman-teman Anda?",
+    "q6Yes": "Ya, tentu saja",
+    "q6Maybe": "Mungkin, setelah saya memahaminya lebih lanjut",
+    "q6NotYet": "Belum yakin",
+    "q7Label": "Ada kekhawatiran, pertanyaan, atau pesan?",
+    "q7Placeholder": "Contoh: Ini pertama kalinya saya, jadi saya ingin memahami alurnya dengan lebih baik."
+  },
+  "flyer": {
+    "title": "Aktivitas Sukarelawan Donor Darah",
+    "printBtn": "Cetak Brosur",
+    "qrLabel": "Detail & Pendaftaran di Sini",
+    "organizer": "Penyelenggara: {{organizer}}"
+  },
+  "footer": {
+    "organizer": "Penyelenggara: {{organizer}}",
+    "contact": "Kontak: {{contact}}"
+  },
+  "common": {
+    "yes": "Ya",
+    "no": "Tidak",
+    "loading": "Memuat...",
+    "error": "Terjadi kesalahan"
+  },
+  "tree": {
+    "title": "Pohon Partisipan",
+    "subtitle": "Daun baru akan tumbuh pada setiap pendaftaran",
+    "unit": "orang",
+    "goalReached": "Target tercapai! Terima kasih semuanya!",
+    "remaining": "Tersisa {{remaining}} slot",
+    "clickHint": "Cobalah mengeklik salah satu daun!",
+    "leafAriaLabel": "Daun {{n}}",
+    "participantNum": "Partisipan #{{n}}",
+    "beFirst": "Jadilah daun yang pertama!",
+    "beFIrstBtn": "Daftar sekarang",
+    "loveMessage": {
+      "0": "Kebaikan Anda membentuk hari esok seseorang.",
+      "1": "Terima kasih tulus atas keberanian Anda melangkah.",
+      "2": "Langkah kecil bagi Anda adalah penyelamat besar bagi sesama.",
+      "3": "Hati yang hangat menyebar luas dari sini.",
+      "4": "Donor darah Anda menyelamatkan orang tercinta seseorang.",
+      "5": "Terima kasih telah bergabung dalam estafet kehidupan.",
+      "6": "Kebaikan itu pasti akan membawa senyuman bagi seseorang.",
+      "7": "Baru pertama atau sudah biasa, tempat bertemunya semua hati.",
+      "8": "Semoga kebahagiaan saling mendukung menyebar di seluruh kampus.",
+      "9": "Langkah mulia yang tidak akan pernah kami lupakan."
+    }
+  },
+  "fs": {
+    "title": "Untuk Mahasiswa Internasional & Warga Negara Asing",
+    "subtitle": "Syarat kelayakan berbeda berdasarkan kewarganegaraan dan wilayah asal. Harap periksa sebelum mendaftar.",
+    "r1_title": "Anda sangat dipersilakan untuk berpartisipasi!",
+    "r1_body": "Selama Anda tinggal secara legal di Jepang dan dapat menjawab wawancara medis dalam bahasa Jepang, Anda dipersilakan untuk berpartisipasi!",
+    "r2_title": "Tinggal di Jepang selama lebih dari 4 minggu",
+    "r2_body": "Dari negara mana pun Anda berasal, selama Anda telah berada di Jepang selama lebih dari 4 minggu, Anda dapat mendaftar untuk donor darah.",
+    "r3_title": "Pemeriksaan riwayat perjalanan area malaria",
+    "r3_body": "Jika Anda pernah tinggal di daerah pedesaan atau dataran tinggi yang berisiko malaria, Anda mungkin perlu menunggu 1-3 tahun setelah kembali ke Jepang.",
+    "tableTitle": "Panduan Berdasarkan Wilayah Asal",
+    "tableNote": "※ Ini hanya panduan umum. Harap konfirmasi detailnya dengan staf pada hari H.",
+    "statusOk": "OK setelah 4 minggu",
+    "statusWait": "Tunggu 1–3 tahun",
+    "statusCheck": "Konfirmasi dengan staf",
+    "statusLifting": "Pelonggaran pembatasan mulai musim gugur 2026",
+    "vn_name": "Vietnam",
+    "vn_urban": "Hanoi, Kota Ho Chi Minh & kota-kota besar",
+    "vn_rural": "Daerah pedesaan, Dataran Tinggi Tengah",
+    "mm_name": "Myanmar",
+    "mm_city": "Pusat kota Yangon",
+    "mm_rural": "Wilayah lainnya",
+    "ne_name": "Nepal",
+    "ne_city": "Lembah Kathmandu",
+    "ne_rural": "Wilayah Terai",
+    "cn_name": "Tiongkok",
+    "cn_city": "Beijing, Shanghai & kota-kota besar",
+    "cn_rural": "Yunnan, Hainan & wilayah selatan",
+    "af_name": "Afrika & Amerika Latin",
+    "af_all": "Semua area (tanyakan detailnya kepada staf)",
+    "eu_name": "Negara-negara Eropa",
+    "eu_all": "Inggris, Prancis, Jerman, dll. (pelonggaran pembatasan mulai musim gugur 2026)",
+    "langTitle": "Wawancara hanya dalam Bahasa Jepang",
+    "langBody": "Kuesioner dan wawancara dokter dilakukan dalam bahasa Jepang. Jika Anda ragu, harap tanyakan kepada staf terlebih dahulu.",
+    "ctaTitle": "Ragu? Tanyakan saja kepada staf kami!",
+    "ctaBody": "Jika Anda tidak yakin apakah Anda memenuhi syarat untuk mendonorkan darah, silakan tanyakan kepada staf sebelum mendaftar atau pada hari H."
+  },
+  "lastYear": {
+    "badge": "Acara Tahun Lalu",
+    "title": "Inilah dokumentasi kegiatan donor darah di kampus kami tahun 2025.",
+    "summary": "Pada tanggal 24 September 2025, acara ini diadakan di lounge lantai 1 Gedung 1 di ECC Computer College. Lebih dari 30 mahasiswa dan staf berpartisipasi, dengan sukarelawan mahasiswa memainkan peran aktif.",
+    "captions": [
+      "Lounge lantai 1 Gedung 1, tempat berlangsungnya acara.",
+      "Bus donor darah yang diparkir di sebelah Gedung 1, di depan Gedung 4.",
+      "Hingga 3 donor sekaligus di dalam bus. Radio diputar pelan — suasana yang santai.",
+      "Selama donor, membaca brosur pencegahan dan menerima tips dari perawat.",
+      "Sukarelawan mahasiswa menangani pemeriksaan pra-pendaftaran dan memandu peserta.",
+      "Sukarelawan mahasiswa bergabung dengan anggota Lions Club untuk menyemangati donor darah."
+    ],
+    "sourceLabel": "Sumber: ",
+    "sourceLink": "Laporan Aktivitas Pusat Aksi Sosial ECC"
+  },
+  "knowledge": {
+    "sectionTitle": "Mengetahui tentang donor darah adalah langkah pertama untuk menyelamatkan nyawa.",
+    "sectionBody": "Donor darah bukan hanya untuk orang spesial. Dengan pengetahuan yang tepat, kecemasan akan hilang, dan semua orang — baik yang mendonorkan darah maupun menyebarkan informasi — menjadi bagian dari pendukung layanan kesehatan setempat.",
+    "readMore": "Baca selengkapnya",
+    "currentLabel": "Sedang dibaca",
+    "seeContributions": "Lihat kontribusi yang dapat diberikan oleh donor darah",
+    "imageAlt": "Ilustrasi untuk {{title}}",
+    "cards": [
+      {
+        "title": "Donor Darah: Infrastruktur Medis Masyarakat",
+        "text": "Operasi, pendarahan hebat saat melahirkan, pengobatan kanker — situasi yang membutuhkan transfusi terjadi setiap hari. Darah tidak dapat diproduksi secara buatan atau disimpan dalam jangka panjang.",
+        "detail": "Darah yang didonorkan memiliki masa simpan yang sangat singkat dan tidak dapat disimpan dalam jangka panjang.\n- Sel darah merah: Bertahan hingga 21 hari\n- Trombosit: Hanya bertahan 4 hari\nKarena darah tidak dapat diproduksi secara buatan, donor darah yang konsisten dan berkelanjutan dari masyarakat adalah satu-satunya cara untuk mendukung operasi darurat harian dan pengobatan kanker di rumah sakit."
+      },
+      {
+        "title": "Satu Donor Mencapai Banyak Pasien",
+        "text": "Darah yang didonorkan dipisahkan berdasarkan komponen — sel merah, trombosit, plasma — dan dikirim ke pasien yang membutuhkan setiap bagian tersebut.",
+        "detail": "Darah yang didonorkan dipisahkan menjadi tiga komponen utama menggunakan teknologi sentrifus untuk membantu pasien yang berbeda:\n- Sel darah merah: Digunakan untuk operasi dan transfusi darurat trauma\n- Trombosit: Digunakan untuk menghentikan pendarahan pada pasien leukemia atau kanker\n- Plasma: Digunakan untuk mengobati luka bakar parah dan penanganan bencana skala besar\nBerkat metode pemisahan canggih ini, satu donor darah Anda dapat menyelamatkan nyawa hingga tiga pasien yang berbeda."
+      },
+      {
+        "title": "Partisipasi Kaum Muda Melindungi Masa Depan",
+        "text": "Seiring bertambahnya usia populasi, pendonor berkurang sementara mereka yang membutuhkan transfusi meningkat. Partisipasi mahasiswa membantu mempertahankan layanan kesehatan setempat.",
+        "detail": "Dengan penurunan angka kelahiran dan penuaan populasi di Jepang, mengamankan pasokan darah yang stabil adalah tantangan besar.\n- Partisipasi pemuda: Jumlah pendonor remaja dan usia 20-an telah berkurang setengahnya dalam 20 tahun terakhir\n- Permintaan transfusi: Terus meningkat seiring dengan bertambahnya populasi lansia\nPartisipasi aktif dari mahasiswa sangat penting untuk mencegah keruntuhan layanan medis setempat di masa depan. Meskipun Anda tidak dapat mendonor hari ini, menyebarkan informasi ini sangatlah membantu."
+      }
+    ]
+  },
+  "benefits": {
+    "sectionTitle": "Manfaat Mendonor dan Kontribusi Anda kepada Masyarakat",
+    "sectionHelper": "Pilih kartu untuk melihat penjelasan rinci dengan foto.",
+    "seeMore": "Lihat detail",
+    "currentLabel": "Sedang dipilih",
+    "toRegister": "Paham — lanjutkan ke pendaftaran",
+    "imageAlt": "Ilustrasi untuk {{title}}",
+    "cards": [
+      {
+        "title": "Alasan untuk Memeriksa Kesehatan Anda",
+        "text": "Pemeriksaan pendaftaran dan penyaringan awal meningkatkan kesadaran Anda akan kesehatan sendiri.",
+        "detail": "Sebelum mendonor, kondisi Anda, tidur, diet, dan tekanan darah ditinjau. Ini bukan hanya tentang kelayakan — ini adalah kesempatan berharga untuk merefleksikan gaya hidup dan kesehatan Anda sendiri."
+      },
+      {
+        "title": "Perasaan Mendukung Kehidupan",
+        "text": "Tindakan kerja sama singkat menjadi kekuatan nyata yang mendukung pengobatan atau pemulihan seseorang.",
+        "detail": "Darah tidak dapat dibuat secara buatan atau disimpan dalam jangka panjang. Kontribusi Anda menjadi dukungan nyata dan praktis bagi orang-orang yang membutuhkan transfusi dalam operasi, kecelakaan, persalinan, atau pengobatan kanker."
+      },
+      {
+        "title": "Solidaritas Kampus",
+        "text": "Berpartisipasi bersama teman dan staf pengajar menyebarkan budaya saling mendukung.",
+        "detail": "Pergi sendiri mungkin terasa menakutkan, tetapi bersama teman atau guru itu lebih mudah. Menghadapinya sebagai acara kampus menciptakan suasana di mana 'membantu mereka yang membutuhkan' menjadi hal yang wajar bagi semua orang."
+      },
+      {
+        "title": "Langkah Pertama Anda dalam Kontribusi Sosial",
+        "text": "Tidak perlu persiapan khusus — Anda dapat mendukung layanan kesehatan langsung dari kampus Anda.",
+        "detail": "Kontribusi sosial tidak memerlukan upaya besar. Berpartisipasi secara lokal dan membagikan informasi akurat dengan orang-orang di sekitar Anda adalah tindakan penting yang menopang layanan kesehatan masyarakat."
+      }
+    ]
+  },
+  "reason": {
+    "whyTitle": "Mengapa Donor Darah Diperlukan?",
+    "whyBody": "Darah tidak dapat dibuat secara buatan dan tidak dapat disimpan lama. Itulah mengapa kerja sama harian diperlukan untuk mendukung orang-orang yang membutuhkan transfusi untuk operasi dan perawatan medis.",
+    "whyLink": "Pelajari tentang manfaat dan kontribusi",
+    "processTitle": "Donor Darah yang Aman dan Menenangkan",
+    "processNote": "Agar pemula dapat memahami alurnya, staf kami akan memandu Anda melalui setiap langkah pada hari H. Jangan ragu untuk bertanya kapan saja.",
+    "communityTitle": "Berkontribusi Bersama Masyarakat",
+    "communityBody": "Mereka yang bisa mendonorkan darah silakan melakukannya; mereka yang tidak bisa tetap berkontribusi dengan membagikan informasi. Tindakan satu orang menyebarkan kasih sayang ke seluruh kampus.",
+    "communityItems": [
+      "Bagikan informasi akurat kepada teman-teman",
+      "Dengarkan penjelasan bersama teman yang merasa cemas",
+      "Bangun budaya donor darah yang terus berlanjut di masa mendatang"
+    ],
+    "imageAlt": "Mahasiswa berpartisipasi dengan nyaman dalam acara donor darah",
+    "stepReadMore": "Lihat foto dan detail",
+    "processDetailLabel": "Apa yang diperiksa staf",
+    "processImageAlt": "Gambar pemeriksaan keselamatan untuk {{title}}"
+  },
+  "steps": [
+    {
+      "title": "Pemeriksaan Awal",
+      "text": "Konfirmasi kelayakan dan kesehatan",
+      "detail": "Sebelum donor darah, staf memastikan bahwa kondisi Anda cocok untuk mendonor dengan aman pada hari itu.",
+      "checks": [
+        "Persyaratan usia dan berat badan",
+        "Tidur, makan, demam, dan kondisi saat ini",
+        "Interval donor sebelumnya dan status obat"
+      ]
+    },
+    {
+      "title": "Wawancara & Tes",
+      "text": "Staf mengonfirmasi keselamatan",
+      "detail": "Wawancara singkat dan penyaringan membantu melindungi pendonor dan pasien yang menerima darah.",
+      "checks": [
+        "Peninjauan kuesioner kesehatan",
+        "Pemeriksaan tekanan darah dan kondisi dasar",
+        "Tes penyaringan kecil bila diperlukan"
+      ]
+    },
+    {
+      "title": "Donor Darah",
+      "text": "Selesai dalam waktu sekitar 10-15 menit",
+      "detail": "Selama donor darah, staf tetap berada di dekat Anda dan memantau kondisi Anda. Anda dapat langsung melapor jika merasa tidak enak badan.",
+      "checks": [
+        "Posisi berbaring yang nyaman",
+        "Pemantauan staf selama pengambilan darah",
+        "Istirahat dan hidrasi setelah berdonor"
+      ]
+    }
+  ],
+  "pledge": {
+    "title": "Menyebarkan Budaya Donor Darah dari Kampus",
+    "items": [
+      "Pelajari faktanya dan jangan memendam kecemasan sendiri",
+      "Mereka yang bisa — ambil langkah pertama; mereka yang tidak bisa — sebarkan informasi",
+      "Jadikan donor darah sebagai budaya kepedulian yang berkelanjutan, bukan sekadar acara satu kali"
+    ]
+  },
+  "footerCta": {
+    "title": "Bersama di kampus — mari kita dukung donor darah.",
+    "cta": "Kembali ke pendaftaran",
+    "aiImageNote": "Beberapa gambar di situs web ini adalah ilustrasi buatan AI dan mungkin berbeda dari tempat atau orang yang sebenarnya."
+  },
+  "impact": {
+    "stats": {
+      "save_title": "Menyelamatkan nyawa dengan sekali donor",
+      "save_to": "3",
+      "save_unit": "orang",
+      "save_desc": "Darah dipisahkan menjadi beberapa komponen untuk mengobati banyak pasien.",
+      "platelet_title": "Batas penyimpanan trombosit",
+      "platelet_to": "4",
+      "platelet_unit": "hari",
+      "platelet_desc": "Itulah mengapa donor darah baru diperlukan setiap hari.",
+      "annual_title": "Orang yang membutuhkan darah setiap tahun",
+      "annual_to": "5",
+      "annual_unit": "juta",
+      "annual_desc": "Mendukung pengobatan medis harian seperti operasi, kanker, kelahiran, dan kecelakaan."
+    },
+    "who_needs": {
+      "eyebrow": "Ke mana darah Anda disalurkan?",
+      "title": "Kenyataan Orang-orang yang Membutuhkan Transfusi",
+      "desc": "\"Rumah sakit\" dan \"operasi\" bukanlah urusan orang lain. Setiap hari, ribuan orang membutuhkan transfusi darah.",
+      "cards": [
+        {
+          "title": "Operasi & Darurat",
+          "body": "Kecelakaan lalu lintas dan operasi mendadak membutuhkan darah dalam jumlah besar dalam waktu singkat. Tanpa darah, nyawa tidak dapat diselamatkan."
+        },
+        {
+          "title": "Kanker & Penyakit Darah",
+          "body": "Dalam kemoterapi dan pengobatan leukemia, pengisian terus-menerus trombosit dan sel merah adalah prasyarat untuk pengobatan."
+        },
+        {
+          "title": "Persalinan & Bayi Baru Lahir",
+          "body": "Pendarahan hebat selama persalinan dan transfusi untuk bayi prematur berada di garda terdepan dalam menyelamatkan nyawa."
+        },
+        {
+          "title": "Penyakit Kronis & Perawatan Jangka Panjang",
+          "body": "Pasien dengan penyakit ginjal atau anemia aplastik memerlukan transfusi darah rutin untuk menopang perawatan mereka."
+        }
+      ]
+    },
+    "journey": {
+      "eyebrow": "Dari donor ke pasien",
+      "title": "Hingga Darah Anda Tiba",
+      "steps": [
+        {
+          "title": "Penerimaan & Pemeriksaan",
+          "sub": "Konfirmasi kondisi kesehatan dan berat badan (sekitar 5 menit)"
+        },
+        {
+          "title": "Donor Darah",
+          "sub": "Pengambilan darah lengkap memakan waktu sekitar 10–15 menit"
+        },
+        {
+          "title": "Pengujian & Pemisahan",
+          "sub": "Konfirmasi keselamatan dan pemisahan komponen dalam waktu 24 jam"
+        },
+        {
+          "title": "Pengiriman ke Pasien",
+          "sub": "Dikirim ke rumah sakit dan ruang operasi di seluruh negeri"
+        }
+      ]
+    },
+    "trust": {
+      "label": "Acara ini adalah aktivitas donor darah yang aman dalam kemitraan dengan organisasi resmi",
+      "redcross_org": "Palang Merah Jepang",
+      "redcross_dept": "Pusat Darah Palang Merah Yamaguchi",
+      "redcross_role": "Manajemen Darah & Jaminan Keselamatan",
+      "school_org": "ECC College of Computer Studies",
+      "school_dept": "Yamaguchi Gakuen ECC College",
+      "school_role": "Penyedia Tempat & Co-penyelenggara",
+      "hotline_org": "Hotline Konsultasi Donor",
+      "hotline_role": "Sen–Sab 9:00–17:30 (Bebas biaya)"
+    }
+  },
+  "faqSection": {
+    "title": "Sebelum berpartisipasi, mari redakan kecemasan Anda",
+    "subtitle": "Kami menjawab pertanyaan umum bagi mereka yang mempertimbangkan donor darah untuk pertama kalinya.",
+    "q1": "Apakah ada risiko tertular infeksi melalui donor darah?",
+    "a1": "Kami selalu menggunakan jarum sekali pakai yang baru untuk pengambilan darah. Karena jarum baru dibuka untuk setiap orang, sama sekali tidak ada kontak dengan darah orang lain. Silakan berpartisipasi dengan tenang.",
+    "q2": "Apakah darahnya benar-benar dikirim ke orang yang membutuhkan?",
+    "a2": "Darah yang didonorkan diuji dan dikelola secara ketat di pusat darah Palang Merah Jepang. Darah tersebut dikirim dengan andal ke pasien yang benar-benar membutuhkan transfusi untuk operasi, pengobatan kanker, persalinan, dll.",
+    "q3": "Apakah saya akan merasa tidak enak badan setelah donor darah?",
+    "a3": "Dalam kasus yang jarang terjadi, Anda mungkin merasa sedikit tidak enak badan segera setelah mendonor, tetapi staf kami akan mendukung Anda sepenuhnya. Harap makan dan tidur nyenyak di hari H, serta istirahat selama 15 hingga 30 menit setelah mendonor.",
+    "q4": "Apakah privasi pendonor darah dilindungi?",
+    "a4": "Hasil tes darah dan informasi pribadi dikelola secara ketat dan tidak akan pernah diberikan kepada pihak ketiga. Informasi tersebut ditangani dengan tepat berdasarkan kebijakan perlindungan informasi pribadi Palang Merah Jepang."
+  },
+  "quickAccess": {
+    "ariaLabel": "Akses Cepat",
+    "register": {
+      "label": "Daftar",
+      "sub": "Ke formulir"
+    },
+    "info": {
+      "label": "Info Acara",
+      "sub": "Waktu, Lokasi, Syarat"
+    },
+    "precautions": {
+      "label": "Pencegahan",
+      "sub": "Persiapan"
+    },
+    "about": {
+      "label": "Apa itu Donor Darah",
+      "sub": "Mekanisme & Signifikansi"
+    }
+  },
+  "eligibility": {
+    "title": "Standar Donor Darah",
+    "closeAria": "Tutup",
+    "colType": "Jenis Donor",
+    "colWhole": "Darah Lengkap",
+    "colComponent": "Komponen",
+    "colPlasma": "Plasma",
+    "colPlatelet": "Trombosit",
+    "rowVolume": "Volume per Donor",
+    "rowAge": "Batas Usia",
+    "rowWeight": "Batas Berat Badan",
+    "rowBpMax": "TD Maks",
+    "rowBpMin": "TD Min",
+    "rowPulse": "Denyut Nadi",
+    "rowTemp": "Suhu Tubuh",
+    "rowHemoglobin": "Kadar Hemoglobin",
+    "rowPlateletCount": "Jumlah Trombosit",
+    "rowInterval": "Interval Donor<br /><small>(Donor Sebelumnya)</small>",
+    "rowAnnualVolume": "Volume Total Tahunan<br /><small>(Berdasarkan 52 minggu/tahun)</small>",
+    "rowAnnualCount": "Frekuensi Tahunan<br /><small>(Berdasarkan 52 minggu/tahun)</small>",
+    "rowCommon": "Diskualifikasi Umum",
+    "cellVolumePlasma": "600mL atau kurang<br /><small>(Dalam 12% dari volume darah yang bersirkulasi)</small>",
+    "cellAge200": "16-69 tahun",
+    "cellAge400": "Pria: 17-69 tahun<br />Wanita: 18-69 tahun",
+    "cellAgePlasma": "18-69 tahun",
+    "cellAgePlatelet": "Pria: 18-69 tahun<br />Wanita: 18-54 tahun",
+    "cellAgeNote": "Catatan: Pendonor berusia 65-69 tahun diterima hanya jika mereka telah mendonorkan darah antara ulang tahun ke-60 dan sehari sebelum ulang tahun ke-65 mereka.",
+    "cellWeight200": "Pria: 45kg atau lebih<br />Wanita: 40kg atau lebih",
+    "cellWeight400": "50kg atau lebih (Keduanya)",
+    "cellWeightPlasma": "Pria: 45kg or lebih<br />Wanita: 40kg or lebih",
+    "cellBpMax": "90mmHg atau lebih dan kurang dari 180mmHg",
+    "cellBpMin": "50mmHg atau lebih dan kurang dari 110mmHg",
+    "cellPulse": "40-100 denyut per menit",
+    "cellTemp": "Kurang dari 37.5°C",
+    "cellHemo200": "Pria: 12.5g/dL atau lebih<br />Wanita: 12.0g/dL atau lebih",
+    "cellHemo400": "Pria: 13.0g/dL atau lebih<br />Wanita: 12.5g/dL atau lebih",
+    "cellHemoPlasma": "12.0g/dL atau lebih<br /><small>(11.5g/dL atau lebih untuk wanita dengan indeks sel darah merah normal*)<br />*MCV: 81-100fL / MCH: 26-35pg / MCHC: 31-36%</small>",
+    "cellHemoPlatelet": "12.0g/dL atau lebih",
+    "cellPlateletCountVal": "150,000-600,000 /μL",
+    "cellInterval200": "200mL Lengkap",
+    "cellInterval200Val": "Mulai hari yang sama dalam seminggu 4 minggu kemudian untuk keduanya",
+    "cellInterval400": "400mL Lengkap",
+    "cellInterval400Val": "Pria: dari 12 minggu kemudian,<br />Wanita: dari 16 minggu kemudian (hari yang sama)",
+    "cellInterval400ValPlasma": "Mulai hari yang sama dalam seminggu 8 minggu kemudian untuk keduanya",
+    "cellIntervalPlasma": "Komponen Plasma",
+    "cellIntervalPlasmaVal": "Mulai hari yang sama dalam seminggu 2 minggu kemudian untuk keduanya",
+    "cellIntervalPlatelet": "Komponen Trombosit",
+    "cellIntervalPlateletVal": "Mungkin dilakukan setelah 1 minggu jika plasma tidak dikumpulkan. Jika mendonorkan darah 4 kali dalam kurun waktu 4 minggu, tunggu 4 minggu hingga donor berikutnya.",
+    "cellAnnualVolumeVal": "Menggabungkan darah lengkap 200mL & 400mL:<br />Pria: dalam 1,200mL / Wanita: dalam 800mL",
+    "cellAnnualCount200": "Pria: 6 kali atau kurang<br />Wanita: 4 kali atau kurang",
+    "cellAnnualCount400": "Pria: 3 kali atau kurang<br />Wanita: 2 kali atau kurang",
+    "cellAnnualCountComponent": "Dalam batas 24 kali secara total (1 donor trombosit dihitung sebagai 2, digabungkan dengan plasma)",
+    "cellCommonVal": "Pengambilan darah tidak dilakukan untuk individu berikut:<br />1. Wanita hamil, atau mereka yang hamil dalam 6 bulan terakhir.<br />2. Mereka yang memiliki penyakit sirkulasi, kelainan darah, atau penyakit lain yang dapat memburuk dengan donor.<br />3. Individu dengan demam atau kondisi kesehatan buruk lainnya.",
+    "footerNote": "* Perhitungan interval dimulai dari hari donor terakhir."
+  }
+}
