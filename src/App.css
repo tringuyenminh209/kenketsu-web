@@ -1927,10 +1927,11 @@ th {
 
 /* ── Eligibility Dialog ─────────────────────────────── */
 .eligibility-btn {
-  display: inline-flex;
+  display: flex;
+  width: fit-content;
   align-items: center;
   gap: 6px;
-  margin: 10px 0 4px;
+  margin: 10px 0 12px;
   padding: 8px 16px;
   border: 1.5px solid var(--line-red);
   border-radius: 8px;
