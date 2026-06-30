@@ -1,4 +1,4 @@
-import { lazy, Suspense, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import heroImage from './assets/blood-donation-hero.png'
@@ -107,6 +107,18 @@ function UserPage() {
   const [surveySubmitting, setSurveySubmitting] = useState(false)
   const [surveySuccess, setSurveySuccess] = useState(false)
   const [surveyError, setSurveyError] = useState<string | null>(null)
+  const [showEligibility, setShowEligibility] = useState(false)
+
+  useEffect(() => {
+    if (!showEligibility) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setShowEligibility(false) }
+    document.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [showEligibility])
 
   const handleKnowledgeSelect = (index: number) => {
     setSelectedKnowledge(index)
@@ -562,6 +574,9 @@ function UserPage() {
             </ul>
             <h3>{t('precautions.dayOfTitle')}</h3>
             <p>{t('precautions.dayOfNote')}</p>
+            <button className="eligibility-btn" type="button" onClick={() => setShowEligibility(true)}>
+              献血基準の詳細を見る →
+            </button>
             <a className="text-link" href="#survey">{t('precautions.toSurvey')}</a>
           </aside>
 
@@ -676,6 +691,112 @@ function UserPage() {
           <a className="button primary" href="#register">{t('footerCta.cta')}</a>
         </footer>
       </main>
+        {showEligibility && (
+          <div className="eligibility-overlay" role="dialog" aria-modal="true" aria-label="献血基準表" onClick={() => setShowEligibility(false)}>
+            <div className="eligibility-dialog" onClick={e => e.stopPropagation()}>
+              <div className="eligibility-dialog-header">
+                <h3>献血基準表</h3>
+                <button className="eligibility-close" type="button" aria-label="閉じる" onClick={() => setShowEligibility(false)}>✕</button>
+              </div>
+              <div className="eligibility-table-wrap">
+                <table className="eligibility-table">
+                  <thead>
+                    <tr>
+                      <th rowSpan={2}>採血の種類</th>
+                      <th colSpan={2}>全血採血</th>
+                      <th colSpan={2}>成分採血</th>
+                    </tr>
+                    <tr>
+                      <th>200mL</th>
+                      <th>400mL</th>
+                      <th>血漿</th>
+                      <th>血小板</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1回採血量</td>
+                      <td>200mL</td>
+                      <td>400mL</td>
+                      <td colSpan={2}>600mL以下<small>（循環血液量の12%以内）</small></td>
+                    </tr>
+                    <tr>
+                      <td rowSpan={2}>年齢</td>
+                      <td>16〜69歳</td>
+                      <td>男性: 17〜69歳<br />女性: 18〜69歳</td>
+                      <td>18〜69歳</td>
+                      <td>男性: 18〜69歳<br />女性: 18〜54歳</td>
+                    </tr>
+                    <tr>
+                      <td colSpan={4} className="eligibility-note-cell">ただし、65〜69歳の方については、60歳に達した日から65歳に達した日の前日までの間に採血が行われた方に限る。</td>
+                    </tr>
+                    <tr>
+                      <td>体重</td>
+                      <td>男性45kg以上<br />女性40kg以上</td>
+                      <td>男女50kg以上</td>
+                      <td colSpan={2}>男性45kg以上<br />女性40kg以上</td>
+                    </tr>
+                    <tr><td>最高血圧</td><td colSpan={4}>90mmHg以上180mmHg未満</td></tr>
+                    <tr><td>最低血圧</td><td colSpan={4}>50mmHg以上110mmHg未満</td></tr>
+                    <tr><td>脈拍</td><td colSpan={4}>40回/分以上100回/分以下</td></tr>
+                    <tr><td>体温</td><td colSpan={4}>37.5℃未満</td></tr>
+                    <tr>
+                      <td>血色素量</td>
+                      <td>男性: 12.5g/dL以上<br />女性: 12.0g/dL以上</td>
+                      <td>男性: 13.0g/dL以上<br />女性: 12.5g/dL以上</td>
+                      <td>12.0g/dL以上<br /><small>（赤血球指数が標準域*にある女性は11.5g/dL以上）<br />*MCV: 81〜100fL / MCH: 26〜35pg / MCHC: 31〜36%</small></td>
+                      <td>12.0g/dL以上</td>
+                    </tr>
+                    <tr>
+                      <td>血小板数</td>
+                      <td>—</td><td>—</td><td>—</td>
+                      <td>15万/μL以上<br />60万/μL以下</td>
+                    </tr>
+                    <tr>
+                      <td rowSpan={4}>採血間隔<br /><small>（前回採血）</small></td>
+                      <td>200mL全血</td>
+                      <td colSpan={3}>男女とも4週間後の同じ曜日から</td>
+                    </tr>
+                    <tr>
+                      <td>400mL全血</td>
+                      <td>男性は12週間後、<br />女性は16週間後の同じ曜日から</td>
+                      <td colSpan={2}>男女とも8週間後の同じ曜日から</td>
+                    </tr>
+                    <tr>
+                      <td>血漿成分</td>
+                      <td colSpan={3}>男女とも2週間後の同じ曜日から</td>
+                    </tr>
+                    <tr>
+                      <td>血小板成分</td>
+                      <td colSpan={3}>血漿を含まない場合1週間後に血小板成分採血が可能。ただし、4週間に4回実施した場合には次回までに4週間あける。</td>
+                    </tr>
+                    <tr>
+                      <td>年間総採血量<br /><small>（1年は52週として換算）</small></td>
+                      <td colSpan={2}>200mL・400mL全血を合わせて<br />男性 1,200mL以内 / 女性 800mL以内</td>
+                      <td>—</td><td>—</td>
+                    </tr>
+                    <tr>
+                      <td>年間採血回数<br /><small>（1年は52週として換算）</small></td>
+                      <td>男性6回以内<br />女性4回以内</td>
+                      <td>男性3回以内<br />女性2回以内</td>
+                      <td colSpan={2}>血小板成分採血1回を2回分に換算して血漿成分採血と合計で24回以内</td>
+                    </tr>
+                    <tr>
+                      <td>共通事項</td>
+                      <td colSpan={4} className="eligibility-common-cell">
+                        次の方からは採血しない。<br />
+                        ① 妊娠していると認められる方、又は過去6ヶ月以内に妊娠していたと認められる方<br />
+                        ② 採血により悪化するおそれのある循環系疾患、血液疾患その他の疾患に罹っていると認められる方<br />
+                        ③ 有熱者その他健康状態が不良であると認められる方
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="eligibility-footer-note">※ 期間の計算は直近の採血を行った日から起算します。</p>
+            </div>
+          </div>
+        )}
     </div>
   )
 }

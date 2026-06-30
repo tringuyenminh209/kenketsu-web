@@ -1925,6 +1925,159 @@ th {
   }
 }
 
+/* ── Eligibility Dialog ─────────────────────────────── */
+.eligibility-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 10px 0 4px;
+  padding: 8px 16px;
+  border: 1.5px solid var(--line-red);
+  border-radius: 8px;
+  background: white;
+  color: var(--red);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.eligibility-btn:hover {
+  background: var(--soft);
+  box-shadow: 0 2px 8px rgba(206, 0, 23, 0.12);
+}
+
+.eligibility-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(16, 24, 40, 0.52);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(2px);
+}
+
+.eligibility-dialog {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 24px 80px rgba(16, 24, 40, 0.2);
+  width: 100%;
+  max-width: 880px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.eligibility-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 28px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.eligibility-dialog-header h3 {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--ink);
+  margin: 0;
+}
+
+.eligibility-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--muted);
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+  line-height: 1;
+}
+
+.eligibility-close:hover {
+  background: var(--soft);
+  color: var(--red);
+}
+
+.eligibility-table-wrap {
+  overflow: auto;
+  flex: 1;
+  padding: 20px 28px;
+}
+
+.eligibility-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  min-width: 580px;
+}
+
+.eligibility-table th,
+.eligibility-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.55;
+}
+
+.eligibility-table thead th {
+  background: var(--soft);
+  font-weight: 800;
+  color: var(--red);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+.eligibility-table tbody tr:nth-child(even) td {
+  background: #fafafa;
+}
+
+.eligibility-table tbody td:first-child {
+  font-weight: 700;
+  color: var(--ink);
+  background: #f9f9f9;
+  text-align: left;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.eligibility-table small {
+  font-size: 10.5px;
+  color: var(--muted);
+  display: block;
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+.eligibility-note-cell {
+  font-size: 11.5px !important;
+  color: var(--muted) !important;
+  text-align: left !important;
+  font-weight: 400 !important;
+  background: #fffbf0 !important;
+}
+
+.eligibility-common-cell {
+  text-align: left !important;
+  font-size: 12px !important;
+  line-height: 1.8 !important;
+}
+
+.eligibility-footer-note {
+  padding: 12px 28px;
+  font-size: 11px;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  margin: 0;
+  flex-shrink: 0;
+}
+
 /* ── Foreign Student Section ───────────────────────── */
 .fs-section {
   padding: 64px 72px;
