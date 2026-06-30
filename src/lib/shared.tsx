@@ -19,6 +19,9 @@ export const LANGS = [
   { code: 'uz', label: 'Oʻzbekcha' },
   { code: 'bn', label: 'বাংলা' },
   { code: 'id', label: 'Bahasa Indonesia' },
+  { code: 'ko', label: '한국어' },
+  { code: 'th', label: 'ภาษาไทย' },
+  { code: 'si', label: 'සිංහල' },
 ]
 
 export function LanguageSelect() {

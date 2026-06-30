@@ -11,6 +11,9 @@ import en from "../locales/en.json"
 import uz from "../locales/uz.json"
 import bn from "../locales/bn.json"
 import id from "../locales/id.json"
+import ko from "../locales/ko.json"
+import th from "../locales/th.json"
+import si from "../locales/si.json"
 
 i18n
   .use(LanguageDetector)
@@ -26,9 +29,12 @@ i18n
       uz: { translation: uz },
       bn: { translation: bn },
       id: { translation: id },
+      ko: { translation: ko },
+      th: { translation: th },
+      si: { translation: si },
     },
     fallbackLng: "ja",
-    supportedLngs: ["ja", "my", "ne", "zh", "vi", "en", "uz", "bn", "id"],
+    supportedLngs: ["ja", "my", "ne", "zh", "vi", "en", "uz", "bn", "id", "ko", "th", "si"],
     detection: {
       order: ["localStorage", "navigator"],
       caches: ["localStorage"],

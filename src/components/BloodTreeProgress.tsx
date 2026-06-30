@@ -69,6 +69,16 @@ function TreeIllustration({ stage }: { stage: -1 | 0 | 1 | 2 | 3 }) {
 
   return (
     <svg viewBox="0 0 300 360" aria-hidden="true" className="blood-tree-svg">
+      <defs>
+        {/* Goo/blob filter: Gaussian blur + alpha threshold → organic blob shapes */}
+        <filter id="canopy-goo" x="-30%" y="-30%" width="160%" height="160%" colorInterpolationFilters="sRGB">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+          <feColorMatrix in="blur" type="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"
+            result="goo" />
+        </filter>
+      </defs>
+
       <ellipse cx="150" cy="354" rx="52" ry="7" fill="#8d6e63" opacity="0.35" />
 
       {/* Trunk */}
@@ -95,46 +105,53 @@ function TreeIllustration({ stage }: { stage: -1 | 0 | 1 | 2 | 3 }) {
       <path d="M148,188 Q160,168 168,148" stroke={trunkColor} fill="none" strokeWidth="4" strokeLinecap="round" />
       <line x1="148" y1="188" x2="148" y2="148" stroke={trunkColor} strokeWidth="3" strokeLinecap="round" />
 
-      {/* Stage 0+: sparse outer canopy */}
+      {/* Canopy — all circles share the goo filter so they merge into organic blobs */}
       {stage >= 0 && (
-        <>
-          <circle cx="42"  cy="155" r="24" fill="#ce0017" opacity="0.72" />
-          <circle cx="258" cy="155" r="24" fill="#ce0017" opacity="0.72" />
-          <circle cx="150" cy="148" r="22" fill="#d32f2f" opacity="0.68" />
-        </>
+        <g filter="url(#canopy-goo)">
+          {/* Stage 0+: 3 puffs at branch tips */}
+          <circle cx="40"  cy="138" r="30" fill="#ce0017" />
+          <circle cx="260" cy="138" r="30" fill="#ce0017" />
+          <circle cx="148" cy="142" r="28" fill="#d32f2f" />
+
+          {/* Stage 1+: inner branch puffs, start bridging the gaps */}
+          {stage >= 1 && (
+            <>
+              <circle cx="96"  cy="162" r="32" fill="#d32f2f" />
+              <circle cx="204" cy="162" r="32" fill="#d32f2f" />
+              <circle cx="148" cy="122" r="30" fill="#e53935" />
+            </>
+          )}
+
+          {/* Stage 2+: fill the middle, canopy becomes one mass */}
+          {stage >= 2 && (
+            <>
+              <circle cx="66"  cy="155" r="30" fill="#ce0017" />
+              <circle cx="234" cy="155" r="30" fill="#ce0017" />
+              <circle cx="120" cy="145" r="28" fill="#e53935" />
+              <circle cx="176" cy="145" r="28" fill="#ef5350" />
+              <circle cx="148" cy="108" r="28" fill="#d32f2f" />
+            </>
+          )}
+
+          {/* Stage 3: lush top canopy */}
+          {stage >= 3 && (
+            <>
+              <circle cx="38"  cy="120" r="26" fill="#ce0017" />
+              <circle cx="262" cy="120" r="26" fill="#ce0017" />
+              <circle cx="110" cy="116" r="24" fill="#e53935" />
+              <circle cx="186" cy="116" r="24" fill="#ef5350" />
+              <circle cx="148" cy="90"  r="30" fill="#ef5350" />
+            </>
+          )}
+        </g>
       )}
 
-      {/* Stage 1+: inner branch canopy */}
-      {stage >= 1 && (
-        <>
-          <circle cx="100" cy="168" r="27" fill="#d32f2f" opacity="0.68" />
-          <circle cx="200" cy="168" r="27" fill="#d32f2f" opacity="0.68" />
-          <circle cx="150" cy="130" r="24" fill="#e53935" opacity="0.65" />
-        </>
-      )}
-
-      {/* Stage 2+: denser mid canopy */}
-      {stage >= 2 && (
-        <>
-          <circle cx="65"  cy="162" r="24" fill="#ce0017" opacity="0.62" />
-          <circle cx="235" cy="162" r="24" fill="#ce0017" opacity="0.62" />
-          <circle cx="118" cy="148" r="22" fill="#e53935" opacity="0.60" />
-          <circle cx="182" cy="148" r="22" fill="#ef5350" opacity="0.60" />
-          <circle cx="150" cy="112" r="22" fill="#d32f2f" opacity="0.65" />
-        </>
-      )}
-
-      {/* Stage 3: full lush canopy + white heart accents */}
+      {/* Hearts rendered outside the filter so they stay crisp */}
       {stage >= 3 && (
         <>
-          <circle cx="38"  cy="136" r="22" fill="#ce0017" opacity="0.65" />
-          <circle cx="262" cy="136" r="22" fill="#ce0017" opacity="0.65" />
-          <circle cx="108" cy="128" r="20" fill="#e53935" opacity="0.60" />
-          <circle cx="192" cy="128" r="20" fill="#ef5350" opacity="0.60" />
-          <circle cx="150" cy="96"  r="26" fill="#ef5350" opacity="0.62" />
-          <Heart cx={42}  cy={152} s={0.45} />
-          <Heart cx={258} cy={152} s={0.45} />
-          <Heart cx={150} cy={96}  s={0.55} />
+          <Heart cx={40}  cy={138} s={0.45} />
+          <Heart cx={260} cy={138} s={0.45} />
+          <Heart cx={148} cy={90}  s={0.55} />
         </>
       )}
     </svg>
