@@ -449,3 +449,30 @@
 - `src/locales/ne.json`
 - `docs/nippo.md`
 
+---
+
+## Ngay: 2026-06-30 (session 8 - da ngon ngu hoa nut Eligibility Details)
+
+## Noi dung da hoan thanh
+
+- **Đa ngôn ngữ hóa nút xem chi tiết bảng tiêu chuẩn (`eligibility-btn`)**:
+  * Chuyển đổi văn bản nút bấm cứng `献血基準の詳細を見る →` trong thẻ `aside` precautions thành dạng đa ngôn ngữ thông qua `t('precautions.detailsBtn')`.
+  * Thêm khóa dịch `detailsBtn` vào mục `precautions` cho cả 6 ngôn ngữ (`ja`, `en`, `vi`, `zh`, `my`, `ne`).
+- Đồng bộ hóa toàn diện các tệp locales: Số lượng khóa dịch của mỗi tệp ngôn ngữ hiện đã được đồng bộ chuẩn hóa lên **357 khóa** khớp nhau hoàn toàn.
+
+## Kiem tra
+
+- Chạy linter (`npm run lint`): pass.
+- Chạy build (`npm run build`): pass.
+
+## File da thay doi chinh
+
+- `src/App.tsx`
+- `src/locales/ja.json`
+- `src/locales/en.json`
+- `src/locales/vi.json`
+- `src/locales/zh.json`
+- `src/locales/my.json`
+- `src/locales/ne.json`
+- `docs/nippo.md`
+
