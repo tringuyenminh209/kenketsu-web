@@ -234,7 +234,11 @@
   },
   "tree": {
     "title": "参加者の木",
-    "subtitle": "申込が増えるたびに、葉が育ちます",
+    "subtitle": "申込が増えるたびに、木が育ちます",
+    "stage0": "芽生え",
+    "stage1": "若木",
+    "stage2": "成長",
+    "stage3": "満開",
     "unit": "人",
     "goalReached": "目標達成！ありがとうございます",
     "remaining": "あと{{remaining}}人で満員です",

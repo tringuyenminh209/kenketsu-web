@@ -1,4 +1,4 @@
-{
+﻿{
   "nav": {
     "know": "了解献血",
     "benefits": "好处",
@@ -230,7 +230,11 @@
   },
   "tree": {
     "title": "参与者之树",
-    "subtitle": "每增加一名报名者，树叶就会增加",
+    "subtitle": "每增加一名报名者，树就会成长",
+    "stage0": "萌芽",
+    "stage1": "幼苗",
+    "stage2": "成长中",
+    "stage3": "盛开",
     "unit": "人",
     "goalReached": "达成目标！感谢大家",
     "remaining": "还差{{remaining}}人就满员",

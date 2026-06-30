@@ -1,4 +1,4 @@
-{
+﻿{
   "nav": {
     "know": "Learn",
     "benefits": "Benefits",
@@ -230,7 +230,11 @@
   },
   "tree": {
     "title": "Participant Tree",
-    "subtitle": "A new leaf grows with every registration",
+    "subtitle": "The tree grows with every registration",
+    "stage0": "Sprout",
+    "stage1": "Young Tree",
+    "stage2": "Growing",
+    "stage3": "In Full Bloom",
     "unit": "people",
     "goalReached": "Goal reached! Thank you everyone!",
     "remaining": "{{remaining}} spots remaining",

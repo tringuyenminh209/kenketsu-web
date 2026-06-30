@@ -478,6 +478,40 @@
 
 ---
 
+## Ngay: 2026-06-30 (session 10 - thiet ke lai cay nhan ai theo growth stages)
+
+## Noi dung da hoan thanh
+
+- **Thiet ke lai BloodTreeProgress thanh growth stages**:
+  * Xoa toan bo he thong la don le (50 la SVG, tooltip, am thanh, particle burst, GSAP animation).
+  * Thay bang 4 stage truc quan dua tren so luong dang ky: stage -1 (chua co ai), stage 0 (1-10 nguoi = Mam non), stage 1 (11-25 = Cay non), stage 2 (26-40 = Dang lon), stage 3 (41-50 = No ro).
+  * Moi stage them them vong tron do chong len nhau tao tan tan (canopy): stage 0 co 3 vong, stage 1 them 3, stage 2 them 5, stage 3 them 5 vong va 3 trai tim trang decorative.
+  * Bo GSAP hoan toan khoi component nay, thay bang `useCountUp` hook don gian dung `requestAnimationFrame`.
+  * Them `IntersectionObserver` de khoi dong animation dem so khi section vao viewport.
+  * Them CSS `@keyframes stageReveal` de transition muot khi stage thay doi.
+- **Cap nhat CSS App.css**:
+  * Doi mau xanh la → do cho: progress fill, milestone markers, progress pct, goal badge.
+  * Xoa CSS khong con dung: `.tree-leaf-group`, `.tree-leaf-active`, `.leaf-tooltip`, `.leaf-tooltip-emoji`, `@keyframes leafPop`, `@keyframes tooltipIn`, `.tree-click-hint`.
+  * Them `.tree-illustration` (thay the `.tree-svg-wrap`) va `.tree-stage-badge`.
+  * Doi mau nen section tu xanh la sang do nhat.
+- **Cap nhat 9 locale files**:
+  * Them 4 khoa moi: `tree.stage0`, `tree.stage1`, `tree.stage2`, `tree.stage3`.
+  * Cap nhat `tree.subtitle` de khong con noi den "la" nua, thay bang "cay".
+
+## Kiem tra
+
+- Chay build (`npm run build`): pass.
+- Kiem tra tren trinh duyet: tree stage 0 hien thi dung voi canopy do, label "Mam non", counter animate, progress bar mau do.
+
+## File da thay doi chinh
+
+- `src/components/BloodTreeProgress.tsx`
+- `src/App.css`
+- `src/locales/ja.json`, `vi.json`, `en.json`, `zh.json`, `my.json`, `ne.json`, `id.json`, `uz.json`, `bn.json`
+- `docs/nippo.md`
+
+---
+
 ## Ngay: 2026-06-30 (session 9 - bo sung 3 ngon ngu: Uzbekistan, Bangladesh, Indonesia)
 
 ## Noi dung da hoan thanh

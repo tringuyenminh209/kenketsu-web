@@ -1,4 +1,4 @@
-{
+﻿{
   "nav": {
     "know": "Belajar",
     "benefits": "Manfaat",
@@ -230,7 +230,11 @@
   },
   "tree": {
     "title": "Pohon Partisipan",
-    "subtitle": "Daun baru akan tumbuh pada setiap pendaftaran",
+    "subtitle": "Pohon berkembang dengan setiap pendaftaran",
+    "stage0": "Kecambah",
+    "stage1": "Pohon Muda",
+    "stage2": "Berkembang",
+    "stage3": "Mekar Penuh",
     "unit": "orang",
     "goalReached": "Target tercapai! Terima kasih semuanya!",
     "remaining": "Tersisa {{remaining}} slot",

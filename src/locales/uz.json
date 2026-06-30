@@ -1,4 +1,4 @@
-{
+﻿{
   "nav": {
     "know": "O'rganish",
     "benefits": "Foydalari",
@@ -230,7 +230,11 @@
   },
   "tree": {
     "title": "Ishtirokchilar daraxti",
-    "subtitle": "Har bir ro'yxatdan o'tish bilan yangi barg o'sib chiqadi",
+    "subtitle": "Har bir ro'yxatdan o'tish bilan daraxt o'sib boradi",
+    "stage0": "Ko'chat",
+    "stage1": "Yosh daraxt",
+    "stage2": "O'sish",
+    "stage3": "To'la gullash",
     "unit": "kishi",
     "goalReached": "Maqsadga erishildi! Hammaga rahmat!",
     "remaining": "Yana {{remaining}} ta bo'sh joy qoldi",

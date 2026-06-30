@@ -230,7 +230,11 @@
   },
   "tree": {
     "title": "Cây nhân ái",
-    "subtitle": "Mỗi lần đăng ký, một chiếc lá mới mọc lên",
+    "subtitle": "Cây phát triển theo từng người đăng ký",
+    "stage0": "Mầm non",
+    "stage1": "Cây non",
+    "stage2": "Đang lớn",
+    "stage3": "Nở rộ",
     "unit": "người",
     "goalReached": "Đã đạt mục tiêu! Cảm ơn mọi người",
     "remaining": "Còn {{remaining}} chỗ trống",
