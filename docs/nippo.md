@@ -588,3 +588,29 @@
 - `public/sitemap.xml`
 - `docs/nippo.md`
 
+---
+
+## Ngay: 2026-06-30 (session 13 - thiet ke lai cay nhan ai organic va nghe thuat hon)
+
+## Noi dung da hoan thanh
+
+- **Thiết kế lại Cây Nhân Ải**:
+  * Loại bỏ hoàn toàn hiệu ứng bong bóng hình tròn (goo filter) vốn gây cảm giác thô cứng và loang lổ.
+  * Thiết kế lại hệ thống lá và trái tim dựa trên danh sách tọa độ phân bổ hữu cơ (`LEAF_DATA` gồm 88 phần tử) chia đều theo các giai đoạn.
+  * Vẽ lá cây bằng hình dáng chiếc lá thật (`<path d="M12,2 C8,7 6,14 12,22 C18,14 16,7 12,2 Z" />`) kết hợp gân lá tinh tế.
+  * Sử dụng dải màu gradient 3D cho thân cây (`#trunk-live` và `#trunk-dry`) để tạo chiều sâu chân thực.
+  * Thêm các cánh hoa/trái tim rơi rụng dưới gốc cây ở giai đoạn 3 (In Full Bloom) để tạo không gian nghệ thuật.
+- **Hoạt họa (CSS Animation)**:
+  * Thêm hiệu ứng `.tree-leaf-pop` và `@keyframes leafPopIn` giúp các lá và trái tim nở ra sinh động khi chuyển đổi giai đoạn với độ trễ (delay) khác nhau.
+
+## Kiem tra
+
+- Chạy build (`npm run build`): pass.
+- Chạy linter (`npm run lint`): pass.
+
+## File da thay doi chinh
+
+- `src/components/BloodTreeProgress.tsx`
+- `src/App.css`
+- `docs/nippo.md`
+
