@@ -93,7 +93,6 @@ export function ForeignStudentSection() {
             {ROWS.map((country) => (
               <div key={country.nameKey} className="fs-country-row" role="listitem">
                 <div className="fs-country-name">
-                  <span className="fs-country-code">{country.code}</span>
                   <strong>{t(country.nameKey)}</strong>
                 </div>
                 <div className="fs-region-list">

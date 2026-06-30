@@ -501,6 +501,25 @@ function UserPage() {
         <ForeignStudentSection />
 
         <section className="work-area reveal">
+          <aside className="panel gentle-precautions motion-card" id="precautions">
+            <div className="section-title calm">
+              <Icon type="shield" />
+              <h2>{t('precautions.title')}</h2>
+            </div>
+            <p className="precaution-intro">{t('precautions.intro')}</p>
+            <h3>{t('precautions.eligibilityTitle')}</h3>
+            <ul className="check-list">
+              {eligibilityItems.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <h3>{t('precautions.dayOfTitle')}</h3>
+            <p>{t('precautions.dayOfNote')}</p>
+            <button className="eligibility-btn" type="button" onClick={() => setShowEligibility(true)}>
+              献血基準の詳細を見る →
+            </button>
+          </aside>
+
           {regSuccess ? (
             <div className="panel register-panel motion-card success-panel">
               <Icon type="heart" />
@@ -617,124 +636,83 @@ function UserPage() {
               </button>
             </form>
           )}
+        </section>
 
-          <aside className="panel gentle-precautions motion-card" id="precautions">
-            <div className="section-title calm">
-              <Icon type="shield" />
-              <h2>{t('precautions.title')}</h2>
-            </div>
-            <p className="precaution-intro">{t('precautions.intro')}</p>
-            <h3>{t('precautions.eligibilityTitle')}</h3>
-            <ul className="check-list">
-              {eligibilityItems.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-            <h3>{t('precautions.dayOfTitle')}</h3>
-            <p>{t('precautions.dayOfNote')}</p>
-            <button className="eligibility-btn" type="button" onClick={() => setShowEligibility(true)}>
-              献血基準の詳細を見る →
-            </button>
-            <a className="text-link" href="#survey">{t('precautions.toSurvey')}</a>
-          </aside>
-
+        <section className="survey-area reveal" id="survey">
           {surveySuccess ? (
-            <div className="panel survey-panel motion-card success-panel">
+            <div className="survey-success motion-card">
               <Icon type="heart" />
               <h2>{t('survey.successTitle')}</h2>
               <p>{t('survey.successBody')}</p>
             </div>
           ) : (
-            <form
-              className="panel survey-panel motion-card"
-              id="survey"
-              onSubmit={handleSurveySubmit}
-            >
-              <div className="section-title">
-                <Icon type="heart" />
-                <h2>{t('survey.title')}</h2>
+            <form className="survey-form motion-card" onSubmit={handleSurveySubmit}>
+              <div className="survey-form-header">
+                <div className="section-title">
+                  <Icon type="heart" />
+                  <h2>{t('survey.title')}</h2>
+                </div>
               </div>
-              <label>
-                {t('survey.q1Label')}
-                <select
-                  value={surveyForm.donationCount}
-                  onChange={(e) => setSurveyForm({ ...surveyForm, donationCount: e.target.value })}
-                >
-                  <option value="first">{t('survey.q1First')}</option>
-                  <option value="few">{t('survey.q1Few')}</option>
-                  <option value="many">{t('survey.q1Many')}</option>
-                </select>
-              </label>
-              <label>
-                {t('survey.q2Label')}
-                <select
-                  value={surveyForm.howFound}
-                  onChange={(e) => setSurveyForm({ ...surveyForm, howFound: e.target.value })}
-                >
-                  <option value="poster">{t('survey.q2Poster')}</option>
-                  <option value="teacher">{t('survey.q2Teacher')}</option>
-                  <option value="friend">{t('survey.q2Friend')}</option>
-                  <option value="sns">{t('survey.q2Sns')}</option>
-                </select>
-              </label>
-              <label>
-                {t('survey.q3Label')}
-                <select
-                  value={surveyForm.motivation}
-                  onChange={(e) => setSurveyForm({ ...surveyForm, motivation: e.target.value })}
-                >
-                  <option value="save_life">{t('survey.q3SaveLife')}</option>
-                  <option value="school_event">{t('survey.q3SchoolEvent')}</option>
-                  <option value="first_step">{t('survey.q3FirstStep')}</option>
-                  <option value="friend">{t('survey.q3Friend')}</option>
-                </select>
-              </label>
-              <label>
-                {t('survey.q4Label')}
-                <select
-                  value={surveyForm.concern}
-                  onChange={(e) => setSurveyForm({ ...surveyForm, concern: e.target.value })}
-                >
-                  <option value="pain">{t('survey.q4Pain')}</option>
-                  <option value="time">{t('survey.q4Time')}</option>
-                  <option value="health">{t('survey.q4Health')}</option>
-                  <option value="none">{t('survey.q4None')}</option>
-                </select>
-              </label>
-              <label>
-                {t('survey.q5Label')}
-                <select
-                  value={surveyForm.preferredSupport}
-                  onChange={(e) => setSurveyForm({ ...surveyForm, preferredSupport: e.target.value })}
-                >
-                  <option value="staff">{t('survey.q5Staff')}</option>
-                  <option value="guide">{t('survey.q5Guide')}</option>
-                  <option value="friend">{t('survey.q5Friend')}</option>
-                  <option value="quiet">{t('survey.q5Quiet')}</option>
-                </select>
-              </label>
-              <label>
-                {t('survey.q6Label')}
-                <select
-                  value={surveyForm.recommend}
-                  onChange={(e) => setSurveyForm({ ...surveyForm, recommend: e.target.value })}
-                >
-                  <option value="yes">{t('survey.q6Yes')}</option>
-                  <option value="maybe">{t('survey.q6Maybe')}</option>
-                  <option value="not_yet">{t('survey.q6NotYet')}</option>
-                </select>
-              </label>
-              <label>
-                {t('survey.q7Label')}
-                <textarea
-                  rows={4}
-                  placeholder={t('survey.q7Placeholder')}
-                  value={surveyForm.comment}
-                  onChange={(e) => setSurveyForm({ ...surveyForm, comment: e.target.value })}
-                />
-              </label>
+              <div className="survey-grid">
+                <label>
+                  {t('survey.q1Label')}
+                  <select value={surveyForm.donationCount} onChange={(e) => setSurveyForm({ ...surveyForm, donationCount: e.target.value })}>
+                    <option value="first">{t('survey.q1First')}</option>
+                    <option value="few">{t('survey.q1Few')}</option>
+                    <option value="many">{t('survey.q1Many')}</option>
+                  </select>
+                </label>
+                <label>
+                  {t('survey.q2Label')}
+                  <select value={surveyForm.howFound} onChange={(e) => setSurveyForm({ ...surveyForm, howFound: e.target.value })}>
+                    <option value="poster">{t('survey.q2Poster')}</option>
+                    <option value="teacher">{t('survey.q2Teacher')}</option>
+                    <option value="friend">{t('survey.q2Friend')}</option>
+                    <option value="sns">{t('survey.q2Sns')}</option>
+                  </select>
+                </label>
+                <label>
+                  {t('survey.q3Label')}
+                  <select value={surveyForm.motivation} onChange={(e) => setSurveyForm({ ...surveyForm, motivation: e.target.value })}>
+                    <option value="save_life">{t('survey.q3SaveLife')}</option>
+                    <option value="school_event">{t('survey.q3SchoolEvent')}</option>
+                    <option value="first_step">{t('survey.q3FirstStep')}</option>
+                    <option value="friend">{t('survey.q3Friend')}</option>
+                  </select>
+                </label>
+                <label>
+                  {t('survey.q4Label')}
+                  <select value={surveyForm.concern} onChange={(e) => setSurveyForm({ ...surveyForm, concern: e.target.value })}>
+                    <option value="pain">{t('survey.q4Pain')}</option>
+                    <option value="time">{t('survey.q4Time')}</option>
+                    <option value="health">{t('survey.q4Health')}</option>
+                    <option value="none">{t('survey.q4None')}</option>
+                  </select>
+                </label>
+                <label>
+                  {t('survey.q5Label')}
+                  <select value={surveyForm.preferredSupport} onChange={(e) => setSurveyForm({ ...surveyForm, preferredSupport: e.target.value })}>
+                    <option value="staff">{t('survey.q5Staff')}</option>
+                    <option value="guide">{t('survey.q5Guide')}</option>
+                    <option value="friend">{t('survey.q5Friend')}</option>
+                    <option value="quiet">{t('survey.q5Quiet')}</option>
+                  </select>
+                </label>
+                <label>
+                  {t('survey.q6Label')}
+                  <select value={surveyForm.recommend} onChange={(e) => setSurveyForm({ ...surveyForm, recommend: e.target.value })}>
+                    <option value="yes">{t('survey.q6Yes')}</option>
+                    <option value="maybe">{t('survey.q6Maybe')}</option>
+                    <option value="not_yet">{t('survey.q6NotYet')}</option>
+                  </select>
+                </label>
+                <label className="survey-comment">
+                  {t('survey.q7Label')}
+                  <textarea rows={3} placeholder={t('survey.q7Placeholder')} value={surveyForm.comment} onChange={(e) => setSurveyForm({ ...surveyForm, comment: e.target.value })} />
+                </label>
+              </div>
               {surveyError && <p className="error-message">{surveyError}</p>}
-              <button className="button primary wide" type="submit" disabled={surveySubmitting}>
+              <button className="button primary" type="submit" disabled={surveySubmitting}>
                 {surveySubmitting ? t('survey.submitting') : t('survey.submit')}
               </button>
             </form>
@@ -750,108 +728,103 @@ function UserPage() {
         </footer>
       </main>
         {showEligibility && (
-          <div className="eligibility-overlay" role="dialog" aria-modal="true" aria-label="献血基準表" onClick={() => setShowEligibility(false)}>
+          <div className="eligibility-overlay" role="dialog" aria-modal="true" aria-label={t('eligibility.title')} onClick={() => setShowEligibility(false)}>
             <div className="eligibility-dialog" onClick={e => e.stopPropagation()}>
               <div className="eligibility-dialog-header">
-                <h3>献血基準表</h3>
-                <button className="eligibility-close" type="button" aria-label="閉じる" onClick={() => setShowEligibility(false)}>✕</button>
+                <h3>{t('eligibility.title')}</h3>
+                <button className="eligibility-close" type="button" aria-label={t('eligibility.closeAria')} onClick={() => setShowEligibility(false)}>✕</button>
               </div>
               <div className="eligibility-table-wrap">
                 <table className="eligibility-table">
                   <thead>
                     <tr>
-                      <th rowSpan={2}>採血の種類</th>
-                      <th colSpan={2}>全血採血</th>
-                      <th colSpan={2}>成分採血</th>
+                      <th rowSpan={2}>{t('eligibility.colType')}</th>
+                      <th colSpan={2}>{t('eligibility.colWhole')}</th>
+                      <th colSpan={2}>{t('eligibility.colComponent')}</th>
                     </tr>
                     <tr>
                       <th>200mL</th>
                       <th>400mL</th>
-                      <th>血漿</th>
-                      <th>血小板</th>
+                      <th>{t('eligibility.colPlasma')}</th>
+                      <th>{t('eligibility.colPlatelet')}</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>1回採血量</td>
+                      <td>{t('eligibility.rowVolume')}</td>
                       <td>200mL</td>
                       <td>400mL</td>
-                      <td colSpan={2}>600mL以下<small>（循環血液量の12%以内）</small></td>
+                      <td colSpan={2} dangerouslySetInnerHTML={{ __html: t('eligibility.cellVolumePlasma') }} />
                     </tr>
                     <tr>
-                      <td rowSpan={2}>年齢</td>
-                      <td>16〜69歳</td>
-                      <td>男性: 17〜69歳<br />女性: 18〜69歳</td>
-                      <td>18〜69歳</td>
-                      <td>男性: 18〜69歳<br />女性: 18〜54歳</td>
+                      <td rowSpan={2}>{t('eligibility.rowAge')}</td>
+                      <td>{t('eligibility.cellAge200')}</td>
+                      <td dangerouslySetInnerHTML={{ __html: t('eligibility.cellAge400') }} />
+                      <td>{t('eligibility.cellAgePlasma')}</td>
+                      <td dangerouslySetInnerHTML={{ __html: t('eligibility.cellAgePlatelet') }} />
                     </tr>
                     <tr>
-                      <td colSpan={4} className="eligibility-note-cell">ただし、65〜69歳の方については、60歳に達した日から65歳に達した日の前日までの間に採血が行われた方に限る。</td>
+                      <td colSpan={4} className="eligibility-note-cell">{t('eligibility.cellAgeNote')}</td>
                     </tr>
                     <tr>
-                      <td>体重</td>
-                      <td>男性45kg以上<br />女性40kg以上</td>
-                      <td>男女50kg以上</td>
-                      <td colSpan={2}>男性45kg以上<br />女性40kg以上</td>
+                      <td>{t('eligibility.rowWeight')}</td>
+                      <td dangerouslySetInnerHTML={{ __html: t('eligibility.cellWeight200') }} />
+                      <td>{t('eligibility.cellWeight400')}</td>
+                      <td colSpan={2} dangerouslySetInnerHTML={{ __html: t('eligibility.cellWeightPlasma') }} />
                     </tr>
-                    <tr><td>最高血圧</td><td colSpan={4}>90mmHg以上180mmHg未満</td></tr>
-                    <tr><td>最低血圧</td><td colSpan={4}>50mmHg以上110mmHg未満</td></tr>
-                    <tr><td>脈拍</td><td colSpan={4}>40回/分以上100回/分以下</td></tr>
-                    <tr><td>体温</td><td colSpan={4}>37.5℃未満</td></tr>
+                    <tr><td>{t('eligibility.rowBpMax')}</td><td colSpan={4}>{t('eligibility.cellBpMax')}</td></tr>
+                    <tr><td>{t('eligibility.rowBpMin')}</td><td colSpan={4}>{t('eligibility.cellBpMin')}</td></tr>
+                    <tr><td>{t('eligibility.rowPulse')}</td><td colSpan={4}>{t('eligibility.cellPulse')}</td></tr>
+                    <tr><td>{t('eligibility.rowTemp')}</td><td colSpan={4}>{t('eligibility.cellTemp')}</td></tr>
                     <tr>
-                      <td>血色素量</td>
-                      <td>男性: 12.5g/dL以上<br />女性: 12.0g/dL以上</td>
-                      <td>男性: 13.0g/dL以上<br />女性: 12.5g/dL以上</td>
-                      <td>12.0g/dL以上<br /><small>（赤血球指数が標準域*にある女性は11.5g/dL以上）<br />*MCV: 81〜100fL / MCH: 26〜35pg / MCHC: 31〜36%</small></td>
-                      <td>12.0g/dL以上</td>
+                      <td>{t('eligibility.rowHemoglobin')}</td>
+                      <td dangerouslySetInnerHTML={{ __html: t('eligibility.cellHemo200') }} />
+                      <td dangerouslySetInnerHTML={{ __html: t('eligibility.cellHemo400') }} />
+                      <td dangerouslySetInnerHTML={{ __html: t('eligibility.cellHemoPlasma') }} />
+                      <td>{t('eligibility.cellHemoPlatelet')}</td>
                     </tr>
                     <tr>
-                      <td>血小板数</td>
+                      <td>{t('eligibility.rowPlateletCount')}</td>
                       <td>—</td><td>—</td><td>—</td>
-                      <td>15万/μL以上<br />60万/μL以下</td>
+                      <td dangerouslySetInnerHTML={{ __html: t('eligibility.cellPlateletCountVal') }} />
                     </tr>
                     <tr>
-                      <td rowSpan={4}>採血間隔<br /><small>（前回採血）</small></td>
-                      <td>200mL全血</td>
-                      <td colSpan={3}>男女とも4週間後の同じ曜日から</td>
+                      <td rowSpan={4} dangerouslySetInnerHTML={{ __html: t('eligibility.rowInterval') }} />
+                      <td>{t('eligibility.cellInterval200')}</td>
+                      <td colSpan={3}>{t('eligibility.cellInterval200Val')}</td>
                     </tr>
                     <tr>
-                      <td>400mL全血</td>
-                      <td>男性は12週間後、<br />女性は16週間後の同じ曜日から</td>
-                      <td colSpan={2}>男女とも8週間後の同じ曜日から</td>
+                      <td>{t('eligibility.cellInterval400')}</td>
+                      <td dangerouslySetInnerHTML={{ __html: t('eligibility.cellInterval400Val') }} />
+                      <td colSpan={2}>{t('eligibility.cellInterval400ValPlasma')}</td>
                     </tr>
                     <tr>
-                      <td>血漿成分</td>
-                      <td colSpan={3}>男女とも2週間後の同じ曜日から</td>
+                      <td>{t('eligibility.cellIntervalPlasma')}</td>
+                      <td colSpan={3}>{t('eligibility.cellIntervalPlasmaVal')}</td>
                     </tr>
                     <tr>
-                      <td>血小板成分</td>
-                      <td colSpan={3}>血漿を含まない場合1週間後に血小板成分採血が可能。ただし、4週間に4回実施した場合には次回までに4週間あける。</td>
+                      <td>{t('eligibility.cellIntervalPlatelet')}</td>
+                      <td colSpan={3} dangerouslySetInnerHTML={{ __html: t('eligibility.cellIntervalPlateletVal') }} />
                     </tr>
                     <tr>
-                      <td>年間総採血量<br /><small>（1年は52週として換算）</small></td>
-                      <td colSpan={2}>200mL・400mL全血を合わせて<br />男性 1,200mL以内 / 女性 800mL以内</td>
+                      <td dangerouslySetInnerHTML={{ __html: t('eligibility.rowAnnualVolume') }} />
+                      <td colSpan={2} dangerouslySetInnerHTML={{ __html: t('eligibility.cellAnnualVolumeVal') }} />
                       <td>—</td><td>—</td>
                     </tr>
                     <tr>
-                      <td>年間採血回数<br /><small>（1年は52週として換算）</small></td>
-                      <td>男性6回以内<br />女性4回以内</td>
-                      <td>男性3回以内<br />女性2回以内</td>
-                      <td colSpan={2}>血小板成分採血1回を2回分に換算して血漿成分採血と合計で24回以内</td>
+                      <td dangerouslySetInnerHTML={{ __html: t('eligibility.rowAnnualCount') }} />
+                      <td dangerouslySetInnerHTML={{ __html: t('eligibility.cellAnnualCount200') }} />
+                      <td dangerouslySetInnerHTML={{ __html: t('eligibility.cellAnnualCount400') }} />
+                      <td colSpan={2} dangerouslySetInnerHTML={{ __html: t('eligibility.cellAnnualCountComponent') }} />
                     </tr>
                     <tr>
-                      <td>共通事項</td>
-                      <td colSpan={4} className="eligibility-common-cell">
-                        次の方からは採血しない。<br />
-                        ① 妊娠していると認められる方、又は過去6ヶ月以内に妊娠していたと認められる方<br />
-                        ② 採血により悪化するおそれのある循環系疾患、血液疾患その他の疾患に罹っていると認められる方<br />
-                        ③ 有熱者その他健康状態が不良であると認められる方
-                      </td>
+                      <td>{t('eligibility.rowCommon')}</td>
+                      <td colSpan={4} className="eligibility-common-cell" dangerouslySetInnerHTML={{ __html: t('eligibility.cellCommonVal') }} />
                     </tr>
                   </tbody>
                 </table>
               </div>
-              <p className="eligibility-footer-note">※ 期間の計算は直近の採血を行った日から起算します。</p>
+              <p className="eligibility-footer-note">{t('eligibility.footerNote')}</p>
             </div>
           </div>
         )}
