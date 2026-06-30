@@ -422,3 +422,30 @@
 - `src/locales/ne.json`
 - `docs/nippo.md`
 
+---
+
+## Ngay: 2026-06-30 (session 7 - bo sung da ngon ngu cho bang tieu chuan hien mau)
+
+## Noi dung da hoan thanh
+
+- **Đa ngôn ngữ hóa Bảng tiêu chuẩn hiến máu (eligibility)**:
+  * Chuyển đổi toàn bộ nội dung của bảng tiêu chuẩn hiến máu `献血基準表` (bao gồm tiêu đề, các cột, các dòng thông số về lượng hiến, độ tuổi, cân nặng, huyết áp, nhịp tim, nhiệt độ, lượng huyết sắc tố, tiểu cầu, khoảng cách hiến giữa các lần, lượng hiến tối đa năm và các điều kiện cấm hiến chung) sang hệ thống đa ngôn ngữ.
+  * Tích hợp hàm `t()` của hook i18next và thuộc tính `dangerouslySetInnerHTML` để xử lý mượt mà các định dạng HTML (`<br />`, `<small>`) trong bảng dịch ở cả 6 ngôn ngữ (`ja`, `en`, `vi`, `zh`, `my`, `ne`).
+- Đồng bộ hóa toàn diện các tệp locales: Số lượng khóa dịch của mỗi tệp ngôn ngữ hiện đã được đồng bộ chuẩn hóa lên **356 khóa** khớp nhau hoàn toàn, có cơ chế tự động loại bỏ ký tự BOM khi đọc dữ liệu.
+
+## Kiem tra
+
+- Chạy linter (`npm run lint`): pass.
+- Chạy build (`npm run build`): pass.
+
+## File da thay doi chinh
+
+- `src/App.tsx`
+- `src/locales/ja.json`
+- `src/locales/en.json`
+- `src/locales/vi.json`
+- `src/locales/zh.json`
+- `src/locales/my.json`
+- `src/locales/ne.json`
+- `docs/nippo.md`
+
