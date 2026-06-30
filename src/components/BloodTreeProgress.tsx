@@ -167,12 +167,12 @@ function TreeIllustration({ stage }: { stage: -1 | 0 | 1 | 2 | 3 }) {
   return (
     <svg viewBox="0 0 300 360" aria-hidden="true" className="blood-tree-svg">
       <defs>
-        <linearGradient id="trunk-live" x1="0" y1="1" x2="0" y2="0">
+        <linearGradient id="trunk-live" gradientUnits="userSpaceOnUse" x1="150" y1="360" x2="150" y2="60">
           <stop offset="0%" stopColor="#271810" />
           <stop offset="60%" stopColor="#4e342e" />
           <stop offset="100%" stopColor="#8d6e63" />
         </linearGradient>
-        <linearGradient id="trunk-dry" x1="0" y1="1" x2="0" y2="0">
+        <linearGradient id="trunk-dry" gradientUnits="userSpaceOnUse" x1="150" y1="360" x2="150" y2="60">
           <stop offset="0%" stopColor="#37474f" />
           <stop offset="60%" stopColor="#78909c" />
           <stop offset="100%" stopColor="#cfd8dc" />
@@ -182,7 +182,7 @@ function TreeIllustration({ stage }: { stage: -1 | 0 | 1 | 2 | 3 }) {
       <ellipse cx="150" cy="354" rx="70" ry="8" fill="#5d4037" opacity={stage === -1 ? 0.15 : 0.25} />
 
       {/* Trunk */}
-      <line x1="150" y1="354" x2="150" y2="248" stroke={trunkStroke} strokeWidth="16" strokeLinecap="round" />
+      <path d="M142,354 L146,248 Q150,244 154,248 L158,354 Z" fill={trunkStroke} />
       {/* Left major branch */}
       <path d="M148,268 Q110,242 78,212 Q58,196 42,172" stroke={trunkStroke} fill="none" strokeWidth="8" strokeLinecap="round" />
       <path d="M42,172 Q28,155 25,135" stroke={trunkStroke} fill="none" strokeWidth="4" strokeLinecap="round" />
