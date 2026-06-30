@@ -476,3 +476,32 @@
 - `src/locales/ne.json`
 - `docs/nippo.md`
 
+---
+
+## Ngay: 2026-06-30 (session 9 - bo sung 3 ngon ngu: Uzbekistan, Bangladesh, Indonesia)
+
+## Noi dung da hoan thanh
+
+- **Bổ sung 3 ngôn ngữ mới**:
+  * Tích hợp **Uzbekistan (Oʻzbekcha)**, **Bangladesh (বাংলা)**, và **Indonesia (Bahasa Indonesia)** vào hệ thống.
+  * Tạo mới 3 tệp dịch tương ứng: `src/locales/uz.json`, `src/locales/bn.json`, và `src/locales/id.json` với đầy đủ **357 khóa dịch** đồng bộ 100% với các ngôn ngữ có sẵn.
+  * Cấu hình tệp `src/lib/i18n.ts` để nạp tài nguyên dịch của 3 ngôn ngữ mới này, nâng tổng số ngôn ngữ hỗ trợ lên 9 ngôn ngữ.
+  * Cập nhật danh sách `LANGS` trong `src/lib/shared.tsx` để hiển thị tùy chọn trên giao diện chọn ngôn ngữ của Header.
+- **Sửa lỗi TypeScript**:
+  * Sửa lỗi khai báo `useRef<number>()` trong `BloodTreeProgress.tsx` thành `useRef<number | undefined>(undefined)` để hỗ trợ biên dịch chặt chẽ hơn ở các môi trường.
+
+## Kiem tra
+
+- Chạy linter (`npm run lint`): pass.
+- Chạy build (`npm run build`): pass.
+
+## File da thay doi chinh
+
+- `src/lib/i18n.ts`
+- `src/lib/shared.tsx`
+- `src/components/BloodTreeProgress.tsx`
+- `src/locales/uz.json`
+- `src/locales/bn.json`
+- `src/locales/id.json`
+- `docs/nippo.md`
+
