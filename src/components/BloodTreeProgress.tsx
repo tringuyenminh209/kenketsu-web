@@ -5,6 +5,8 @@ import { EVENT_CONFIG } from '../config/event'
 
 const GOAL = EVENT_CONFIG.capacity
 
+const LOVE_MESSAGE_COUNT = 10
+
 const STAGES = [
   { max: 10,       icon: '🌱', labelKey: 'tree.stage0' as const },
   { max: 25,       icon: '🌿', labelKey: 'tree.stage1' as const },
@@ -252,7 +254,40 @@ export function BloodTreeProgress() {
   const [count, setCount] = useState<number | null>(null)
   const [visible, setVisible] = useState(false)
   const [previewStage, setPreviewStage] = useState<null | 0 | 1 | 2 | 3>(null)
+  const [card, setCard] = useState<{ idx: number; key: number } | null>(null)
+  const [hearts, setHearts] = useState<{ id: number; x: number; delay: number }[]>([])
+  const [hasTapped, setHasTapped] = useState(false)
+  const [shaking, setShaking] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
+  const cardTimer = useRef<number | undefined>(undefined)
+  const shakeTimer = useRef<number | undefined>(undefined)
+  const lastIdx = useRef(-1)
+
+  useEffect(() => () => {
+    if (cardTimer.current) clearTimeout(cardTimer.current)
+    if (shakeTimer.current) clearTimeout(shakeTimer.current)
+  }, [])
+
+  const handleTreeTap = () => {
+    let idx = Math.floor(Math.random() * LOVE_MESSAGE_COUNT)
+    if (idx === lastIdx.current) idx = (idx + 1) % LOVE_MESSAGE_COUNT
+    lastIdx.current = idx
+
+    const now = Date.now()
+    setCard({ idx, key: now })
+    setHearts(Array.from({ length: 6 }, (_, i) => ({
+      id: now + i,
+      x: 18 + Math.random() * 64,
+      delay: Math.random() * 0.25,
+    })))
+    setHasTapped(true)
+    setShaking(true)
+
+    if (cardTimer.current) clearTimeout(cardTimer.current)
+    cardTimer.current = window.setTimeout(() => setCard(null), 6000)
+    if (shakeTimer.current) clearTimeout(shakeTimer.current)
+    shakeTimer.current = window.setTimeout(() => setShaking(false), 700)
+  }
 
   useEffect(() => {
     const el = sectionRef.current
@@ -314,13 +349,59 @@ export function BloodTreeProgress() {
       </div>
 
       <div className="tree-body">
-        <div key={renderStage} className="tree-illustration">
-          <TreeIllustration stage={renderStage} />
-          {stageInfo && (
-            <p className="tree-stage-badge">
-              <span role="img" aria-hidden="true">{stageInfo.icon}</span>
-              {t(stageInfo.labelKey)}
-            </p>
+        <div
+          className={`tree-illustration ${renderStage >= 0 ? 'is-tappable' : ''}`}
+          onClick={renderStage >= 0 ? handleTreeTap : undefined}
+          role={renderStage >= 0 ? 'button' : undefined}
+          tabIndex={renderStage >= 0 ? 0 : undefined}
+          aria-label={renderStage >= 0 ? t('tree.clickHint') : undefined}
+          onKeyDown={(e) => {
+            if (renderStage >= 0 && (e.key === 'Enter' || e.key === ' ')) {
+              e.preventDefault()
+              handleTreeTap()
+            }
+          }}
+        >
+          <div key={renderStage} className="tree-illustration-inner">
+            <div className={`tree-shake-wrap ${shaking ? 'is-shaking' : ''}`}>
+              <TreeIllustration stage={renderStage} />
+            </div>
+            {stageInfo && (
+              <p className="tree-stage-badge">
+                <span role="img" aria-hidden="true">{stageInfo.icon}</span>
+                {t(stageInfo.labelKey)}
+              </p>
+            )}
+          </div>
+
+          {renderStage >= 0 && !hasTapped && (
+            <span className="tree-tap-hint">{t('tree.clickHint')}</span>
+          )}
+
+          {hearts.map((h) => (
+            <span
+              key={h.id}
+              className="tree-heart-particle"
+              style={{ left: `${h.x}%`, animationDelay: `${h.delay}s` }}
+              aria-hidden="true"
+            >
+              ❤
+            </span>
+          ))}
+
+          {card && (
+            <div
+              key={card.key}
+              className="tree-thanks-card"
+              onClick={(e) => { e.stopPropagation(); setCard(null) }}
+            >
+              <span className="tree-thanks-heart" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg>
+              </span>
+              <p className="tree-thanks-msg">{t(`tree.loveMessage.${card.idx}`)}</p>
+            </div>
           )}
         </div>
 
