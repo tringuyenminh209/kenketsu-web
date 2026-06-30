@@ -230,7 +230,6 @@ export function BloodTreeProgress() {
             <p className="tree-stage-badge">
               <span role="img" aria-hidden="true">{stageInfo.icon}</span>
               {t(stageInfo.labelKey)}
-              {previewStage !== null && <span className="tree-preview-tag">PREVIEW</span>}
             </p>
           )}
         </div>
