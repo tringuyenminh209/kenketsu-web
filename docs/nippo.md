@@ -396,3 +396,29 @@
 - `src/locales/ne.json`
 - `docs/nippo.md`
 
+---
+
+## Ngay: 2026-06-30 (session 6 - bo sung da ngon ngu cho FAQ va Quick Access)
+
+## Noi dung da hoan thanh
+
+- **Đa ngôn ngữ hóa phần FAQ (Câu hỏi thường gặp)**: Tích hợp hàm `t()` và chuyển toàn bộ nội dung của 4 câu hỏi & câu trả lời từ tiếng Nhật cứng sang 6 tệp dịch (`ja`, `en`, `vi`, `zh`, `my`, `ne`) đồng bộ 100%.
+- **Đa ngôn ngữ hóa phần Quick Access (Thanh truy cập nhanh)**: Chuyển 4 thẻ liên kết nhanh ("参加申込", "イベント情報", "注意事項", "献血とは") và các phụ đề tương ứng sang cơ chế đa ngôn ngữ tương ứng với 6 locales.
+- Đồng bộ hóa toàn diện các tệp locales: Số lượng khóa dịch của mỗi tệp ngôn ngữ hiện đã đạt 303 khóa khớp nhau hoàn toàn.
+
+## Kiem tra
+
+- Chạy linter (`npm run lint`): pass.
+- Chạy build (`npm run build`): pass.
+
+## File da thay doi chinh
+
+- `src/App.tsx`
+- `src/locales/ja.json`
+- `src/locales/en.json`
+- `src/locales/vi.json`
+- `src/locales/zh.json`
+- `src/locales/my.json`
+- `src/locales/ne.json`
+- `docs/nippo.md`
+
