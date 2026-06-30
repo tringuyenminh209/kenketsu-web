@@ -857,7 +857,7 @@ a:focus-visible {
 
 .reason-grid {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 18px;
   padding: 52px 72px;
   border-bottom: 1px solid var(--line-red);
@@ -866,8 +866,11 @@ a:focus-visible {
     white;
 }
 
-.reason-grid article {
-  min-height: 260px;
+.reason-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: 220px;
   padding: 28px;
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -880,91 +883,58 @@ a:focus-visible {
     transform 220ms ease;
 }
 
-.reason-grid article:hover {
+.reason-card:hover {
   background: #fffafa;
   box-shadow: 0 22px 56px rgba(206, 0, 23, 0.1);
   transform: translateY(-2px);
 }
 
-.reason-story {
-  grid-column: span 5;
-  display: grid;
-  grid-template-rows: 220px 1fr;
-  overflow: hidden;
-  padding: 0 !important;
-}
-
-.reason-story > div:last-child {
-  padding: 28px;
-}
-
-.reason-visual {
-  overflow: hidden;
-  border-bottom: 1px solid var(--border);
-}
-
-.reason-visual img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.reason-process {
-  grid-column: span 4;
-}
-
-.reason-community {
-  grid-column: span 3;
+.reason-card--accent {
   background:
     radial-gradient(circle at 88% 12%, rgba(206, 0, 23, 0.08), transparent 34%),
-    white !important;
+    rgba(255, 255, 255, 0.86);
 }
 
-.reason-grid h2 {
-  margin: 0 0 16px;
+.reason-card h2 {
+  margin: 14px 0 10px;
   color: var(--ink);
-  font-size: 22px;
+  font-size: 20px;
 }
 
-.reason-grid p {
-  max-width: 460px;
+.reason-card p {
   color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
 }
 
-.reason-note {
-  margin-bottom: 18px;
-}
-
-.reason-community ul {
+.reason-card ul {
   display: grid;
   gap: 10px;
   padding: 0;
-  margin: 22px 0 0;
+  margin: 18px 0 0;
   list-style: none;
 }
 
-.reason-community li {
+.reason-card li {
   position: relative;
-  padding-left: 24px;
+  padding-left: 20px;
   color: var(--ink);
-  font-size: 14px;
-  font-weight: 800;
+  font-size: 13px;
+  font-weight: 700;
 }
 
-.reason-community li::before {
+.reason-card li::before {
   content: '';
   position: absolute;
   left: 0;
-  top: 7px;
-  width: 9px;
-  height: 9px;
+  top: 6px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--red);
-  box-shadow: 0 0 0 4px rgba(206, 0, 23, 0.1);
+  box-shadow: 0 0 0 3px rgba(206, 0, 23, 0.1);
 }
 
-.reason-grid a,
 .text-link {
   display: inline-flex;
   margin-top: 18px;
@@ -972,6 +942,26 @@ a:focus-visible {
   font-size: 14px;
   font-weight: 800;
   text-decoration: none;
+}
+
+/* ── Process section (独立した献血の流れ) ─────────────── */
+.process-section {
+  padding: 52px 72px;
+  border-bottom: 1px solid var(--line-red);
+  background: white;
+}
+
+.process-header {
+  margin-bottom: 28px;
+}
+
+.process-section .step-list {
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 24px;
+}
+
+.process-section .process-detail {
+  grid-template-columns: 1fr 1fr;
 }
 
 .step-list {
@@ -2857,12 +2847,19 @@ th {
 
   .reason-grid {
     padding: 36px;
+    grid-template-columns: 1fr;
   }
 
-  .reason-story,
-  .reason-process,
-  .reason-community {
-    grid-column: 1 / -1;
+  .process-section {
+    padding: 36px;
+  }
+
+  .process-section .step-list {
+    grid-template-columns: 1fr;
+  }
+
+  .process-section .process-detail {
+    grid-template-columns: 1fr;
   }
 
   .knowledge-lead {
@@ -3058,17 +3055,8 @@ th {
     gap: 14px;
   }
 
-  .reason-grid article {
+  .reason-card {
     min-height: auto;
-    padding: 22px;
-  }
-
-  .reason-story {
-    grid-template-rows: 190px 1fr;
-    padding: 0 !important;
-  }
-
-  .reason-story > div:last-child {
     padding: 22px;
   }
 

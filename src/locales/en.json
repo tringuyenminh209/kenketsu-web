@@ -503,5 +503,24 @@
     "a3": "In rare cases, you may feel slightly unwell immediately after donating, but our staff will fully support you. Please eat and sleep well on the day, and rest for 15 to 30 minutes after donating.",
     "q4": "Is the privacy of the blood donor protected?",
     "a4": "Blood test results and personal information are strictly managed and will never be provided to third parties. They are handled appropriately based on the Japanese Red Cross Society's personal info protection policy."
+  },
+  "quickAccess": {
+    "ariaLabel": "Quick Access",
+    "register": {
+      "label": "Register",
+      "sub": "Go to form"
+    },
+    "info": {
+      "label": "Event Info",
+      "sub": "Date, Location, Items"
+    },
+    "precautions": {
+      "label": "Precautions",
+      "sub": "Preparation"
+    },
+    "about": {
+      "label": "What is Blood Donation",
+      "sub": "Mechanism & Significance"
+    }
   }
 }

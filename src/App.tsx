@@ -9,7 +9,6 @@ import benefitHealthCheckImage from './assets/benefit-health-check.webp'
 import benefitLifeSupportImage from './assets/benefit-life-support.webp'
 import benefitCampusSolidarityImage from './assets/benefit-campus-solidarity.webp'
 import benefitSocialContributionImage from './assets/benefit-social-contribution.webp'
-import reasonSafetyImage from './assets/reason-safety.webp'
 import processPrecheckImage from './assets/process/process-precheck.webp'
 import processInterviewImage from './assets/process/process-interview-test.webp'
 import processDonationImage from './assets/process/process-donation.webp'
@@ -20,7 +19,6 @@ import { BloodTreeProgress } from './components/BloodTreeProgress'
 import { ForeignStudentSection } from './components/ForeignStudentSection'
 import { ImpactSection } from './components/ImpactSection'
 import { LastYearSection } from './components/LastYearSection'
-import { LottieIcon } from './components/LottieIcon'
 import './App.css'
 
 const AdminPage = lazy(() => import('./pages/AdminPage'))
@@ -212,7 +210,7 @@ function UserPage() {
             </div>
             <div className="impact-row" aria-label={t('hero.featuresAriaLabel')}>
               <article>
-                <LottieIcon src="/animations/heartbeat.json" size={36} />
+                <Icon type="heart" />
                 <strong>{t('hero.feature1Title')}</strong>
                 <span>{t('hero.feature1Desc')}</span>
               </article>
@@ -230,19 +228,16 @@ function UserPage() {
           </div>
           <figure className="hero-media">
             <img src={heroImage} alt={t('hero.imageAlt')} />
-            <div className="hero-lottie-badge">
-              <LottieIcon src="/animations/blood-drop.json" size={72} />
-            </div>
           </figure>
         </section>
 
         {/* Quick-access nav — saiseikai style */}
-        <nav className="quick-access" aria-label="クイックアクセス">
+        <nav className="quick-access" aria-label={t('quickAccess.ariaLabel')}>
           {([
-            { href: '#register', icon: 'users' as const, label: '参加申込', sub: '申込フォームへ' },
-            { href: '#info', icon: 'calendar' as const, label: 'イベント情報', sub: '日時・場所・持ち物' },
-            { href: '#precautions', icon: 'shield' as const, label: '注意事項', sub: '当日までの準備' },
-            { href: '#knowledge', icon: 'book' as const, label: '献血とは', sub: '仕組みと意義' },
+            { href: '#register', icon: 'users' as const, label: t('quickAccess.register.label'), sub: t('quickAccess.register.sub') },
+            { href: '#info', icon: 'calendar' as const, label: t('quickAccess.info.label'), sub: t('quickAccess.info.sub') },
+            { href: '#precautions', icon: 'shield' as const, label: t('quickAccess.precautions.label'), sub: t('quickAccess.precautions.sub') },
+            { href: '#knowledge', icon: 'book' as const, label: t('quickAccess.about.label'), sub: t('quickAccess.about.sub') },
           ] as const).map(({ href, icon, label, sub }) => (
             <a key={href} href={href} className="qa-card">
               <div className="qa-icon">
@@ -426,54 +421,18 @@ function UserPage() {
         </section>
 
         <section className="reason-grid reveal" id="reason">
-          <article className="reason-story motion-card">
-            <div className="reason-visual">
-              <img src={reasonSafetyImage} alt={t('reason.imageAlt')} />
-            </div>
-            <div>
-              <Icon type="heart" />
-              <h2>{t('reason.whyTitle')}</h2>
-              <p>{t('reason.whyBody')}</p>
-              <a href="#benefits">{t('reason.whyLink')}</a>
-            </div>
+          <article className="reason-card motion-card">
+            <Icon type="heart" />
+            <h2>{t('reason.whyTitle')}</h2>
+            <p>{t('reason.whyBody')}</p>
           </article>
-          <article className="reason-process motion-card">
-            <div className="section-title">
-              <Icon type="shield" />
-              <h2>{t('reason.processTitle')}</h2>
-            </div>
-            <p className="reason-note">{t('reason.processNote')}</p>
-            <div className="step-list" role="list">
-              {steps.map(({ title, text }, index) => (
-                <button
-                  className={`step-card ${selectedProcessStep === index ? 'is-active' : ''}`}
-                  key={title}
-                  type="button"
-                  onClick={() => setSelectedProcessStep(index)}
-                  aria-pressed={selectedProcessStep === index}
-                >
-                  <span>{title}</span>
-                  <small>{text}</small>
-                  <em>{t('reason.stepReadMore')}</em>
-                </button>
-              ))}
-            </div>
-            <article className="process-detail" aria-live="polite">
-              <img src={activeProcessStep.image} alt={t('reason.processImageAlt', { title: activeProcessStep.title })} />
-              <div>
-                <span className="detail-label">{t('reason.processDetailLabel')}</span>
-                <h3>{activeProcessStep.title}</h3>
-                <p>{activeProcessStep.detail}</p>
-                <ul>
-                  {activeProcessStep.checks.map((check) => (
-                    <li key={check}>{check}</li>
-                  ))}
-                </ul>
-              </div>
-            </article>
+          <article className="reason-card motion-card">
+            <Icon type="shield" />
+            <h2>{t('reason.processTitle')}</h2>
+            <p>{t('reason.processNote')}</p>
           </article>
-          <article className="reason-community motion-card">
-            <Icon type="users" />
+          <article className="reason-card reason-card--accent motion-card">
+            <Icon type="globe" />
             <h2>{t('reason.communityTitle')}</h2>
             <p>{t('reason.communityBody')}</p>
             <ul>
@@ -481,6 +440,44 @@ function UserPage() {
                 <li key={item}>{item}</li>
               ))}
             </ul>
+          </article>
+        </section>
+
+        <section className="process-section reveal" id="process">
+          <div className="process-header">
+            <div className="section-title">
+              <Icon type="shield" />
+              <h2>{t('reason.processTitle')}</h2>
+            </div>
+            <p className="section-helper">{t('reason.processNote')}</p>
+          </div>
+          <div className="step-list" role="list">
+            {steps.map(({ title, text }, index) => (
+              <button
+                className={`step-card ${selectedProcessStep === index ? 'is-active' : ''}`}
+                key={title}
+                type="button"
+                onClick={() => setSelectedProcessStep(index)}
+                aria-pressed={selectedProcessStep === index}
+              >
+                <span>{title}</span>
+                <small>{text}</small>
+                <em>{t('reason.stepReadMore')}</em>
+              </button>
+            ))}
+          </div>
+          <article className="process-detail" aria-live="polite">
+            <img src={activeProcessStep.image} alt={t('reason.processImageAlt', { title: activeProcessStep.title })} />
+            <div>
+              <span className="detail-label">{t('reason.processDetailLabel')}</span>
+              <h3>{activeProcessStep.title}</h3>
+              <p>{activeProcessStep.detail}</p>
+              <ul>
+                {activeProcessStep.checks.map((check) => (
+                  <li key={check}>{check}</li>
+                ))}
+              </ul>
+            </div>
           </article>
         </section>
 

@@ -503,5 +503,24 @@
     "a3": "Một số ít trường hợp có thể cảm thấy hơi mệt ngay sau khi hiến, nhưng nhân viên y tế sẽ hỗ trợ bạn chu đáo. Hãy ăn uống đầy đủ và ngủ ngon trước ngày hiến máu, đồng thời nghỉ ngơi từ 15-30 phút sau khi hiến.",
     "q4": "Thông tin cá nhân và kết quả máu hiến có được bảo mật không?",
     "a4": "Kết quả xét nghiệm máu và thông tin cá nhân được quản lý nghiêm ngặt và không bao giờ được cung cấp cho bên thứ ba. Tất cả được xử lý thích đáng tuân theo chính sách bảo vệ thông tin cá nhân của Hội Chữ thập đỏ Nhật Bản."
+  },
+  "quickAccess": {
+    "ariaLabel": "Truy cập nhanh",
+    "register": {
+      "label": "Đăng ký tham gia",
+      "sub": "Đi đến biểu mẫu"
+    },
+    "info": {
+      "label": "Thông tin sự kiện",
+      "sub": "Thời gian, Địa điểm, Hành lý"
+    },
+    "precautions": {
+      "label": "Lưu ý quan trọng",
+      "sub": "Chuẩn bị trước khi đi"
+    },
+    "about": {
+      "label": "Về hiến máu",
+      "sub": "Cơ chế và Ý nghĩa"
+    }
   }
 }
