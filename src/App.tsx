@@ -22,6 +22,7 @@ import { LastYearSection } from './components/LastYearSection'
 import './App.css'
 
 const AdminPage = lazy(() => import('./pages/AdminPage'))
+const Flyer = lazy(() => import('./pages/Flyer').then(m => ({ default: m.Flyer })))
 
 function normalizeBirthDateInput(value: string) {
   const trimmed = value.trim()
@@ -858,6 +859,14 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<UserPage />} />
+        <Route
+          path="/flyer"
+          element={
+            <Suspense fallback={<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>読み込み中...</div>}>
+              <Flyer />
+            </Suspense>
+          }
+        />
         <Route
           path="/admin"
           element={
