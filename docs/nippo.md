@@ -614,3 +614,26 @@
 - `src/App.css`
 - `docs/nippo.md`
 
+---
+
+## Ngay: 2026-07-01 (session 14 - sua loi responsive va ngon ngu cua dialog tieu chuan hien mau)
+
+## Noi dung da hoan thanh
+
+- **Sửa lỗi hiển thị Dialog trên thiết bị di động (Mobile/Tablet)**:
+  * Thêm `padding-bottom: 32px` vào `.eligibility-table-wrap` để tạo không gian trống phía dưới bảng. Điều này ngăn chặn thanh cuộn ngang đè lên và che mất dòng chữ cuối cùng của bảng.
+  * Thêm media query `@media (max-width: 768px)` để tinh chỉnh kích thước: giảm padding của overlay (`10px`), bo góc hộp thoại (`12px`), giảm kích thước chữ của bảng xuống `11px`, thu hẹp khoảng cách padding ở các ô để tối ưu hóa không gian hiển thị trên màn hình dọc nhỏ (iPad/iPhone).
+- **Sửa lỗi dịch tiếng Việt chưa tự nhiên**:
+  * Chỉnh sửa các cụm từ `"Từ cùng thứ đó sau 4/8/2 tuần"` dịch từ tiếng Nhật (`同じ曜日から`) thành cụm từ tiếng Việt tự nhiên và chuẩn y khoa hơn: `"Kể từ cùng ngày thứ trong tuần sau 4/8/2 tuần"`.
+
+## Kiem tra
+
+- Chạy build (`npm run build`): pass.
+- Chạy linter (`npm run lint`): pass.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `src/locales/vi.json`
+- `docs/nippo.md`
+
