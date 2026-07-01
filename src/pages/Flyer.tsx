@@ -9,64 +9,58 @@ export function Flyer() {
     <div className="flyer-shell">
       <div className="flyer-page" style={{ backgroundImage: `url(${flyerBg})` }}>
 
-        {/* ── TOP ── */}
-        <div className="fp-top">
-          <p className="fp-eyebrow">{EVENT_CONFIG.organizer} 主催</p>
-          <h1 className="fp-title">献血しませんか？</h1>
-          <p className="fp-tagline">あなたの血液が、誰かの命をつなぎます</p>
-        </div>
-
-        {/* rabbit shows through */}
+        {/* rabbit illustration shows through here */}
         <div className="fp-spacer" />
 
-        {/* ── BOTTOM ── */}
-        <div className="fp-bottom">
+        {/* ── all text below rabbit ── */}
+        <div className="fp-content">
 
-          {/* Event info rows with icons */}
-          <div className="fp-info">
-            <div className="fp-row">
-              <span className="fp-icon">📅</span>
-              <div className="fp-row-body">
-                <span className="fp-label">日にち</span>
-                <p className="fp-date">{EVENT_CONFIG.date}</p>
-              </div>
+          <p className="fp-loc">{EVENT_CONFIG.location}で</p>
+          <h1 className="fp-title">献血しませんか？</h1>
+          <p className="fp-desc">
+            献血はみんなでつなぐ命のリレーです<br />
+            あなたの血液を必要としている誰かのために<br />
+            ECC専門学校での献血にご協力ください
+          </p>
+
+          <div className="fp-infobox">
+            <div className="fp-irow">
+              <span className="fp-ikey">日にち</span>
+              <strong className="fp-ival fp-ival--date">{EVENT_CONFIG.date}</strong>
             </div>
-            <div className="fp-row">
-              <span className="fp-icon">🕐</span>
-              <div className="fp-row-body">
-                <span className="fp-label">時　間</span>
-                <p className="fp-time">{EVENT_CONFIG.time}</p>
-              </div>
+            <div className="fp-irow">
+              <span className="fp-ikey">時　間</span>
+              <strong className="fp-ival">{EVENT_CONFIG.time}</strong>
             </div>
-            <div className="fp-row">
-              <span className="fp-icon">📍</span>
-              <div className="fp-row-body">
-                <span className="fp-label">会　場</span>
-                <p className="fp-place">{EVENT_CONFIG.location}</p>
-                <p className="fp-place">{EVENT_CONFIG.locationDetail}</p>
-              </div>
+            <div className="fp-irow">
+              <span className="fp-ikey">会　場</span>
+              <strong className="fp-ival">
+                {EVENT_CONFIG.location}<br />
+                {EVENT_CONFIG.locationDetail}
+              </strong>
             </div>
           </div>
 
-          {/* Gift + QR */}
-          <div className="fp-gift-qr">
-            <div className="fp-gift-block">
-              <p className="fp-gift">🎁 献血ご協力者全員に記念品プレゼント！</p>
-              <p className="fp-gift-sub">{EVENT_CONFIG.sponsor}よりご提供</p>
-              <p className="fp-footer">主催：{EVENT_CONFIG.organizer}　後援：日本赤十字社</p>
+          <div className="fp-footer-row">
+            <div className="fp-footer-left">
+              <p className="fp-gift">
+                献血にご協力いただいた方には、<br />
+                <strong>🎁 ライオンズクラブより記念品プレゼント</strong>
+              </p>
+              <p className="fp-org">主催：{EVENT_CONFIG.organizer}　後援：日本赤十字社</p>
             </div>
-            <div className="fp-qr-wrap">
+            <div className="fp-qr">
               <div className="fp-qr-box">
                 <QRCodeSVG
                   value={SITE_URL}
-                  size={76}
+                  size={72}
                   bgColor="#ffffff"
                   fgColor="#0f172a"
                   level="M"
                   marginSize={1}
                 />
               </div>
-              <p className="fp-qr-caption">事前申込QR</p>
+              <p className="fp-qr-cap">事前申込QR</p>
             </div>
           </div>
 
