@@ -8,172 +8,103 @@ export function Flyer() {
     <div className="flyer-shell">
       <div className="flyer-page">
 
-        {/* ── Header ── */}
-        <header className="flyer-header">
-          <div className="flyer-header-accent" />
-          <div className="flyer-header-body">
-            <div className="flyer-drop-icon" aria-hidden="true">
-              <svg viewBox="0 0 48 64" fill="none">
-                <path d="M24 4C24 4 4 28 4 42C4 53.046 13.059 62 24 62C34.941 62 44 53.046 44 42C44 28 24 4 24 4Z" fill="white" opacity="0.92"/>
-                <path d="M18 46C18 42.686 20.686 40 24 40C27.314 40 30 42.686 30 46" stroke="rgba(206,0,23,0.5)" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
-              </svg>
-            </div>
-            <div className="flyer-header-text">
-              <p className="flyer-header-label">ECC社会貢献センター主催</p>
-              <h1 className="flyer-title">献血ボランティア活動</h1>
-              <p className="flyer-tagline">あなたの「血液」が、誰かの「命」をつなぐ</p>
-            </div>
+        {/* ── Hero ── */}
+        <div className="flyer-hero">
+          <div className="flyer-hero-bg" aria-hidden="true">
+            <svg className="flyer-hero-drop" viewBox="0 0 120 160" fill="none">
+              <path d="M60 8C60 8 8 72 8 108C8 136.719 31.386 160 60 160C88.614 160 112 136.719 112 108C112 72 60 8 60 8Z" fill="rgba(255,255,255,0.10)"/>
+              <path d="M60 8C60 8 8 72 8 108C8 136.719 31.386 160 60 160C88.614 160 112 136.719 112 108C112 72 60 8 60 8Z" stroke="rgba(255,255,255,0.22)" strokeWidth="2" fill="none"/>
+            </svg>
+            <svg className="flyer-hero-drop flyer-hero-drop--sm" viewBox="0 0 80 108" fill="none">
+              <path d="M40 5C40 5 5 48 5 72C5 91.33 20.67 107 40 107C59.33 107 75 91.33 75 72C75 48 40 5 40 5Z" fill="rgba(255,255,255,0.07)"/>
+            </svg>
           </div>
-        </header>
 
-        {/* ── Event Info ── */}
-        <section className="flyer-info-band">
-          <div className="flyer-info-item">
-            <span className="flyer-info-icon">📅</span>
+          <p className="flyer-eyebrow">ECC社会貢献センター 主催イベント</p>
+          <h1 className="flyer-headline">
+            <span className="flyer-headline-line1">献血に</span>
+            <span className="flyer-headline-line2">参加しませんか？</span>
+          </h1>
+          <p className="flyer-subline">
+            あなたの血液が、誰かの命をつなぎます
+          </p>
+
+          <div className="flyer-heart-row" aria-hidden="true">
+            <span>❤</span><span>❤</span><span>❤</span>
+          </div>
+        </div>
+
+        {/* ── Event details ── */}
+        <div className="flyer-details">
+          <div className="flyer-detail-card">
+            <span className="flyer-detail-icon">📅</span>
             <div>
-              <span className="flyer-info-label">日時</span>
+              <span className="flyer-detail-label">日時</span>
               <strong>{EVENT_CONFIG.date}</strong>
-              <span className="flyer-info-sub">{EVENT_CONFIG.time}</span>
+              <span className="flyer-detail-sub">{EVENT_CONFIG.time}</span>
             </div>
           </div>
-          <div className="flyer-info-divider" />
-          <div className="flyer-info-item">
-            <span className="flyer-info-icon">📍</span>
+          <div className="flyer-detail-card">
+            <span className="flyer-detail-icon">📍</span>
             <div>
-              <span className="flyer-info-label">場所</span>
+              <span className="flyer-detail-label">場所</span>
               <strong>{EVENT_CONFIG.location}</strong>
-              <span className="flyer-info-sub">{EVENT_CONFIG.locationDetail}</span>
+              <span className="flyer-detail-sub">{EVENT_CONFIG.locationDetail}</span>
             </div>
           </div>
-          <div className="flyer-info-divider" />
-          <div className="flyer-info-item">
-            <span className="flyer-info-icon">👥</span>
+          <div className="flyer-detail-card flyer-detail-card--gift">
+            <span className="flyer-detail-icon">🎁</span>
             <div>
-              <span className="flyer-info-label">定員</span>
-              <strong>{EVENT_CONFIG.capacity}名</strong>
-              <span className="flyer-info-sub">事前予約推奨</span>
+              <span className="flyer-detail-label">特典</span>
+              <strong>参加者全員に記念品プレゼント！</strong>
+              <span className="flyer-detail-sub">ライオンズクラブ様よりご提供</span>
             </div>
           </div>
-        </section>
+        </div>
 
-        {/* ── Main body ── */}
-        <div className="flyer-body">
-
-          {/* Left column */}
-          <div className="flyer-col">
-
-            {/* Gift badge */}
-            <div className="flyer-gift-badge">
-              <span className="flyer-gift-icon" aria-hidden="true">🎁</span>
-              <div>
-                <strong>献血記念品プレゼント</strong>
-                <p>ライオンズクラブ様より、献血ご協力者全員に記念品を贈呈いたします。</p>
-              </div>
-            </div>
-
-            {/* Benefits */}
-            <div className="flyer-section">
-              <h2 className="flyer-section-title">
-                <span className="flyer-section-num">01</span>
-                献血で得られること
-              </h2>
-              <ul className="flyer-benefits">
-                <li>
-                  <span className="flyer-benefit-icon">💉</span>
-                  <div>
-                    <strong>無料で血液検査が受けられる</strong>
-                    <p>血液型・感染症・血球数などを無料チェック。結果は後日お知らせ。</p>
-                  </div>
-                </li>
-                <li>
-                  <span className="flyer-benefit-icon">❤️</span>
-                  <div>
-                    <strong>1回の献血で最大3人を救える</strong>
-                    <p>分離された血液成分がそれぞれ別の患者さんの治療に使われます。</p>
-                  </div>
-                </li>
-                <li>
-                  <span className="flyer-benefit-icon">🌱</span>
-                  <div>
-                    <strong>社会貢献活動の一歩になる</strong>
-                    <p>所要時間は約30〜60分。学生でも気軽に参加できます。</p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            {/* Precautions */}
-            <div className="flyer-section">
-              <h2 className="flyer-section-title">
-                <span className="flyer-section-num">02</span>
-                参加前の注意事項
-              </h2>
-              <ul className="flyer-checks">
-                <li>前日・当日は十分な睡眠と食事をとってください</li>
-                <li>激しい運動・飲酒の翌日は献血できません</li>
-                <li>来日から4週間以上経過している方が対象です</li>
-                <li>体調が優れない方は参加をご遠慮ください</li>
-                <li>問診は日本語で行います（外国人学生も参加可）</li>
-              </ul>
-            </div>
+        {/* ── Notes ── */}
+        <div className="flyer-notes">
+          <p className="flyer-notes-title">ご参加にあたって</p>
+          <div className="flyer-notes-grid">
+            <span>✔ 当日は食事をとってから来てください</span>
+            <span>✔ 来日4週間以上経過している方が対象</span>
+            <span>✔ 体調の優れない方はご遠慮ください</span>
+            <span>✔ 外国人留学生も参加歓迎です</span>
           </div>
+        </div>
 
-          {/* Right column */}
-          <div className="flyer-col flyer-col--right">
-
-            {/* QR code */}
-            <div className="flyer-qr-card">
-              <p className="flyer-qr-label">詳細情報・事前申込はこちら</p>
-              <div className="flyer-qr-code">
-                <QRCodeSVG
-                  value={SITE_URL}
-                  size={160}
-                  bgColor="#ffffff"
-                  fgColor="#101828"
-                  level="M"
-                  marginSize={2}
-                />
-              </div>
-              <p className="flyer-qr-url">{SITE_URL.replace('https://', '')}</p>
-              <p className="flyer-qr-note">
-                QRコードを読み取ると、<br />
-                イベント情報・申込フォームに<br />
-                アクセスできます。
-              </p>
-            </div>
-
-            {/* Flow */}
-            <div className="flyer-section">
-              <h2 className="flyer-section-title">
-                <span className="flyer-section-num">03</span>
-                当日の流れ
-              </h2>
-              <ol className="flyer-flow">
-                <li><span>受付・問診票記入</span></li>
-                <li><span>医師による問診</span></li>
-                <li><span>血圧・体重測定</span></li>
-                <li><span>献血（約10〜15分）</span></li>
-                <li><span>休憩・記念品受取</span></li>
-              </ol>
-            </div>
-
-            {/* Sponsors */}
-            <div className="flyer-sponsors">
-              <p className="flyer-sponsors-label">主催・協力</p>
-              <p className="flyer-sponsors-body">{EVENT_CONFIG.organizer}</p>
-              <p className="flyer-sponsors-body">{EVENT_CONFIG.sponsor}</p>
-              <p className="flyer-sponsors-body">日本赤十字社（後援）</p>
-            </div>
+        {/* ── QR CTA ── */}
+        <div className="flyer-cta">
+          <div className="flyer-cta-left">
+            <p className="flyer-cta-head">詳細・事前予約はこちら</p>
+            <p className="flyer-cta-desc">
+              事前予約で当日の手続きがスムーズに！<br />
+              予約は必須ではありませんが、推奨します。
+            </p>
+            <p className="flyer-cta-url">{SITE_URL.replace('https://', '')}</p>
+          </div>
+          <div className="flyer-qr-wrap">
+            <QRCodeSVG
+              value={SITE_URL}
+              size={148}
+              bgColor="#ffffff"
+              fgColor="#0f172a"
+              level="M"
+              marginSize={2}
+            />
           </div>
         </div>
 
         {/* ── Footer ── */}
         <footer className="flyer-footer">
-          <p>ご不明な点は当日スタッフまでお気軽にお声がけください</p>
+          <span>主催：{EVENT_CONFIG.organizer}</span>
+          <span className="flyer-footer-dot">·</span>
+          <span>協力：{EVENT_CONFIG.sponsor}</span>
+          <span className="flyer-footer-dot">·</span>
+          <span>後援：日本赤十字社</span>
         </footer>
       </div>
 
-      {/* Print button (screen only) */}
       <button className="flyer-print-btn no-print" onClick={() => window.print()}>
         🖨️ 印刷 / Print
       </button>
