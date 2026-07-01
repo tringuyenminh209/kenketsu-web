@@ -1,4 +1,4 @@
-﻿{
+{
   "nav": {
     "know": "Belajar",
     "benefits": "Manfaat",
@@ -569,12 +569,12 @@
     "cellHemoPlatelet": "12.0g/dL atau lebih",
     "cellPlateletCountVal": "150,000-600,000 /μL",
     "cellInterval200": "200mL Lengkap",
-    "cellInterval200Val": "Mulai hari yang sama dalam seminggu 4 minggu kemudian untuk keduanya",
+    "cellInterval200Val": "Mulai hari yang sama di 4 minggu berikutnya untuk keduanya",
     "cellInterval400": "400mL Lengkap",
-    "cellInterval400Val": "Pria: dari 12 minggu kemudian,<br />Wanita: dari 16 minggu kemudian (hari yang sama)",
-    "cellInterval400ValPlasma": "Mulai hari yang sama dalam seminggu 8 minggu kemudian untuk keduanya",
+    "cellInterval400Val": "Pria: setelah 12 minggu,<br />Wanita: setelah 16 minggu (di hari yang sama dalam seminggu)",
+    "cellInterval400ValPlasma": "Mulai hari yang sama di 8 minggu berikutnya untuk keduanya",
     "cellIntervalPlasma": "Komponen Plasma",
-    "cellIntervalPlasmaVal": "Mulai hari yang sama dalam seminggu 2 minggu kemudian untuk keduanya",
+    "cellIntervalPlasmaVal": "Mulai hari yang sama di 2 minggu berikutnya untuk keduanya",
     "cellIntervalPlatelet": "Komponen Trombosit",
     "cellIntervalPlateletVal": "Mungkin dilakukan setelah 1 minggu jika plasma tidak dikumpulkan. Jika mendonorkan darah 4 kali dalam kurun waktu 4 minggu, tunggu 4 minggu hingga donor berikutnya.",
     "cellAnnualVolumeVal": "Menggabungkan darah lengkap 200mL & 400mL:<br />Pria: dalam 1,200mL / Wanita: dalam 800mL",
