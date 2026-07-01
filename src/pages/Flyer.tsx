@@ -48,10 +48,10 @@ export function Flyer() {
             </div>
           </div>
 
-          {/* 4. Gift line */}
+          {/* 4. 献血の意義 */}
           <p className="fp-gift-text">
-            🎁 献血にご協力いただいた方全員に<br />
-            ライオンズクラブより記念品をプレゼントいたします！
+            一人の献血で最大３人の命が救われます<br />
+            あなたの一歩が、誰かの未来を守ります
           </p>
 
           {/* 5. Footer */}
@@ -64,7 +64,7 @@ export function Flyer() {
               <div className="fp-qr-box">
                 <QRCodeSVG
                   value={SITE_URL}
-                  size={76}
+                  size={108}
                   bgColor="#ffffff"
                   fgColor="#0f172a"
                   level="M"
