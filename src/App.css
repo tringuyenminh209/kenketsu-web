@@ -3618,14 +3618,14 @@ th {
   position: relative;
 }
 
-/* Subtle flat overlay — text is big enough for contrast */
+/* Minimal overlay for print — keep bg image vivid */
 .flyer-page::before {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background: rgba(55, 0, 0, 0.2);
+  background: rgba(40, 0, 0, 0.06);
 }
 
 /* All children above the overlay */
