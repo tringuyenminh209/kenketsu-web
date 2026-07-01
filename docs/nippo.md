@@ -623,8 +623,10 @@
 - **Sửa lỗi hiển thị Dialog trên thiết bị di động (Mobile/Tablet)**:
   * Thêm `padding-bottom: 32px` vào `.eligibility-table-wrap` để tạo không gian trống phía dưới bảng. Điều này ngăn chặn thanh cuộn ngang đè lên và che mất dòng chữ cuối cùng của bảng.
   * Thêm media query `@media (max-width: 768px)` để tinh chỉnh kích thước: giảm padding của overlay (`10px`), bo góc hộp thoại (`12px`), giảm kích thước chữ của bảng xuống `11px`, thu hẹp khoảng cách padding ở các ô để tối ưu hóa không gian hiển thị trên màn hình dọc nhỏ (iPad/iPhone).
-- **Sửa lỗi dịch tiếng Việt chưa tự nhiên**:
-  * Chỉnh sửa các cụm từ `"Từ cùng thứ đó sau 4/8/2 tuần"` dịch từ tiếng Nhật (`同じ曜日から`) thành cụm từ tiếng Việt tự nhiên và chuẩn y khoa hơn: `"Kể từ cùng ngày thứ trong tuần sau 4/8/2 tuần"`.
+- **Sửa lỗi dịch chưa tự nhiên**:
+  * Tiếng Việt: Chỉnh sửa cụm từ `"Từ cùng thứ đó sau 4/8/2 tuần"` dịch từ tiếng Nhật (`同じ曜日から`) thành cụm từ tự nhiên và chuẩn y khoa: `"Kể từ cùng ngày thứ trong tuần sau 4/8/2 tuần"`.
+  * Tiếng Thái: Hiệu chỉnh cụm từ chỉ khoảng cách sang dạng tự nhiên của tiếng Thái: `"เริ่มต้นได้ในวันเดียวกันของอีก 4/8/2 สัปดาห์ถัดไป"`.
+  * Tiếng Indonesia: Tối ưu hóa cụm từ dịch khoảng cách tương ứng: `"Mulai hari yang sama di 4/8/2 minggu berikutnya"`.
 
 ## Kiem tra
 
@@ -635,5 +637,7 @@
 
 - `src/App.css`
 - `src/locales/vi.json`
+- `src/locales/th.json`
+- `src/locales/id.json`
 - `docs/nippo.md`
 
