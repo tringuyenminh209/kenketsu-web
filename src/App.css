@@ -3606,7 +3606,12 @@ th {
 .flyer-page {
   width: 210mm;
   height: 297mm;
-  background: linear-gradient(165deg, #8c0010 0%, #ce0017 55%, #e02030 100%);
+  /* gradient fallback; real bg set via inline style from imported asset */
+  background-color: #ce0017;
+  /* crop the white border of the AI image: scale up past edges */
+  background-size: auto 118%;
+  background-position: center center;
+  background-repeat: no-repeat;
   box-shadow: 0 16px 56px rgba(0, 0, 0, 0.32);
   display: flex;
   flex-direction: column;
@@ -3615,31 +3620,9 @@ th {
   font-family: 'Noto Sans JP', sans-serif;
 }
 
-/* ── Illustration row ── */
-.flyer-illust-row {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding: 20px 28px 0;
-  flex-shrink: 0;
-}
-
-.flyer-mascot-wrap {
-  width: 112px;
-  flex-shrink: 0;
-  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.28));
-}
-
-.flyer-bloodbag-wrap {
-  width: 90px;
-  flex-shrink: 0;
-  filter: drop-shadow(0 6px 16px rgba(0,0,0,0.25));
-  margin-bottom: 8px;
-}
-
 /* ── Headline ── */
 .flyer-headline-section {
-  padding: 8px 32px 16px;
+  padding: 44px 32px 16px;
   flex-shrink: 0;
 }
 
@@ -3649,7 +3632,7 @@ th {
   font-weight: 900;
   color: #FFE55C;
   letter-spacing: 0.02em;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
 }
 
 .flyer-title {
@@ -3658,7 +3641,7 @@ th {
   font-weight: 900;
   letter-spacing: -0.02em;
   line-height: 1.05;
-  text-shadow: 0 3px 12px rgba(0,0,0,0.3);
+  text-shadow: 0 3px 16px rgba(0,0,0,0.5);
 }
 
 .flyer-desc {
@@ -3666,7 +3649,8 @@ th {
   font-size: 12.5px;
   font-weight: 600;
   line-height: 1.75;
-  opacity: 0.88;
+  opacity: 0.95;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.4);
 }
 
 /* ── Info box ── */
