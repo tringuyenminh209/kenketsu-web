@@ -635,9 +635,27 @@
 
 ## File da thay doi chinh
 
-- `src/App.css`
-- `src/locales/vi.json`
-- `src/locales/th.json`
 - `src/locales/id.json`
+- `docs/nippo.md`
+
+---
+
+## Ngay: 2026-07-01 (session 15 - khoanh vung CSS table de sua loi vo giao dien dialog tren mobile/tablet)
+
+## Noi dung da hoan thanh
+
+- **Sửa lỗi vỡ cấu trúc bảng (Table layout crash) trên Mobile/Tablet**:
+  * Phát hiện CSS responsive table dành riêng cho bảng quản trị trên Mobile (`table`, `thead`, `tr`, `td` biến thành `display: block` hoặc `grid`, đồng thời chèn nhãn cứng tiếng Nhật như `氏名`, `所属` thông qua pseudo-elements `::before`) bị áp dụng nhầm lên bảng tiêu chuẩn hiến máu trong dialog của người dùng.
+  * Tiến hành giới hạn phạm vi (CSS Scoping) các quy tắc responsive này, chỉ cho phép kích hoạt khi nằm dưới bộ chọn `.admin-page` (ví dụ: `.admin-page table`, `.admin-page thead`,...).
+  * Giải quyết triệt để lỗi vỡ cấu trúc và lỗi trộn lẫn nhãn tiếng Nhật ngoài ý muốn trong hộp thoại của trang người dùng.
+
+## Kiem tra
+
+- Chạy build (`npm run build`): pass.
+- Chạy linter (`npm run lint`): pass.
+
+## File da thay doi chinh
+
+- `src/App.css`
 - `docs/nippo.md`
 
