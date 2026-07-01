@@ -24,7 +24,7 @@ export function Flyer() {
             ECC専門学校での献血にぜひご協力ください
           </p>
 
-          {/* 3. Event info — no box, plain text rows */}
+          {/* 3. Event info */}
           <div className="fp-info">
             <div className="fp-irow">
               <span className="fp-ikey">日にち</span>
@@ -42,9 +42,19 @@ export function Flyer() {
               <span className="fp-ikey">対　象</span>
               <strong className="fp-ival">16〜65歳・体重50kg以上（健康な方）</strong>
             </div>
+            <div className="fp-irow">
+              <span className="fp-ikey">持ち物</span>
+              <strong className="fp-ival">身分証明書（学生証など）</strong>
+            </div>
           </div>
 
-          {/* 4. Footer */}
+          {/* 4. Gift line */}
+          <p className="fp-gift-text">
+            🎁 献血にご協力いただいた方全員に<br />
+            ライオンズクラブより記念品をプレゼントいたします！
+          </p>
+
+          {/* 5. Footer */}
           <div className="fp-foot-row">
             <p className="fp-org">
               主催：{EVENT_CONFIG.organizer}<br />
