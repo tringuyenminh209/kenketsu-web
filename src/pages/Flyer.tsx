@@ -20,6 +20,9 @@ export function Flyer() {
             <p className="fp-loc">{EVENT_CONFIG.location}で</p>
             <h1 className="fp-title">献血しませんか？</h1>
             <p className="fp-tagline">あなたの血液が、誰かの命をつなぎます</p>
+            <div className="fp-badge">
+              🎁 参加者全員に{EVENT_CONFIG.sponsor}より記念品プレゼント！
+            </div>
           </div>
 
           {/* 2. Info rows */}
@@ -46,13 +49,18 @@ export function Flyer() {
               <span className="fp-ikey">所要時間</span>
               <strong className="fp-ival">約30〜60分　予約優先・当日参加可</strong>
             </div>
+            <div className="fp-irow">
+              <span className="fp-ikey">定　員</span>
+              <strong className="fp-ival">{EVENT_CONFIG.capacity}名（先着順）</strong>
+            </div>
           </div>
 
           {/* 3. Footer */}
           <div className="fp-foot">
-            <p className="fp-note">
-              ※ 前日は十分な睡眠・朝食をとってご来場ください。水分補給もお忘れなく。
-            </p>
+            <div className="fp-notes">
+              <p className="fp-note">※ 当日は学生証などの身分証明書をご持参ください</p>
+              <p className="fp-note">※ 前日は十分な睡眠をとり、朝食後・水分補給をしてご来場ください</p>
+            </div>
             <div className="fp-foot-bottom">
               <p className="fp-org">
                 主催：{EVENT_CONFIG.organizer}<br />
