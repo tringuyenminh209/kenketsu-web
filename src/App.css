@@ -2043,7 +2043,7 @@ th {
 .eligibility-table-wrap {
   overflow: auto;
   flex: 1;
-  padding: 20px 28px;
+  padding: 20px 28px 32px;
 }
 
 .eligibility-table {
@@ -2112,6 +2112,37 @@ th {
   border-top: 1px solid var(--border);
   margin: 0;
   flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .eligibility-overlay {
+    padding: 10px;
+  }
+  .eligibility-dialog {
+    max-height: 95vh;
+    border-radius: 12px;
+  }
+  .eligibility-dialog-header {
+    padding: 12px 16px;
+  }
+  .eligibility-dialog-header h3 {
+    font-size: 15px;
+  }
+  .eligibility-table-wrap {
+    padding: 12px 12px 24px;
+  }
+  .eligibility-table {
+    font-size: 11px;
+    min-width: 540px;
+  }
+  .eligibility-table th,
+  .eligibility-table td {
+    padding: 6px 8px;
+  }
+  .eligibility-footer-note {
+    padding: 10px 16px;
+    font-size: 10px;
+  }
 }
 
 /* ── Foreign Student Section ───────────────────────── */

@@ -1,4 +1,4 @@
-﻿{
+{
   "nav": {
     "know": "Tìm hiểu",
     "benefits": "Lợi ích",
@@ -569,12 +569,12 @@
     "cellHemoPlatelet": "Từ 12.0g/dL trở lên",
     "cellPlateletCountVal": "Từ 150,000 đến 600,000 /μL",
     "cellInterval200": "Hiến toàn phần 200mL",
-    "cellInterval200Val": "Cả nam và nữ: Từ cùng thứ đó sau 4 tuần",
+    "cellInterval200Val": "Cả nam và nữ: Kể từ cùng ngày thứ trong tuần sau 4 tuần",
     "cellInterval400": "Hiến toàn phần 400mL",
-    "cellInterval400Val": "Nam: từ sau 12 tuần,<br />Nữ: từ sau 16 tuần (cùng thứ trong tuần)",
-    "cellInterval400ValPlasma": "Cả nam và nữ: Từ cùng thứ đó sau 8 tuần",
+    "cellInterval400Val": "Nam: sau 12 tuần,<br />Nữ: sau 16 tuần (tính từ cùng thứ trong tuần)",
+    "cellInterval400ValPlasma": "Cả nam và nữ: Kể từ cùng ngày thứ trong tuần sau 8 tuần",
     "cellIntervalPlasma": "Huyết tương",
-    "cellIntervalPlasmaVal": "Cả nam và nữ: Từ cùng thứ đó sau 2 tuần",
+    "cellIntervalPlasmaVal": "Cả nam và nữ: Kể từ cùng ngày thứ trong tuần sau 2 tuần",
     "cellIntervalPlatelet": "Tiểu cầu",
     "cellIntervalPlateletVal": "Có thể hiến sau 1 tuần nếu không lấy huyết tương. Tuy nhiên, nếu hiến 4 lần trong vòng 4 tuần thì phải cách 4 tuần mới được hiến tiếp.",
     "cellAnnualVolumeVal": "Tổng máu toàn phần (200mL & 400mL):<br />Nam: trong vòng 1,200mL / Nữ: trong vòng 800mL",
