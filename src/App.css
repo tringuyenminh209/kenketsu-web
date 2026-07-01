@@ -3637,27 +3637,33 @@ th {
   z-index: 1;
 }
 
-/* ── SPACER: small, text overlaps rabbit ── */
+/* ── SPACER ── */
 .fp-spacer {
   flex: 0 0 22%;
 }
 
-/* ── CONTENT ── */
+/* ── CONTENT: space-between fills the full remaining page ── */
 .fp-content {
   flex: 1;
-  padding: 8px 26px 16px;
+  padding: 10px 28px 24px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  justify-content: space-between;
+}
+
+/* 1. Headline block */
+.fp-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .fp-loc {
   margin: 0;
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 900;
   color: #FFE55C;
   letter-spacing: 0.02em;
-  line-height: 1.2;
   text-shadow: 0 2px 10px rgba(0,0,0,0.6);
 }
 
@@ -3670,21 +3676,19 @@ th {
   text-shadow: 0 4px 24px rgba(0,0,0,0.6);
 }
 
-.fp-desc {
+.fp-tagline {
   margin: 0;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   opacity: 0.9;
-  line-height: 1.7;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
 }
 
-/* ── Info box ── */
+/* 2. Info box */
 .fp-infobox {
-  margin-top: 2px;
-  background: rgba(255, 255, 255, 0.13);
-  border-radius: 8px;
-  padding: 4px 14px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 4px 16px;
   display: flex;
   flex-direction: column;
 }
@@ -3692,8 +3696,8 @@ th {
 .fp-irow {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 5px 0;
+  gap: 14px;
+  padding: 9px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
@@ -3702,23 +3706,23 @@ th {
 }
 
 .fp-ikey {
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 900;
-  letter-spacing: 0.04em;
-  min-width: 48px;
+  letter-spacing: 0.05em;
+  min-width: 52px;
   flex-shrink: 0;
-  opacity: 0.88;
+  opacity: 0.85;
 }
 
 .fp-ival {
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 800;
   line-height: 1.3;
   text-shadow: 0 1px 6px rgba(0,0,0,0.4);
 }
 
 .fp-ival--date {
-  font-size: 40px;
+  font-size: 42px;
   font-weight: 900;
   color: #FFE55C;
   letter-spacing: -0.02em;
@@ -3726,46 +3730,37 @@ th {
   text-shadow: 0 2px 14px rgba(0,0,0,0.55);
 }
 
-/* Preparation note */
-.fp-note {
-  margin: 0;
-  font-size: 10.5px;
-  font-weight: 600;
-  opacity: 0.78;
-  line-height: 1.55;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
-}
-
-/* ── Footer row ── */
-.fp-footer-row {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 2px;
-}
-
-.fp-footer-left {
-  flex: 1;
+/* 3. Footer block */
+.fp-foot {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 8px;
 }
 
-.fp-gift {
+.fp-note {
   margin: 0;
-  font-size: 13px;
-  font-weight: 700;
-  color: #FFE55C;
-  line-height: 1.5;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.78;
+  line-height: 1.6;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  border-top: 1px solid rgba(255,255,255,0.2);
+  padding-top: 8px;
+}
+
+.fp-foot-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .fp-org {
   margin: 0;
-  font-size: 9px;
-  font-weight: 600;
-  opacity: 0.55;
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0.7;
+  line-height: 1.6;
 }
 
 .fp-qr {
@@ -3786,7 +3781,7 @@ th {
 
 .fp-qr-cap {
   margin: 0;
-  font-size: 9.5px;
+  font-size: 10px;
   font-weight: 700;
   opacity: 0.78;
   letter-spacing: 0.04em;

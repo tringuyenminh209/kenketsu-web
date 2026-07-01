@@ -9,19 +9,20 @@ export function Flyer() {
     <div className="flyer-shell">
       <div className="flyer-page" style={{ backgroundImage: `url(${flyerBg})` }}>
 
-        {/* small spacer — text overlaps lower part of rabbit */}
+        {/* rabbit shows at top */}
         <div className="fp-spacer" />
 
+        {/* space-between stretches content across remaining page */}
         <div className="fp-content">
 
-          <p className="fp-loc">{EVENT_CONFIG.location}で</p>
-          <h1 className="fp-title">献血しませんか？</h1>
-          <p className="fp-desc">
-            献血はみんなでつなぐ命のリレーです。<br />
-            あなたの血液を必要としている誰かのために、<br />
-            ECC専門学校での献血にぜひご協力ください！
-          </p>
+          {/* 1. Headline */}
+          <div className="fp-head">
+            <p className="fp-loc">{EVENT_CONFIG.location}で</p>
+            <h1 className="fp-title">献血しませんか？</h1>
+            <p className="fp-tagline">あなたの血液が、誰かの命をつなぎます</p>
+          </div>
 
+          {/* 2. Info rows */}
           <div className="fp-infobox">
             <div className="fp-irow">
               <span className="fp-ikey">日にち</span>
@@ -47,27 +48,29 @@ export function Flyer() {
             </div>
           </div>
 
-          <p className="fp-note">
-            ※ 前日は十分に睡眠をとり、当日は朝食を済ませてご来場ください。水分補給もお忘れなく。
-          </p>
-
-          <div className="fp-footer-row">
-            <div className="fp-footer-left">
-              <p className="fp-gift">🎁 {EVENT_CONFIG.giftNote}</p>
-              <p className="fp-org">主催：{EVENT_CONFIG.organizer}　後援：日本赤十字社</p>
-            </div>
-            <div className="fp-qr">
-              <div className="fp-qr-box">
-                <QRCodeSVG
-                  value={SITE_URL}
-                  size={68}
-                  bgColor="#ffffff"
-                  fgColor="#0f172a"
-                  level="M"
-                  marginSize={1}
-                />
+          {/* 3. Footer */}
+          <div className="fp-foot">
+            <p className="fp-note">
+              ※ 前日は十分な睡眠・朝食をとってご来場ください。水分補給もお忘れなく。
+            </p>
+            <div className="fp-foot-bottom">
+              <p className="fp-org">
+                主催：{EVENT_CONFIG.organizer}<br />
+                後援：日本赤十字社
+              </p>
+              <div className="fp-qr">
+                <div className="fp-qr-box">
+                  <QRCodeSVG
+                    value={SITE_URL}
+                    size={72}
+                    bgColor="#ffffff"
+                    fgColor="#0f172a"
+                    level="M"
+                    marginSize={1}
+                  />
+                </div>
+                <p className="fp-qr-cap">事前申込QR</p>
               </div>
-              <p className="fp-qr-cap">事前申込QR</p>
             </div>
           </div>
 
