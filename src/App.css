@@ -3348,21 +3348,21 @@ th {
     overflow-x: visible;
   }
 
-  table {
+  .admin-page table {
     min-width: 0;
     font-size: 12px;
   }
 
-  thead {
+  .admin-page thead {
     display: none;
   }
 
-  tbody {
+  .admin-page tbody {
     display: grid;
     gap: 10px;
   }
 
-  tr {
+  .admin-page tr {
     display: grid;
     gap: 0;
     overflow: hidden;
@@ -3371,12 +3371,12 @@ th {
     background: #fff;
   }
 
-  th,
-  td {
+  .admin-page th,
+  .admin-page td {
     border: 0;
   }
 
-  td {
+  .admin-page td {
     display: flex;
     justify-content: space-between;
     gap: 16px;
@@ -3385,29 +3385,29 @@ th {
     text-align: right;
   }
 
-  td:last-child {
+  .admin-page td:last-child {
     border-bottom: 0;
   }
 
-  td::before {
+  .admin-page td::before {
     color: var(--muted);
     font-weight: 800;
     text-align: left;
   }
 
-  td:nth-child(1)::before {
+  .admin-page td:nth-child(1)::before {
     content: '申込日時';
   }
 
-  td:nth-child(2)::before {
+  .admin-page td:nth-child(2)::before {
     content: '氏名';
   }
 
-  td:nth-child(3)::before {
+  .admin-page td:nth-child(3)::before {
     content: '所属';
   }
 
-  td:nth-child(4)::before {
+  .admin-page td:nth-child(4)::before {
     content: 'ステータス';
   }
 
