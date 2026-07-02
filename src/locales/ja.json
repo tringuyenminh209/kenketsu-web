@@ -94,7 +94,7 @@
     ],
     "sponsor_label": "協賛",
     "reservation_label": "ご予約について",
-    "gift_label": "献血記念品",
+    "gift_label": "プレゼント",
     "appLinksLabel": "ラブラッドアプリリンク",
     "appLinksTitle": "ラブラッドアプリで事前予約",
     "appLinksText": "献血カード管理や事前予約に使えます。",
@@ -103,7 +103,7 @@
     "location_value": "ECCコンピュータ専門学校 1号館 1階ラウンジ",
     "sponsor_value": "大阪曾根崎ライオンズクラブ / 大阪西ライオンズクラブ",
     "reservation_value": "ご予約をいただくと献血にかかる手続きの時間が短くなります",
-    "gift_value": "献血にご協力いただいた方に、ライオンズクラブ様より「献血記念品」をプレゼント"
+    "gift_value": "献血にご協力いただいた方に、ライオンズクラブ様よりささやかなプレゼントをご用意しています"
   },
   "precautions": {
     "title": "参加前に、無理なく確認しておきたいこと",

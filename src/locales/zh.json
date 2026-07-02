@@ -94,7 +94,7 @@
     ],
     "sponsor_label": "赞助方",
     "reservation_label": "预约须知",
-    "gift_label": "献血纪念品",
+    "gift_label": "小礼品",
     "appLinksLabel": "Labrad 应用程序链接",
     "appLinksTitle": "通过 Labrad 应用程序提前预约",
     "appLinksText": "用于献血卡管理和提前预约。",
@@ -103,7 +103,7 @@
     "location_value": "ECC电脑专业学校 1号馆 1楼大厅",
     "sponsor_value": "大阪曾根崎狮子会 / 大阪西狮子会",
     "reservation_value": "提前预约可以缩短献血手续的办理时间",
-    "gift_value": "为协助献血的人士，狮子会将赠送「献血纪念品」"
+    "gift_value": "为协助献血的人士，狮子会将赠送小礼品以表感谢"
   },
   "precautions": {
     "title": "参加前请轻松确认的事项",

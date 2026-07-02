@@ -94,7 +94,7 @@
     ],
     "sponsor_label": "Sponsors",
     "reservation_label": "Reservation note",
-    "gift_label": "Donation gift",
+    "gift_label": "Small gift",
     "appLinksLabel": "Labrad app links",
     "appLinksTitle": "Reserve ahead with the Labrad app",
     "appLinksText": "Use it for blood donation card management and advance reservations.",
@@ -103,7 +103,7 @@
     "location_value": "ECC Computer College Building 1, 1F Lounge",
     "sponsor_value": "Osaka Sonezaki Lions Club / Osaka Nishi Lions Club",
     "reservation_value": "Making a reservation will shorten the time required for blood donation procedures.",
-    "gift_value": "Those who cooperate with blood donation will receive a 'commemorative gift' from the Lions Club."
+    "gift_value": "Everyone who donates will receive a small thank-you gift from the Lions Club."
   },
   "precautions": {
     "title": "Things to Check Before Participating",

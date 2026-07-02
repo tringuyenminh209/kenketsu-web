@@ -8,7 +8,7 @@ export const EVENT_CONFIG = {
   capacity: 50,
   sponsor: "大阪曾根崎ライオンズクラブ / 大阪西ライオンズクラブ",
   reservationNote: "ご予約をいただくと献血にかかる手続きの時間が短くなります",
-  giftNote: "献血にご協力いただいた方に、ライオンズクラブ様より「献血記念品」をプレゼント",
+  giftNote: "献血にご協力いただいた方に、ライオンズクラブ様よりささやかなプレゼントをご用意しています",
   appLinks: {
     appStore: "https://apps.apple.com/jp/app/%E7%8C%AE%E8%A1%80web%E4%BC%9A%E5%93%A1%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9-%E3%83%A9%E3%83%96%E3%83%A9%E3%83%83%E3%83%89/id1629819569",
     googlePlay: "https://play.google.com/store/apps/details?id=jp.kenketsu.blood_donation_card",

@@ -94,7 +94,7 @@
     ],
     "sponsor_label": "Sponsor",
     "reservation_label": "Catatan reservasi",
-    "gift_label": "Hadiah donor",
+    "gift_label": "Hadiah kecil",
     "appLinksLabel": "Tautan aplikasi Labrad",
     "appLinksTitle": "Pesan lebih awal dengan aplikasi Labrad",
     "appLinksText": "Gunakan untuk manajemen kartu donor darah dan reservasi di muka.",
@@ -103,7 +103,7 @@
     "location_value": "ECC Computer College Gedung 1, Lounge Lantai 1",
     "sponsor_value": "Osaka Sonezaki Lions Club / Osaka Nishi Lions Club",
     "reservation_value": "Melakukan reservasi akan mempersingkat waktu yang dibutuhkan untuk prosedur donor darah.",
-    "gift_value": "Mereka yang bekerja sama dalam donor darah akan menerima 'hadiah kenang-kenangan' dari Lions Club."
+    "gift_value": "Peserta donor darah akan menerima hadiah kecil sebagai ucapan terima kasih dari Lions Club."
   },
   "precautions": {
     "title": "Hal yang Perlu Diperiksa Sebelum Berpartisipasi",
