@@ -48,11 +48,16 @@ export function Flyer() {
             </div>
           </div>
 
-          {/* 4. 献血の意義 */}
-          <p className="fp-gift-text">
-            一人の献血で最大３人の命が救われます<br />
-            あなたの一歩が、誰かの未来を守ります
-          </p>
+          {/* 4. 献血の意義 + gift */}
+          <div className="fp-message">
+            <p className="fp-gift-text">
+              一人の献血で最大３人の命が救われます<br />
+              あなたの一歩が、誰かの未来を守ります
+            </p>
+            <p className="fp-gift-note">
+              🎁 ご協力いただいた方に、ささやかなプレゼントをご用意しています
+            </p>
+          </div>
 
           {/* 5. Footer */}
           <div className="fp-foot-row">

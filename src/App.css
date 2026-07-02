@@ -3751,7 +3751,13 @@ th {
   text-shadow: 2px 2px 0 rgba(0,0,0,0.3), 0 3px 16px rgba(0,0,0,0.45);
 }
 
-/* 4. Gift line */
+/* 4. Message: 意義 + gift note */
+.fp-message {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .fp-gift-text {
   margin: 0;
   font-size: 21px;
@@ -3759,6 +3765,14 @@ th {
   line-height: 1.7;
   color: #FFE55C;
   text-shadow: 1px 1px 0 rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.35);
+}
+
+.fp-gift-note {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.25), 0 2px 6px rgba(0,0,0,0.3);
 }
 
 /* 5. Footer row */
