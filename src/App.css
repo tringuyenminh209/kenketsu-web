@@ -3723,7 +3723,7 @@ th {
 
 /* 2. Main panel: one block for desc + info */
 .fp-panel {
-  background: rgba(110, 0, 12, 0.5);
+  background: rgba(110, 0, 12, 0.32);
   border-radius: 16px;
   padding: 16px 22px;
   display: flex;
@@ -3733,11 +3733,17 @@ th {
 
 .fp-desc {
   margin: 0;
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 1.85;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.8;
   border-bottom: 1px solid rgba(255, 255, 255, 0.22);
-  padding-bottom: 10px;
+  padding-bottom: 12px;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.fp-desc-hook {
+  font-size: 28px;
+  color: #FFE55C;
 }
 
 /* 3. Info rows */

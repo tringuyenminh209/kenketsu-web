@@ -20,7 +20,7 @@ export function Flyer() {
           {/* 2. Main panel: description + event info in one block */}
           <div className="fp-panel">
           <p className="fp-desc">
-            献血はみんなでつなぐ命のリレーです<br />
+            <span className="fp-desc-hook">献血はみんなでつなぐ命のリレーです</span><br />
             あなたの血液を必要としている誰かのため<br />
             {EVENT_CONFIG.location}での献血にぜひご協力ください
           </p>
