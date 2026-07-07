@@ -3722,8 +3722,12 @@ th {
 }
 
 /* 2. Main panel: one block for desc + info */
+/* Frosted glass: blur the rabbit behind the text instead of darkening it,
+   so the illustration stays visible but text keeps contrast */
 .fp-panel {
-  background: rgba(110, 0, 12, 0.32);
+  background: rgba(110, 0, 12, 0.16);
+  backdrop-filter: blur(6px) saturate(1.15);
+  -webkit-backdrop-filter: blur(6px) saturate(1.15);
   border-radius: 16px;
   padding: 16px 22px;
   display: flex;
