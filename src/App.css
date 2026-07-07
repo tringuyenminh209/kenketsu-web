@@ -3686,16 +3686,13 @@ th {
 
 /* 縁取り: stroke only where text sits on the busy illustration */
 .fp-loc,
-.fp-title,
-.fp-ival--date {
+.fp-title {
   paint-order: stroke fill;
   -webkit-text-stroke: 6px #8f000f;
 }
 
+/* desc + mission sit directly on the artwork — keep a thin stroke */
 .fp-desc,
-.fp-ikey,
-.fp-ival,
-.fp-target-cond,
 .fp-gift-text {
   paint-order: stroke fill;
   -webkit-text-stroke: 2px #8f000f;
@@ -3718,10 +3715,11 @@ th {
 
 .fp-title {
   margin: 0;
-  font-size: 94px;
+  font-size: 84px;
   font-weight: 900;
   letter-spacing: -0.03em;
   line-height: 1.0;
+  white-space: nowrap;
 }
 
 /* 2. Description */
@@ -3732,11 +3730,14 @@ th {
   line-height: 1.85;
 }
 
-/* 3. Info rows */
+/* 3. Info rows — dark panel so text never fights the mascot */
 .fp-info {
   display: flex;
   flex-direction: column;
   gap: 0;
+  background: rgba(110, 0, 12, 0.5);
+  border-radius: 14px;
+  padding: 12px 20px;
 }
 
 .fp-irow {
@@ -3780,7 +3781,7 @@ th {
 .fp-target {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
 }
 
 .fp-target-row {
