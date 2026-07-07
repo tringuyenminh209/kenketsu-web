@@ -17,14 +17,14 @@ export function Flyer() {
             <h1 className="fp-title">献血しませんか？</h1>
           </div>
 
-          {/* 2. Description */}
+          {/* 2. Main panel: description + event info in one block */}
+          <div className="fp-panel">
           <p className="fp-desc">
             献血はみんなでつなぐ命のリレーです<br />
             あなたの血液を必要としている誰かのため<br />
             {EVENT_CONFIG.location}での献血にぜひご協力ください
           </p>
 
-          {/* 3. Event info */}
           <div className="fp-info">
             <div className="fp-irow">
               <span className="fp-ikey">日にち</span>
@@ -61,8 +61,9 @@ export function Flyer() {
               </div>
             </div>
           </div>
+          </div>
 
-          {/* 4. 献血の意義 + gift */}
+          {/* 3. 献血の意義 + gift */}
           <div className="fp-message">
             <p className="fp-gift-text">
               一人の献血で最大３人の命が救われます<br />
@@ -70,7 +71,11 @@ export function Flyer() {
             </p>
             <p className="fp-gift-note">
               <span className="fp-gift-emoji">🎁</span>
-              ご協力いただいた方に、ささやかなプレゼントをご用意しています
+              <span>
+                ご協力いただいた方に、ささやかな
+                <strong className="fp-gift-key">プレゼント</strong>
+                をご用意しています
+              </span>
             </p>
           </div>
 
