@@ -3743,7 +3743,8 @@ th {
   line-height: 1.8;
   border-bottom: 1px solid rgba(255, 255, 255, 0.22);
   padding-bottom: 12px;
-  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  paint-order: stroke fill;
+  -webkit-text-stroke: 3px #8f000f;
 }
 
 .fp-desc-hook {
