@@ -3785,6 +3785,8 @@ th {
   color: #FFE55C;
   letter-spacing: -0.02em;
   line-height: 1.0;
+  paint-order: stroke fill;
+  -webkit-text-stroke: 3px #8f000f;
 }
 
 /* 対象: two donation types */
