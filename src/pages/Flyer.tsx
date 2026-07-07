@@ -13,7 +13,7 @@ export function Flyer() {
 
           {/* 1. Headline */}
           <div className="fp-head">
-            <p className="fp-loc">{EVENT_CONFIG.location}で</p>
+            <p className="fp-loc">ECC学校法人山口学園で</p>
             <h1 className="fp-title">献血しませんか？</h1>
           </div>
 
@@ -21,7 +21,7 @@ export function Flyer() {
           <p className="fp-desc">
             献血はみんなでつなぐ命のリレーです<br />
             あなたの血液を必要としている誰かのため<br />
-            ECC専門学校での献血にぜひご協力ください
+            {EVENT_CONFIG.location}での献血にぜひご協力ください
           </p>
 
           {/* 3. Event info */}
@@ -38,13 +38,18 @@ export function Flyer() {
               <span className="fp-ikey">会　場</span>
               <strong className="fp-ival">{EVENT_CONFIG.location}　{EVENT_CONFIG.locationDetail}</strong>
             </div>
-            <div className="fp-irow">
+            <div className="fp-irow fp-irow--target">
               <span className="fp-ikey">対　象</span>
-              <strong className="fp-ival">16〜65歳・体重50kg以上（健康な方）</strong>
-            </div>
-            <div className="fp-irow">
-              <span className="fp-ikey">持ち物</span>
-              <strong className="fp-ival">身分証明書（学生証など）</strong>
+              <div className="fp-target">
+                <div className="fp-target-row">
+                  <span className="fp-target-badge">400mL</span>
+                  <strong className="fp-target-cond">男性17〜69歳／女性18〜69歳・体重50kg以上</strong>
+                </div>
+                <div className="fp-target-row">
+                  <span className="fp-target-badge">200mL</span>
+                  <strong className="fp-target-cond">男女16〜69歳・男性45kg／女性40kg以上</strong>
+                </div>
+              </div>
             </div>
           </div>
 
