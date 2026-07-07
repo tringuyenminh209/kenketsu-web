@@ -59,7 +59,7 @@ export function Flyer() {
           {/* 4. 献血の意義 + gift */}
           <div className="fp-message">
             <p className="fp-gift-text">
-              献血は、いちばん身近なボランティア<br />
+              一人の献血で最大３人の命が救われます<br />
               あなたの一歩が、誰かの未来を守ります
             </p>
             <p className="fp-gift-note">
