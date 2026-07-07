@@ -46,11 +46,17 @@ export function Flyer() {
               <div className="fp-target">
                 <div className="fp-target-row">
                   <span className="fp-target-badge">400mL</span>
-                  <strong className="fp-target-cond">男性17〜69歳／女性18〜69歳・体重50kg以上</strong>
+                  <strong className="fp-target-cond">
+                    男性17〜69歳／女性18〜69歳<br />
+                    体重50kg以上
+                  </strong>
                 </div>
                 <div className="fp-target-row">
                   <span className="fp-target-badge">200mL</span>
-                  <strong className="fp-target-cond">男女16〜69歳・男性45kg／女性40kg以上</strong>
+                  <strong className="fp-target-cond">
+                    男女16〜69歳<br />
+                    男性45kg以上／女性40kg以上
+                  </strong>
                 </div>
               </div>
             </div>
@@ -63,7 +69,8 @@ export function Flyer() {
               あなたの一歩が、誰かの未来を守ります
             </p>
             <p className="fp-gift-note">
-              🎁 ご協力いただいた方に、ささやかなプレゼントをご用意しています
+              <span className="fp-gift-emoji">🎁</span>
+              ご協力いただいた方に、ささやかなプレゼントをご用意しています
             </p>
           </div>
 
