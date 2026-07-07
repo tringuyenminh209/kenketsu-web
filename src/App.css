@@ -3691,8 +3691,7 @@ th {
   -webkit-text-stroke: 6px #8f000f;
 }
 
-/* desc + mission sit directly on the artwork — keep a thin stroke */
-.fp-desc,
+/* mission lines sit directly on the artwork — keep a thin stroke */
 .fp-gift-text {
   paint-order: stroke fill;
   -webkit-text-stroke: 2px #8f000f;
@@ -3722,12 +3721,16 @@ th {
   white-space: nowrap;
 }
 
-/* 2. Description */
+/* 2. Description — same panel treatment as info rows */
 .fp-desc {
   margin: 0;
   font-size: 22px;
   font-weight: 700;
   line-height: 1.85;
+  background: rgba(110, 0, 12, 0.5);
+  border-radius: 14px;
+  padding: 12px 20px;
+  align-self: flex-start;
 }
 
 /* 3. Info rows — dark panel so text never fights the mascot */
