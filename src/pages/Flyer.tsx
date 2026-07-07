@@ -36,7 +36,10 @@ export function Flyer() {
             </div>
             <div className="fp-irow">
               <span className="fp-ikey">会　場</span>
-              <strong className="fp-ival">{EVENT_CONFIG.location}　{EVENT_CONFIG.locationDetail}</strong>
+              <strong className="fp-ival">
+                {EVENT_CONFIG.location}<br />
+                {EVENT_CONFIG.locationDetail}
+              </strong>
             </div>
             <div className="fp-irow fp-irow--target">
               <span className="fp-ikey">対　象</span>

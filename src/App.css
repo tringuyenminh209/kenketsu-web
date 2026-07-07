@@ -3684,14 +3684,12 @@ th {
   gap: 2px;
 }
 
-/* 縁取り (outline) shadows — dark red border makes white text pop */
+/* 縁取り: crisp vector stroke behind the fill — no blur */
 .fp-loc,
 .fp-title,
 .fp-ival--date {
-  text-shadow:
-    -3px -3px 0 #8f000f, 3px -3px 0 #8f000f, -3px 3px 0 #8f000f, 3px 3px 0 #8f000f,
-    -3px 0 0 #8f000f, 3px 0 0 #8f000f, 0 -3px 0 #8f000f, 0 3px 0 #8f000f,
-    0 6px 18px rgba(0,0,0,0.4);
+  paint-order: stroke fill;
+  -webkit-text-stroke: 8px #8f000f;
 }
 
 .fp-desc,
@@ -3699,18 +3697,15 @@ th {
 .fp-ival,
 .fp-target-cond,
 .fp-gift-text {
-  text-shadow:
-    -2px -2px 0 #8f000f, 2px -2px 0 #8f000f, -2px 2px 0 #8f000f, 2px 2px 0 #8f000f,
-    -2px 0 0 #8f000f, 2px 0 0 #8f000f, 0 -2px 0 #8f000f, 0 2px 0 #8f000f,
-    0 3px 10px rgba(0,0,0,0.35);
+  paint-order: stroke fill;
+  -webkit-text-stroke: 5px #8f000f;
 }
 
 .fp-gift-note,
 .fp-org,
 .fp-qr-cap {
-  text-shadow:
-    -1.5px -1.5px 0 #8f000f, 1.5px -1.5px 0 #8f000f, -1.5px 1.5px 0 #8f000f, 1.5px 1.5px 0 #8f000f,
-    -1.5px 0 0 #8f000f, 1.5px 0 0 #8f000f, 0 -1.5px 0 #8f000f, 0 1.5px 0 #8f000f;
+  paint-order: stroke fill;
+  -webkit-text-stroke: 3px #8f000f;
 }
 
 .fp-loc {
