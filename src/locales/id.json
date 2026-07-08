@@ -17,6 +17,7 @@
     "lead": "Dari kesadaran menuju tindakan. Kebaikan Anda menciptakan hari esok bagi seseorang.",
     "cta": "Daftar Sekarang",
     "cta2": "Pelajari Donor Darah",
+    "cta3": "Survei",
     "feature1Title": "Selamatkan Nyawa",
     "feature1Desc": "Bantu banyak pasien dengan sekali donor",
     "feature2Title": "Pahami Faktanya",
@@ -114,6 +115,7 @@
       "Pria 45kg+, Wanita 40kg+",
       "Sehat dan cukup tidur pada hari H"
     ],
+    "note200mL": "* Kriteria untuk 200mL dapat diperiksa di 'Lihat detail kriteria donor darah'.",
     "dayOfTitle": "Pada hari H, hal ini baik dilakukan",
     "dayOfNote": "Tidur yang cukup dan makan sebelum datang. Jika Anda demam atau merasa tidak enak badan, harap urungkan niat untuk berpartisipasi.",
     "toSurvey": "Beralih ke survei pasca-partisipasi",
@@ -140,6 +142,7 @@
   },
   "register": {
     "title": "Pendaftaran",
+    "note": "Kami akan mengirimkan panduan pendaftaran resmi pada awal Agustus.",
     "name": "Nama Lengkap",
     "namePlaceholder": "mis. Taro Yamada",
     "email": "Alamat Email",
@@ -493,9 +496,7 @@
       "redcross_role": "Manajemen Darah & Jaminan Keselamatan",
       "school_org": "ECC College of Computer Studies",
       "school_dept": "Yamaguchi Gakuen ECC College",
-      "school_role": "Penyedia Tempat & Co-penyelenggara",
-      "hotline_org": "Hotline Konsultasi Donor",
-      "hotline_role": "Sen–Sab 9:00–17:30 (Bebas biaya)"
+      "school_role": "Penyedia Tempat & Co-penyelenggara"
     }
   },
   "faqSection": {

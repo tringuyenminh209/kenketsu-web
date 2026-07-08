@@ -1,4 +1,4 @@
-﻿{
+{
   "nav": {
     "know": "了解献血",
     "benefits": "好处",
@@ -17,6 +17,7 @@
     "lead": "从了解到支持，迈出一步。您的善良为他人创造明天。",
     "cta": "点击报名参加",
     "cta2": "了解更多关于献血",
+    "cta3": "问卷",
     "feature1Title": "拯救生命",
     "feature1Desc": "支持众多患者",
     "feature2Title": "正确认知",
@@ -114,6 +115,7 @@
       "男性 45kg 以上，女性 40kg 以上",
       "当天身体状况良好，睡眠充足"
     ],
+    "note200mL": "* 200mL的基准可以通过点击“查看献血标准详情”进行确认。",
     "dayOfTitle": "当天大致这样就可以了",
     "dayOfNote": "前一天请充分睡眠并吃好饭再来。如有发烧或身体不适，请勿参加。",
     "toSurvey": "参加后前往问卷调查",
@@ -140,6 +142,7 @@
   },
   "register": {
     "title": "参加报名",
+    "note": "我们将在8月上旬发送正式申请指南。",
     "name": "姓名",
     "namePlaceholder": "例：Yamada Taro",
     "email": "邮箱地址",
@@ -493,9 +496,7 @@
       "redcross_role": "血液管理·安全保障",
       "school_org": "ECC电脑专业学校",
       "school_dept": "山口学园 ECC专业学校",
-      "school_role": "场地提供·共办",
-      "hotline_org": "献血咨询窗口",
-      "hotline_role": "周一至周六 9:00〜17:30（免费）"
+      "school_role": "场地提供·共办"
     }
   },
   "faqSection": {

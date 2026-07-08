@@ -208,6 +208,7 @@ function UserPage() {
             <div className="hero-actions">
               <a className="button primary" href="#register">{t('hero.cta')}</a>
               <a className="button secondary" href="#knowledge">{t('hero.cta2')}</a>
+              <a className="button secondary" href="#survey">{t('hero.cta3')}</a>
             </div>
             <div className="impact-row" aria-label={t('hero.featuresAriaLabel')}>
               <article>
@@ -514,6 +515,7 @@ function UserPage() {
                 <li key={item}>{item}</li>
               ))}
             </ul>
+            <p className="precaution-note">{t('precautions.note200mL')}</p>
             <h3>{t('precautions.dayOfTitle')}</h3>
             <p>{t('precautions.dayOfNote')}</p>
             <button className="eligibility-btn" type="button" onClick={() => setShowEligibility(true)}>
@@ -537,6 +539,7 @@ function UserPage() {
                 <Icon type="users" />
                 <h2>{t('register.title')}</h2>
               </div>
+              <p className="register-note">{t('register.note')}</p>
               <div className="form-grid">
                 <label>
                   {t('register.name')} <span>{t('register.required')}</span>

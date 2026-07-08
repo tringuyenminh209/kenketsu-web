@@ -1,4 +1,4 @@
-﻿{
+{
   "nav": {
     "know": "Learn",
     "benefits": "Benefits",
@@ -17,6 +17,7 @@
     "lead": "From awareness to action. Your kindness creates tomorrow for someone.",
     "cta": "Register Now",
     "cta2": "Learn About Blood Donation",
+    "cta3": "Survey",
     "feature1Title": "Save Lives",
     "feature1Desc": "Support multiple patients with one donation",
     "feature2Title": "Know the Facts",
@@ -114,6 +115,7 @@
       "Male 45kg+, Female 40kg+",
       "Good health and adequate sleep on the day"
     ],
+    "note200mL": "* Criteria for 200mL can be checked from 'See details of blood donation criteria'.",
     "dayOfTitle": "On the day, this is fine",
     "dayOfNote": "Get enough sleep and eat before coming. If you have a fever or feel unwell, please refrain from participating.",
     "toSurvey": "Go to post-participation survey",
@@ -140,6 +142,7 @@
   },
   "register": {
     "title": "Registration",
+    "note": "We will send formal registration guidelines in early August.",
     "name": "Full Name",
     "namePlaceholder": "e.g. Taro Yamada",
     "email": "Email Address",
@@ -493,9 +496,7 @@
       "redcross_role": "Blood Management & Safety Assurance",
       "school_org": "ECC College of Computer Studies",
       "school_dept": "Yamaguchi Gakuen ECC College",
-      "school_role": "Venue Provider & Co-organizer",
-      "hotline_org": "Donation Consultation Hotline",
-      "hotline_role": "Mon–Sat 9:00–17:30 (Free of charge)"
+      "school_role": "Venue Provider & Co-organizer"
     }
   },
   "faqSection": {

@@ -17,6 +17,7 @@
     "lead": "Từ hiểu biết đến hành động. Sự tốt bụng của bạn tạo nên ngày mai cho ai đó.",
     "cta": "Đăng ký tham gia",
     "cta2": "Tìm hiểu về hiến máu",
+    "cta3": "Khảo sát",
     "feature1Title": "Kết nối sự sống",
     "feature1Desc": "Hỗ trợ nhiều bệnh nhân cùng lúc",
     "feature2Title": "Hiểu đúng",
@@ -114,6 +115,7 @@
       "Nam từ 45kg, Nữ từ 40kg",
       "Sức khỏe tốt và đã ngủ đủ giấc vào ngày sự kiện"
     ],
+    "note200mL": "* Tiêu chuẩn đối với trường hợp hiến 200mL có thể kiểm tra tại 'Xem chi tiết tiêu chuẩn hiến máu'.",
     "dayOfTitle": "Ngày sự kiện như thế này là ổn",
     "dayOfNote": "Hãy ngủ đủ giấc và ăn trước khi đến. Nếu bị sốt hoặc không khỏe, hãy tạm hoãn tham gia.",
     "toSurvey": "Đến khảo sát sau tham gia",
@@ -140,6 +142,7 @@
   },
   "register": {
     "title": "Đăng ký tham gia",
+    "note": "Chúng tôi sẽ gửi hướng dẫn đăng ký chính thức vào đầu tháng 8.",
     "name": "Họ tên",
     "namePlaceholder": "VD: Nguyen Van A",
     "email": "Email",
@@ -493,9 +496,7 @@
       "redcross_role": "Quản lý & Bảo đảm an toàn máu",
       "school_org": "Trường Cao đẳng Công nghệ thông tin ECC",
       "school_dept": "Học viện Yamaguchi - Trường chuyên môn ECC",
-      "school_role": "Cung cấp địa điểm & Đồng tổ chức",
-      "hotline_org": "Đường dây nóng hỗ trợ hiến máu",
-      "hotline_role": "Thứ Hai - Thứ Bảy: 9:00 - 17:30 (Miễn phí)"
+      "school_role": "Cung cấp địa điểm & Đồng tổ chức"
     }
   },
   "faqSection": {

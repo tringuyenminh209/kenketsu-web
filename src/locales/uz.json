@@ -1,4 +1,4 @@
-﻿{
+{
   "nav": {
     "know": "O'rganish",
     "benefits": "Foydalari",
@@ -17,6 +17,7 @@
     "lead": "Anglashdan harakatga. Sizning mehribonligingiz kimningdir ertangi kunini yaratadi.",
     "cta": "Hozir ro'yxatdan o'ting",
     "cta2": "Donorlik haqida bilib oling",
+    "cta3": "Soʻrovnoma",
     "feature1Title": "Hayotni qutqaring",
     "feature1Desc": "Bir marta topshirish bilan bir nechta bemorga yordam bering",
     "feature2Title": "Haqiqatni biling",
@@ -114,6 +115,7 @@
       "Erkaklar 45kg+, Ayollar 40kg+",
       "Tadbir kuni sog'liq yaxshi bo'lishi va yetarli darajada uxlash"
     ],
+    "note200mL": "* 200mL hajmdagi qon topshirish mezonlarini 'Batafsil ma'lumot' bo'limidan tekshirishingiz mumkin.",
     "dayOfTitle": "Tadbir kuni bularga amal qiling",
     "dayOfNote": "Kelishdan oldin yetarlicha uxlang va ovqatlaning. Agar isitmangiz bo'lsa yoki o'zingizni yomon his qilsangiz, iltimos ishtirok etishdan tiyiling.",
     "toSurvey": "Ishtirok etgandan keyingi so'rovnomaga o'tish",
@@ -140,6 +142,7 @@
   },
   "register": {
     "title": "Ro'yxatdan o'tish",
+    "note": "Avgust oyi boshida rasmiy ro'yxatdan o'tish bo'yicha ko'rsatmalarni yuboramiz.",
     "name": "To'liq ism",
     "namePlaceholder": "masalan, Taro Yamada",
     "email": "Elektron pochta manzili",
@@ -493,9 +496,7 @@
       "redcross_role": "Qon nazorati va xavfsizlikni ta'minlash",
       "school_org": "ECC College of Computer Studies",
       "school_dept": "Yamaguchi Gakuen ECC kolleji",
-      "school_role": "Joy taqdim etuvchi va hamkor tashkilotchi",
-      "hotline_org": "Donorlik maslahat liniyasi",
-      "hotline_role": "Dush–Shanba 9:00–17:30 (Bepul)"
+      "school_role": "Joy taqdim etuvchi va hamkor tashkilotchi"
     }
   },
   "faqSection": {

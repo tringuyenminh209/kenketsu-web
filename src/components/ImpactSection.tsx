@@ -227,19 +227,6 @@ export function ImpactSection() {
               <span className="trust-role">{t('impact.trust.school_role')}</span>
             </div>
           </div>
-          <div className="trust-divider" />
-          <div className="trust-org trust-hotline">
-            <div className="trust-phone-icon">
-              <svg viewBox="0 0 48 48" aria-hidden="true">
-                <path d="M10 8h8l3 9-4.5 2.5A20 20 0 0 0 30.5 33.5L33 29l9 3v8a2 2 0 0 1-2 2C14 42 6 14 8 10a2 2 0 0 1 2-2Z" strokeWidth="2.5" strokeLinejoin="round" />
-              </svg>
-            </div>
-            <div>
-              <strong>{t('impact.trust.hotline_org')}</strong>
-              <a className="trust-phone" href="tel:0120326759">0120-326-759</a>
-              <span className="trust-role">{t('impact.trust.hotline_role')}</span>
-            </div>
-          </div>
         </div>
       </section>
     </>

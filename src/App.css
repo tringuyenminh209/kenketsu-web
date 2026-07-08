@@ -1291,6 +1291,20 @@ input[type='radio'] {
   color: var(--green-dark);
 }
 
+.precaution-note {
+  margin: 12px 0 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #b42318;
+}
+
+.register-note {
+  margin: 8px 0 18px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #b42318;
+}
+
 .survey-area {
   padding: 52px 72px;
   border-bottom: 1px solid var(--line-red);
