@@ -32,14 +32,14 @@ function buildHtml(name: string, studentId: string, dept: string): string {
         <tr>
           <td style="border-top:3px solid #b3261e;padding:28px 40px 20px;">
             <p style="margin:0;font-size:12px;color:#888;letter-spacing:0.5px;">ECC社会貢献センター</p>
-            <h1 style="margin:6px 0 0;font-size:19px;font-weight:700;color:#1a1a1a;">献血ボランティアイベント　参加申込受付のご案内</h1>
+            <h1 style="margin:6px 0 0;font-size:19px;font-weight:700;color:#1a1a1a;">学内献血　参加申込受付のご案内</h1>
           </td>
         </tr>
         <tr>
           <td style="padding:8px 40px 32px;">
             <p style="margin:0 0 18px;font-size:14px;color:#333;">${n} 様</p>
             <p style="margin:0 0 28px;font-size:14px;color:#444;line-height:1.9;">
-              この度は献血ボランティアイベントへお申込みいただき、誠にありがとうございます。<br>
+              この度は学内献血へお申込みいただき、誠にありがとうございます。<br>
               下記の内容にて受付いたしましたので、ご確認ください。
             </p>
 

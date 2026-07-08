@@ -84,21 +84,27 @@ export async function fetchAvailableYears(): Promise<number[]> {
 
 // CSV export helper
 export function registrationsToCSV(rows: Registration[]): string {
-  const header = "学生番号,名前,所属,メール,電話番号,生年月日,性別,申込日時\n"
+  const header = "学生番号,名前,フリガナ,学校名,所属,メール,電話番号,生年月日,性別,受付希望時間,献血経験,申込日時\n"
   const body = rows
     .map((r) => {
       const genderLabel = r.gender === 'male' ? '男性' :
                           r.gender === 'female' ? '女性' :
                           r.gender === 'other' ? 'その他' :
                           r.gender === 'no_answer' ? '回答しない' : r.gender ?? '';
+      const experienceLabel = r.donation_experience === 'yes' ? 'ある' :
+                              r.donation_experience === 'no' ? 'ない' : r.donation_experience ?? '';
       return [
         r.student_id,
         r.name,
+        r.furigana ?? "",
+        r.school ?? "",
         r.class,
         r.email ?? "",
         r.phone ?? "",
         r.birth_date ?? "",
         genderLabel,
+        r.time_slot ?? "",
+        experienceLabel,
         r.created_at
       ].join(",")
     })

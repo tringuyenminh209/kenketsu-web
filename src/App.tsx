@@ -85,7 +85,8 @@ function UserPage() {
 
   // ── 参加申込フォーム ──────────────────────────────
   const [regForm, setRegForm] = useState({
-    name: '', email: '', studentId: '', phone: '', department: '', birthDate: '', gender: '',
+    name: '', furigana: '', email: '', studentId: '', phone: '', school: '', department: '',
+    birthDate: '', timeSlot: '', donationExperience: '', gender: '',
   })
   const [fieldTouched, setFieldTouched] = useState({ studentId: false, birthDate: false })
   const studentIdValid = regForm.studentId.trim().length >= 4
@@ -158,10 +159,14 @@ function UserPage() {
         event_year: EVENT_CONFIG.year,
         student_id: regForm.studentId,
         name: regForm.name,
+        furigana: regForm.furigana || undefined,
         class: regForm.department,
         email: regForm.email || undefined,
         phone: regForm.phone || undefined,
+        school: regForm.school || undefined,
         birth_date: normalizedBirthDate,
+        time_slot: regForm.timeSlot || undefined,
+        donation_experience: regForm.donationExperience || undefined,
         gender: regForm.gender || undefined,
       })
       sendConfirmationEmail(registrationId)
@@ -557,6 +562,15 @@ function UserPage() {
                   />
                 </label>
                 <label>
+                  {t('register.furigana')} <span>{t('register.required')}</span>
+                  <input
+                    required
+                    placeholder={t('register.furiganaPlaceholder')}
+                    value={regForm.furigana}
+                    onChange={(e) => setRegForm({ ...regForm, furigana: e.target.value })}
+                  />
+                </label>
+                <label>
                   {t('register.email')} <span>{t('register.required')}</span>
                   <input
                     required
@@ -596,6 +610,19 @@ function UserPage() {
                   />
                 </label>
                 <label>
+                  {t('register.school')} <span>{t('register.required')}</span>
+                  <select
+                    required
+                    value={regForm.school}
+                    onChange={(e) => setRegForm({ ...regForm, school: e.target.value })}
+                  >
+                    <option value="" disabled>{t('register.departmentSelect')}</option>
+                    {(['school1', 'school2', 'school3', 'school4', 'school5'] as const).map((val) => (
+                      <option key={val} value={val}>{t(`register.${val}`)}</option>
+                    ))}
+                  </select>
+                </label>
+                <label>
                   {t('register.department')} <span>{t('register.required')}</span>
                   <input
                     required
@@ -623,6 +650,35 @@ function UserPage() {
                       </span>
                     )}
                   </div>
+                </label>
+                <label>
+                  {t('register.timeSlot')} <span>{t('register.required')}</span>
+                  <select
+                    required
+                    value={regForm.timeSlot}
+                    onChange={(e) => setRegForm({ ...regForm, timeSlot: e.target.value })}
+                  >
+                    <option value="" disabled>{t('register.departmentSelect')}</option>
+                    {[
+                      '9:30-10:00', '10:00-10:30', '10:30-11:00', '11:00-11:30',
+                      '12:30-13:00', '13:00-13:30', '13:30-14:00', '14:00-14:30',
+                      '14:30-15:00', '15:00-15:30', '15:30-16:00', '16:00-16:30',
+                    ].map((val) => (
+                      <option key={val} value={val}>{val.replace('-', '～')}</option>
+                    ))}
+                  </select>
+                </label>
+                <label>
+                  {t('register.donationExperience')} <span>{t('register.required')}</span>
+                  <select
+                    required
+                    value={regForm.donationExperience}
+                    onChange={(e) => setRegForm({ ...regForm, donationExperience: e.target.value })}
+                  >
+                    <option value="" disabled>{t('register.departmentSelect')}</option>
+                    <option value="yes">{t('register.donationExperienceYes')}</option>
+                    <option value="no">{t('register.donationExperienceNo')}</option>
+                  </select>
                 </label>
               </div>
               <fieldset>
