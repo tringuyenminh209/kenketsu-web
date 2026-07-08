@@ -18,10 +18,20 @@ const esc = (s: string) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;")
 
-function buildHtml(name: string, studentId: string, dept: string): string {
+function buildHtml(
+  name: string,
+  studentId: string,
+  dept: string,
+  furigana: string,
+  school: string,
+  timeSlot: string,
+): string {
   const n = esc(name)
   const sid = esc(studentId)
   const d = esc(dept)
+  const fg = esc(furigana)
+  const sc = esc(school)
+  const ts = esc(timeSlot)
   return `<!DOCTYPE html>
 <html lang="ja">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
@@ -56,6 +66,14 @@ function buildHtml(name: string, studentId: string, dept: string): string {
                 <td style="padding:10px 0;font-size:13px;color:#1a1a1a;border-bottom:1px solid #eee;">${n}</td>
               </tr>
               <tr>
+                <td style="padding:10px 0;font-size:13px;color:#888;border-bottom:1px solid #eee;">フリガナ</td>
+                <td style="padding:10px 0;font-size:13px;color:#1a1a1a;border-bottom:1px solid #eee;">${fg}</td>
+              </tr>
+              <tr>
+                <td style="padding:10px 0;font-size:13px;color:#888;border-bottom:1px solid #eee;">学校名</td>
+                <td style="padding:10px 0;font-size:13px;color:#1a1a1a;border-bottom:1px solid #eee;">${sc}</td>
+              </tr>
+              <tr>
                 <td style="padding:10px 0;font-size:13px;color:#888;">所属</td>
                 <td style="padding:10px 0;font-size:13px;color:#1a1a1a;">${d}</td>
               </tr>
@@ -78,8 +96,8 @@ function buildHtml(name: string, studentId: string, dept: string): string {
                 </td>
               </tr>
               <tr>
-                <td style="padding:10px 0;font-size:13px;color:#888;">持参物</td>
-                <td style="padding:10px 0;font-size:13px;color:#1a1a1a;">学生証</td>
+                <td style="padding:10px 0;font-size:13px;color:#888;">受付希望時間</td>
+                <td style="padding:10px 0;font-size:13px;color:#1a1a1a;">${ts}</td>
               </tr>
             </table>
 
@@ -146,7 +164,7 @@ Deno.serve(async (req) => {
   const windowStart = new Date(Date.now() - 5 * 60 * 1000).toISOString()
   const { data: reg, error } = await db
     .from("registrations")
-    .select("email, name, student_id, class, created_at")
+    .select("email, name, student_id, class, furigana, school, time_slot, created_at")
     .eq("id", registration_id)
     .gte("created_at", windowStart)
     .maybeSingle()
@@ -168,7 +186,14 @@ Deno.serve(async (req) => {
       from: `ECC献血ボランティア <${FROM_EMAIL}>`,
       to: [reg.email],
       subject: "【献血ボランティア】参加申込を受け付けました",
-      html: buildHtml(reg.name, reg.student_id, reg.class ?? ""),
+      html: buildHtml(
+        reg.name,
+        reg.student_id,
+        reg.class ?? "",
+        reg.furigana ?? "",
+        reg.school ?? "",
+        (reg.time_slot ?? "").replace("-", "～"),
+      ),
     }),
   })
 

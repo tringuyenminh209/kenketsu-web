@@ -618,7 +618,7 @@ function UserPage() {
                   >
                     <option value="" disabled>{t('register.departmentSelect')}</option>
                     {(['school1', 'school2', 'school3', 'school4', 'school5'] as const).map((val) => (
-                      <option key={val} value={val}>{t(`register.${val}`)}</option>
+                      <option key={val} value={t(`register.${val}`)}>{t(`register.${val}`)}</option>
                     ))}
                   </select>
                 </label>
