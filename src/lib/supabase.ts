@@ -117,6 +117,11 @@ export interface ParsedComment {
   concern: string
   preferredSupport: string
   recommend: string
+  resolvedConcern: string
+  infoDifficulty: string
+  infoDifficultyDetail: string
+  hesitationReason: string
+  hesitationDetail: string
   freeComment: string
 }
 
@@ -126,6 +131,11 @@ export function parseStructuredComment(commentStr: string | null): ParsedComment
     concern: '—',
     preferredSupport: '—',
     recommend: '—',
+    resolvedConcern: '—',
+    infoDifficulty: '—',
+    infoDifficultyDetail: '—',
+    hesitationReason: '—',
+    hesitationDetail: '—',
     freeComment: '—'
   }
   if (!commentStr) return result
@@ -167,12 +177,44 @@ export function parseStructuredComment(commentStr: string | null): ParsedComment
         not_yet: 'まだわからない'
       }
       result.recommend = recommendMap[value] ?? value
+    } else if (key === 'resolved_concern') {
+      const resolvedMap: Record<string, string> = {
+        pain: '痛みや針への不安が減った',
+        time: '時間がかかりそうという不安が減った',
+        health: '体調面の不安が減った',
+        none: 'まだ不安が残っている'
+      }
+      result.resolvedConcern = resolvedMap[value] ?? value
+    } else if (key === 'info_difficulty') {
+      const infoMap: Record<string, string> = {
+        language: '言語面で困った',
+        info: '情報が分かりにくかった',
+        none: '特になかった'
+      }
+      result.infoDifficulty = infoMap[value] ?? value
+    } else if (key === 'info_difficulty_detail') {
+      result.infoDifficultyDetail = value
+    } else if (key === 'hesitation_reason') {
+      const hesitationMap: Record<string, string> = {
+        busy: '忙しい・時間が合わない',
+        scared: '痛み・注射が怖い',
+        ineligible: '対象条件に当てはまらないと思う',
+        lack_info: '情報が足りない・不安が残る',
+        none: '特にない・参加予定'
+      }
+      result.hesitationReason = hesitationMap[value] ?? value
+    } else if (key === 'hesitation_detail') {
+      result.hesitationDetail = value
     } else if (key === 'free_comment') {
       result.freeComment = value
     }
   }
 
-  if (result.motivation === '—' && result.concern === '—' && result.preferredSupport === '—' && result.recommend === '—') {
+  const allEmpty = result.motivation === '—' && result.concern === '—' &&
+    result.preferredSupport === '—' && result.recommend === '—' &&
+    result.resolvedConcern === '—' && result.infoDifficulty === '—' &&
+    result.hesitationReason === '—'
+  if (allEmpty) {
     result.freeComment = commentStr
   }
 
