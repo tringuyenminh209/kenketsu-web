@@ -102,6 +102,9 @@ function UserPage() {
     concern: 'pain',
     preferredSupport: 'staff',
     recommend: 'yes',
+    resolvedConcern: 'pain',
+    infoDifficulty: 'none',
+    hesitationReason: 'none',
     comment: '',
   })
   const [surveySubmitting, setSurveySubmitting] = useState(false)
@@ -180,6 +183,9 @@ function UserPage() {
         `concern=${surveyForm.concern}`,
         `preferred_support=${surveyForm.preferredSupport}`,
         `recommend=${surveyForm.recommend}`,
+        `resolved_concern=${surveyForm.resolvedConcern}`,
+        `info_difficulty=${surveyForm.infoDifficulty}`,
+        `hesitation_reason=${surveyForm.hesitationReason}`,
         surveyForm.comment ? `free_comment=${surveyForm.comment}` : '',
       ].filter(Boolean).join('\n')
 
@@ -708,6 +714,33 @@ function UserPage() {
                     <option value="yes">{t('survey.q6Yes')}</option>
                     <option value="maybe">{t('survey.q6Maybe')}</option>
                     <option value="not_yet">{t('survey.q6NotYet')}</option>
+                  </select>
+                </label>
+                <label>
+                  {t('survey.q8Label')}
+                  <select value={surveyForm.resolvedConcern} onChange={(e) => setSurveyForm({ ...surveyForm, resolvedConcern: e.target.value })}>
+                    <option value="pain">{t('survey.q8Pain')}</option>
+                    <option value="time">{t('survey.q8Time')}</option>
+                    <option value="health">{t('survey.q8Health')}</option>
+                    <option value="none">{t('survey.q8None')}</option>
+                  </select>
+                </label>
+                <label>
+                  {t('survey.q9Label')}
+                  <select value={surveyForm.infoDifficulty} onChange={(e) => setSurveyForm({ ...surveyForm, infoDifficulty: e.target.value })}>
+                    <option value="language">{t('survey.q9Language')}</option>
+                    <option value="info">{t('survey.q9Info')}</option>
+                    <option value="none">{t('survey.q9None')}</option>
+                  </select>
+                </label>
+                <label>
+                  {t('survey.q10Label')}
+                  <select value={surveyForm.hesitationReason} onChange={(e) => setSurveyForm({ ...surveyForm, hesitationReason: e.target.value })}>
+                    <option value="busy">{t('survey.q10Busy')}</option>
+                    <option value="scared">{t('survey.q10Scared')}</option>
+                    <option value="ineligible">{t('survey.q10Ineligible')}</option>
+                    <option value="lack_info">{t('survey.q10LackInfo')}</option>
+                    <option value="none">{t('survey.q10None')}</option>
                   </select>
                 </label>
                 <label className="survey-comment">
