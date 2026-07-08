@@ -178,17 +178,21 @@ export default function AdminPage() {
                     <th>申込日時</th>
                     <th>学生番号</th>
                     <th>氏名</th>
+                    <th>フリガナ</th>
+                    <th>学校名</th>
                     <th>所属</th>
                     <th>メール</th>
                     <th>電話番号</th>
                     <th>生年月日</th>
                     <th>性別</th>
+                    <th>受付希望時間</th>
+                    <th>献血経験</th>
                   </tr>
                 </thead>
                 <tbody>
                   {registrations.length === 0 ? (
                     <tr>
-                      <td colSpan={8} style={{ textAlign: 'center', padding: '2rem' }}>
+                      <td colSpan={12} style={{ textAlign: 'center', padding: '2rem' }}>
                         申込データがありません
                       </td>
                     </tr>
@@ -198,16 +202,22 @@ export default function AdminPage() {
                                           row.gender === 'female' ? '女性' :
                                           row.gender === 'other' ? 'その他' :
                                           row.gender === 'no_answer' ? '回答しない' : row.gender ?? '—';
+                      const experienceLabel = row.donation_experience === 'yes' ? 'ある' :
+                                              row.donation_experience === 'no' ? 'ない' : row.donation_experience ?? '—';
                       return (
                         <tr key={row.id}>
                           <td>{new Date(row.created_at).toLocaleString('ja-JP')}</td>
                           <td>{row.student_id}</td>
                           <td>{row.name}</td>
+                          <td>{row.furigana ?? '—'}</td>
+                          <td>{row.school ?? '—'}</td>
                           <td>{row.class}</td>
                           <td>{row.email ?? '—'}</td>
                           <td>{row.phone ?? '—'}</td>
                           <td>{row.birth_date ?? '—'}</td>
                           <td>{genderLabel}</td>
+                          <td>{row.time_slot?.replace('-', '～') ?? '—'}</td>
+                          <td>{experienceLabel}</td>
                         </tr>
                       )
                     })
@@ -274,6 +284,11 @@ export default function AdminPage() {
                               {parsed.concern !== '—' && <div><strong>不安:</strong> {parsed.concern}</div>}
                               {parsed.preferredSupport !== '—' && <div><strong>サポート:</strong> {parsed.preferredSupport}</div>}
                               {parsed.recommend !== '—' && <div><strong>お勧め:</strong> {parsed.recommend}</div>}
+                              {parsed.resolvedConcern !== '—' && <div><strong>解消した不安:</strong> {parsed.resolvedConcern}</div>}
+                              {parsed.infoDifficulty !== '—' && <div><strong>言語/情報:</strong> {parsed.infoDifficulty}</div>}
+                              {parsed.infoDifficultyDetail !== '—' && <div><strong>└詳細:</strong> {parsed.infoDifficultyDetail}</div>}
+                              {parsed.hesitationReason !== '—' && <div><strong>参加を迷う理由:</strong> {parsed.hesitationReason}</div>}
+                              {parsed.hesitationDetail !== '—' && <div><strong>└詳細:</strong> {parsed.hesitationDetail}</div>}
                               {parsed.freeComment !== '—' && (
                                 <div style={{ borderTop: '1px dashed #eee', paddingTop: '4px', marginTop: '2px' }}>
                                   <strong>コメント:</strong> {parsed.freeComment}

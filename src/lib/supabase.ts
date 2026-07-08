@@ -222,7 +222,7 @@ export function parseStructuredComment(commentStr: string | null): ParsedComment
 }
 
 export function surveysToCSV(rows: SurveyResponse[]): string {
-  const header = "回答日時,献血回数,知ったきっかけ,参加理由,気になること,希望するサポート,周囲へ薦めたいか,自由コメント\n"
+  const header = "回答日時,献血回数,知ったきっかけ,参加理由,気になること,希望するサポート,周囲へ薦めたいか,解消された不安,言語・情報の困りごと,困りごとの詳細,参加を迷う理由,迷う理由の詳細,自由コメント\n"
   const body = rows
     .map((r) => {
       const countLabel = r.donation_count === 'first' ? '初めて' :
@@ -241,6 +241,11 @@ export function surveysToCSV(rows: SurveyResponse[]): string {
         `"${parsed.concern.replace(/"/g, '""')}"`,
         `"${parsed.preferredSupport.replace(/"/g, '""')}"`,
         `"${parsed.recommend.replace(/"/g, '""')}"`,
+        `"${parsed.resolvedConcern.replace(/"/g, '""')}"`,
+        `"${parsed.infoDifficulty.replace(/"/g, '""')}"`,
+        `"${parsed.infoDifficultyDetail.replace(/"/g, '""')}"`,
+        `"${parsed.hesitationReason.replace(/"/g, '""')}"`,
+        `"${parsed.hesitationDetail.replace(/"/g, '""')}"`,
         `"${parsed.freeComment.replace(/"/g, '""')}"`
       ].join(",")
     })
