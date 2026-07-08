@@ -79,12 +79,8 @@ export function Flyer() {
             </p>
           </div>
 
-          {/* 5. Footer */}
+          {/* 5. Footer — QR on the left (empty area), org text on the right (near rabbit) */}
           <div className="fp-foot-row">
-            <p className="fp-org">
-              主催：{EVENT_CONFIG.organizer}<br />
-              後援：日本赤十字社
-            </p>
             <div className="fp-qr">
               <div className="fp-qr-box">
                 <QRCodeSVG
@@ -98,6 +94,10 @@ export function Flyer() {
               </div>
               <p className="fp-qr-cap">QRコードから<br />事前申込！</p>
             </div>
+            <p className="fp-org">
+              主催：{EVENT_CONFIG.organizer}<br />
+              後援：日本赤十字社
+            </p>
           </div>
 
         </div>

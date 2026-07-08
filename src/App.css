@@ -3656,7 +3656,7 @@ th {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background: rgba(40, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* All children above the overlay */
@@ -3882,6 +3882,7 @@ th {
   font-size: 14px;
   font-weight: 700;
   line-height: 1.7;
+  text-align: right;
 }
 
 .fp-qr {
