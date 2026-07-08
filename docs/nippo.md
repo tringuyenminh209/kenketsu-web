@@ -682,3 +682,26 @@
 - `src/locales/*.json`
 - `docs/nippo.md`
 
+---
+
+## Ngay: 2026-07-08 (session 17 - dich tu nhien 11 ngon ngu cho cac truong moi cua form dang ky va khao sat)
+
+## Noi dung da hoan thanh
+
+- **Đồng bộ hóa bản dịch tự nhiên cho 31 khóa mới trong 11 ngôn ngữ**:
+  * Phát triển kịch bản `scratch/sync_all_keys.js` để tự động cập nhật bản dịch cho 31 khóa mới liên quan đến các trường của biểu mẫu đăng ký bổ sung (`furigana`, `school`, `timeSlot`, `donationExperience`) và các câu hỏi khảo sát mở rộng (`q8`, `q9`, `q10`).
+  * Thực hiện dịch tiêu đề chính của form đăng ký `"献血申し込（仮）"` thành dạng **`"Đăng ký trước hiến máu"`** (tiếng Việt), **`"Blood Donation Pre-registration"`** (tiếng Anh) và các dạng biểu đạt tự nhiên tương tự trên tất cả 11 ngôn ngữ phụ.
+  * Tích hợp thành công và đồng bộ cấu trúc khóa dịch (mỗi tệp chứa đúng 394 khóa).
+
+## Kiem tra
+
+- Chạy kiểm tra đồng bộ: Đạt 100% (toàn bộ 11 tệp ngôn ngữ phụ khớp hoàn toàn với `ja.json`).
+- Chạy build (`npm run build`): pass.
+- Chạy linter (`npm run lint`): pass.
+
+## File da thay doi chinh
+
+- `src/locales/*.json`
+- `src/lib/supabase.ts`
+- `docs/nippo.md`
+
