@@ -47,6 +47,13 @@ const KNOWLEDGE_IMAGES = [knowledgeInfrastructureImage, knowledgeMultiplePatient
 const BENEFIT_IMAGES = [benefitHealthCheckImage, benefitLifeSupportImage, benefitCampusSolidarityImage, benefitSocialContributionImage]
 const PROCESS_IMAGES = [processPrecheckImage, processInterviewImage, processDonationImage]
 
+const hesitationDetailOptions: Record<string, string[]> = {
+  busy: ['busy_class', 'busy_job', 'busy_schedule', 'busy_time'],
+  scared: ['scared_needle', 'scared_faint', 'scared_past', 'scared_blood'],
+  ineligible: ['ineligible_weight', 'ineligible_medication', 'ineligible_travel', 'ineligible_condition'],
+  lack_info: ['lack_info_aftereffect', 'lack_info_process', 'lack_info_location', 'lack_info_items'],
+}
+
 function UserPage() {
   const { t } = useTranslation()
   const [selectedKnowledge, setSelectedKnowledge] = useState(0)
@@ -808,7 +815,10 @@ function UserPage() {
                 )}
                 <label>
                   {t('survey.q10Label')}
-                  <select value={surveyForm.hesitationReason} onChange={(e) => setSurveyForm({ ...surveyForm, hesitationReason: e.target.value })}>
+                  <select
+                    value={surveyForm.hesitationReason}
+                    onChange={(e) => setSurveyForm({ ...surveyForm, hesitationReason: e.target.value, hesitationDetail: '' })}
+                  >
                     <option value="busy">{t('survey.q10Busy')}</option>
                     <option value="scared">{t('survey.q10Scared')}</option>
                     <option value="ineligible">{t('survey.q10Ineligible')}</option>
@@ -819,12 +829,15 @@ function UserPage() {
                 {surveyForm.hesitationReason !== 'none' && (
                   <label className="survey-followup">
                     {t('survey.q10DetailLabel')}
-                    <input
-                      type="text"
-                      placeholder={t('survey.q10DetailPlaceholder')}
+                    <select
                       value={surveyForm.hesitationDetail}
                       onChange={(e) => setSurveyForm({ ...surveyForm, hesitationDetail: e.target.value })}
-                    />
+                    >
+                      <option value="" disabled>{t('register.departmentSelect')}</option>
+                      {(hesitationDetailOptions[surveyForm.hesitationReason] ?? []).map((val) => (
+                        <option key={val} value={val}>{t(`survey.q10Detail_${val}`)}</option>
+                      ))}
+                    </select>
                   </label>
                 )}
                 <label className="survey-comment">

@@ -204,7 +204,25 @@ export function parseStructuredComment(commentStr: string | null): ParsedComment
       }
       result.hesitationReason = hesitationMap[value] ?? value
     } else if (key === 'hesitation_detail') {
-      result.hesitationDetail = value
+      const hesitationDetailMap: Record<string, string> = {
+        busy_class: '授業と重なる',
+        busy_job: 'アルバイトがある',
+        busy_schedule: '他の予定がある',
+        busy_time: '提供時間帯が合わない',
+        scared_needle: '注射針が苦手',
+        scared_faint: '気分が悪くなりそうで心配',
+        scared_past: '過去の献血がつらかった',
+        scared_blood: '血を見るのが苦手',
+        ineligible_weight: '体重が基準に届かないと思う',
+        ineligible_medication: '持病・服薬中の薬がある',
+        ineligible_travel: '海外渡航歴がある',
+        ineligible_condition: '睡眠不足・体調に自信がない',
+        lack_info_aftereffect: '献血後の体調への影響が心配',
+        lack_info_process: '手続き・流れがわかりにくい',
+        lack_info_location: '会場の場所がわからない',
+        lack_info_items: '当日の持ち物がわからない',
+      }
+      result.hesitationDetail = hesitationDetailMap[value] ?? value
     } else if (key === 'free_comment') {
       result.freeComment = value
     }
