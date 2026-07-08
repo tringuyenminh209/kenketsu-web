@@ -3638,7 +3638,7 @@ th {
   height: 297mm;
   background-color: #ce0017;
   background-size: cover;
-  background-position: right center;
+  background-position: 65% center;
   background-repeat: no-repeat;
   box-shadow: 0 16px 56px rgba(0, 0, 0, 0.32);
   display: flex;
