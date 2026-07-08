@@ -235,23 +235,23 @@ export default function AdminPage() {
                 </tbody>
               </table>
             </div>
-            <div className="admin-actions">
-              <button
-                className="button outline"
-                type="button"
-                onClick={handleCsvExport}
-                disabled={registrations.length === 0}
-              >
-                CSVエクスポート
-              </button>
-            </div>
           </div>
         </section>
 
         <section className="admin-preview admin-page-panel reveal" style={{ marginTop: '2rem' }}>
-          <div className="section-title">
-            <Icon type="book" />
-            <h2>アンケート回答データ</h2>
+          <div className="admin-panel-header">
+            <div className="section-title">
+              <Icon type="book" />
+              <h2>アンケート回答データ</h2>
+            </div>
+            <button
+              className="button outline"
+              type="button"
+              onClick={handleSurveyCsvExport}
+              disabled={surveys.length === 0}
+            >
+              CSVエクスポート
+            </button>
           </div>
           <div className="admin-content">
             <div className="table-wrap">
@@ -261,13 +261,22 @@ export default function AdminPage() {
                     <th>回答日時</th>
                     <th>献血回数</th>
                     <th>知ったきっかけ</th>
-                    <th>自由回答・コメント</th>
+                    <th>参加理由</th>
+                    <th>気になること</th>
+                    <th>解消した不安</th>
+                    <th>希望サポート</th>
+                    <th>周囲へ薦める</th>
+                    <th>言語/情報の困りごと</th>
+                    <th>困りごとの詳細</th>
+                    <th>参加を迷う理由</th>
+                    <th>迷う理由の詳細</th>
+                    <th>自由コメント</th>
                   </tr>
                 </thead>
                 <tbody>
                   {surveys.length === 0 ? (
                     <tr>
-                      <td colSpan={4} style={{ textAlign: 'center', padding: '2rem' }}>
+                      <td colSpan={13} style={{ textAlign: 'center', padding: '2rem' }}>
                         アンケート回答データがありません
                       </td>
                     </tr>
@@ -288,40 +297,22 @@ export default function AdminPage() {
                              row.how_found === 'friend' ? '友人の紹介' :
                              row.how_found === 'sns' ? 'SNS' : row.how_found ?? '—'}
                           </td>
-                          <td style={{ textAlign: 'left', padding: '0.75rem 1rem' }}>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '0.8rem', lineHeight: '1.4' }}>
-                              {parsed.motivation !== '—' && <div><strong>理由:</strong> {parsed.motivation}</div>}
-                              {parsed.concern !== '—' && <div><strong>不安:</strong> {parsed.concern}</div>}
-                              {parsed.preferredSupport !== '—' && <div><strong>サポート:</strong> {parsed.preferredSupport}</div>}
-                              {parsed.recommend !== '—' && <div><strong>お勧め:</strong> {parsed.recommend}</div>}
-                              {parsed.resolvedConcern !== '—' && <div><strong>解消した不安:</strong> {parsed.resolvedConcern}</div>}
-                              {parsed.infoDifficulty !== '—' && <div><strong>言語/情報:</strong> {parsed.infoDifficulty}</div>}
-                              {parsed.infoDifficultyDetail !== '—' && <div><strong>└詳細:</strong> {parsed.infoDifficultyDetail}</div>}
-                              {parsed.hesitationReason !== '—' && <div><strong>参加を迷う理由:</strong> {parsed.hesitationReason}</div>}
-                              {parsed.hesitationDetail !== '—' && <div><strong>└詳細:</strong> {parsed.hesitationDetail}</div>}
-                              {parsed.freeComment !== '—' && (
-                                <div style={{ borderTop: '1px dashed #eee', paddingTop: '4px', marginTop: '2px' }}>
-                                  <strong>コメント:</strong> {parsed.freeComment}
-                                </div>
-                              )}
-                            </div>
-                          </td>
+                          <td>{parsed.motivation}</td>
+                          <td>{parsed.concern}</td>
+                          <td>{parsed.resolvedConcern}</td>
+                          <td>{parsed.preferredSupport}</td>
+                          <td>{parsed.recommend}</td>
+                          <td>{parsed.infoDifficulty}</td>
+                          <td>{parsed.infoDifficultyDetail}</td>
+                          <td>{parsed.hesitationReason}</td>
+                          <td>{parsed.hesitationDetail}</td>
+                          <td>{parsed.freeComment}</td>
                         </tr>
                       )
                     })
                   )}
                 </tbody>
               </table>
-            </div>
-            <div className="admin-actions">
-              <button
-                className="button outline"
-                type="button"
-                onClick={handleSurveyCsvExport}
-                disabled={surveys.length === 0}
-              >
-                CSVエクスポート
-              </button>
             </div>
           </div>
         </section>

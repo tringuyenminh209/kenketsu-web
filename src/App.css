@@ -1388,11 +1388,26 @@ input[type='radio'] {
   color: var(--green-dark);
 }
 
+.admin-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.admin-panel-header .section-title {
+  margin-bottom: 0;
+}
+
+.admin-panel-header .button {
+  flex-shrink: 0;
+  color: var(--green-dark);
+  border-color: rgba(0, 122, 88, 0.5);
+}
+
 .admin-content {
-  display: grid;
-  grid-template-columns: 1fr 220px;
-  gap: 28px;
-  align-items: start;
+  display: block;
 }
 
 .table-wrap {
@@ -1417,18 +1432,6 @@ td {
 th {
   background: #f4f8f7;
   font-weight: 900;
-}
-
-.admin-actions {
-  display: grid;
-  gap: 12px;
-}
-
-.admin-actions .button {
-  width: 100%;
-  min-width: 0;
-  color: var(--green-dark);
-  border-color: rgba(0, 122, 88, 0.5);
 }
 
 .admin-shell {
@@ -3208,9 +3211,12 @@ th {
   .hero-actions,
   .info-strip dl,
   .step-list,
-  .form-grid,
-  .admin-content {
+  .form-grid {
     grid-template-columns: 1fr;
+  }
+
+  .admin-panel-header {
+    flex-wrap: wrap;
   }
 
   .app-reservation-links {
