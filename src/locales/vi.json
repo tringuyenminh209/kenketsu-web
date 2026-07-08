@@ -244,7 +244,22 @@
     "q10LackInfo": "Thiếu thông tin / Vẫn thấy lo lắng",
     "q10None": "Không có lý do gì / Dự kiến tham gia",
     "q10DetailLabel": "Nếu có thể, hãy chia sẻ thêm chi tiết với chúng tôi:",
-    "q10DetailPlaceholder": "VD: Tôi rất sợ kim tiêm."
+    "q10Detail_busy_class": "Trùng lịch học trên lớp",
+    "q10Detail_busy_job": "Có ca làm thêm (Arubaito)",
+    "q10Detail_busy_schedule": "Có kế hoạch/lịch trình khác",
+    "q10Detail_busy_time": "Khung giờ hiến máu không phù hợp",
+    "q10Detail_scared_needle": "Sợ/ngại kim tiêm",
+    "q10Detail_scared_faint": "Lo lắng về việc bị chóng mặt/mệt mỏi",
+    "q10Detail_scared_past": "Từng có trải nghiệm không tốt ở lần hiến trước",
+    "q10Detail_scared_blood": "Sợ nhìn thấy máu",
+    "q10Detail_ineligible_weight": "Cân nặng chưa đạt tiêu chuẩn",
+    "q10Detail_ineligible_medication": "Có bệnh nền / đang uống thuốc điều trị",
+    "q10Detail_ineligible_travel": "Có lịch sử du lịch/ở nước ngoài gần đây",
+    "q10Detail_ineligible_condition": "Thiếu ngủ / cảm thấy sức khỏe không đảm bảo",
+    "q10Detail_lack_info_aftereffect": "Lo ngại về ảnh hưởng sức khỏe sau khi hiến",
+    "q10Detail_lack_info_process": "Thủ tục và quy trình chưa rõ ràng",
+    "q10Detail_lack_info_location": "Không biết địa điểm tổ chức",
+    "q10Detail_lack_info_items": "Không biết cần mang theo những đồ gì"
   },
   "flyer": {
     "title": "Hoạt động tình nguyện hiến máu",

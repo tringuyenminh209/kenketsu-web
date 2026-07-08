@@ -166,9 +166,19 @@ export default function AdminPage() {
         </section>
 
         <section className="admin-preview admin-page-panel reveal">
-          <div className="section-title">
-            <Icon type="chart" />
-            <h2>申込データ</h2>
+          <div className="admin-panel-header">
+            <div className="section-title">
+              <Icon type="chart" />
+              <h2>申込データ</h2>
+            </div>
+            <button
+              className="button outline"
+              type="button"
+              onClick={handleCsvExport}
+              disabled={registrations.length === 0}
+            >
+              CSVエクスポート
+            </button>
           </div>
           <div className="admin-content">
             <div className="table-wrap">

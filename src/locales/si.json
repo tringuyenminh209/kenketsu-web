@@ -244,7 +244,22 @@
     "q10LackInfo": "තොරතුරු ප්‍රමාණවත් නොවීම / තවමත් පවතින බිය",
     "q10None": "විශේෂ හේතුවක් නැත / සහභာගී වීමට බලාපොරොත්තු වේ",
     "q10DetailLabel": "හැකි නම් කරුණාකර විස්තර කරන්න:",
-    "q10DetailPlaceholder": "උදා.) මම කටු ගැලවීමට ඉතා බිය වෙමි."
+    "q10Detail_busy_class": "දේශන වේලාවන් සමඟ ගැටේ",
+    "q10Detail_busy_job": "අර්ධකාලීන රැකියාවක් (අරුබයිතෝ) ඇත",
+    "q10Detail_busy_schedule": "වෙනත් වැඩ කටයුතු යෙදී ඇත",
+    "q10Detail_busy_time": "ලබා දී ඇති වේලාවන් නොගැලපේ",
+    "q10Detail_scared_needle": "කටු වලට බියක් දක්වයි",
+    "q10Detail_scared_faint": "කලන්තය හැදේවි යැයි හෝ අසනීප වේවි යැයි බියක් පවතී",
+    "q10Detail_scared_past": "පෙර ලේ දීමේදී අමිහිරි අත්දැකීමක් ලැබී ඇත",
+    "q10Detail_scared_blood": "ලේ දැකීමට බියක් දක්වයි",
+    "q10Detail_ineligible_weight": "බර ප්‍රමාණවත් නොවන බව හැඟේ",
+    "q10Detail_ineligible_medication": "දීර්ඝකාලීන රෝගාබාධයක් හෝ ඖෂධ ලබා ගනිමින් සිටී",
+    "q10Detail_ineligible_travel": "මෑතකදී විදේශගත වූ ඉතිහාසයක් ඇත",
+    "q10Detail_ineligible_condition": "නින්ද නොමැතිකම / සෞඛ්‍ය තත්ත්වය පිළිබඳ විශ්වාසයක් නැත",
+    "q10Detail_lack_info_aftereffect": "ලේ දීමෙන් පසු සෞඛ්‍යයට සිදුවන බලපෑම පිළිබඳව සැලකිලිමත් වේ",
+    "q10Detail_lack_info_process": "ක්‍රියාවලිය සහ පියවර පැහැදිලි නැත",
+    "q10Detail_lack_info_location": "පවත්වන ස්ථානය කොහේදැයි නොදනී",
+    "q10Detail_lack_info_items": "එදිනට රැගෙන ආ යුතු දෑ මොනවාදැයි නොදනී"
   },
   "flyer": {
     "title": "ස්වේච්ඡා ලේ දීමේ ක්‍රියාකාරකම",

@@ -244,7 +244,22 @@
     "q10LackInfo": "ข้อมูลไม่เพียงพอ / ยังคงกังวล",
     "q10None": "ไม่มีเหตุผลพิเศษ / วางแผนจะเข้าร่วม",
     "q10DetailLabel": "หากสะดวกรบกวนช่วยอธิบายรายละเอียดเพิ่มเติม:",
-    "q10DetailPlaceholder": "ต.ย.) กลัวการฉีดยามาก"
+    "q10Detail_busy_class": "ตรงกับเวลาเรียน",
+    "q10Detail_busy_job": "มีงานพาร์ทไทม์",
+    "q10Detail_busy_schedule": "มีนัดหมายอื่น",
+    "q10Detail_busy_time": "ช่วงเวลาที่จัดไม่สะดวก",
+    "q10Detail_scared_needle": "กลัวเข็มฉีดยา",
+    "q10Detail_scared_faint": "กังวลว่าอาจวิงเวียนศีรษะหรือหน้ามืด",
+    "q10Detail_scared_past": "เคยมีประสบการณ์ไม่ดีในการบริจาคโลหิตครั้งก่อน",
+    "q10Detail_scared_blood": "กลัวเลือด/ไม่อยากเห็นเลือด",
+    "q10Detail_ineligible_weight": "น้ำหนักไม่ถึงเกณฑ์ขั้นต่ำ",
+    "q10Detail_ineligible_medication": "มีโรคประจำตัวหรือกำลังทานยาอยู่",
+    "q10Detail_ineligible_travel": "มีประวัติเดินทางไปต่างประเทศ",
+    "q10Detail_ineligible_condition": "นอนไม่พอ/รู้สึกไม่แข็งแรงพอ",
+    "q10Detail_lack_info_aftereffect": "กังวลเรื่องผลกระทบต่อร่างกายหลังบริจาค",
+    "q10Detail_lack_info_process": "ขั้นตอนและกระบวนการเข้าใจยาก",
+    "q10Detail_lack_info_location": "ไม่ทราบสถานที่จัดงาน",
+    "q10Detail_lack_info_items": "ไม่ทราบว่าต้องเตรียมอะไรไปบ้าง"
   },
   "flyer": {
     "title": "กิจกรรมอาสาสมัครบริจาคโลหิต",

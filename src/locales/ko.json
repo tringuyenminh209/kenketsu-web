@@ -244,7 +244,22 @@
     "q10LackInfo": "정보 부족 / 불안감이 남아있음",
     "q10None": "특별히 없음 / 참여 예정",
     "q10DetailLabel": "괜찮으시다면 자세히 들려주세요",
-    "q10DetailPlaceholder": "예) 주삿바늘을 매우 무서워합니다."
+    "q10Detail_busy_class": "수업 시간과 겹침",
+    "q10Detail_busy_job": "아르바이트가 있음",
+    "q10Detail_busy_schedule": "다른 일정이 있음",
+    "q10Detail_busy_time": "제공되는 시간대가 맞지 않음",
+    "q10Detail_scared_needle": "주삿바늘이 무서움/싫음",
+    "q10Detail_scared_faint": "어지러움이나 컨디션 난조가 걱정됨",
+    "q10Detail_scared_past": "과거 헌혈 때 힘들었던 경험이 있음",
+    "q10Detail_scared_blood": "피를 보는 것이 힘듦",
+    "q10Detail_ineligible_weight": "몸무게가 기준에 미치지 못함",
+    "q10Detail_ineligible_medication": "지병이 있거나 약을 복용 중임",
+    "q10Detail_ineligible_travel": "해외 여행 이력이 있음",
+    "q10Detail_ineligible_condition": "수면 부족/컨디션에 자신이 없음",
+    "q10Detail_lack_info_aftereffect": "헌혈 후 컨디션에 미칠 영향이 걱정됨",
+    "q10Detail_lack_info_process": "절차 및 진행 과정이 불명확함",
+    "q10Detail_lack_info_location": "행사장 위치를 모름",
+    "q10Detail_lack_info_items": "준비물을 모름"
   },
   "flyer": {
     "title": "헌혈 자원봉사 활동",

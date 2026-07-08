@@ -244,7 +244,22 @@
     "q10LackInfo": "তথ্যের অভাব / উদ্বেগ রয়ে গেছে",
     "q10None": "কোনো বিশেষ কারণ নেই / অংশ নেওয়ার পরিকল্পনা আছে",
     "q10DetailLabel": "দয়া করে বিস্তারিত বলবেন কি:",
-    "q10DetailPlaceholder": "উদা.) আমি ইনজেকশন খুব ভয় পাই।"
+    "q10Detail_busy_class": "ক্লাসের সময়ের সাথে মিলে যায়",
+    "q10Detail_busy_job": "পার্ট-টাইম কাজ (আরুবাইতো) আছে",
+    "q10Detail_busy_schedule": "অন্যান্য পরিকল্পনা আছে",
+    "q10Detail_busy_time": "নির্ধারিত সময়টি উপযুক্ত নয়",
+    "q10Detail_scared_needle": "ইনজেকশনের সূঁচ ভয় পাই",
+    "q10Detail_scared_faint": "মাথা ঘোরানো বা অসুস্থ বোধ করার ভয় আছে",
+    "q10Detail_scared_past": "অতীতে রক্তদানের সময় খারাপ অভিজ্ঞতা হয়েছিল",
+    "q10Detail_scared_blood": "রক্ত দেখতে ভয় পাই",
+    "q10Detail_ineligible_weight": "মনে হয় ওজন মানদণ্ডের চেয়ে কম",
+    "q10Detail_ineligible_medication": "ক্রনিক অসুস্থতা আছে বা ওষুধ খাচ্ছি",
+    "q10Detail_ineligible_travel": "বিদেশ ভ্রমণের ইতিহাস আছে",
+    "q10Detail_ineligible_condition": "ঘুমের অভাব / শরীরের অবস্থা ভালো না",
+    "q10Detail_lack_info_aftereffect": "রক্তদানের পর স্বাস্থ্যের উপর प्रभाव নিয়ে চিন্তিত",
+    "q10Detail_lack_info_process": "পদ্ধতি এবং প্রক্রিয়া অস্পষ্ট",
+    "q10Detail_lack_info_location": "আয়োজনস্থলের অবস্থান জানি না",
+    "q10Detail_lack_info_items": "সেদিন কী নিয়ে আসতে হবে জানি না"
   },
   "flyer": {
     "title": "রক্তদান স্বেচ্ছাসেবী কার্যক্রম",

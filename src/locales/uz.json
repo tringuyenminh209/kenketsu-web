@@ -244,7 +244,22 @@
     "q10LackInfo": "Ma'lumotlar yetarli emas / Xavotirlar bor",
     "q10None": "Sarlavha yo'q / Qatnashmoqchiman",
     "q10DetailLabel": "Iltimos, batafsilroq ma'lumot bera olasizmi:",
-    "q10DetailPlaceholder": "Masalan: Ukol qilishlaridan juda qo'rqaman."
+    "q10Detail_busy_class": "Dars vaqtiga to'g'ri keladi",
+    "q10Detail_busy_job": "Ishim (arubaito) bor",
+    "q10Detail_busy_schedule": "Boshqa rejalarim bor",
+    "q10Detail_busy_time": "Taklif etilgan vaqt to'g'ri kelmadi",
+    "q10Detail_scared_needle": "Ukol ignasidan qo'rqaman",
+    "q10Detail_scared_faint": "O'zimni yomon his qilishdan xavotirdaman",
+    "q10Detail_scared_past": "Avvalgi qon topshirishda yomon tajribaga ega bo'lganman",
+    "q10Detail_scared_blood": "Qonni ko'rishga toqatim yo'q",
+    "q10Detail_ineligible_weight": "Vaznim me'yorga to'g'ri kelmaydi deb o'ylayman",
+    "q10Detail_ineligible_medication": "Surunkali kasallik bor yoki dori ichaman",
+    "q10Detail_ineligible_travel": "Yaqinda chet elda bo'lganman",
+    "q10Detail_ineligible_condition": "Uxlamaganman / sog'lig'imdan shubhadaman",
+    "q10Detail_lack_info_aftereffect": "Qon topshirgandan keyin sog'lig'im yomonlashishidan xavotirdaman",
+    "q10Detail_lack_info_process": "Jarayon va tartib-qoidalar tushunarsiz",
+    "q10Detail_lack_info_location": "Tadbir o'tkaziladigan joyni bilmayman",
+    "q10Detail_lack_info_items": "O'zim bilan nimalar olib kelishni bilmayman"
   },
   "flyer": {
     "title": "Qon topshirish xayriya tadbiri",

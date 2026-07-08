@@ -244,7 +244,22 @@
     "q10LackInfo": "Kurang informasi / Masih khawatir",
     "q10None": "Tidak ada alasan khusus / Berencana ikut",
     "q10DetailLabel": "Silakan beri tahu kami detailnya jika berkenan:",
-    "q10DetailPlaceholder": "misal) Saya sangat takut disuntik."
+    "q10Detail_busy_class": "Bentrok dengan waktu kuliah",
+    "q10Detail_busy_job": "Ada jadwal kerja paruh waktu (arubaito)",
+    "q10Detail_busy_schedule": "Ada acara atau rencana lain",
+    "q10Detail_busy_time": "Waktu yang tersedia tidak cocok",
+    "q10Detail_scared_needle": "Takut atau tidak suka jarum suntik",
+    "q10Detail_scared_faint": "Khawatir akan pusing atau merasa tidak enak badan",
+    "q10Detail_scared_past": "Pernah mengalami pengalaman tidak menyenangkan saat donor sebelumnya",
+    "q10Detail_scared_blood": "Takut melihat darah",
+    "q10Detail_ineligible_weight": "Berat badan tidak mencapai standar",
+    "q10Detail_ineligible_medication": "Memiliki penyakit kronis atau sedang minum obat",
+    "q10Detail_ineligible_travel": "Memiliki riwayat perjalanan ke luar negeri",
+    "q10Detail_ineligible_condition": "Kurang tidur / kurang percaya diri dengan kondisi kesehatan",
+    "q10Detail_lack_info_aftereffect": "Khawatir tentang efek samping pada kesehatan setelah donor",
+    "q10Detail_lack_info_process": "Prosedur dan alur donor kurang jelas",
+    "q10Detail_lack_info_location": "Tidak tahu lokasi tempat pelaksanaan",
+    "q10Detail_lack_info_items": "Tidak tahu barang apa saja yang harus dibawa"
   },
   "flyer": {
     "title": "Aktivitas Sukarelawan Donor Darah",

@@ -244,7 +244,22 @@
     "q10LackInfo": "Lack of information / Concerns remain",
     "q10None": "No reason / Plan to participate",
     "q10DetailLabel": "Please tell us more if you'd like",
-    "q10DetailPlaceholder": "e.g., I am very afraid of needles."
+    "q10Detail_busy_class": "Conflicts with classes",
+    "q10Detail_busy_job": "Have a part-time job",
+    "q10Detail_busy_schedule": "Have other plans",
+    "q10Detail_busy_time": "Available time slots do not match",
+    "q10Detail_scared_needle": "Dislike/Afraid of needles",
+    "q10Detail_scared_faint": "Worried about feeling unwell",
+    "q10Detail_scared_past": "Had a bad experience in past donations",
+    "q10Detail_scared_blood": "Dislike the sight of blood",
+    "q10Detail_ineligible_weight": "Do not meet weight requirements",
+    "q10Detail_ineligible_medication": "Have chronic illness or taking medication",
+    "q10Detail_ineligible_travel": "Have history of traveling abroad",
+    "q10Detail_ineligible_condition": "Lack of sleep / not feeling well",
+    "q10Detail_lack_info_aftereffect": "Worried about health effects after donation",
+    "q10Detail_lack_info_process": "Procedures and flow are unclear",
+    "q10Detail_lack_info_location": "Do not know the venue location",
+    "q10Detail_lack_info_items": "Do not know what to bring"
   },
   "flyer": {
     "title": "Blood Donation Volunteer Activity",

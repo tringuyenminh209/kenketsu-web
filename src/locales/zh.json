@@ -244,7 +244,22 @@
     "q10LackInfo": "信息不足 / 仍有疑虑",
     "q10None": "没有原因 / 计划参加",
     "q10DetailLabel": "如果可以，请告诉我们更多细节：",
-    "q10DetailPlaceholder": "例）我非常害怕打针。"
+    "q10Detail_busy_class": "与上课时间冲突",
+    "q10Detail_busy_job": "有兼职工作",
+    "q10Detail_busy_schedule": "有其他安排",
+    "q10Detail_busy_time": "开放时间段不合适",
+    "q10Detail_scared_needle": "害怕针头",
+    "q10Detail_scared_faint": "担心会出现身体不适/头晕",
+    "q10Detail_scared_past": "以前献血有不好的体验",
+    "q10Detail_scared_blood": "害怕见血",
+    "q10Detail_ineligible_weight": "体重未达标",
+    "q10Detail_ineligible_medication": "患有慢性病/正在服药",
+    "q10Detail_ineligible_travel": "有境外旅居史",
+    "q10Detail_ineligible_condition": "睡眠不足/对身体状态没信心",
+    "q10Detail_lack_info_aftereffect": "担心献血后的身体后遗症",
+    "q10Detail_lack_info_process": "不清楚具体步骤和流程",
+    "q10Detail_lack_info_location": "不知道活动场地位置",
+    "q10Detail_lack_info_items": "不知道当天需要带什么物品"
   },
   "flyer": {
     "title": "献血志愿者活动",

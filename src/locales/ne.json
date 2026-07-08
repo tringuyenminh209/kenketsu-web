@@ -244,7 +244,22 @@
     "q10LackInfo": "जानकारीको अभाव / चिन्ता बाँकी रहनु",
     "q10None": "खासै केही छैन / सहभागी हुने विचारमा छु",
     "q10DetailLabel": "कृपया विस्तृतमा बताइदिनुहोस्:",
-    "q10DetailPlaceholder": "उदा.) मलाई सुइ लगाउन निकै डर लाग्छ।"
+    "q10Detail_busy_class": "कक्षा समयसँग बाझिएको छ",
+    "q10Detail_busy_job": "पार्ट-टाइम काम (अरुबाइतो) छ",
+    "q10Detail_busy_schedule": "अन्य योजनाहरू छन्",
+    "q10Detail_busy_time": "उपलब्ध समय तालिका मिलेन",
+    "q10Detail_scared_needle": "सुइ लगाउन डर लाग्छ",
+    "q10Detail_scared_faint": "रिंगटा लाग्ने वा स्वास्थ्य बिग्रने चिन्ता छ",
+    "q10Detail_scared_past": "विगतमा रक्तदान गर्दा नराम्रो अनुभव भएको थियो",
+    "q10Detail_scared_blood": "रगत देख्न डर लाग्छ",
+    "q10Detail_ineligible_weight": "तौल मापदण्ड अनुसार नपुगेको जस्तो लाग्छ",
+    "q10Detail_ineligible_medication": "दीर्घकालीन रोग छ वा औषधि सेवन गर्दैछु",
+    "q10Detail_ineligible_travel": "हालसालै विदेश यात्रा गरेको इतिहास छ",
+    "q10Detail_ineligible_condition": "अपुग निद्रा / स्वास्थ्य ठीक नभएको महसुस",
+    "q10Detail_lack_info_aftereffect": "रक्तदान पछि स्वास्थ्यमा पर्ने असरको चिन्ता छ",
+    "q10Detail_lack_info_process": "प्रक्रिया र चरणहरू अस्पष्ट छन्",
+    "q10Detail_lack_info_location": "कार्यक्रम स्थलको स्थान थाहा छैन",
+    "q10Detail_lack_info_items": "त्यस दिन के के ल्याउनुपर्छ थाहा छैन"
   },
   "flyer": {
     "title": "रक्तदान स्वयंसेवक गतिविधि",
