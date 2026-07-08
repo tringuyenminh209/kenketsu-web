@@ -25,88 +25,81 @@ function buildHtml(name: string, studentId: string, dept: string): string {
   return `<!DOCTYPE html>
 <html lang="ja">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#f5f5f5;font-family:'Helvetica Neue',Arial,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f5f5;padding:32px 0;">
+<body style="margin:0;padding:0;background:#eef0f2;font-family:'Hiragino Kaku Gothic ProN','Hiragino Sans',Meiryo,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#eef0f2;padding:40px 0;">
     <tr><td align="center">
-      <table width="560" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+      <table width="580" cellpadding="0" cellspacing="0" style="background:#ffffff;border:1px solid #dcdfe3;">
         <tr>
-          <td style="background:linear-gradient(135deg,#c0392b,#e74c3c);padding:32px 40px;text-align:center;">
-            <p style="margin:0;color:rgba(255,255,255,0.8);font-size:13px;">ECC社会貢献センター</p>
-            <h1 style="margin:8px 0 0;color:#ffffff;font-size:22px;font-weight:700;">献血ボランティアイベント</h1>
-            <p style="margin:8px 0 0;color:rgba(255,255,255,0.9);font-size:15px;">参加申込を受け付けました ✓</p>
+          <td style="border-top:3px solid #b3261e;padding:28px 40px 20px;">
+            <p style="margin:0;font-size:12px;color:#888;letter-spacing:0.5px;">ECC社会貢献センター</p>
+            <h1 style="margin:6px 0 0;font-size:19px;font-weight:700;color:#1a1a1a;">献血ボランティアイベント　参加申込受付のご案内</h1>
           </td>
         </tr>
         <tr>
-          <td style="padding:36px 40px;">
-            <p style="margin:0 0 20px;font-size:16px;color:#333;">${n} さん</p>
-            <p style="margin:0 0 24px;font-size:14px;color:#555;line-height:1.8;">
-              献血ボランティアイベントへのご参加申込、ありがとうございます。<br>
-              以下の内容で受付が完了しました。
+          <td style="padding:8px 40px 32px;">
+            <p style="margin:0 0 18px;font-size:14px;color:#333;">${n} 様</p>
+            <p style="margin:0 0 28px;font-size:14px;color:#444;line-height:1.9;">
+              この度は献血ボランティアイベントへお申込みいただき、誠にありがとうございます。<br>
+              下記の内容にて受付いたしましたので、ご確認ください。
             </p>
 
-            <table width="100%" cellpadding="0" cellspacing="0"
-              style="background:#fef2f2;border-left:4px solid #e74c3c;border-radius:0 8px 8px 0;margin:0 0 28px;">
-              <tr><td style="padding:20px 24px;">
-                <p style="margin:0 0 12px;font-size:12px;color:#aaa;letter-spacing:0.5px;">申込情報</p>
-                <table cellpadding="0" cellspacing="0">
-                  <tr>
-                    <td style="padding:4px 0;font-size:13px;color:#888;width:100px;">学生番号</td>
-                    <td style="padding:4px 0;font-size:13px;color:#333;font-weight:600;">${sid}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding:4px 0;font-size:13px;color:#888;">氏名</td>
-                    <td style="padding:4px 0;font-size:13px;color:#333;font-weight:600;">${n}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding:4px 0;font-size:13px;color:#888;">所属</td>
-                    <td style="padding:4px 0;font-size:13px;color:#333;font-weight:600;">${d}</td>
-                  </tr>
-                </table>
-              </td></tr>
+            <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;margin:0 0 28px;">
+              <tr>
+                <td colspan="2" style="padding:0 0 10px;font-size:12px;color:#888;border-bottom:1px solid #e2e4e7;">お申込み内容</td>
+              </tr>
+              <tr>
+                <td style="padding:10px 0;font-size:13px;color:#888;width:110px;border-bottom:1px solid #eee;">学生番号</td>
+                <td style="padding:10px 0;font-size:13px;color:#1a1a1a;border-bottom:1px solid #eee;">${sid}</td>
+              </tr>
+              <tr>
+                <td style="padding:10px 0;font-size:13px;color:#888;border-bottom:1px solid #eee;">氏名</td>
+                <td style="padding:10px 0;font-size:13px;color:#1a1a1a;border-bottom:1px solid #eee;">${n}</td>
+              </tr>
+              <tr>
+                <td style="padding:10px 0;font-size:13px;color:#888;">所属</td>
+                <td style="padding:10px 0;font-size:13px;color:#1a1a1a;">${d}</td>
+              </tr>
             </table>
 
-            <p style="margin:0 0 12px;font-size:14px;color:#333;font-weight:600;">📅 イベント詳細</p>
-            <table width="100%" cellpadding="0" cellspacing="0"
-              style="background:#f8f8f8;border-radius:8px;margin:0 0 24px;">
-              <tr><td style="padding:18px 24px;">
-                <table cellpadding="0" cellspacing="0">
-                  <tr>
-                    <td style="padding:4px 0;font-size:13px;color:#888;width:60px;">日時</td>
-                    <td style="padding:4px 0;font-size:13px;color:#333;">
-                      2026年9月15日（火）<br>9:30〜11:30 / 12:30〜16:30
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="padding:4px 0;font-size:13px;color:#888;vertical-align:top;">場所</td>
-                    <td style="padding:4px 0;font-size:13px;color:#333;">
-                      ECCコンピュータ専門学校<br>1号館 1階ラウンジ
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="padding:4px 0;font-size:13px;color:#888;">持参</td>
-                    <td style="padding:4px 0;font-size:13px;color:#333;">学生証</td>
-                  </tr>
-                </table>
-              </td></tr>
+            <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;margin:0 0 28px;">
+              <tr>
+                <td colspan="2" style="padding:0 0 10px;font-size:12px;color:#888;border-bottom:1px solid #e2e4e7;">イベント詳細</td>
+              </tr>
+              <tr>
+                <td style="padding:10px 0;font-size:13px;color:#888;width:70px;vertical-align:top;border-bottom:1px solid #eee;">日時</td>
+                <td style="padding:10px 0;font-size:13px;color:#1a1a1a;line-height:1.7;border-bottom:1px solid #eee;">
+                  2026年9月15日（火）<br>9:30〜11:30 / 12:30〜16:30
+                </td>
+              </tr>
+              <tr>
+                <td style="padding:10px 0;font-size:13px;color:#888;vertical-align:top;border-bottom:1px solid #eee;">場所</td>
+                <td style="padding:10px 0;font-size:13px;color:#1a1a1a;line-height:1.7;border-bottom:1px solid #eee;">
+                  ECCコンピュータ専門学校<br>1号館 1階ラウンジ
+                </td>
+              </tr>
+              <tr>
+                <td style="padding:10px 0;font-size:13px;color:#888;">持参物</td>
+                <td style="padding:10px 0;font-size:13px;color:#1a1a1a;">学生証</td>
+              </tr>
             </table>
 
-            <p style="margin:0 0 10px;font-size:14px;color:#333;font-weight:600;">⚠️ 当日のご注意</p>
-            <ul style="margin:0 0 24px;padding-left:18px;font-size:13px;color:#555;line-height:2.2;">
-              <li>前日はしっかり睡眠をとってください</li>
-              <li>当日は十分な水分を摂り、食事を済ませてからお越しください</li>
-              <li>体調が優れない場合はご参加をご遠慮ください</li>
-            </ul>
+            <p style="margin:0 0 8px;font-size:13px;color:#1a1a1a;font-weight:700;">当日のご注意</p>
+            <p style="margin:0 0 28px;font-size:13px;color:#444;line-height:2;">
+              ・前日はしっかり睡眠をとってください<br>
+              ・当日は十分な水分を摂り、食事を済ませてからお越しください<br>
+              ・体調が優れない場合はご参加をご遠慮ください
+            </p>
 
-            <p style="margin:0;font-size:13px;color:#999;line-height:1.7;">
-              ご不明な点は担当の先生までお問い合わせください。<br>
-              ご参加をお待ちしております。
+            <p style="margin:0;font-size:13px;color:#666;line-height:1.8;">
+              ご不明な点がございましたら、担当の先生までお問い合わせください。<br>
+              当日のご参加をお待ちしております。
             </p>
           </td>
         </tr>
         <tr>
-          <td style="background:#f5f5f5;padding:16px 40px;text-align:center;border-top:1px solid #eee;">
-            <p style="margin:0;font-size:11px;color:#bbb;">
-              ECC社会貢献センター 献血ボランティアイベント事務局 · ECCコンピュータ専門学校
+          <td style="padding:16px 40px;border-top:1px solid #e2e4e7;">
+            <p style="margin:0;font-size:11px;color:#aaa;">
+              ECC社会貢献センター　献血ボランティアイベント事務局／ECCコンピュータ専門学校
             </p>
           </td>
         </tr>
