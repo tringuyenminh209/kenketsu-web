@@ -659,3 +659,26 @@
 - `src/App.css`
 - `docs/nippo.md`
 
+---
+
+## Ngay: 2026-07-08 (session 16 - dong bo toan bo ngon ngu theo file ja.json)
+
+## Noi dung da hoan thanh
+
+- **Đồng bộ hóa 11 ngôn ngữ phụ theo chuẩn tệp tiêu chuẩn `ja.json`**:
+  * Phát triển kịch bản tự động `scratch/sync_locales.js` nhằm kiểm tra, thêm mới các khóa bị thiếu và tự động xóa các khóa lỗi thời không còn tồn tại trong `ja.json`.
+  * Bổ sung 3 khóa mới cho toàn bộ 11 ngôn ngữ: `hero.cta3` (Nút khảo sát), `precautions.note200mL` (Ghi chú hiến 200mL), `register.note` (Thông báo đăng ký chính thức đầu tháng 8).
+  * Xóa bỏ 2 khóa lỗi thời đã được lược bỏ khỏi giao diện chính: `impact.trust.hotline_org` và `impact.trust.hotline_role` (Liên kết tổng đài không còn hiển thị ở phần Impact).
+  * Định dạng lại toàn bộ cấu trúc các tệp dịch sang kiểu 2-space chuẩn mực.
+
+## Kiem tra
+
+- Chạy kiểm tra đồng bộ khóa: Đạt 100% khớp (tất cả các tệp đều sở hữu đúng 363 khóa).
+- Chạy build (`npm run build`): pass.
+- Chạy linter (`npm run lint`): pass.
+
+## File da thay doi chinh
+
+- `src/locales/*.json`
+- `docs/nippo.md`
+
