@@ -60,6 +60,23 @@ export function Flyer() {
                 </div>
               </div>
             </div>
+
+            {/* QR sits right above where the rabbit's ears poke into the panel */}
+            <div className="fp-irow fp-irow--qr">
+              <div className="fp-qr">
+                <div className="fp-qr-box">
+                  <QRCodeSVG
+                    value={SITE_URL}
+                    size={84}
+                    bgColor="#ffffff"
+                    fgColor="#0f172a"
+                    level="M"
+                    marginSize={1}
+                  />
+                </div>
+                <p className="fp-qr-cap">QRコードから<br />事前申込！</p>
+              </div>
+            </div>
           </div>
           </div>
 
@@ -79,26 +96,12 @@ export function Flyer() {
             </p>
           </div>
 
-          {/* 5. Footer — org text stays left, QR centered in the empty area, nothing on the right (rabbit) */}
+          {/* 5. Footer — QR moved up into the info panel, only org text remains here */}
           <div className="fp-foot-row">
             <p className="fp-org">
               主催：{EVENT_CONFIG.organizer}<br />
               後援：日本赤十字社
             </p>
-            <div className="fp-qr">
-              <div className="fp-qr-box">
-                <QRCodeSVG
-                  value={SITE_URL}
-                  size={108}
-                  bgColor="#ffffff"
-                  fgColor="#0f172a"
-                  level="M"
-                  marginSize={1}
-                />
-              </div>
-              <p className="fp-qr-cap">QRコードから<br />事前申込！</p>
-            </div>
-            <div className="fp-foot-spacer" aria-hidden="true" />
           </div>
 
         </div>
