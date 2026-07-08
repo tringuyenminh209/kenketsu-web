@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type RefObject } from 'react'
+import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type RefObject } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import gsap from 'gsap'
@@ -126,11 +126,50 @@ export function Icon({ type }: { type: IconType }) {
   )
 }
 
+function useHeaderAutoHide() {
+  const [hidden, setHidden] = useState(false)
+  useEffect(() => {
+    let lastY = window.scrollY
+    let ticking = false
+    const HIDE_AFTER = 80
+
+    const onScroll = () => {
+      if (ticking) return
+      ticking = true
+      window.requestAnimationFrame(() => {
+        const y = window.scrollY
+        if (y <= HIDE_AFTER) {
+          setHidden(false)
+        } else if (y > lastY) {
+          setHidden(true) // scrolling down
+        } else if (y < lastY) {
+          setHidden(false) // scrolling up
+        }
+        lastY = y
+        ticking = false
+      })
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+  return hidden
+}
+
 export function SiteHeader({ isAdmin = false }: { isAdmin?: boolean }) {
   const { t } = useTranslation()
+  const hidden = useHeaderAutoHide()
+
+  const scrollToTop = (e: ReactMouseEvent) => {
+    if (window.location.pathname === '/') {
+      e.preventDefault()
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
+
   return (
-    <header className="site-header">
-      <Link className="brand" to="/" aria-label="Campus Care top">
+    <header className={`site-header${hidden ? ' site-header--hidden' : ''}`}>
+      <Link className="brand" to="/" aria-label="Campus Care top" onClick={scrollToTop}>
         <img className="brand-mark" src={logoMark} alt="" />
         <span>
           <strong>Campus Care</strong>

@@ -19,6 +19,11 @@
   border-bottom: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(18px);
+  transition: transform 0.28s ease;
+}
+
+.site-header--hidden {
+  transform: translateY(-100%);
 }
 
 .brand {
@@ -3117,7 +3122,8 @@ th {
 
 @media (max-width: 760px) {
   .site-header {
-    position: relative;
+    position: sticky;
+    top: 0;
     z-index: 100;
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
