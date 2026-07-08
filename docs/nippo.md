@@ -705,3 +705,26 @@
 - `src/lib/supabase.ts`
 - `docs/nippo.md`
 
+---
+
+## Ngay: 2026-07-08 (session 18 - dich 16 khoa chi tiet ly do ngan ngai trong khao sat)
+
+## Noi dung da hoan thanh
+
+- **Đồng bộ hóa 16 bản dịch mới về lý do ngần ngại hiến máu (q10Detail)**:
+  * Phát triển kịch bản `scratch/sync_new_survey_keys.js` để tích hợp 16 khóa dịch mới chi tiết hóa các nguyên nhân như: bận học/làm thêm, sợ kim tiêm/sợ máu, không đủ cân nặng, lo sợ tác dụng phụ, chưa rõ địa điểm/quy trình,...
+  * Tự động loại bỏ khóa lỗi thời `survey.q10DetailPlaceholder` khỏi tất cả 11 tệp ngôn ngữ phụ.
+  * Đồng bộ thành công cấu trúc toàn bộ 12 ngôn ngữ (mỗi tệp chứa đúng 409 khóa dịch).
+
+## Kiem tra
+
+- Chạy kiểm tra đồng bộ khóa: Đạt 100% khớp.
+- Chạy build (`npm run build`): pass.
+- Chạy linter (`npm run lint`): pass.
+
+## File da thay doi chinh
+
+- `src/locales/*.json`
+- `src/pages/AdminPage.tsx`
+- `docs/nippo.md`
+
