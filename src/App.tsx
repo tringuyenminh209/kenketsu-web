@@ -105,7 +105,9 @@ function UserPage() {
     recommend: 'yes',
     resolvedConcern: 'pain',
     infoDifficulty: 'none',
+    infoDifficultyDetail: '',
     hesitationReason: 'none',
+    hesitationDetail: '',
     comment: '',
   })
   const [surveySubmitting, setSurveySubmitting] = useState(false)
@@ -190,7 +192,11 @@ function UserPage() {
         `recommend=${surveyForm.recommend}`,
         `resolved_concern=${surveyForm.resolvedConcern}`,
         `info_difficulty=${surveyForm.infoDifficulty}`,
+        surveyForm.infoDifficulty !== 'none' && surveyForm.infoDifficultyDetail
+          ? `info_difficulty_detail=${surveyForm.infoDifficultyDetail}` : '',
         `hesitation_reason=${surveyForm.hesitationReason}`,
+        surveyForm.hesitationReason !== 'none' && surveyForm.hesitationDetail
+          ? `hesitation_detail=${surveyForm.hesitationDetail}` : '',
         surveyForm.comment ? `free_comment=${surveyForm.comment}` : '',
       ].filter(Boolean).join('\n')
 
@@ -789,6 +795,17 @@ function UserPage() {
                     <option value="none">{t('survey.q9None')}</option>
                   </select>
                 </label>
+                {surveyForm.infoDifficulty !== 'none' && (
+                  <label className="survey-followup">
+                    {t('survey.q9DetailLabel')}
+                    <input
+                      type="text"
+                      placeholder={t('survey.q9DetailPlaceholder')}
+                      value={surveyForm.infoDifficultyDetail}
+                      onChange={(e) => setSurveyForm({ ...surveyForm, infoDifficultyDetail: e.target.value })}
+                    />
+                  </label>
+                )}
                 <label>
                   {t('survey.q10Label')}
                   <select value={surveyForm.hesitationReason} onChange={(e) => setSurveyForm({ ...surveyForm, hesitationReason: e.target.value })}>
@@ -799,6 +816,17 @@ function UserPage() {
                     <option value="none">{t('survey.q10None')}</option>
                   </select>
                 </label>
+                {surveyForm.hesitationReason !== 'none' && (
+                  <label className="survey-followup">
+                    {t('survey.q10DetailLabel')}
+                    <input
+                      type="text"
+                      placeholder={t('survey.q10DetailPlaceholder')}
+                      value={surveyForm.hesitationDetail}
+                      onChange={(e) => setSurveyForm({ ...surveyForm, hesitationDetail: e.target.value })}
+                    />
+                  </label>
+                )}
                 <label className="survey-comment">
                   {t('survey.q7Label')}
                   <textarea rows={3} placeholder={t('survey.q7Placeholder')} value={surveyForm.comment} onChange={(e) => setSurveyForm({ ...surveyForm, comment: e.target.value })} />

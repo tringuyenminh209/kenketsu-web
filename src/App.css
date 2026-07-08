@@ -1345,6 +1345,18 @@ input[type='radio'] {
   min-height: 44px;
 }
 
+.survey-followup {
+  grid-column: 1 / -1;
+  padding-left: 16px;
+  border-left: 3px solid rgba(206, 0, 23, 0.18);
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.survey-followup input {
+  min-height: 44px;
+}
+
 .survey-success {
   max-width: 480px;
   margin: 0 auto;
