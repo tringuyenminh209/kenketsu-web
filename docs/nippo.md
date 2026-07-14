@@ -802,3 +802,23 @@
 - `src/locales/ne.json`
 - `docs/nippo.md`
 
+---
+
+## Ngay: 2026-07-14 (session 22 - sua loi css khoang cach cua quick-access tren mobile)
+
+## Noi dung da hoan thanh
+
+- **Sửa lỗi hiển thị khoảng cách (CSS padding-bottom) của khối Quick Access trên mobile**:
+  * Phát hiện lỗi padding ở thiết bị di động (chiều rộng màn hình <= 900px), thuộc tính `padding: 24px 24px 0;` của `.quick-access` triệt tiêu padding dưới khiến thẻ cuối cùng ("献血とは") sát rạt và chạm vào đường viền đỏ của khối `ImpactSection` bên dưới.
+  * Cập nhật thành `padding: 24px 24px 24px;` trong media query `@media (max-width: 900px)` để tạo khoảng cách đệm dưới cân đối và đẹp mắt trên màn hình nhỏ.
+
+## Kiem tra
+
+- Chạy build (`npm run build`): pass.
+- Chạy linter (`npm run lint`): pass.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `docs/nippo.md`
+
