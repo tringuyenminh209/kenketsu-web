@@ -371,7 +371,7 @@ a:focus-visible {
 
 /* Last Year Section */
 .last-year-section {
-  padding: 80px var(--page-px);
+  padding: 80px 72px;
   background: #fafafa;
 }
 .last-year-header {
@@ -441,6 +441,9 @@ a:focus-visible {
 }
 
 @media (max-width: 768px) {
+  .last-year-section {
+    padding: 48px 24px;
+  }
   .last-year-grid {
     grid-template-columns: repeat(2, 1fr);
   }
