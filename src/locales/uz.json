@@ -161,6 +161,8 @@
     "school3": "ECC San'at va go'zallik kolleji (litsey sinflari bilan)",
     "school4": "ECC Xalqaro chet tillari kolleji - Yapon tili / Xalqaro aloqalar bo'limi",
     "school5": "ECC Gakuen litseyi",
+    "timeSlotRemaining": "{{count}} kishi qoldi",
+    "timeSlotFull": "To'lgan",
     "birthDate": "Tug'ilgan sana",
     "timeSlot": "Qabul uchun qulay vaqt",
     "donationExperience": "Qon topshirish tajribasi",

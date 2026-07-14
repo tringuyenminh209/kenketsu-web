@@ -1210,6 +1210,12 @@ input[type='checkbox'] {
   flex-shrink: 0;
 }
 
+/* Best-effort: <option> styling support varies by browser */
+option:disabled {
+  color: #b5b5b5;
+  text-decoration: line-through;
+}
+
 .check-list {
   display: grid;
   gap: 12px;

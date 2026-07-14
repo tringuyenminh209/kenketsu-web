@@ -161,6 +161,8 @@
     "school3": "ECC Artist Beauty College (termasuk SMA)",
     "school4": "ECC College of Foreign Languages - Jurusan Bahasa Jepang / Komunikasi Internasional",
     "school5": "SMA ECC Gakuen",
+    "timeSlotRemaining": "Tersisa {{count}} orang",
+    "timeSlotFull": "Penuh",
     "birthDate": "Tanggal Lahir",
     "timeSlot": "Waktu Kedatangan yang Diinginkan",
     "donationExperience": "Pengalaman Donor Darah",

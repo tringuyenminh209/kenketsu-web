@@ -161,6 +161,8 @@
     "school3": "ECC 아티스트뷰티전문학교 (고등부 포함)",
     "school4": "ECC 국제외국어전문학교 일본어학과/국제커뮤니케이션학과",
     "school5": "ECC 학원 고등학교",
+    "timeSlotRemaining": "{{count}}명 남음",
+    "timeSlotFull": "만석",
     "birthDate": "생년월일",
     "timeSlot": "희망 접수 시간",
     "donationExperience": "헌혈 경험",

@@ -165,6 +165,8 @@
     "school3": "ECCアーティスト美容専門学校　※高等部含む",
     "school4": "ECC国際外語専門学校　日本語学科/国際コミュニケーション学科",
     "school5": "ECC学園高等学校",
+    "timeSlotRemaining": "残り{{count}}名",
+    "timeSlotFull": "満席",
     "birthDate": "生年月日",
     "timeSlot": "受付希望時間",
     "donationExperience": "献血経験",

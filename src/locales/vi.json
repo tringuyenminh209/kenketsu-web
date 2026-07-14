@@ -161,6 +161,8 @@
     "school3": "Cao đẳng Làm đẹp & Nghệ thuật ECC (gồm cả hệ THPT)",
     "school4": "Cao đẳng Ngoại ngữ Quốc tế ECC - Khoa tiếng Nhật / Khoa Truyền thông Quốc tế",
     "school5": "Trường THPT ECC Gakuen",
+    "timeSlotRemaining": "Còn lại {{count}} chỗ",
+    "timeSlotFull": "Hết chỗ",
     "birthDate": "Ngày sinh",
     "timeSlot": "Khung giờ đăng ký mong muốn",
     "donationExperience": "Kinh nghiệm hiến máu",

@@ -6,6 +6,7 @@ export const EVENT_CONFIG = {
   location: "ECCコンピュータ専門学校",
   locationDetail: "1号館 1階ラウンジ",
   capacity: 50,
+  slotCapacity: 8,
   sponsor: "大阪曾根崎ライオンズクラブ / 大阪西ライオンズクラブ",
   reservationNote: "ご予約をいただくと献血にかかる手続きの時間が短くなります",
   giftNote: "献血にご協力いただいた方に、ライオンズクラブ様よりささやかなプレゼントをご用意しています",

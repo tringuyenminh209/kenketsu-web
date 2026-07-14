@@ -161,6 +161,8 @@
     "school3": "ECC Artist Beauty College (รวมแผนกมัธยมปลาย)",
     "school4": "ECC College of Foreign Languages (แผนกภาษาญี่ปุ่น / แผนกการสื่อสารระหว่างประเทศ)",
     "school5": "โรงเรียนมัธยมศึกษา ECC Gakuen",
+    "timeSlotRemaining": "เหลืออีก {{count}} ที่",
+    "timeSlotFull": "เต็ม",
     "birthDate": "วันเกิด",
     "timeSlot": "เวลาที่ต้องการลงทะเบียน",
     "donationExperience": "ประสบการณ์การบริจาคโลหิต",

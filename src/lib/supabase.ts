@@ -12,6 +12,19 @@ export async function insertRegistration(data: RegistrationInsert) {
   if (error) throw error
 }
 
+// Public aggregate-only counts per time slot (RLS blocks direct SELECT on
+// registrations for anon; this calls a SECURITY DEFINER function that only
+// ever returns a slot name + count, never personal data).
+export async function fetchSlotCounts(eventYear: number): Promise<Record<string, number>> {
+  const { data, error } = await supabase.rpc("get_slot_counts", { p_event_year: eventYear })
+  if (error) throw error
+  const counts: Record<string, number> = {}
+  for (const row of (data ?? []) as { time_slot: string; cnt: number }[]) {
+    counts[row.time_slot] = Number(row.cnt)
+  }
+  return counts
+}
+
 export function sendConfirmationEmail(registrationId: string): void {
   void supabase.functions.invoke("send-confirmation", {
     body: { registration_id: registrationId },
