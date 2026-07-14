@@ -1203,9 +1203,11 @@ fieldset label {
   font-weight: 700;
 }
 
-input[type='radio'] {
+input[type='radio'],
+input[type='checkbox'] {
   width: 15px;
   height: 15px;
+  flex-shrink: 0;
 }
 
 .check-list {
