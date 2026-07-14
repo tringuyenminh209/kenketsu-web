@@ -750,3 +750,31 @@
 - `src/locales/*.json`
 - `docs/nippo.md`
 
+---
+
+## Ngay: 2026-07-14 (session 20 - dong bo 2 khoa timeSlotRemaining va timeSlotFull)
+
+## Noi dung da hoan thanh
+
+- **Đồng bộ hóa bản dịch cho 2 khóa hiển thị trạng thái số chỗ trống và hết chỗ của khung giờ hiến máu**:
+  * Phát triển kịch bản `scratch/sync_timeslot_keys.js` để tự động tích hợp các khóa dịch:
+    * `register.timeSlotRemaining`: hiển thị số chỗ còn lại (ví dụ tiếng Việt: `"Còn lại {{count}} chỗ"`, tiếng Anh: `"{{count}} slot(s) left"`,...).
+    * `register.timeSlotFull`: hiển thị trạng thái đã kín chỗ (ví dụ tiếng Việt: `"Hết chỗ"`, tiếng Anh: `"Full"`,...).
+  * Đồng bộ thành công cấu trúc toàn bộ 12 ngôn ngữ (mỗi tệp chứa đúng 394 khóa dịch sạch sẽ).
+
+## Kiem tra
+
+- Chạy kiểm tra đồng bộ khóa: Đạt 100% khớp (mỗi tệp đúng 394 khóa).
+- Chạy build (`npm run build`): pass.
+- Chạy linter (`npm run lint`): pass.
+
+## File da thay doi chinh
+
+- `src/locales/*.json`
+- `src/App.tsx`
+- `src/App.css`
+- `src/config/event.ts`
+- `src/lib/supabase.ts`
+- `supabase/migrations/005_slot_counts_function.sql`
+- `docs/nippo.md`
+
