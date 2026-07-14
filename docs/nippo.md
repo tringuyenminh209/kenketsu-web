@@ -728,3 +728,25 @@
 - `src/pages/AdminPage.tsx`
 - `docs/nippo.md`
 
+---
+
+## Ngay: 2026-07-14 (session 19 - dong bo 39 khoa khao sat moi duoc thay doi tu ja.json)
+
+## Noi dung da hoan thanh
+
+- **Đồng bộ hóa các bản dịch cho 39 khóa khảo sát sửa đổi (q1-q7) sang 11 ngôn ngữ**:
+  * Phát triển kịch bản `scratch/sync_revised_survey.js` để tích hợp 39 khóa dịch mới liên quan đến bản khảo sát cấu trúc lại (bao gồm các ấn tượng hiến máu, lý do chưa hiến máu, nhu cầu/điều kiện đăng ký thuận tiện, và đăng ký trước).
+  * Loại bỏ hoàn toàn các khóa khảo sát cũ lỗi thời (như q8, q9, q10 và các chi tiết).
+  * Đồng bộ thành công cấu trúc toàn bộ 12 ngôn ngữ (mỗi tệp chứa đúng 392 khóa dịch sạch sẽ).
+
+## Kiem tra
+
+- Chạy kiểm tra đồng bộ khóa: Đạt 100% khớp (mỗi tệp đúng 392 khóa).
+- Chạy build (`npm run build`): pass.
+- Chạy linter (`npm run lint`): pass.
+
+## File da thay doi chinh
+
+- `src/locales/*.json`
+- `docs/nippo.md`
+
