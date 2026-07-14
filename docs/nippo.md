@@ -822,3 +822,23 @@
 - `src/App.css`
 - `docs/nippo.md`
 
+---
+
+## Ngay: 2026-07-14 (session 23 - sua loi css khoang cach cua last-year-section do thieu bien)
+
+## Noi dung da hoan thanh
+
+- **Sửa lỗi hiển thị khoảng cách của phần Hoạt động năm ngoái (last-year-section) với các phần xung quanh**:
+  * Phát hiện biến CSS `--page-px` sử dụng trong thuộc tính `padding: 80px var(--page-px);` chưa từng được định nghĩa ở bất kỳ đâu trong dự án, dẫn đến việc trình duyệt bỏ qua quy tắc này và làm padding của phần này bị tính là `0` trên cả desktop và mobile (làm ảnh và liên kết nguồn sát rạt phần "参加者の木").
+  * Thay thế bằng giá trị padding tường minh: đặt `padding: 80px 72px;` ở bản desktop và `padding: 48px 24px;` trong media query `@media (max-width: 768px)`.
+
+## Kiem tra
+
+- Chạy build (`npm run build`): pass.
+- Chạy linter (`npm run lint`): pass.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `docs/nippo.md`
+
