@@ -778,3 +778,27 @@
 - `supabase/migrations/005_slot_counts_function.sql`
 - `docs/nippo.md`
 
+---
+
+## Ngay: 2026-07-14 (session 21 - sua loi ky tu dau cham hoi ??? trong tieng Myanmar va Nepal)
+
+## Noi dung da hoan thanh
+
+- **Sửa lỗi hiển thị dấu chấm hỏi `????????` ở khối Quy trình hiến máu (process & steps)**:
+  * Phát hiện và khắc phục triệt để lỗi mã hóa ký tự dạng `?` trong tệp `my.json` (tiếng Myanmar) và `ne.json` (tiếng Nepal) ở các khóa dịch của phần quy trình (`reason.stepReadMore`, `reason.processDetailLabel`, `reason.processImageAlt` và toàn bộ mảng `steps`).
+  * Thực hiện khôi phục thủ công bằng bản dịch chuẩn tự nhiên của tiếng Myanmar và tiếng Nepal cho các khóa bị lỗi này.
+  * Đảm bảo tính nhất quán cấu trúc tệp ngôn ngữ (mỗi tệp chứa đúng 394 khóa sạch sẽ).
+
+## Kiem tra
+
+- Chạy kiểm tra đồng bộ khóa: Đạt 100% khớp (mỗi tệp đúng 394 khóa).
+- Chạy kiểm tra tìm kiếm ký tự lỗi `???`: Hoàn toàn sạch bóng lỗi dấu chấm hỏi.
+- Chạy build (`npm run build`): pass.
+- Chạy linter (`npm run lint`): pass.
+
+## File da thay doi chinh
+
+- `src/locales/my.json`
+- `src/locales/ne.json`
+- `docs/nippo.md`
+
