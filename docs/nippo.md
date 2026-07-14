@@ -842,3 +842,29 @@
 - `src/App.css`
 - `docs/nippo.md`
 
+---
+
+## Ngay: 2026-07-14 (session 24 - them nut back-to-top noi co dinh va dong bo da ngon ngu)
+
+## Noi dung da hoan thanh
+
+- **Tích hợp nút "Quay lại đầu trang" (Back to Top) dạng nổi để tối ưu hóa trải nghiệm người dùng**:
+  * Tạo component `src/components/BackToTop.tsx` quản lý trạng thái ẩn/hiện dựa trên vị trí cuộn trang (hiển thị khi cuộn xuống > 400px) và thực hiện cuộn trang mượt mà lên đầu trang (`window.scrollTo({ top: 0, behavior: 'smooth' })`).
+  * Khai báo thêm biểu tượng `arrowUp` mới dạng SVG trong `src/lib/shared.tsx`.
+  * Cập nhật CSS định hình nút dạng tròn đỏ chuyên nghiệp, đổ bóng sang trọng, có chuyển động hover nhẹ và ẩn nút khi in trang (`no-print`).
+  * Bổ sung khóa `"common.backToTop"` và tự động đồng bộ hóa dịch nghĩa chuẩn sang toàn bộ 12 ngôn ngữ (mỗi tệp chứa đúng 395 khóa sạch sẽ).
+
+## Kiem tra
+
+- Chạy build (`npm run build`): pass.
+- Chạy linter (`npm run lint`): pass.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `src/App.tsx`
+- `src/lib/shared.tsx`
+- `src/components/BackToTop.tsx`
+- `src/locales/*.json`
+- `docs/nippo.md`
+
