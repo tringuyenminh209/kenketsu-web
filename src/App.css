@@ -3685,7 +3685,7 @@ th {
 @media (max-width: 900px) {
   .quick-access {
     grid-template-columns: repeat(2, 1fr);
-    padding: 24px 24px 0;
+    padding: 24px 24px 24px;
   }
 }
 
