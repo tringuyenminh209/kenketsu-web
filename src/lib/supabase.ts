@@ -113,30 +113,82 @@ export function registrationsToCSV(rows: Registration[]): string {
 }
 
 export interface ParsedComment {
-  motivation: string
-  concern: string
-  preferredSupport: string
-  recommend: string
-  resolvedConcern: string
-  infoDifficulty: string
-  infoDifficultyDetail: string
-  hesitationReason: string
-  hesitationDetail: string
-  freeComment: string
+  impressions: string
+  impressionsOther: string
+  reasons: string
+  reasonsOther: string
+  knewCampus: string
+  wantParticipate: string
+  conditions: string
+  conditionsOther: string
+  reservation: string
+}
+
+const Q2_IMPRESSION_MAP: Record<string, string> = {
+  help_others: '人の役に立てる',
+  social_contribution: '社会貢献になる',
+  health_check: '健康チェックになる',
+  scary: '痛そう・怖い',
+  time_consuming: '時間がかかる',
+  dont_understand: 'よく分からない',
+  not_interested: '特に興味がない',
+  other: 'その他',
+}
+
+const Q3_REASON_MAP: Record<string, string> = {
+  no_opportunity: '機会がなかった',
+  afraid_needle: '注射が苦手',
+  anxious: '不安がある',
+  no_time: '時間がない',
+  dont_know_conditions: '献血できる条件が分からない',
+  health_reason: '健康面でできない',
+  not_interested: '興味がない',
+  other: 'その他',
+}
+
+const Q6_CONDITION_MAP: Record<string, string> = {
+  easy_reservation: '事前予約が簡単',
+  flexible_time: '空き時間に参加できる',
+  short_duration: '所要時間が短い',
+  clear_process: '献血の流れが分かる',
+  with_friend: '友達と一緒に参加できる',
+  detailed_explanation: '献血について詳しい説明がある',
+  other: 'その他',
+}
+
+const Q4_KNEW_MAP: Record<string, string> = {
+  knew: '知っていた',
+  first_time: '今日初めて知った',
+}
+
+const Q5_PARTICIPATE_MAP: Record<string, string> = {
+  yes: 'ぜひ参加したい',
+  maybe: 'できれば参加したい',
+  unsure: 'まだ分からない',
+  no: '今回は参加しない',
+}
+
+const Q7_RESERVATION_MAP: Record<string, string> = {
+  now: '今すぐ予約したい',
+  later: '後で検討したい',
+  no: '今回は予約しない',
+}
+
+function mapCommaList(value: string, map: Record<string, string>): string {
+  return value.split(',').filter(Boolean).map((v) => map[v] ?? v).join('、')
 }
 
 export function parseStructuredComment(commentStr: string | null): ParsedComment {
   const result: ParsedComment = {
-    motivation: '—',
-    concern: '—',
-    preferredSupport: '—',
-    recommend: '—',
-    resolvedConcern: '—',
-    infoDifficulty: '—',
-    infoDifficultyDetail: '—',
-    hesitationReason: '—',
-    hesitationDetail: '—',
-    freeComment: '—'
+    impressions: '—',
+    impressionsOther: '—',
+    reasons: '—',
+    reasonsOther: '—',
+    knewCampus: '—',
+    wantParticipate: '—',
+    conditions: '—',
+    conditionsOther: '—',
+    reservation: '—',
   }
   if (!commentStr) return result
 
@@ -146,125 +198,51 @@ export function parseStructuredComment(commentStr: string | null): ParsedComment
     const value = valueParts.join('=')
     if (!key) continue
 
-    if (key === 'motivation') {
-      const motivationMap: Record<string, string> = {
-        save_life: '誰かの命を支えたい',
-        school_event: '学校のイベントだから',
-        first_step: '初めて挑戦してみたい',
-        friend: '友人と一緒に参加したい'
-      }
-      result.motivation = motivationMap[value] ?? value
-    } else if (key === 'concern') {
-      const concernMap: Record<string, string> = {
-        pain: '痛みや針が少し不安',
-        time: '所要時間が気になる',
-        health: '体調面が少し不安',
-        none: '特に不安はない'
-      }
-      result.concern = concernMap[value] ?? value
-    } else if (key === 'preferred_support') {
-      const supportMap: Record<string, string> = {
-        staff: 'スタッフの声かけ',
-        guide: '流れがわかる案内',
-        friend: '友人と一緒に待てること',
-        quiet: '落ち着いて休める場所'
-      }
-      result.preferredSupport = supportMap[value] ?? value
-    } else if (key === 'recommend') {
-      const recommendMap: Record<string, string> = {
-        yes: 'すすめたい',
-        maybe: '内容を知ればすすめたい',
-        not_yet: 'まだわからない'
-      }
-      result.recommend = recommendMap[value] ?? value
-    } else if (key === 'resolved_concern') {
-      const resolvedMap: Record<string, string> = {
-        pain: '痛みや針への不安が減った',
-        time: '時間がかかりそうという不安が減った',
-        health: '体調面の不安が減った',
-        none: 'まだ不安が残っている'
-      }
-      result.resolvedConcern = resolvedMap[value] ?? value
-    } else if (key === 'info_difficulty') {
-      const infoMap: Record<string, string> = {
-        language: '言語面で困った',
-        info: '情報が分かりにくかった',
-        none: '特になかった'
-      }
-      result.infoDifficulty = infoMap[value] ?? value
-    } else if (key === 'info_difficulty_detail') {
-      result.infoDifficultyDetail = value
-    } else if (key === 'hesitation_reason') {
-      const hesitationMap: Record<string, string> = {
-        busy: '忙しい・時間が合わない',
-        scared: '痛み・注射が怖い',
-        ineligible: '対象条件に当てはまらないと思う',
-        lack_info: '情報が足りない・不安が残る',
-        none: '特にない・参加予定'
-      }
-      result.hesitationReason = hesitationMap[value] ?? value
-    } else if (key === 'hesitation_detail') {
-      const hesitationDetailMap: Record<string, string> = {
-        busy_class: '授業と重なる',
-        busy_job: 'アルバイトがある',
-        busy_schedule: '他の予定がある',
-        busy_time: '提供時間帯が合わない',
-        scared_needle: '注射針が苦手',
-        scared_faint: '気分が悪くなりそうで心配',
-        scared_past: '過去の献血がつらかった',
-        scared_blood: '血を見るのが苦手',
-        ineligible_weight: '体重が基準に届かないと思う',
-        ineligible_medication: '持病・服薬中の薬がある',
-        ineligible_travel: '海外渡航歴がある',
-        ineligible_condition: '睡眠不足・体調に自信がない',
-        lack_info_aftereffect: '献血後の体調への影響が心配',
-        lack_info_process: '手続き・流れがわかりにくい',
-        lack_info_location: '会場の場所がわからない',
-        lack_info_items: '当日の持ち物がわからない',
-      }
-      result.hesitationDetail = hesitationDetailMap[value] ?? value
-    } else if (key === 'free_comment') {
-      result.freeComment = value
+    if (key === 'q2_impressions') {
+      result.impressions = mapCommaList(value, Q2_IMPRESSION_MAP) || '—'
+    } else if (key === 'q2_other') {
+      result.impressionsOther = value
+    } else if (key === 'q3_reasons') {
+      result.reasons = mapCommaList(value, Q3_REASON_MAP) || '—'
+    } else if (key === 'q3_other') {
+      result.reasonsOther = value
+    } else if (key === 'q4_knew_campus') {
+      result.knewCampus = Q4_KNEW_MAP[value] ?? value
+    } else if (key === 'q5_want_participate') {
+      result.wantParticipate = Q5_PARTICIPATE_MAP[value] ?? value
+    } else if (key === 'q6_conditions') {
+      result.conditions = mapCommaList(value, Q6_CONDITION_MAP) || '—'
+    } else if (key === 'q6_other') {
+      result.conditionsOther = value
+    } else if (key === 'q7_reservation') {
+      result.reservation = Q7_RESERVATION_MAP[value] ?? value
     }
-  }
-
-  const allEmpty = result.motivation === '—' && result.concern === '—' &&
-    result.preferredSupport === '—' && result.recommend === '—' &&
-    result.resolvedConcern === '—' && result.infoDifficulty === '—' &&
-    result.hesitationReason === '—'
-  if (allEmpty) {
-    result.freeComment = commentStr
   }
 
   return result
 }
 
 export function surveysToCSV(rows: SurveyResponse[]): string {
-  const header = "回答日時,献血回数,知ったきっかけ,参加理由,気になること,希望するサポート,周囲へ薦めたいか,解消された不安,言語・情報の困りごと,困りごとの詳細,参加を迷う理由,迷う理由の詳細,自由コメント\n"
+  const header = "回答日時,献血経験,印象,印象その他,未経験の理由,未経験理由その他,学内献血を知っていたか,参加意向,参加しやすくなる条件,条件その他,事前予約\n"
   const body = rows
     .map((r) => {
-      const countLabel = r.donation_count === 'first' ? '初めて' :
-                          r.donation_count === 'few' ? '2〜4回' :
-                          r.donation_count === 'many' ? '5回以上' : r.donation_count ?? '';
-      const foundLabel = r.how_found === 'poster' ? 'ポスター' :
-                         r.how_found === 'teacher' ? '先生の紹介' :
-                         r.how_found === 'friend' ? '友人の紹介' :
-                         r.how_found === 'sns' ? 'SNS' : r.how_found ?? '';
+      const countLabel = r.donation_count === 'once' ? 'ある（1回）' :
+                          r.donation_count === 'few' ? 'ある（2〜4回）' :
+                          r.donation_count === 'many' ? 'ある（5回以上）' :
+                          r.donation_count === 'none' ? 'ない' : r.donation_count ?? '';
       const parsed = parseStructuredComment(r.comment)
       return [
         r.created_at,
         countLabel,
-        foundLabel,
-        `"${parsed.motivation.replace(/"/g, '""')}"`,
-        `"${parsed.concern.replace(/"/g, '""')}"`,
-        `"${parsed.preferredSupport.replace(/"/g, '""')}"`,
-        `"${parsed.recommend.replace(/"/g, '""')}"`,
-        `"${parsed.resolvedConcern.replace(/"/g, '""')}"`,
-        `"${parsed.infoDifficulty.replace(/"/g, '""')}"`,
-        `"${parsed.infoDifficultyDetail.replace(/"/g, '""')}"`,
-        `"${parsed.hesitationReason.replace(/"/g, '""')}"`,
-        `"${parsed.hesitationDetail.replace(/"/g, '""')}"`,
-        `"${parsed.freeComment.replace(/"/g, '""')}"`
+        `"${parsed.impressions.replace(/"/g, '""')}"`,
+        `"${parsed.impressionsOther.replace(/"/g, '""')}"`,
+        `"${parsed.reasons.replace(/"/g, '""')}"`,
+        `"${parsed.reasonsOther.replace(/"/g, '""')}"`,
+        `"${parsed.knewCampus.replace(/"/g, '""')}"`,
+        `"${parsed.wantParticipate.replace(/"/g, '""')}"`,
+        `"${parsed.conditions.replace(/"/g, '""')}"`,
+        `"${parsed.conditionsOther.replace(/"/g, '""')}"`,
+        `"${parsed.reservation.replace(/"/g, '""')}"`
       ].join(",")
     })
     .join("\n")

@@ -47,12 +47,9 @@ const KNOWLEDGE_IMAGES = [knowledgeInfrastructureImage, knowledgeMultiplePatient
 const BENEFIT_IMAGES = [benefitHealthCheckImage, benefitLifeSupportImage, benefitCampusSolidarityImage, benefitSocialContributionImage]
 const PROCESS_IMAGES = [processPrecheckImage, processInterviewImage, processDonationImage]
 
-const hesitationDetailOptions: Record<string, string[]> = {
-  busy: ['busy_class', 'busy_job', 'busy_schedule', 'busy_time'],
-  scared: ['scared_needle', 'scared_faint', 'scared_past', 'scared_blood'],
-  ineligible: ['ineligible_weight', 'ineligible_medication', 'ineligible_travel', 'ineligible_condition'],
-  lack_info: ['lack_info_aftereffect', 'lack_info_process', 'lack_info_location', 'lack_info_items'],
-}
+const SURVEY_Q2_OPTIONS = ['help_others', 'social_contribution', 'health_check', 'scary', 'time_consuming', 'dont_understand', 'not_interested', 'other']
+const SURVEY_Q3_OPTIONS = ['no_opportunity', 'afraid_needle', 'anxious', 'no_time', 'dont_know_conditions', 'health_reason', 'not_interested', 'other']
+const SURVEY_Q6_OPTIONS = ['easy_reservation', 'flexible_time', 'short_duration', 'clear_process', 'with_friend', 'detailed_explanation', 'other']
 
 function UserPage() {
   const { t } = useTranslation()
@@ -104,19 +101,24 @@ function UserPage() {
 
   // ── アンケートフォーム ────────────────────────────
   const [surveyForm, setSurveyForm] = useState({
-    donationCount: 'first',
-    howFound: 'poster',
-    motivation: 'save_life',
-    concern: 'pain',
-    preferredSupport: 'staff',
-    recommend: 'yes',
-    resolvedConcern: 'pain',
-    infoDifficulty: 'none',
-    infoDifficultyDetail: '',
-    hesitationReason: 'none',
-    hesitationDetail: '',
-    comment: '',
+    donationCount: 'once',
+    impressions: [] as string[],
+    impressionsOther: '',
+    reasons: [] as string[],
+    reasonsOther: '',
+    knewCampus: 'knew',
+    wantParticipate: 'yes',
+    conditions: [] as string[],
+    conditionsOther: '',
+    reservation: 'later',
   })
+  const toggleSurveyCheckbox = (field: 'impressions' | 'reasons' | 'conditions', value: string) => {
+    setSurveyForm((prev) => {
+      const current = prev[field]
+      const next = current.includes(value) ? current.filter((v) => v !== value) : [...current, value]
+      return { ...prev, [field]: next }
+    })
+  }
   const [surveySubmitting, setSurveySubmitting] = useState(false)
   const [surveySuccess, setSurveySuccess] = useState(false)
   const [surveyError, setSurveyError] = useState<string | null>(null)
@@ -193,24 +195,24 @@ function UserPage() {
     setSurveyError(null)
     try {
       const structuredComment = [
-        `motivation=${surveyForm.motivation}`,
-        `concern=${surveyForm.concern}`,
-        `preferred_support=${surveyForm.preferredSupport}`,
-        `recommend=${surveyForm.recommend}`,
-        `resolved_concern=${surveyForm.resolvedConcern}`,
-        `info_difficulty=${surveyForm.infoDifficulty}`,
-        surveyForm.infoDifficulty !== 'none' && surveyForm.infoDifficultyDetail
-          ? `info_difficulty_detail=${surveyForm.infoDifficultyDetail}` : '',
-        `hesitation_reason=${surveyForm.hesitationReason}`,
-        surveyForm.hesitationReason !== 'none' && surveyForm.hesitationDetail
-          ? `hesitation_detail=${surveyForm.hesitationDetail}` : '',
-        surveyForm.comment ? `free_comment=${surveyForm.comment}` : '',
+        `q2_impressions=${surveyForm.impressions.join(',')}`,
+        surveyForm.impressions.includes('other') && surveyForm.impressionsOther
+          ? `q2_other=${surveyForm.impressionsOther}` : '',
+        surveyForm.donationCount === 'none'
+          ? `q3_reasons=${surveyForm.reasons.join(',')}` : '',
+        surveyForm.donationCount === 'none' && surveyForm.reasons.includes('other') && surveyForm.reasonsOther
+          ? `q3_other=${surveyForm.reasonsOther}` : '',
+        `q4_knew_campus=${surveyForm.knewCampus}`,
+        `q5_want_participate=${surveyForm.wantParticipate}`,
+        `q6_conditions=${surveyForm.conditions.join(',')}`,
+        surveyForm.conditions.includes('other') && surveyForm.conditionsOther
+          ? `q6_other=${surveyForm.conditionsOther}` : '',
+        `q7_reservation=${surveyForm.reservation}`,
       ].filter(Boolean).join('\n')
 
       await insertSurvey({
         event_year: EVENT_CONFIG.year,
         donation_count: surveyForm.donationCount,
-        how_found: surveyForm.howFound,
         comment: structuredComment || undefined,
       })
       setSurveySuccess(true)
@@ -731,119 +733,143 @@ function UserPage() {
                   <Icon type="heart" />
                   <h2>{t('survey.title')}</h2>
                 </div>
+                <p className="section-helper">{t('survey.subtitle')}</p>
               </div>
               <div className="survey-grid">
+                {/* Q1 */}
                 <label>
                   {t('survey.q1Label')}
-                  <select value={surveyForm.donationCount} onChange={(e) => setSurveyForm({ ...surveyForm, donationCount: e.target.value })}>
-                    <option value="first">{t('survey.q1First')}</option>
+                  <select
+                    value={surveyForm.donationCount}
+                    onChange={(e) => setSurveyForm({ ...surveyForm, donationCount: e.target.value })}
+                  >
+                    <option value="once">{t('survey.q1Once')}</option>
                     <option value="few">{t('survey.q1Few')}</option>
                     <option value="many">{t('survey.q1Many')}</option>
+                    <option value="none">{t('survey.q1None')}</option>
                   </select>
                 </label>
-                <label>
-                  {t('survey.q2Label')}
-                  <select value={surveyForm.howFound} onChange={(e) => setSurveyForm({ ...surveyForm, howFound: e.target.value })}>
-                    <option value="poster">{t('survey.q2Poster')}</option>
-                    <option value="teacher">{t('survey.q2Teacher')}</option>
-                    <option value="friend">{t('survey.q2Friend')}</option>
-                    <option value="sns">{t('survey.q2Sns')}</option>
-                  </select>
-                </label>
-                <label>
-                  {t('survey.q3Label')}
-                  <select value={surveyForm.motivation} onChange={(e) => setSurveyForm({ ...surveyForm, motivation: e.target.value })}>
-                    <option value="save_life">{t('survey.q3SaveLife')}</option>
-                    <option value="school_event">{t('survey.q3SchoolEvent')}</option>
-                    <option value="first_step">{t('survey.q3FirstStep')}</option>
-                    <option value="friend">{t('survey.q3Friend')}</option>
-                  </select>
-                </label>
+
+                {/* Q2 — checkboxes */}
+                <fieldset className="survey-full survey-checkbox-group">
+                  <legend>{t('survey.q2Label')}</legend>
+                  {SURVEY_Q2_OPTIONS.map((val) => (
+                    <label key={val}>
+                      <input
+                        type="checkbox"
+                        checked={surveyForm.impressions.includes(val)}
+                        onChange={() => toggleSurveyCheckbox('impressions', val)}
+                      />
+                      {t(`survey.q2_${val}`)}
+                    </label>
+                  ))}
+                  {surveyForm.impressions.includes('other') && (
+                    <input
+                      className="survey-other-input"
+                      type="text"
+                      placeholder={t('survey.q2OtherPlaceholder')}
+                      value={surveyForm.impressionsOther}
+                      onChange={(e) => setSurveyForm({ ...surveyForm, impressionsOther: e.target.value })}
+                    />
+                  )}
+                </fieldset>
+
+                {/* Q3 — only for those who have never donated */}
+                {surveyForm.donationCount === 'none' && (
+                  <fieldset className="survey-full survey-checkbox-group">
+                    <legend>
+                      {t('survey.q3Intro')}<br />
+                      {t('survey.q3Label')}
+                    </legend>
+                    {SURVEY_Q3_OPTIONS.map((val) => (
+                      <label key={val}>
+                        <input
+                          type="checkbox"
+                          checked={surveyForm.reasons.includes(val)}
+                          onChange={() => toggleSurveyCheckbox('reasons', val)}
+                        />
+                        {t(`survey.q3_${val}`)}
+                      </label>
+                    ))}
+                    {surveyForm.reasons.includes('other') && (
+                      <input
+                        className="survey-other-input"
+                        type="text"
+                        placeholder={t('survey.q3OtherPlaceholder')}
+                        value={surveyForm.reasonsOther}
+                        onChange={(e) => setSurveyForm({ ...surveyForm, reasonsOther: e.target.value })}
+                      />
+                    )}
+                  </fieldset>
+                )}
+
+                {/* Q4 */}
                 <label>
                   {t('survey.q4Label')}
-                  <select value={surveyForm.concern} onChange={(e) => setSurveyForm({ ...surveyForm, concern: e.target.value })}>
-                    <option value="pain">{t('survey.q4Pain')}</option>
-                    <option value="time">{t('survey.q4Time')}</option>
-                    <option value="health">{t('survey.q4Health')}</option>
-                    <option value="none">{t('survey.q4None')}</option>
+                  <select
+                    value={surveyForm.knewCampus}
+                    onChange={(e) => setSurveyForm({ ...surveyForm, knewCampus: e.target.value })}
+                  >
+                    <option value="knew">{t('survey.q4Knew')}</option>
+                    <option value="first_time">{t('survey.q4FirstTime')}</option>
                   </select>
                 </label>
+
+                {/* Q5 */}
                 <label>
                   {t('survey.q5Label')}
-                  <select value={surveyForm.preferredSupport} onChange={(e) => setSurveyForm({ ...surveyForm, preferredSupport: e.target.value })}>
-                    <option value="staff">{t('survey.q5Staff')}</option>
-                    <option value="guide">{t('survey.q5Guide')}</option>
-                    <option value="friend">{t('survey.q5Friend')}</option>
-                    <option value="quiet">{t('survey.q5Quiet')}</option>
-                  </select>
-                </label>
-                <label>
-                  {t('survey.q6Label')}
-                  <select value={surveyForm.recommend} onChange={(e) => setSurveyForm({ ...surveyForm, recommend: e.target.value })}>
-                    <option value="yes">{t('survey.q6Yes')}</option>
-                    <option value="maybe">{t('survey.q6Maybe')}</option>
-                    <option value="not_yet">{t('survey.q6NotYet')}</option>
-                  </select>
-                </label>
-                <label>
-                  {t('survey.q8Label')}
-                  <select value={surveyForm.resolvedConcern} onChange={(e) => setSurveyForm({ ...surveyForm, resolvedConcern: e.target.value })}>
-                    <option value="pain">{t('survey.q8Pain')}</option>
-                    <option value="time">{t('survey.q8Time')}</option>
-                    <option value="health">{t('survey.q8Health')}</option>
-                    <option value="none">{t('survey.q8None')}</option>
-                  </select>
-                </label>
-                <label>
-                  {t('survey.q9Label')}
-                  <select value={surveyForm.infoDifficulty} onChange={(e) => setSurveyForm({ ...surveyForm, infoDifficulty: e.target.value })}>
-                    <option value="language">{t('survey.q9Language')}</option>
-                    <option value="info">{t('survey.q9Info')}</option>
-                    <option value="none">{t('survey.q9None')}</option>
-                  </select>
-                </label>
-                {surveyForm.infoDifficulty !== 'none' && (
-                  <label className="survey-followup">
-                    {t('survey.q9DetailLabel')}
-                    <input
-                      type="text"
-                      placeholder={t('survey.q9DetailPlaceholder')}
-                      value={surveyForm.infoDifficultyDetail}
-                      onChange={(e) => setSurveyForm({ ...surveyForm, infoDifficultyDetail: e.target.value })}
-                    />
-                  </label>
-                )}
-                <label>
-                  {t('survey.q10Label')}
                   <select
-                    value={surveyForm.hesitationReason}
-                    onChange={(e) => setSurveyForm({ ...surveyForm, hesitationReason: e.target.value, hesitationDetail: '' })}
+                    value={surveyForm.wantParticipate}
+                    onChange={(e) => setSurveyForm({ ...surveyForm, wantParticipate: e.target.value })}
                   >
-                    <option value="busy">{t('survey.q10Busy')}</option>
-                    <option value="scared">{t('survey.q10Scared')}</option>
-                    <option value="ineligible">{t('survey.q10Ineligible')}</option>
-                    <option value="lack_info">{t('survey.q10LackInfo')}</option>
-                    <option value="none">{t('survey.q10None')}</option>
+                    <option value="yes">{t('survey.q5Yes')}</option>
+                    <option value="maybe">{t('survey.q5Maybe')}</option>
+                    <option value="unsure">{t('survey.q5Unsure')}</option>
+                    <option value="no">{t('survey.q5No')}</option>
                   </select>
                 </label>
-                {surveyForm.hesitationReason !== 'none' && (
-                  <label className="survey-followup">
-                    {t('survey.q10DetailLabel')}
-                    <select
-                      value={surveyForm.hesitationDetail}
-                      onChange={(e) => setSurveyForm({ ...surveyForm, hesitationDetail: e.target.value })}
-                    >
-                      <option value="" disabled>{t('register.departmentSelect')}</option>
-                      {(hesitationDetailOptions[surveyForm.hesitationReason] ?? []).map((val) => (
-                        <option key={val} value={val}>{t(`survey.q10Detail_${val}`)}</option>
-                      ))}
-                    </select>
-                  </label>
-                )}
-                <label className="survey-comment">
+
+                {/* Q6 — checkboxes */}
+                <fieldset className="survey-full survey-checkbox-group">
+                  <legend>{t('survey.q6Label')}</legend>
+                  {SURVEY_Q6_OPTIONS.map((val) => (
+                    <label key={val}>
+                      <input
+                        type="checkbox"
+                        checked={surveyForm.conditions.includes(val)}
+                        onChange={() => toggleSurveyCheckbox('conditions', val)}
+                      />
+                      {t(`survey.q6_${val}`)}
+                    </label>
+                  ))}
+                  {surveyForm.conditions.includes('other') && (
+                    <input
+                      className="survey-other-input"
+                      type="text"
+                      placeholder={t('survey.q6OtherPlaceholder')}
+                      value={surveyForm.conditionsOther}
+                      onChange={(e) => setSurveyForm({ ...surveyForm, conditionsOther: e.target.value })}
+                    />
+                  )}
+                </fieldset>
+
+                {/* Q7 */}
+                <label>
                   {t('survey.q7Label')}
-                  <textarea rows={3} placeholder={t('survey.q7Placeholder')} value={surveyForm.comment} onChange={(e) => setSurveyForm({ ...surveyForm, comment: e.target.value })} />
+                  <select
+                    value={surveyForm.reservation}
+                    onChange={(e) => setSurveyForm({ ...surveyForm, reservation: e.target.value })}
+                  >
+                    <option value="now">{t('survey.q7Now')}</option>
+                    <option value="later">{t('survey.q7Later')}</option>
+                    <option value="no">{t('survey.q7No')}</option>
+                  </select>
                 </label>
+                {surveyForm.reservation === 'now' && (
+                  <p className="survey-full survey-note">
+                    <a href="#register">{t('survey.q7NowNote')}</a>
+                  </p>
+                )}
               </div>
               {surveyError && <p className="error-message">{surveyError}</p>}
               <button className="button primary" type="submit" disabled={surveySubmitting}>

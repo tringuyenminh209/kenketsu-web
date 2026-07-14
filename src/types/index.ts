@@ -45,6 +45,5 @@ export interface SurveyResponse {
 export interface SurveyInsert {
   event_year: number
   donation_count: string
-  how_found: string
   comment?: string
 }

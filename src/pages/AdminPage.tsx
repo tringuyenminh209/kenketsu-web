@@ -259,54 +259,45 @@ export default function AdminPage() {
                 <thead>
                   <tr>
                     <th>回答日時</th>
-                    <th>献血回数</th>
-                    <th>知ったきっかけ</th>
-                    <th>参加理由</th>
-                    <th>気になること</th>
-                    <th>解消した不安</th>
-                    <th>希望サポート</th>
-                    <th>周囲へ薦める</th>
-                    <th>言語/情報の困りごと</th>
-                    <th>困りごとの詳細</th>
-                    <th>参加を迷う理由</th>
-                    <th>迷う理由の詳細</th>
-                    <th>自由コメント</th>
+                    <th>献血経験</th>
+                    <th>印象</th>
+                    <th>印象その他</th>
+                    <th>未経験の理由</th>
+                    <th>未経験理由その他</th>
+                    <th>学内献血を知っていたか</th>
+                    <th>参加意向</th>
+                    <th>参加しやすくなる条件</th>
+                    <th>条件その他</th>
+                    <th>事前予約</th>
                   </tr>
                 </thead>
                 <tbody>
                   {surveys.length === 0 ? (
                     <tr>
-                      <td colSpan={13} style={{ textAlign: 'center', padding: '2rem' }}>
+                      <td colSpan={11} style={{ textAlign: 'center', padding: '2rem' }}>
                         アンケート回答データがありません
                       </td>
                     </tr>
                   ) : (
                     surveys.map((row) => {
                       const parsed = parseStructuredComment(row.comment)
+                      const countLabel = row.donation_count === 'once' ? 'ある（1回）' :
+                                         row.donation_count === 'few' ? 'ある（2〜4回）' :
+                                         row.donation_count === 'many' ? 'ある（5回以上）' :
+                                         row.donation_count === 'none' ? 'ない' : row.donation_count ?? '—';
                       return (
                         <tr key={row.id}>
                           <td>{new Date(row.created_at).toLocaleString('ja-JP')}</td>
-                          <td>
-                            {row.donation_count === 'first' ? '初めて' :
-                             row.donation_count === 'few' ? '2〜4回' :
-                             row.donation_count === 'many' ? '5回以上' : row.donation_count ?? '—'}
-                          </td>
-                          <td>
-                            {row.how_found === 'poster' ? 'ポスター' :
-                             row.how_found === 'teacher' ? '先生の紹介' :
-                             row.how_found === 'friend' ? '友人の紹介' :
-                             row.how_found === 'sns' ? 'SNS' : row.how_found ?? '—'}
-                          </td>
-                          <td>{parsed.motivation}</td>
-                          <td>{parsed.concern}</td>
-                          <td>{parsed.resolvedConcern}</td>
-                          <td>{parsed.preferredSupport}</td>
-                          <td>{parsed.recommend}</td>
-                          <td>{parsed.infoDifficulty}</td>
-                          <td>{parsed.infoDifficultyDetail}</td>
-                          <td>{parsed.hesitationReason}</td>
-                          <td>{parsed.hesitationDetail}</td>
-                          <td>{parsed.freeComment}</td>
+                          <td>{countLabel}</td>
+                          <td>{parsed.impressions}</td>
+                          <td>{parsed.impressionsOther}</td>
+                          <td>{parsed.reasons}</td>
+                          <td>{parsed.reasonsOther}</td>
+                          <td>{parsed.knewCampus}</td>
+                          <td>{parsed.wantParticipate}</td>
+                          <td>{parsed.conditions}</td>
+                          <td>{parsed.conditionsOther}</td>
+                          <td>{parsed.reservation}</td>
                         </tr>
                       )
                     })
