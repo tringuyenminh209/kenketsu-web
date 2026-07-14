@@ -260,7 +260,8 @@
     "yes": "Ya",
     "no": "Tidak",
     "loading": "Memuat...",
-    "error": "Terjadi kesalahan"
+    "error": "Terjadi kesalahan",
+    "backToTop": "Kembali ke atas"
   },
   "tree": {
     "title": "Pohon Partisipan",

@@ -260,7 +260,8 @@
     "yes": "是",
     "no": "否",
     "loading": "加载中...",
-    "error": "发生错误"
+    "error": "发生错误",
+    "backToTop": "回到顶部"
   },
   "tree": {
     "title": "参与者之树",

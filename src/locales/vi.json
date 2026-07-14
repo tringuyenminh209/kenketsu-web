@@ -260,7 +260,8 @@
     "yes": "Có",
     "no": "Không",
     "loading": "Đang tải...",
-    "error": "Đã xảy ra lỗi"
+    "error": "Đã xảy ra lỗi",
+    "backToTop": "Quay lại đầu trang"
   },
   "tree": {
     "title": "Cây nhân ái",

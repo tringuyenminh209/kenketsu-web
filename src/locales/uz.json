@@ -260,7 +260,8 @@
     "yes": "Ha",
     "no": "Yo'q",
     "loading": "Yuklanmoqda...",
-    "error": "Xatolik yuz berdi"
+    "error": "Xatolik yuz berdi",
+    "backToTop": "Yuqoriga qaytish"
   },
   "tree": {
     "title": "Ishtirokchilar daraxti",

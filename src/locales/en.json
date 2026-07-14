@@ -260,7 +260,8 @@
     "yes": "Yes",
     "no": "No",
     "loading": "Loading...",
-    "error": "An error occurred"
+    "error": "An error occurred",
+    "backToTop": "Back to Top"
   },
   "tree": {
     "title": "Participant Tree",

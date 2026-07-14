@@ -19,6 +19,7 @@ import { BloodTreeProgress } from './components/BloodTreeProgress'
 import { ForeignStudentSection } from './components/ForeignStudentSection'
 import { ImpactSection } from './components/ImpactSection'
 import { LastYearSection } from './components/LastYearSection'
+import { BackToTop } from './components/BackToTop'
 import './App.css'
 
 const AdminPage = lazy(() => import('./pages/AdminPage'))
@@ -1014,6 +1015,7 @@ function UserPage() {
             </div>
           </div>
         )}
+        <BackToTop />
     </div>
   )
 }
