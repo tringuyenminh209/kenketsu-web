@@ -127,12 +127,15 @@ export function registrationsToCSV(rows: Registration[]): string {
 
 export interface ParsedComment {
   impressions: string
+  impressionsList: string[]
   impressionsOther: string
   reasons: string
+  reasonsList: string[]
   reasonsOther: string
   knewCampus: string
   wantParticipate: string
   conditions: string
+  conditionsList: string[]
   conditionsOther: string
   reservation: string
 }
@@ -187,19 +190,22 @@ const Q7_RESERVATION_MAP: Record<string, string> = {
   no: '今回は予約しない',
 }
 
-function mapCommaList(value: string, map: Record<string, string>): string {
-  return value.split(',').filter(Boolean).map((v) => map[v] ?? v).join('、')
+function mapCommaListArray(value: string, map: Record<string, string>): string[] {
+  return value.split(',').filter(Boolean).map((v) => map[v] ?? v)
 }
 
 export function parseStructuredComment(commentStr: string | null): ParsedComment {
   const result: ParsedComment = {
     impressions: '—',
+    impressionsList: [],
     impressionsOther: '—',
     reasons: '—',
+    reasonsList: [],
     reasonsOther: '—',
     knewCampus: '—',
     wantParticipate: '—',
     conditions: '—',
+    conditionsList: [],
     conditionsOther: '—',
     reservation: '—',
   }
@@ -212,11 +218,13 @@ export function parseStructuredComment(commentStr: string | null): ParsedComment
     if (!key) continue
 
     if (key === 'q2_impressions') {
-      result.impressions = mapCommaList(value, Q2_IMPRESSION_MAP) || '—'
+      result.impressionsList = mapCommaListArray(value, Q2_IMPRESSION_MAP)
+      result.impressions = result.impressionsList.join('、') || '—'
     } else if (key === 'q2_other') {
       result.impressionsOther = value
     } else if (key === 'q3_reasons') {
-      result.reasons = mapCommaList(value, Q3_REASON_MAP) || '—'
+      result.reasonsList = mapCommaListArray(value, Q3_REASON_MAP)
+      result.reasons = result.reasonsList.join('、') || '—'
     } else if (key === 'q3_other') {
       result.reasonsOther = value
     } else if (key === 'q4_knew_campus') {
@@ -224,7 +232,8 @@ export function parseStructuredComment(commentStr: string | null): ParsedComment
     } else if (key === 'q5_want_participate') {
       result.wantParticipate = Q5_PARTICIPATE_MAP[value] ?? value
     } else if (key === 'q6_conditions') {
-      result.conditions = mapCommaList(value, Q6_CONDITION_MAP) || '—'
+      result.conditionsList = mapCommaListArray(value, Q6_CONDITION_MAP)
+      result.conditions = result.conditionsList.join('、') || '—'
     } else if (key === 'q6_other') {
       result.conditionsOther = value
     } else if (key === 'q7_reservation') {

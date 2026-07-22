@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Icon, SiteHeader, usePageMotion } from '../lib/shared'
 import { EVENT_CONFIG } from '../config/event'
@@ -14,6 +14,46 @@ import {
 } from '../lib/supabase'
 import type { Registration, SurveyResponse } from '../types'
 import { downloadCSV } from '../lib/utils'
+
+interface ChartDatum {
+  label: string
+  count: number
+}
+
+function countBy(values: string[]): ChartDatum[] {
+  const counts = new Map<string, number>()
+  for (const v of values) {
+    if (!v || v === '—') continue
+    counts.set(v, (counts.get(v) ?? 0) + 1)
+  }
+  return [...counts.entries()]
+    .map(([label, count]) => ({ label, count }))
+    .sort((a, b) => b.count - a.count)
+}
+
+function BarChart({ title, data }: { title: string; data: ChartDatum[] }) {
+  const max = Math.max(1, ...data.map((d) => d.count))
+  return (
+    <div className="chart-block">
+      <h3>{title}</h3>
+      {data.length === 0 ? (
+        <p className="chart-empty">データがありません</p>
+      ) : (
+        <div className="chart-bars">
+          {data.map(({ label, count }) => (
+            <div className="chart-bar-row" key={label}>
+              <span className="chart-bar-label">{label}</span>
+              <div className="chart-bar-track">
+                <div className="chart-bar-fill" style={{ width: `${(count / max) * 100}%` }} />
+              </div>
+              <span className="chart-bar-value">{count}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
 
 export default function AdminPage() {
   const rootRef = useRef<HTMLDivElement>(null)
@@ -79,6 +119,26 @@ export default function AdminPage() {
     const csv = surveysToCSV(surveys)
     downloadCSV(csv, `surveys_${EVENT_CONFIG.year}.csv`)
   }
+
+  const surveyCharts = useMemo(() => {
+    const donationLabel = (count: string | null) =>
+      count === 'once' ? 'ある（1回）' :
+      count === 'few' ? 'ある（2〜4回）' :
+      count === 'many' ? 'ある（5回以上）' :
+      count === 'none' ? 'ない' : ''
+
+    const parsedRows = surveys.map((s) => parseStructuredComment(s.comment))
+
+    return {
+      q1: countBy(surveys.map((s) => donationLabel(s.donation_count))),
+      q2: countBy(parsedRows.flatMap((p) => p.impressionsList)),
+      q3: countBy(parsedRows.flatMap((p) => p.reasonsList)),
+      q4: countBy(parsedRows.map((p) => p.knewCampus)),
+      q5: countBy(parsedRows.map((p) => p.wantParticipate)),
+      q6: countBy(parsedRows.flatMap((p) => p.conditionsList)),
+      q7: countBy(parsedRows.map((p) => p.reservation)),
+    }
+  }, [surveys])
 
   if (loading) {
     return (
@@ -252,6 +312,17 @@ export default function AdminPage() {
             >
               CSVエクスポート
             </button>
+          </div>
+          <div className="chart-grid">
+            <BarChart title="Q1. 献血経験" data={surveyCharts.q1} />
+            <BarChart title="Q2. 印象（複数回答）" data={surveyCharts.q2} />
+            {surveyCharts.q3.length > 0 && (
+              <BarChart title="Q3. 未経験の理由（複数回答）" data={surveyCharts.q3} />
+            )}
+            <BarChart title="Q4. 学内献血を知っていたか" data={surveyCharts.q4} />
+            <BarChart title="Q5. 参加意向" data={surveyCharts.q5} />
+            <BarChart title="Q6. 参加しやすくなる条件（複数回答）" data={surveyCharts.q6} />
+            <BarChart title="Q7. 事前予約について" data={surveyCharts.q7} />
           </div>
           <div className="admin-content">
             <div className="table-wrap">
