@@ -1498,6 +1498,59 @@ option:disabled {
   gap: 10px;
 }
 
+.chart-bar-row--clickable {
+  width: 100%;
+  padding: 4px 6px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.chart-bar-row--clickable:hover {
+  background: #f7f8f9;
+}
+
+.chart-bar-row--clickable.is-selected {
+  background: rgba(206, 0, 23, 0.06);
+  border-color: rgba(206, 0, 23, 0.28);
+}
+
+.slot-detail {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.slot-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.slot-detail-header strong {
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.slot-detail-close {
+  border: none;
+  background: none;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.slot-detail-close:hover {
+  color: var(--ink);
+}
+
 .chart-bar-label {
   font-size: 12px;
   color: var(--ink);

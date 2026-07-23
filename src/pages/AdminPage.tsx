@@ -61,6 +61,7 @@ export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [registrations, setRegistrations] = useState<Registration[]>([])
   const [surveys, setSurveys] = useState<SurveyResponse[]>([])
+  const [selectedSlot, setSelectedSlot] = useState<string | null>(null)
   const [loginEmail, setLoginEmail] = useState('')
   const [loginPassword, setLoginPassword] = useState('')
   const [loginError, setLoginError] = useState<string | null>(null)
@@ -149,10 +150,16 @@ export default function AdminPage() {
       counts.set(r.time_slot, (counts.get(r.time_slot) ?? 0) + 1)
     }
     return TIME_SLOTS.map((slot) => ({
+      slot,
       label: slot.replace('-', '～'),
       count: counts.get(slot) ?? 0,
     }))
   }, [registrations])
+
+  const selectedSlotRegistrants = useMemo(
+    () => (selectedSlot ? registrations.filter((r) => r.time_slot === selectedSlot) : []),
+    [registrations, selectedSlot],
+  )
 
   if (loading) {
     return (
@@ -261,10 +268,15 @@ export default function AdminPage() {
           </div>
           <div className="chart-grid">
             <div className="chart-block chart-block--wide">
-              <h3>受付希望時間ごとの申込数</h3>
+              <h3>受付希望時間ごとの申込数（クリックで内訳を表示）</h3>
               <div className="chart-bars">
-                {slotChart.map(({ label, count }) => (
-                  <div className="chart-bar-row" key={label}>
+                {slotChart.map(({ slot, label, count }) => (
+                  <button
+                    type="button"
+                    key={slot}
+                    className={`chart-bar-row chart-bar-row--clickable${selectedSlot === slot ? ' is-selected' : ''}`}
+                    onClick={() => setSelectedSlot(selectedSlot === slot ? null : slot)}
+                  >
                     <span className="chart-bar-label">{label}</span>
                     <div className="chart-bar-track">
                       <div
@@ -273,9 +285,47 @@ export default function AdminPage() {
                       />
                     </div>
                     <span className="chart-bar-value">{count}/{EVENT_CONFIG.slotCapacity}</span>
-                  </div>
+                  </button>
                 ))}
               </div>
+              {selectedSlot && (
+                <div className="slot-detail">
+                  <div className="slot-detail-header">
+                    <strong>{selectedSlot.replace('-', '～')} の申込者（{selectedSlotRegistrants.length}名）</strong>
+                    <button type="button" className="slot-detail-close" onClick={() => setSelectedSlot(null)}>✕</button>
+                  </div>
+                  {selectedSlotRegistrants.length === 0 ? (
+                    <p className="chart-empty">この時間帯の申込者はいません</p>
+                  ) : (
+                    <div className="table-wrap">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>学生番号</th>
+                            <th>氏名</th>
+                            <th>フリガナ</th>
+                            <th>学校名</th>
+                            <th>所属</th>
+                            <th>電話番号</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {selectedSlotRegistrants.map((r) => (
+                            <tr key={r.id}>
+                              <td>{r.student_id}</td>
+                              <td>{r.name}</td>
+                              <td>{r.furigana ?? '—'}</td>
+                              <td>{r.school ?? '—'}</td>
+                              <td>{r.class}</td>
+                              <td>{r.phone ?? '—'}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
           <div className="admin-content">
