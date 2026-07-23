@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Icon, SiteHeader, usePageMotion } from '../lib/shared'
-import { EVENT_CONFIG } from '../config/event'
+import { EVENT_CONFIG, TIME_SLOTS } from '../config/event'
 import {
   fetchRegistrations,
   fetchSurveys,
@@ -140,6 +140,20 @@ export default function AdminPage() {
     }
   }, [surveys])
 
+  // Registrations per time slot, kept in chronological order (not sorted
+  // by count) so the schedule reads left-to-right like a timetable.
+  const slotChart = useMemo(() => {
+    const counts = new Map<string, number>()
+    for (const r of registrations) {
+      if (!r.time_slot) continue
+      counts.set(r.time_slot, (counts.get(r.time_slot) ?? 0) + 1)
+    }
+    return TIME_SLOTS.map((slot) => ({
+      label: slot.replace('-', '～'),
+      count: counts.get(slot) ?? 0,
+    }))
+  }, [registrations])
+
   if (loading) {
     return (
       <div className="app-shell">
@@ -244,6 +258,25 @@ export default function AdminPage() {
             >
               CSVエクスポート
             </button>
+          </div>
+          <div className="chart-grid">
+            <div className="chart-block chart-block--wide">
+              <h3>受付希望時間ごとの申込数</h3>
+              <div className="chart-bars">
+                {slotChart.map(({ label, count }) => (
+                  <div className="chart-bar-row" key={label}>
+                    <span className="chart-bar-label">{label}</span>
+                    <div className="chart-bar-track">
+                      <div
+                        className="chart-bar-fill"
+                        style={{ width: `${(count / EVENT_CONFIG.slotCapacity) * 100}%` }}
+                      />
+                    </div>
+                    <span className="chart-bar-value">{count}/{EVENT_CONFIG.slotCapacity}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
           <div className="admin-content">
             <div className="table-wrap">

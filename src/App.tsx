@@ -12,7 +12,7 @@ import benefitSocialContributionImage from './assets/benefit-social-contribution
 import processPrecheckImage from './assets/process/process-precheck.webp'
 import processInterviewImage from './assets/process/process-interview-test.webp'
 import processDonationImage from './assets/process/process-donation.webp'
-import { EVENT_CONFIG } from './config/event'
+import { EVENT_CONFIG, TIME_SLOTS } from './config/event'
 import { Icon, SiteHeader, usePageMotion } from './lib/shared'
 import { checkDuplicateRegistration, fetchSlotCounts, insertRegistration, insertSurvey, sendConfirmationEmail } from './lib/supabase'
 import { BloodTreeProgress } from './components/BloodTreeProgress'
@@ -51,12 +51,6 @@ const PROCESS_IMAGES = [processPrecheckImage, processInterviewImage, processDona
 const SURVEY_Q2_OPTIONS = ['help_others', 'social_contribution', 'health_check', 'scary', 'time_consuming', 'dont_understand', 'not_interested', 'other']
 const SURVEY_Q3_OPTIONS = ['no_opportunity', 'afraid_needle', 'anxious', 'no_time', 'dont_know_conditions', 'health_reason', 'not_interested', 'other']
 const SURVEY_Q6_OPTIONS = ['easy_reservation', 'flexible_time', 'short_duration', 'clear_process', 'with_friend', 'detailed_explanation', 'other']
-
-const TIME_SLOTS = [
-  '9:30-10:00', '10:00-10:30', '10:30-11:00', '11:00-11:30',
-  '12:30-13:00', '13:00-13:30', '13:30-14:00', '14:00-14:30',
-  '14:30-15:00', '15:00-15:30', '15:30-16:00', '16:00-16:30',
-]
 
 // The event's calendar date (YYYY-MM-DD in JST), independent of the
 // browser's own timezone, so we can compare "is this slot already over?"
