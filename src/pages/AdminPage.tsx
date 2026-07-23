@@ -214,6 +214,11 @@ export default function AdminPage() {
             <small>定員{EVENT_CONFIG.capacity}名まであと{EVENT_CONFIG.capacity - registrations.length}名</small>
           </article>
           <article className="motion-card">
+            <span>アンケート回答数</span>
+            <strong>{surveys.length}</strong>
+            <small>申込者のうち回答した人数</small>
+          </article>
+          <article className="motion-card">
             <span>年度</span>
             <strong>{EVENT_CONFIG.year}</strong>
             <small>{EVENT_CONFIG.date}</small>
