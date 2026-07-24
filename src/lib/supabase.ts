@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js"
-import type { Registration, RegistrationInsert, SurveyInsert, SurveyResponse } from "../types"
+import type { Registration, RegistrationInsert, SheetData, SurveyInsert, SurveyResponse } from "../types"
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string
@@ -95,34 +95,33 @@ export async function fetchAvailableYears(): Promise<number[]> {
   return [...new Set((data ?? []).map((r) => r.event_year))]
 }
 
-// CSV export helper
-export function registrationsToCSV(rows: Registration[]): string {
-  const header = "学生番号,名前,フリガナ,学校名,所属,メール,電話番号,生年月日,性別,受付希望時間,献血経験,申込日時\n"
-  const body = rows
-    .map((r) => {
-      const genderLabel = r.gender === 'male' ? '男性' :
-                          r.gender === 'female' ? '女性' :
-                          r.gender === 'other' ? 'その他' :
-                          r.gender === 'no_answer' ? '回答しない' : r.gender ?? '';
-      const experienceLabel = r.donation_experience === 'yes' ? 'ある' :
-                              r.donation_experience === 'no' ? 'ない' : r.donation_experience ?? '';
-      return [
-        r.student_id,
-        r.name,
-        r.furigana ?? "",
-        r.school ?? "",
-        r.class,
-        r.email ?? "",
-        r.phone ?? "",
-        r.birth_date ?? "",
-        genderLabel,
-        r.time_slot ?? "",
-        experienceLabel,
-        r.created_at
-      ].join(",")
-    })
-    .join("\n")
-  return header + body
+// Excel export helper — structured rows (no CSV escaping needed; the
+// xlsx writer takes cell values directly).
+export function registrationsToRows(rows: Registration[]): SheetData {
+  const headers = ["学生番号", "名前", "フリガナ", "学校名", "所属", "メール", "電話番号", "生年月日", "性別", "受付希望時間", "献血経験", "申込日時"]
+  const body = rows.map((r) => {
+    const genderLabel = r.gender === 'male' ? '男性' :
+                        r.gender === 'female' ? '女性' :
+                        r.gender === 'other' ? 'その他' :
+                        r.gender === 'no_answer' ? '回答しない' : r.gender ?? '';
+    const experienceLabel = r.donation_experience === 'yes' ? 'ある' :
+                            r.donation_experience === 'no' ? 'ない' : r.donation_experience ?? '';
+    return [
+      r.student_id,
+      r.name,
+      r.furigana ?? "",
+      r.school ?? "",
+      r.class,
+      r.email ?? "",
+      r.phone ?? "",
+      r.birth_date ?? "",
+      genderLabel,
+      r.time_slot ?? "",
+      experienceLabel,
+      new Date(r.created_at).toLocaleString('ja-JP'),
+    ]
+  })
+  return { headers, rows: body }
 }
 
 export interface ParsedComment {
@@ -244,29 +243,27 @@ export function parseStructuredComment(commentStr: string | null): ParsedComment
   return result
 }
 
-export function surveysToCSV(rows: SurveyResponse[]): string {
-  const header = "回答日時,献血経験,印象,印象その他,未経験の理由,未経験理由その他,学内献血を知っていたか,参加意向,参加しやすくなる条件,条件その他,事前予約\n"
-  const body = rows
-    .map((r) => {
-      const countLabel = r.donation_count === 'once' ? 'ある（1回）' :
-                          r.donation_count === 'few' ? 'ある（2〜4回）' :
-                          r.donation_count === 'many' ? 'ある（5回以上）' :
-                          r.donation_count === 'none' ? 'ない' : r.donation_count ?? '';
-      const parsed = parseStructuredComment(r.comment)
-      return [
-        r.created_at,
-        countLabel,
-        `"${parsed.impressions.replace(/"/g, '""')}"`,
-        `"${parsed.impressionsOther.replace(/"/g, '""')}"`,
-        `"${parsed.reasons.replace(/"/g, '""')}"`,
-        `"${parsed.reasonsOther.replace(/"/g, '""')}"`,
-        `"${parsed.knewCampus.replace(/"/g, '""')}"`,
-        `"${parsed.wantParticipate.replace(/"/g, '""')}"`,
-        `"${parsed.conditions.replace(/"/g, '""')}"`,
-        `"${parsed.conditionsOther.replace(/"/g, '""')}"`,
-        `"${parsed.reservation.replace(/"/g, '""')}"`
-      ].join(",")
-    })
-    .join("\n")
-  return header + body
+export function surveysToRows(rows: SurveyResponse[]): SheetData {
+  const headers = ["回答日時", "献血経験", "印象", "印象その他", "未経験の理由", "未経験理由その他", "学内献血を知っていたか", "参加意向", "参加しやすくなる条件", "条件その他", "事前予約"]
+  const body = rows.map((r) => {
+    const countLabel = r.donation_count === 'once' ? 'ある（1回）' :
+                        r.donation_count === 'few' ? 'ある（2〜4回）' :
+                        r.donation_count === 'many' ? 'ある（5回以上）' :
+                        r.donation_count === 'none' ? 'ない' : r.donation_count ?? '';
+    const parsed = parseStructuredComment(r.comment)
+    return [
+      new Date(r.created_at).toLocaleString('ja-JP'),
+      countLabel,
+      parsed.impressions,
+      parsed.impressionsOther,
+      parsed.reasons,
+      parsed.reasonsOther,
+      parsed.knewCampus,
+      parsed.wantParticipate,
+      parsed.conditions,
+      parsed.conditionsOther,
+      parsed.reservation,
+    ]
+  })
+  return { headers, rows: body }
 }

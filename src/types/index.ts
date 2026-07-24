@@ -47,3 +47,8 @@ export interface SurveyInsert {
   donation_count: string
   comment?: string
 }
+
+export interface SheetData {
+  headers: string[]
+  rows: (string | number)[][]
+}

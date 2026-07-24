@@ -7,13 +7,13 @@ import {
   fetchSurveys,
   getSession,
   parseStructuredComment,
-  registrationsToCSV,
+  registrationsToRows,
   signInAdmin,
   signOutAdmin,
-  surveysToCSV,
+  surveysToRows,
 } from '../lib/supabase'
 import type { Registration, SurveyResponse } from '../types'
-import { downloadCSV } from '../lib/utils'
+import { downloadXLSX } from '../lib/utils'
 
 interface ChartDatum {
   label: string
@@ -111,14 +111,14 @@ export default function AdminPage() {
     setSurveys([])
   }
 
-  const handleCsvExport = () => {
-    const csv = registrationsToCSV(registrations)
-    downloadCSV(csv, `registrations_${EVENT_CONFIG.year}.csv`)
+  const handleRegistrationsExport = () => {
+    const data = registrationsToRows(registrations)
+    downloadXLSX(data, `registrations_${EVENT_CONFIG.year}.xlsx`, '申込データ')
   }
 
-  const handleSurveyCsvExport = () => {
-    const csv = surveysToCSV(surveys)
-    downloadCSV(csv, `surveys_${EVENT_CONFIG.year}.csv`)
+  const handleSurveyExport = () => {
+    const data = surveysToRows(surveys)
+    downloadXLSX(data, `surveys_${EVENT_CONFIG.year}.xlsx`, 'アンケート回答データ')
   }
 
   const surveyCharts = useMemo(() => {
@@ -220,7 +220,7 @@ export default function AdminPage() {
           <div>
             <Icon type="monitor" />
             <h1>管理ダッシュボード</h1>
-            <p>申込状況、CSV出力を確認するための管理者向け画面です。</p>
+            <p>申込状況、Excel出力を確認するための管理者向け画面です。</p>
           </div>
           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
             <Link className="button secondary" to="/">ユーザーサイトへ戻る</Link>
@@ -260,10 +260,10 @@ export default function AdminPage() {
             <button
               className="button outline"
               type="button"
-              onClick={handleCsvExport}
+              onClick={handleRegistrationsExport}
               disabled={registrations.length === 0}
             >
-              CSVエクスポート
+              Excelエクスポート
             </button>
           </div>
           <div className="chart-grid">
@@ -395,10 +395,10 @@ export default function AdminPage() {
             <button
               className="button outline"
               type="button"
-              onClick={handleSurveyCsvExport}
+              onClick={handleSurveyExport}
               disabled={surveys.length === 0}
             >
-              CSVエクスポート
+              Excelエクスポート
             </button>
           </div>
           <div className="chart-grid">
