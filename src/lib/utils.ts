@@ -9,6 +9,7 @@ export function cn(...inputs: ClassValue[]) {
 
 const HEADER_FILL = "FFCE0017" // brand red
 const HEADER_FONT = "FFFFFFFF" // white
+const FONT_NAME = "游ゴシック" // Windows/Office標準の日本語フォント
 
 // 全角文字（日本語など）は半角の約2倍の幅で表示されるため、
 // .lengthではなく実際の表示幅で列幅を計算する
@@ -36,10 +37,15 @@ export async function downloadXLSX(data: SheetData, filename: string, sheetName:
   sheet.addRow(data.headers)
   data.rows.forEach((row) => sheet.addRow(row))
 
+  sheet.eachRow((row, rowNumber) => {
+    row.font = { name: FONT_NAME, size: 11 }
+    if (rowNumber > 1) row.alignment = { vertical: "middle" }
+  })
+
   const headerRow = sheet.getRow(1)
   headerRow.height = 22
   headerRow.eachCell((cell) => {
-    cell.font = { bold: true, color: { argb: HEADER_FONT } }
+    cell.font = { name: FONT_NAME, size: 11, bold: true, color: { argb: HEADER_FONT } }
     cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: HEADER_FILL } }
     cell.alignment = { vertical: "middle", horizontal: "center" }
   })
