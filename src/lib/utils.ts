@@ -10,6 +10,25 @@ export function cn(...inputs: ClassValue[]) {
 const HEADER_FILL = "FFCE0017" // brand red
 const HEADER_FONT = "FFFFFFFF" // white
 
+// 全角文字（日本語など）は半角の約2倍の幅で表示されるため、
+// .lengthではなく実際の表示幅で列幅を計算する
+function displayWidth(text: string): number {
+  let width = 0
+  for (const char of text) {
+    const code = char.codePointAt(0) ?? 0
+    const isFullWidth =
+      (code >= 0x1100 && code <= 0x115f) ||
+      (code >= 0x2e80 && code <= 0xa4cf) ||
+      (code >= 0xac00 && code <= 0xd7a3) ||
+      (code >= 0xf900 && code <= 0xfaff) ||
+      (code >= 0xff00 && code <= 0xff60) ||
+      (code >= 0xffe0 && code <= 0xffe6) ||
+      (code >= 0x20000 && code <= 0x3ffff)
+    width += isFullWidth ? 2 : 1
+  }
+  return width
+}
+
 export async function downloadXLSX(data: SheetData, filename: string, sheetName: string) {
   const workbook = new ExcelJS.Workbook()
   const sheet = workbook.addWorksheet(sheetName)
@@ -27,10 +46,10 @@ export async function downloadXLSX(data: SheetData, filename: string, sheetName:
 
   sheet.columns.forEach((col, i) => {
     const longest = Math.max(
-      data.headers[i]?.length ?? 10,
-      ...data.rows.map((r) => String(r[i] ?? "").length),
+      displayWidth(data.headers[i] ?? ""),
+      ...data.rows.map((r) => displayWidth(String(r[i] ?? ""))),
     )
-    col.width = Math.min(Math.max(longest * 1.3, 12), 40)
+    col.width = Math.max(longest + 4, 12)
   })
 
   sheet.views = [{ state: "frozen", ySplit: 1 }]
