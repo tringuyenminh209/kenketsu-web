@@ -868,3 +868,29 @@
 - `src/locales/*.json`
 - `docs/nippo.md`
 
+---
+
+## Ngay: 2026-07-28
+
+## Noi dung da hoan thanh
+
+- **Thêm tùy chọn "本部" vào mục chọn trường (学校名)** trong form đăng ký hiến máu:
+  * Thêm tùy chọn `'school6'` vào danh sách dropdown lựa chọn trường trong `src/App.tsx`.
+  * Cập nhật và đồng bộ bản dịch khóa `"register.school6"` sang cả 12 ngôn ngữ:
+    - Tiếng Nhật: `"本部"`
+    - Tiếng Việt: `"Trụ sở (本部)"`
+    - Tiếng Anh: `"Headquarters (本部)"`
+    - Các ngôn ngữ khác: Hiển thị tên dịch tương ứng kèm chú thích `(本部)`.
+
+## Kiem tra
+
+- Chạy build (`npm run build`): pass.
+- Chạy linter (`npm run lint`): pass.
+
+## File da thay doi chinh
+
+- `src/App.tsx`
+- `src/locales/*.json`
+- `docs/nippo.md`
+
+

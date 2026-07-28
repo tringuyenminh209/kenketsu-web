@@ -165,6 +165,7 @@
     "school3": "ECCアーティスト美容専門学校　※高等部含む",
     "school4": "ECC国際外語専門学校　日本語学科/国際コミュニケーション学科",
     "school5": "ECC学園高等学校",
+    "school6": "本部",
     "timeSlotRemaining": "残り{{count}}名",
     "timeSlotFull": "満席",
     "birthDate": "生年月日",
@@ -201,13 +202,11 @@
     "successTitle": "ご回答ありがとうございました！",
     "successBody": "いただいたご意見を今後の学内献血の改善に役立てます。",
     "errorGeneral": "エラーが発生しました。もう一度お試しください。",
-
     "q1Label": "あなたは献血をしたことがありますか？",
     "q1Once": "ある（1回）",
     "q1Few": "ある（2〜4回）",
     "q1Many": "ある（5回以上）",
     "q1None": "ない",
-
     "q2Label": "献血についてどのような印象を持っていますか？（複数回答可）",
     "q2_help_others": "人の役に立てる",
     "q2_social_contribution": "社会貢献になる",
@@ -218,7 +217,6 @@
     "q2_not_interested": "特に興味がない",
     "q2_other": "その他（自由記述）",
     "q2OtherPlaceholder": "自由にご記入ください",
-
     "q3Intro": "献血をしたことがない方にお聞きします。",
     "q3Label": "献血をしていない理由は何ですか？（複数回答可）",
     "q3_no_opportunity": "機会がなかった",
@@ -230,17 +228,14 @@
     "q3_not_interested": "興味がない",
     "q3_other": "その他（自由記述）",
     "q3OtherPlaceholder": "自由にご記入ください",
-
     "q4Label": "学内で献血ができることを知っていましたか？",
     "q4Knew": "知っていた",
     "q4FirstTime": "今日初めて知った",
-
     "q5Label": "9月15日（火）の学内献血に参加したいと思いますか？",
     "q5Yes": "ぜひ参加したい",
     "q5Maybe": "できれば参加したい",
     "q5Unsure": "まだ分からない",
     "q5No": "今回は参加しない",
-
     "q6Label": "学内献血に参加しやすくなる条件があれば教えてください。（複数回答可）",
     "q6_easy_reservation": "事前予約が簡単",
     "q6_flexible_time": "空き時間に参加できる",
@@ -250,7 +245,6 @@
     "q6_detailed_explanation": "献血について詳しい説明がある",
     "q6_other": "その他（自由記述）",
     "q6OtherPlaceholder": "自由にご記入ください",
-
     "q7Label": "学内献血の事前予約について",
     "q7Now": "今すぐ予約したい",
     "q7Later": "後で検討したい",

@@ -652,7 +652,7 @@ function UserPage() {
                     onChange={(e) => setRegForm({ ...regForm, school: e.target.value })}
                   >
                     <option value="" disabled>{t('register.departmentSelect')}</option>
-                    {(['school1', 'school2', 'school3', 'school4', 'school5'] as const).map((val) => (
+                    {(['school1', 'school2', 'school3', 'school4', 'school5', 'school6'] as const).map((val) => (
                       <option key={val} value={t(`register.${val}`)}>{t(`register.${val}`)}</option>
                     ))}
                   </select>
