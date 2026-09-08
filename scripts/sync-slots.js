@@ -1,4 +1,4 @@
-﻿import puppeteer from 'puppeteer-core'
+import puppeteer from 'puppeteer-core'
 import { createClient } from '@supabase/supabase-js'
 import fs from 'fs'
 import path from 'path'
@@ -25,10 +25,14 @@ loadEnv()
 const URL = 'https://www.kenketsu.jp/reservationeditbydate?birthday=20&birthmonth=9&birthyear=2000&day=15&from=date&month=9&placeId=a0p0K000007osDqQAI&sex=%E7%94%B7%E6%80%A7&year=2026'
 
 const CHROME_PATHS = [
+  process.env.PUPPETEER_EXECUTABLE_PATH,
+  '/usr/bin/google-chrome',
+  '/usr/bin/chromium-browser',
+  '/usr/bin/chromium',
   'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
   'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
   'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe'
-]
+].filter(Boolean)
 
 const SUPABASE_URL = process.env.VITE_SUPABASE_URL || 'https://kdtsvsfswywfhtlegvfg.supabase.co'
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_ANON_KEY

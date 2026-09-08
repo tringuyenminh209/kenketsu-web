@@ -1,4 +1,4 @@
-﻿name: Sync Red Cross Blood Donation Capacities
+name: Sync Red Cross Blood Donation Capacities
 
 on:
   schedule:
@@ -24,10 +24,13 @@ jobs:
         run: npm ci
 
       - name: Install Puppeteer Chrome
-        run: npx @puppeteer/browsers install chrome@stable
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
 
       - name: Run Slot Synchronization
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          PUPPETEER_EXECUTABLE_PATH: /usr/bin/google-chrome
         run: node scripts/sync-slots.js
