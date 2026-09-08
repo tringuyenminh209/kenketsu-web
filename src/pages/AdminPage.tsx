@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Icon, SiteHeader, usePageMotion } from '../lib/shared'
 import { EVENT_CONFIG, TIME_SLOTS } from '../config/event'
 import {
+  fetchOfficialSlotCapacities,
   fetchRegistrations,
   fetchSurveys,
   getSession,
@@ -11,6 +12,7 @@ import {
   signInAdmin,
   signOutAdmin,
   surveysToRows,
+  updateOfficialSlotCapacities,
 } from '../lib/supabase'
 import type { Registration, SurveyResponse } from '../types'
 import { downloadXLSX } from '../lib/utils'
@@ -62,6 +64,9 @@ export default function AdminPage() {
   const [registrations, setRegistrations] = useState<Registration[]>([])
   const [surveys, setSurveys] = useState<SurveyResponse[]>([])
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null)
+  const [officialCapacities, setOfficialCapacities] = useState<Record<string, number>>({})
+  const [capacitySaving, setCapacitySaving] = useState(false)
+  const [capacityMsg, setCapacityMsg] = useState<{ type: 'ok' | 'error'; text: string } | null>(null)
   const [loginEmail, setLoginEmail] = useState('')
   const [loginPassword, setLoginPassword] = useState('')
   const [loginError, setLoginError] = useState<string | null>(null)
@@ -75,9 +80,11 @@ export default function AdminPage() {
         Promise.all([
           fetchRegistrations(EVENT_CONFIG.year),
           fetchSurveys(EVENT_CONFIG.year),
-        ]).then(([regData, surveyData]) => {
+          fetchOfficialSlotCapacities(EVENT_CONFIG.year),
+        ]).then(([regData, surveyData, capData]) => {
           setRegistrations(regData)
           setSurveys(surveyData)
+          setOfficialCapacities(capData)
         })
       }
       setLoading(false)
@@ -91,16 +98,31 @@ export default function AdminPage() {
     try {
       await signInAdmin(loginEmail, loginPassword)
       setIsAuthenticated(true)
-      const [regData, surveyData] = await Promise.all([
+      const [regData, surveyData, capData] = await Promise.all([
         fetchRegistrations(EVENT_CONFIG.year),
         fetchSurveys(EVENT_CONFIG.year),
+        fetchOfficialSlotCapacities(EVENT_CONFIG.year),
       ])
       setRegistrations(regData)
       setSurveys(surveyData)
+      setOfficialCapacities(capData)
     } catch {
       setLoginError('メールアドレスまたはパスワードが正しくありません。')
     } finally {
       setLoginSubmitting(false)
+    }
+  }
+
+  const handleCapacitySave = async () => {
+    setCapacitySaving(true)
+    setCapacityMsg(null)
+    try {
+      await updateOfficialSlotCapacities(EVENT_CONFIG.year, officialCapacities)
+      setCapacityMsg({ type: 'ok', text: '日本赤十字社の空き枠数を正常に更新しました！' })
+    } catch {
+      setCapacityMsg({ type: 'error', text: '枠数の保存に失敗しました。もう一度お試しください。' })
+    } finally {
+      setCapacitySaving(false)
     }
   }
 
@@ -249,6 +271,102 @@ export default function AdminPage() {
             <strong style={{ fontSize: '0.85rem' }}>{EVENT_CONFIG.location}</strong>
             <small>{EVENT_CONFIG.locationDetail}</small>
           </article>
+        </section>
+
+        {/* ── 日本赤十字社 実空き枠数管理パネル ── */}
+        <section className="admin-preview admin-page-panel reveal" style={{ marginTop: '2rem' }}>
+          <div className="admin-panel-header">
+            <div className="section-title">
+              <Icon type="calendar" />
+              <div>
+                <h2 style={{ margin: 0 }}>日本赤十字社 空き枠数設定（手動同期）</h2>
+                <p style={{ margin: '0.25rem 0 0', fontSize: '0.85rem', color: '#666' }}>
+                  kenketsu.jp（ラブラッド）に表示されている各時間帯の「残り空き枠数」を設定します。0名に設定するとユーザー側で「満席」として選択不可になります。
+                </p>
+              </div>
+            </div>
+            <button
+              className="button primary"
+              type="button"
+              onClick={handleCapacitySave}
+              disabled={capacitySaving}
+            >
+              {capacitySaving ? '保存中...' : '空き枠数を保存する'}
+            </button>
+          </div>
+
+          {capacityMsg && (
+            <div
+              style={{
+                margin: '0.75rem 0',
+                padding: '0.75rem 1rem',
+                borderRadius: '8px',
+                fontSize: '0.9rem',
+                backgroundColor: capacityMsg.type === 'ok' ? '#e8f5e9' : '#ffebee',
+                color: capacityMsg.type === 'ok' ? '#2e7d32' : '#c62828',
+                border: `1px solid ${capacityMsg.type === 'ok' ? '#a5d6a7' : '#ef9a9a'}`,
+              }}
+            >
+              {capacityMsg.text}
+            </div>
+          )}
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
+              gap: '1rem',
+              marginTop: '1rem',
+            }}
+          >
+            {TIME_SLOTS.map((slot) => {
+              const currentVal = officialCapacities[slot] ?? 0
+              return (
+                <div
+                  key={slot}
+                  style={{
+                    padding: '0.75rem',
+                    background: currentVal === 0 ? '#fdf2f2' : '#f8fafc',
+                    border: `1px solid ${currentVal === 0 ? '#fca5a5' : '#e2e8f0'}`,
+                    borderRadius: '8px',
+                  }}
+                >
+                  <div style={{ fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.4rem', color: '#1e293b' }}>
+                    {slot.replace('-', '～')}
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <label style={{ fontSize: '0.8rem', color: '#64748b', margin: 0 }}>残り枠:</label>
+                    <input
+                      type="number"
+                      min="0"
+                      max="50"
+                      value={currentVal}
+                      onChange={(e) => {
+                        const val = Math.max(0, parseInt(e.target.value, 10) || 0)
+                        setOfficialCapacities((prev) => ({ ...prev, [slot]: val }))
+                      }}
+                      style={{
+                        width: '60px',
+                        padding: '0.35rem 0.5rem',
+                        fontSize: '0.95rem',
+                        fontWeight: 'bold',
+                        textAlign: 'center',
+                        border: '1px solid #cbd5e1',
+                        borderRadius: '6px',
+                        backgroundColor: '#fff',
+                      }}
+                    />
+                    <span style={{ fontSize: '0.85rem', color: '#475569' }}>名</span>
+                  </div>
+                  {currentVal === 0 && (
+                    <div style={{ fontSize: '0.75rem', color: '#dc2626', fontWeight: 600, marginTop: '0.25rem' }}>
+                      ※ 満席扱い
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
         </section>
 
         <section className="admin-preview admin-page-panel reveal">

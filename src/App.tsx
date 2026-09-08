@@ -14,7 +14,7 @@ import processInterviewImage from './assets/process/process-interview-test.webp'
 import processDonationImage from './assets/process/process-donation.webp'
 import { EVENT_CONFIG, TIME_SLOTS } from './config/event'
 import { Icon, SiteHeader, usePageMotion } from './lib/shared'
-import { checkDuplicateRegistration, fetchSlotCounts, insertRegistration, insertSurvey, sendConfirmationEmail } from './lib/supabase'
+import { checkDuplicateRegistration, fetchOfficialSlotCapacities, fetchSlotCounts, insertRegistration, insertSurvey, sendConfirmationEmail } from './lib/supabase'
 import { BloodTreeProgress } from './components/BloodTreeProgress'
 import { ForeignStudentSection } from './components/ForeignStudentSection'
 import { ImpactSection } from './components/ImpactSection'
@@ -103,12 +103,18 @@ function UserPage() {
     birthDate: '', timeSlot: '', donationExperience: '', gender: '',
   })
   const [slotCounts, setSlotCounts] = useState<Record<string, number>>({})
+  const [officialCapacities, setOfficialCapacities] = useState<Record<string, number>>({})
   useEffect(() => {
     fetchSlotCounts(EVENT_CONFIG.year).then(setSlotCounts).catch(() => {})
+    fetchOfficialSlotCapacities(EVENT_CONFIG.year).then(setOfficialCapacities).catch(() => {})
   }, [])
   const now = useRef(new Date()).current
   const timeSlotStatus = TIME_SLOTS.map((slot) => {
-    const remaining = EVENT_CONFIG.slotCapacity - (slotCounts[slot] ?? 0)
+    // Ưu tiên lấy số chỗ thực tế từ Chữ Thập Đỏ (officialCapacities).
+    // Nếu chưa cấu hình thì fallback về slotCapacity - số người đăng ký web tạm.
+    const remaining = officialCapacities[slot] !== undefined
+      ? officialCapacities[slot]
+      : Math.max(0, EVENT_CONFIG.slotCapacity - (slotCounts[slot] ?? 0))
     const isPast = now > getSlotEndTime(slot)
     return { slot, remaining, isPast, isFull: remaining <= 0 }
   })

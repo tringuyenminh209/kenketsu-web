@@ -52,3 +52,10 @@ export interface SheetData {
   headers: string[]
   rows: (string | number)[][]
 }
+
+export interface OfficialSlotCapacity {
+  event_year: number
+  time_slot: string
+  remaining: number
+  updated_at: string
+}

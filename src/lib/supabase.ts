@@ -25,6 +25,40 @@ export async function fetchSlotCounts(eventYear: number): Promise<Record<string,
   return counts
 }
 
+// Lấy số lượng chỗ còn lại thực tế từ Hội Chữ Thập Đỏ đã lưu trong DB
+export async function fetchOfficialSlotCapacities(eventYear: number): Promise<Record<string, number>> {
+  const { data, error } = await supabase
+    .from("official_slot_capacities")
+    .select("time_slot, remaining")
+    .eq("event_year", eventYear)
+
+  if (error) throw error
+  const capacities: Record<string, number> = {}
+  for (const row of (data ?? []) as { time_slot: string; remaining: number }[]) {
+    capacities[row.time_slot] = Number(row.remaining)
+  }
+  return capacities
+}
+
+// Admin cập nhật số chỗ còn lại thực tế từ Hội Chữ Thập Đỏ
+export async function updateOfficialSlotCapacities(
+  eventYear: number,
+  capacities: Record<string, number>
+): Promise<void> {
+  const rows = Object.entries(capacities).map(([time_slot, remaining]) => ({
+    event_year: eventYear,
+    time_slot,
+    remaining,
+    updated_at: new Date().toISOString(),
+  }))
+
+  const { error } = await supabase
+    .from("official_slot_capacities")
+    .upsert(rows, { onConflict: "event_year,time_slot" })
+
+  if (error) throw error
+}
+
 export function sendConfirmationEmail(registrationId: string): void {
   void supabase.functions.invoke("send-confirmation", {
     body: { registration_id: registrationId },
