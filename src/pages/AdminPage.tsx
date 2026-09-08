@@ -286,12 +286,37 @@ export default function AdminPage() {
               </div>
             </div>
             <button
-              className="button primary"
               type="button"
               onClick={handleCapacitySave}
               disabled={capacitySaving}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.65rem 1.25rem',
+                fontSize: '0.92rem',
+                fontWeight: 600,
+                color: '#fff',
+                backgroundColor: capacitySaving ? '#94a3b8' : '#2563eb',
+                border: 'none',
+                borderRadius: '8px',
+                cursor: capacitySaving ? 'not-allowed' : 'pointer',
+                boxShadow: '0 2px 6px rgba(37, 99, 235, 0.25)',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                if (!capacitySaving) e.currentTarget.style.backgroundColor = '#1d4ed8'
+              }}
+              onMouseLeave={(e) => {
+                if (!capacitySaving) e.currentTarget.style.backgroundColor = '#2563eb'
+              }}
             >
-              {capacitySaving ? '保存中...' : '空き枠数を保存する'}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                <polyline points="17 21 17 13 7 13 7 21" />
+                <polyline points="7 3 7 8 15 8" />
+              </svg>
+              <span>{capacitySaving ? '保存中...' : '空き枠数を保存する'}</span>
             </button>
           </div>
 
