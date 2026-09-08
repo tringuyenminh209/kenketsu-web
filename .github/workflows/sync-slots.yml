@@ -1,0 +1,33 @@
+﻿name: Sync Red Cross Blood Donation Capacities
+
+on:
+  schedule:
+    # Chạy tự động mỗi 30 phút một lần
+    - cron: '*/30 * * * *'
+  workflow_dispatch: # Cho phép bấm chạy thủ công trên GitHub bất kỳ lúc nào
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Puppeteer Chrome
+        run: npx @puppeteer/browsers install chrome@stable
+
+      - name: Run Slot Synchronization
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/sync-slots.js
