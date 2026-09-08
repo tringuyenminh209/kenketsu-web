@@ -122,7 +122,10 @@ export async function syncRedCrossCapacities(eventYear = 2026) {
     }
 
     console.log(`[Scraper] Updating ${rows.length} slots in Supabase...`)
-    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
+    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
+      auth: { persistSession: false },
+      realtime: { params: { eventsPerSecond: 0 } },
+    })
     const { error } = await supabase
       .from('official_slot_capacities')
       .upsert(rows, { onConflict: 'event_year,time_slot' })
