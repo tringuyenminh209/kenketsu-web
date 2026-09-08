@@ -178,6 +178,20 @@ export default function AdminPage() {
     }))
   }, [registrations])
 
+  // Dữ liệu từ web thật (Nhật Bản - Nhật Xích Thập Tự / kenketsu.jp)
+  const officialSlotChart = useMemo(() => {
+    return TIME_SLOTS.map((slot) => {
+      const remaining = officialCapacities[slot] ?? 0
+      const registered = Math.max(0, EVENT_CONFIG.slotCapacity - remaining)
+      return {
+        slot,
+        label: slot.replace('-', '～'),
+        remaining,
+        registered,
+      }
+    })
+  }, [officialCapacities])
+
   const selectedSlotRegistrants = useMemo(
     () => (selectedSlot ? registrations.filter((r) => r.time_slot === selectedSlot) : []),
     [registrations, selectedSlot],
@@ -410,8 +424,16 @@ export default function AdminPage() {
             </button>
           </div>
           <div className="chart-grid">
+            {/* 1. Dữ liệu từ Web trường (仮予約) */}
             <div className="chart-block chart-block--wide">
-              <h3>受付希望時間ごとの申込数（クリックで内訳を表示）</h3>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                <h3 style={{ margin: 0 }}>
+                  【学内サイト】仮予約の申込数（クリックで申込者一覧を表示）
+                </h3>
+                <span style={{ fontSize: '0.8rem', padding: '0.2rem 0.6rem', borderRadius: '4px', background: '#eff6ff', color: '#1d4ed8', fontWeight: 600 }}>
+                  Web仮申込データ ({registrations.length}名)
+                </span>
+              </div>
               <div className="chart-bars">
                 {slotChart.map(({ slot, label, count }) => (
                   <button
@@ -434,7 +456,7 @@ export default function AdminPage() {
               {selectedSlot && (
                 <div className="slot-detail">
                   <div className="slot-detail-header">
-                    <strong>{selectedSlot.replace('-', '～')} の申込者（{selectedSlotRegistrants.length}名）</strong>
+                    <strong>{selectedSlot.replace('-', '～')} の仮申込者（{selectedSlotRegistrants.length}名）</strong>
                     <button type="button" className="slot-detail-close" onClick={() => setSelectedSlot(null)}>✕</button>
                   </div>
                   {selectedSlotRegistrants.length === 0 ? (
@@ -469,6 +491,62 @@ export default function AdminPage() {
                   )}
                 </div>
               )}
+            </div>
+
+            {/* 2. Dữ liệu thực tế từ Hội Chữ Thập Đỏ (kenketsu.jp / ラブラッド) */}
+            <div className="chart-block chart-block--wide">
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                <h3 style={{ margin: 0 }}>
+                  【日本赤十字社】公式予約システムの枠状況（kenketsu.jp 実データ）
+                </h3>
+                <span style={{ fontSize: '0.8rem', padding: '0.2rem 0.6rem', borderRadius: '4px', background: '#fef2f2', color: '#b91c1c', fontWeight: 600 }}>
+                  公式ラブラッド自動同期データ
+                </span>
+              </div>
+              <p style={{ margin: '0 0 1rem', fontSize: '0.82rem', color: '#64748b' }}>
+                ※ 日本赤十字社の本予約サイトにおける「残り空き枠数」および「満席状況」です。（公式枠数基準: 最大4〜5枠）
+              </p>
+              <div className="chart-bars">
+                {officialSlotChart.map(({ slot, label, remaining }) => {
+                  const isFull = remaining === 0
+                  return (
+                    <div
+                      key={slot}
+                      className="chart-bar-row"
+                      style={{
+                        padding: '0.4rem 0.6rem',
+                        borderRadius: '6px',
+                        background: isFull ? '#fff1f2' : '#f8fafc',
+                        border: `1px solid ${isFull ? '#fecdd3' : '#f1f5f9'}`,
+                      }}
+                    >
+                      <span className="chart-bar-label" style={{ fontWeight: 600 }}>
+                        {label}
+                      </span>
+                      <div className="chart-bar-track" style={{ background: '#e2e8f0' }}>
+                        <div
+                          className="chart-bar-fill"
+                          style={{
+                            width: isFull ? '100%' : `${Math.min(100, Math.max(15, remaining * 20))}%`,
+                            backgroundColor: isFull ? '#ef4444' : '#059669',
+                          }}
+                        />
+                      </div>
+                      <span
+                        className="chart-bar-value"
+                        style={{
+                          fontWeight: 700,
+                          color: isFull ? '#dc2626' : '#047857',
+                          minWidth: '75px',
+                          textAlign: 'right',
+                        }}
+                      >
+                        {isFull ? '満席 (0名)' : `空き ${remaining}名`}
+                      </span>
+                    </div>
+                  )
+                })}
+              </div>
             </div>
           </div>
           <div className="admin-content">
