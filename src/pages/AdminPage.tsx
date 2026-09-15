@@ -1481,12 +1481,13 @@ export default function AdminPage() {
                     onChange={(e) => setMemoryField('badge', e.target.value)}
                   />
                 </label>
-                <label>
+                <label className="span-2">
                   見出しタイトル
                   <input
                     type="text"
                     value={getMemoryField('title')}
                     onChange={(e) => setMemoryField('title', e.target.value)}
+                    title={getMemoryField('title')}
                   />
                 </label>
                 <label className="span-2">
@@ -1498,12 +1499,13 @@ export default function AdminPage() {
                     placeholder={activeMemoryLang === 'ja' ? `例: ${selectedMemoryYear}年9月、ECCコンピュータ専門学校にて開催された学内献血の様子です。学生・教職員の皆さんにご協力いただきました。` : ''}
                   />
                 </label>
-                <label>
+                <label className="span-2">
                   出典リンクの表示テキスト
                   <input
                     type="text"
                     value={getMemoryField('source_label')}
                     onChange={(e) => setMemoryField('source_label', e.target.value)}
+                    title={getMemoryField('source_label')}
                   />
                 </label>
                 {activeMemoryLang === 'ja' ? (
@@ -1563,6 +1565,7 @@ export default function AdminPage() {
                         placeholder={activeMemoryLang === 'ja' ? 'キャプション（説明）' : `キャプション（${ADMIN_LANG_LABELS[activeMemoryLang] ?? activeMemoryLang}）`}
                         value={getPhotoCaption(p.url, p.caption)}
                         onChange={(e) => setPhotoCaption(idx, p.url, e.target.value)}
+                        title={getPhotoCaption(p.url, p.caption)}
                         className="admin-photo-caption-input"
                       />
                       <button

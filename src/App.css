@@ -2323,7 +2323,7 @@ th {
 
 .admin-photo-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 16px;
 }
 
@@ -2373,6 +2373,7 @@ th {
   font-size: 13px;
   border-radius: 4px;
   border: 1px solid var(--border);
+  text-overflow: ellipsis;
   font: inherit;
 }
 
