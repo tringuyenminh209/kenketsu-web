@@ -695,8 +695,9 @@ export default function AdminPage() {
           ? `${selectedMemoryYear}年の記録・写真を保存し、ユーザーサイトに公開しました！`
           : `${selectedMemoryYear}年の記録・写真を下書き保存しました（まだ非公開です）。`,
       })
-    } catch {
-      setMemorySaveMsg({ type: 'error', text: '保存に失敗しました。' })
+    } catch (err) {
+      console.error('handleSaveMemory failed:', err)
+      setMemorySaveMsg({ type: 'error', text: '保存に失敗しました。（詳細はブラウザのコンソールを確認してください）' })
     } finally {
       setSavingMemory(false)
     }
