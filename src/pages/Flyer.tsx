@@ -1,10 +1,23 @@
+import { useEffect, useState } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import { EVENT_CONFIG } from '../config/event'
+import { fetchActiveEvent } from '../lib/supabase'
+import type { EventItem } from '../types'
 import flyerBg from '../assets/flyer-bg.png'
 
 const SITE_URL = 'https://kenketsu-web.vercel.app'
 
 export function Flyer() {
+  const [activeEvent, setActiveEvent] = useState<EventItem | null>(null)
+  useEffect(() => {
+    fetchActiveEvent().then(setActiveEvent).catch(() => {})
+  }, [])
+
+  const eventDate = activeEvent?.date_display || EVENT_CONFIG.date
+  const eventTime = activeEvent?.time_display || EVENT_CONFIG.time
+  const eventLocation = activeEvent?.location || EVENT_CONFIG.location
+  const eventLocationDetail = activeEvent?.location_detail || EVENT_CONFIG.locationDetail
+
   return (
     <div className="flyer-shell">
       <div className="flyer-page" style={{ backgroundImage: `url(${flyerBg})` }}>
@@ -22,23 +35,23 @@ export function Flyer() {
           <p className="fp-desc">
             <span className="fp-desc-hook">献血はみんなでつなぐ命のリレーです</span><br />
             あなたの血液を必要としている誰かのため<br />
-            {EVENT_CONFIG.location}での献血にぜひご協力ください
+            {eventLocation}での献血にぜひご協力ください
           </p>
 
           <div className="fp-info">
             <div className="fp-irow">
               <span className="fp-ikey">日にち</span>
-              <strong className="fp-ival fp-ival--date">{EVENT_CONFIG.date}</strong>
+              <strong className="fp-ival fp-ival--date">{eventDate}</strong>
             </div>
             <div className="fp-irow">
               <span className="fp-ikey">時　間</span>
-              <strong className="fp-ival">{EVENT_CONFIG.time}</strong>
+              <strong className="fp-ival">{eventTime}</strong>
             </div>
             <div className="fp-irow">
               <span className="fp-ikey">会　場</span>
               <strong className="fp-ival">
-                {EVENT_CONFIG.location}<br />
-                {EVENT_CONFIG.locationDetail}
+                {eventLocation}<br />
+                {eventLocationDetail}
               </strong>
             </div>
             <div className="fp-irow fp-irow--target">

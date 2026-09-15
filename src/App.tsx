@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import heroImage from './assets/blood-donation-hero.png'
@@ -14,7 +14,8 @@ import processInterviewImage from './assets/process/process-interview-test.webp'
 import processDonationImage from './assets/process/process-donation.webp'
 import { EVENT_CONFIG, TIME_SLOTS } from './config/event'
 import { Icon, SiteHeader, usePageMotion } from './lib/shared'
-import { checkDuplicateRegistration, fetchOfficialSlotCapacities, fetchSlotCounts, insertRegistration, insertSurvey, sendConfirmationEmail } from './lib/supabase'
+import { checkDuplicateRegistration, fetchActiveEvent, fetchFormFieldSettings, fetchOfficialSlotCapacities, fetchSlotCounts, insertRegistration, insertSurvey, sendConfirmationEmail } from './lib/supabase'
+import type { EventItem, FormFieldSetting } from './types'
 import { BloodTreeProgress } from './components/BloodTreeProgress'
 import { ForeignStudentSection } from './components/ForeignStudentSection'
 import { ImpactSection } from './components/ImpactSection'
@@ -61,6 +62,23 @@ function getSlotEndTime(slot: string): Date {
   return new Date(`${EVENT_DATE_JST}T${endStr}:00+09:00`)
 }
 
+// Cac field bat buoc phai co du lieu de khong vi pham rang buoc NOT NULL
+// cua DB (registrations.name/student_id/class, survey_responses.donation_count).
+// Du admin co lo an/bo bat buoc trong Admin, frontend van khoa cung de
+// khong lam gay form dang ky/khao sat.
+const REG_CORE_FIELDS = new Set(['name', 'studentId', 'department'])
+const SURVEY_CORE_FIELDS = new Set(['donationCount'])
+
+function makeFieldHelper(settings: FormFieldSetting[], coreKeys: Set<string>) {
+  const map = new Map(settings.map((s) => [s.field_key, s]))
+  return {
+    isVisible: (key: string) => (coreKeys.has(key) ? true : map.get(key)?.is_visible ?? true),
+    isRequired: (key: string) => (coreKeys.has(key) ? true : map.get(key)?.is_required ?? true),
+    label: (key: string, fallback: string) => map.get(key)?.label_override?.trim() || fallback,
+    order: (key: string, fallback: number) => map.get(key)?.sort_order ?? fallback,
+  }
+}
+
 function UserPage() {
   const { t } = useTranslation()
   const [selectedKnowledge, setSelectedKnowledge] = useState(0)
@@ -86,16 +104,39 @@ function UserPage() {
   const activeBenefit = benefits[selectedBenefit]
   const activeProcessStep = steps[selectedProcessStep]
 
-  const eventInfo = [
-    { label: t('info.date_label'), value: t('info.date_value') },
-    { label: t('info.time_label'), value: t('info.time_value') },
-    { label: t('info.location_label'), value: t('info.location_value') },
-    { label: t('info.sponsor_label'), value: t('info.sponsor_value') },
-    { label: t('info.reservation_label'), value: t('info.reservation_value') },
-    { label: t('info.gift_label'), value: t('info.gift_value') },
-    { label: t('info.capacity_label'), value: t('info.capacity_value', { capacity: EVENT_CONFIG.capacity }) },
-  ]
   const eligibilityItems = t('precautions.eligibilityItems', { returnObjects: true }) as string[]
+
+  // ── Sự kiện hiện tại (Active Event) ──────────────
+  const [activeEvent, setActiveEvent] = useState<EventItem | null>(null)
+  // Phan biet "dang tai" voi "da xac nhan khong co su kien active nao"
+  // de tranh hien nham thong bao trong luc du lieu con dang fetch.
+  const [activeEventStatus, setActiveEventStatus] = useState<'loading' | 'ready' | 'none'>('loading')
+  const currentEventYear = activeEvent?.year ?? EVENT_CONFIG.year
+  const currentSlotCapacity = activeEvent?.slot_capacity ?? EVENT_CONFIG.slotCapacity
+
+  // Admin co the chu dong ep hien banner "dang chuan bi" (vd: su kien cu
+  // da qua nhung chua kich hoat nam moi) ngay ca khi van con 1 event active.
+  const showPendingNotice = activeEventStatus === 'none' || (activeEventStatus === 'ready' && !!activeEvent?.show_pending_notice)
+  // Khi dang hien banner "chua xac nhan", khong dung du lieu (co the da cu/
+  // chua chinh thuc) cua event de hien thi chi tiet — fallback ve ban dich tinh.
+  const confirmedEvent = showPendingNotice ? null : activeEvent
+
+  // Uu tien noi dung tu Admin (bang events) neu co su kien active; neu
+  // khong co (hoac chua tai xong) thi fallback ve ban dich i18n tinh.
+  // Luu y: gia tri tu Admin la vin ban tieng Nhat duy nhat, hien thi
+  // giong nhau cho ca 12 ngon ngu — day la danh doi da duoc chap nhan.
+  const eventInfo = [
+    { label: t('info.date_label'), value: confirmedEvent?.date_display || t('info.date_value') },
+    { label: t('info.time_label'), value: confirmedEvent?.time_display || t('info.time_value') },
+    {
+      label: t('info.location_label'),
+      value: confirmedEvent ? `${confirmedEvent.location} ${confirmedEvent.location_detail}`.trim() : t('info.location_value'),
+    },
+    { label: t('info.sponsor_label'), value: confirmedEvent?.sponsor || t('info.sponsor_value') },
+    { label: t('info.reservation_label'), value: confirmedEvent?.reservation_note || t('info.reservation_value') },
+    { label: t('info.gift_label'), value: confirmedEvent?.gift_note || t('info.gift_value') },
+    { label: t('info.capacity_label'), value: t('info.capacity_value', { capacity: confirmedEvent?.capacity ?? EVENT_CONFIG.capacity }) },
+  ]
 
   // ── 参加申込フォーム ──────────────────────────────
   const [regForm, setRegForm] = useState({
@@ -104,20 +145,48 @@ function UserPage() {
   })
   const [slotCounts, setSlotCounts] = useState<Record<string, number>>({})
   const [officialCapacities, setOfficialCapacities] = useState<Record<string, number>>({})
+
+  // ── Cấu hình tự do cho form (ẩn/hiện, đổi nhãn, bắt buộc, thứ tự) ──
+  const [regFieldSettings, setRegFieldSettings] = useState<FormFieldSetting[]>([])
+  const [surveyFieldSettings, setSurveyFieldSettings] = useState<FormFieldSetting[]>([])
+  const regField = useMemo(() => makeFieldHelper(regFieldSettings, REG_CORE_FIELDS), [regFieldSettings])
+  const surveyField = useMemo(() => makeFieldHelper(surveyFieldSettings, SURVEY_CORE_FIELDS), [surveyFieldSettings])
+
   useEffect(() => {
-    fetchSlotCounts(EVENT_CONFIG.year).then(setSlotCounts).catch(() => {})
-    fetchOfficialSlotCapacities(EVENT_CONFIG.year).then(setOfficialCapacities).catch(() => {})
+    fetchFormFieldSettings('registration').then(setRegFieldSettings).catch(() => {})
+    fetchFormFieldSettings('survey').then(setSurveyFieldSettings).catch(() => {})
   }, [])
+
+  useEffect(() => {
+    fetchActiveEvent().then((ev) => {
+      if (ev) {
+        setActiveEvent(ev)
+        setActiveEventStatus('ready')
+        fetchSlotCounts(ev.year).then(setSlotCounts).catch(() => {})
+        fetchOfficialSlotCapacities(ev.year).then(setOfficialCapacities).catch(() => {})
+      } else {
+        setActiveEventStatus('none')
+        fetchSlotCounts(EVENT_CONFIG.year).then(setSlotCounts).catch(() => {})
+        fetchOfficialSlotCapacities(EVENT_CONFIG.year).then(setOfficialCapacities).catch(() => {})
+      }
+    }).catch(() => {
+      setActiveEventStatus('none')
+      fetchSlotCounts(EVENT_CONFIG.year).then(setSlotCounts).catch(() => {})
+      fetchOfficialSlotCapacities(EVENT_CONFIG.year).then(setOfficialCapacities).catch(() => {})
+    })
+  }, [])
+
   const now = useRef(new Date()).current
   const timeSlotStatus = TIME_SLOTS.map((slot) => {
     // Ưu tiên lấy số chỗ thực tế từ Chữ Thập Đỏ (officialCapacities).
     // Nếu chưa cấu hình thì fallback về slotCapacity - số người đăng ký web tạm.
     const remaining = officialCapacities[slot] !== undefined
       ? officialCapacities[slot]
-      : Math.max(0, EVENT_CONFIG.slotCapacity - (slotCounts[slot] ?? 0))
+      : Math.max(0, currentSlotCapacity - (slotCounts[slot] ?? 0))
     const isPast = now > getSlotEndTime(slot)
     return { slot, remaining, isPast, isFull: remaining <= 0 }
   })
+
   const [fieldTouched, setFieldTouched] = useState({ studentId: false, birthDate: false })
   const studentIdValid = regForm.studentId.trim().length >= 4
   const birthDateValid = regForm.birthDate.trim().length > 0 && normalizeBirthDateInput(regForm.birthDate) !== null
@@ -185,7 +254,7 @@ function UserPage() {
         setRegError(t('register.errorInvalidBirthDate'))
         return
       }
-      const isDuplicate = await checkDuplicateRegistration(regForm.studentId, EVENT_CONFIG.year)
+      const isDuplicate = await checkDuplicateRegistration(regForm.studentId, currentEventYear)
       if (isDuplicate) {
         setRegError(t('register.errorDuplicate'))
         return
@@ -193,7 +262,7 @@ function UserPage() {
       const registrationId = crypto.randomUUID()
       await insertRegistration({
         id: registrationId,
-        event_year: EVENT_CONFIG.year,
+        event_year: currentEventYear,
         student_id: regForm.studentId,
         name: regForm.name,
         furigana: regForm.furigana || undefined,
@@ -237,10 +306,11 @@ function UserPage() {
       ].filter(Boolean).join('\n')
 
       await insertSurvey({
-        event_year: EVENT_CONFIG.year,
+        event_year: currentEventYear,
         donation_count: surveyForm.donationCount,
         comment: structuredComment || undefined,
       })
+
       setSurveySuccess(true)
     } catch {
       setSurveyError(t('survey.errorGeneral'))
@@ -252,6 +322,11 @@ function UserPage() {
   return (
     <div className="app-shell" ref={rootRef}>
       <SiteHeader />
+      {showPendingNotice && (
+        <div className="event-pending-notice" role="status">
+          {t('eventNotice.pending', '現在、次回の献血イベントの詳細情報を準備中です。決まり次第こちらでお知らせします。')}
+        </div>
+      )}
       <main id="top">
         <section className="hero-section" aria-labelledby="hero-title">
           <div className="hero-copy">
@@ -452,26 +527,34 @@ function UserPage() {
             <Icon type="calendar" />
             <h2>{t('nav.info')}</h2>
           </div>
-          <dl>
-            {eventInfo.map((item) => (
-              <div key={item.label}>
-                <dt>{item.label}</dt>
-                <dd>{item.value}</dd>
+          {showPendingNotice ? (
+            <p className="info-pending-placeholder">
+              {t('eventNotice.detailsPending', '開催日・場所などの詳細は決まり次第こちらに掲載します。')}
+            </p>
+          ) : (
+            <>
+              <dl>
+                {eventInfo.map((item) => (
+                  <div key={item.label}>
+                    <dt>{item.label}</dt>
+                    <dd>{item.value}</dd>
+                  </div>
+                ))}
+              </dl>
+              <div className="app-reservation-links" aria-label={t('info.appLinksLabel')}>
+                <div>
+                  <strong>{t('info.appLinksTitle')}</strong>
+                  <span>{t('info.appLinksText')}</span>
+                </div>
+                <a href={EVENT_CONFIG.appLinks.appStore} target="_blank" rel="noreferrer">
+                  App Store
+                </a>
+                <a href={EVENT_CONFIG.appLinks.googlePlay} target="_blank" rel="noreferrer">
+                  Google Play
+                </a>
               </div>
-            ))}
-          </dl>
-          <div className="app-reservation-links" aria-label={t('info.appLinksLabel')}>
-            <div>
-              <strong>{t('info.appLinksTitle')}</strong>
-              <span>{t('info.appLinksText')}</span>
-            </div>
-            <a href={EVENT_CONFIG.appLinks.appStore} target="_blank" rel="noreferrer">
-              App Store
-            </a>
-            <a href={EVENT_CONFIG.appLinks.googlePlay} target="_blank" rel="noreferrer">
-              Google Play
-            </a>
-          </div>
+            </>
+          )}
         </section>
 
         <section className="reason-grid reveal" id="reason">
@@ -593,39 +676,49 @@ function UserPage() {
               </div>
               <p className="register-note">{t('register.note')}</p>
               <div className="form-grid">
-                <label>
-                  {t('register.name')} <span>{t('register.required')}</span>
+                {regField.isVisible('name') && (
+                <label style={{ order: regField.order('name', 0) }}>
+                  {regField.label('name', t('register.name'))} {regField.isRequired('name') && <span>{t('register.required')}</span>}
                   <input
-                    required
+                    required={regField.isRequired('name')}
                     placeholder={t('register.namePlaceholder')}
                     value={regForm.name}
                     onChange={(e) => setRegForm({ ...regForm, name: e.target.value })}
                   />
                 </label>
-                <label>
-                  {t('register.furigana')} <span>{t('register.required')}</span>
+                )}
+                {regField.isVisible('furigana') && (
+                <label style={{ order: regField.order('furigana', 1) }}>
+                  {regField.label('furigana', t('register.furigana'))} {regField.isRequired('furigana') && <span>{t('register.required')}</span>}
                   <input
-                    required
+                    required={regField.isRequired('furigana')}
                     placeholder={t('register.furiganaPlaceholder')}
                     value={regForm.furigana}
                     onChange={(e) => setRegForm({ ...regForm, furigana: e.target.value })}
                   />
                 </label>
-                <label>
-                  {t('register.email')} <span>{t('register.required')}</span>
+                )}
+                {regField.isVisible('email') && (
+                <label style={{ order: regField.order('email', 2) }}>
+                  {regField.label('email', t('register.email'))} {regField.isRequired('email') && <span>{t('register.required')}</span>}
                   <input
-                    required
+                    required={regField.isRequired('email')}
                     type="email"
                     placeholder={t('register.emailPlaceholder')}
                     value={regForm.email}
                     onChange={(e) => setRegForm({ ...regForm, email: e.target.value })}
                   />
                 </label>
-                <label className={fieldTouched.studentId ? (studentIdValid ? 'field-valid' : 'field-invalid') : ''}>
-                  {t('register.studentId')} <span>{t('register.required')}</span>
+                )}
+                {regField.isVisible('studentId') && (
+                <label
+                  style={{ order: regField.order('studentId', 3) }}
+                  className={fieldTouched.studentId ? (studentIdValid ? 'field-valid' : 'field-invalid') : ''}
+                >
+                  {regField.label('studentId', t('register.studentId'))} {regField.isRequired('studentId') && <span>{t('register.required')}</span>}
                   <div className="input-wrap">
                     <input
-                      required
+                      required={regField.isRequired('studentId')}
                       placeholder={t('register.studentIdPlaceholder')}
                       value={regForm.studentId}
                       onChange={(e) => {
@@ -640,20 +733,24 @@ function UserPage() {
                     )}
                   </div>
                 </label>
-                <label>
-                  {t('register.phone')} <span>{t('register.required')}</span>
+                )}
+                {regField.isVisible('phone') && (
+                <label style={{ order: regField.order('phone', 4) }}>
+                  {regField.label('phone', t('register.phone'))} {regField.isRequired('phone') && <span>{t('register.required')}</span>}
                   <input
-                    required
+                    required={regField.isRequired('phone')}
                     inputMode="tel"
                     placeholder={t('register.phonePlaceholder')}
                     value={regForm.phone}
                     onChange={(e) => setRegForm({ ...regForm, phone: e.target.value })}
                   />
                 </label>
-                <label>
-                  {t('register.school')} <span>{t('register.required')}</span>
+                )}
+                {regField.isVisible('school') && (
+                <label style={{ order: regField.order('school', 5) }}>
+                  {regField.label('school', t('register.school'))} {regField.isRequired('school') && <span>{t('register.required')}</span>}
                   <select
-                    required
+                    required={regField.isRequired('school')}
                     value={regForm.school}
                     onChange={(e) => setRegForm({ ...regForm, school: e.target.value })}
                   >
@@ -663,20 +760,27 @@ function UserPage() {
                     ))}
                   </select>
                 </label>
-                <label>
-                  {t('register.department')} <span>{t('register.required')}</span>
+                )}
+                {regField.isVisible('department') && (
+                <label style={{ order: regField.order('department', 6) }}>
+                  {regField.label('department', t('register.department'))} {regField.isRequired('department') && <span>{t('register.required')}</span>}
                   <input
-                    required
+                    required={regField.isRequired('department')}
                     placeholder={t('register.departmentPlaceholder')}
                     value={regForm.department}
                     onChange={(e) => setRegForm({ ...regForm, department: e.target.value })}
                   />
                 </label>
-                <label className={fieldTouched.birthDate ? (birthDateValid ? 'field-valid' : 'field-invalid') : ''}>
-                  {t('register.birthDate')} <span>{t('register.required')}</span>
+                )}
+                {regField.isVisible('birthDate') && (
+                <label
+                  style={{ order: regField.order('birthDate', 7) }}
+                  className={fieldTouched.birthDate ? (birthDateValid ? 'field-valid' : 'field-invalid') : ''}
+                >
+                  {regField.label('birthDate', t('register.birthDate'))} {regField.isRequired('birthDate') && <span>{t('register.required')}</span>}
                   <div className="input-wrap">
                     <input
-                      required
+                      required={regField.isRequired('birthDate')}
                       inputMode="numeric"
                       placeholder={t('register.birthDatePlaceholder')}
                       value={regForm.birthDate}
@@ -692,10 +796,12 @@ function UserPage() {
                     )}
                   </div>
                 </label>
-                <label>
-                  {t('register.timeSlot')} <span>{t('register.required')}</span>
+                )}
+                {regField.isVisible('timeSlot') && (
+                <label style={{ order: regField.order('timeSlot', 8) }}>
+                  {regField.label('timeSlot', t('register.timeSlot'))} {regField.isRequired('timeSlot') && <span>{t('register.required')}</span>}
                   <select
-                    required
+                    required={regField.isRequired('timeSlot')}
                     value={regForm.timeSlot}
                     onChange={(e) => setRegForm({ ...regForm, timeSlot: e.target.value })}
                   >
@@ -710,10 +816,12 @@ function UserPage() {
                     ))}
                   </select>
                 </label>
-                <label>
-                  {t('register.donationExperience')} <span>{t('register.required')}</span>
+                )}
+                {regField.isVisible('donationExperience') && (
+                <label style={{ order: regField.order('donationExperience', 9) }}>
+                  {regField.label('donationExperience', t('register.donationExperience'))} {regField.isRequired('donationExperience') && <span>{t('register.required')}</span>}
                   <select
-                    required
+                    required={regField.isRequired('donationExperience')}
                     value={regForm.donationExperience}
                     onChange={(e) => setRegForm({ ...regForm, donationExperience: e.target.value })}
                   >
@@ -722,9 +830,11 @@ function UserPage() {
                     <option value="no">{t('register.donationExperienceNo')}</option>
                   </select>
                 </label>
+                )}
               </div>
+              {regField.isVisible('gender') && (
               <fieldset>
-                <legend>{t('register.gender')}</legend>
+                <legend>{regField.label('gender', t('register.gender'))}</legend>
                 {(['male', 'female', 'other', 'no_answer'] as const).map((val) => (
                   <label key={val}>
                     <input
@@ -738,6 +848,7 @@ function UserPage() {
                   </label>
                 ))}
               </fieldset>
+              )}
               {regError && <p className="error-message">{regError}</p>}
               <button className="button primary wide" type="submit" disabled={regSubmitting}>
                 {regSubmitting ? t('register.submitting') : t('register.submit')}
@@ -764,9 +875,11 @@ function UserPage() {
               </div>
               <div className="survey-grid">
                 {/* Q1 */}
-                <label>
-                  {t('survey.q1Label')}
+                {surveyField.isVisible('donationCount') && (
+                <label style={{ order: surveyField.order('donationCount', 0) }}>
+                  {surveyField.label('donationCount', t('survey.q1Label'))}
                   <select
+                    required={surveyField.isRequired('donationCount')}
                     value={surveyForm.donationCount}
                     onChange={(e) => setSurveyForm({ ...surveyForm, donationCount: e.target.value })}
                   >
@@ -776,10 +889,12 @@ function UserPage() {
                     <option value="none">{t('survey.q1None')}</option>
                   </select>
                 </label>
+                )}
 
                 {/* Q2 — checkboxes */}
-                <fieldset className="survey-full survey-checkbox-group">
-                  <legend>{t('survey.q2Label')}</legend>
+                {surveyField.isVisible('impressions') && (
+                <fieldset className="survey-full survey-checkbox-group" style={{ order: surveyField.order('impressions', 1) }}>
+                  <legend>{surveyField.label('impressions', t('survey.q2Label'))}</legend>
                   {SURVEY_Q2_OPTIONS.map((val) => (
                     <label key={val}>
                       <input
@@ -800,13 +915,14 @@ function UserPage() {
                     />
                   )}
                 </fieldset>
+                )}
 
                 {/* Q3 — only for those who have never donated */}
-                {surveyForm.donationCount === 'none' && (
-                  <fieldset className="survey-full survey-checkbox-group">
+                {surveyField.isVisible('reasons') && surveyForm.donationCount === 'none' && (
+                  <fieldset className="survey-full survey-checkbox-group" style={{ order: surveyField.order('reasons', 2) }}>
                     <legend>
                       {t('survey.q3Intro')}<br />
-                      {t('survey.q3Label')}
+                      {surveyField.label('reasons', t('survey.q3Label'))}
                     </legend>
                     {SURVEY_Q3_OPTIONS.map((val) => (
                       <label key={val}>
@@ -831,9 +947,11 @@ function UserPage() {
                 )}
 
                 {/* Q4 */}
-                <label>
-                  {t('survey.q4Label')}
+                {surveyField.isVisible('knewCampus') && (
+                <label style={{ order: surveyField.order('knewCampus', 3) }}>
+                  {surveyField.label('knewCampus', t('survey.q4Label'))}
                   <select
+                    required={surveyField.isRequired('knewCampus')}
                     value={surveyForm.knewCampus}
                     onChange={(e) => setSurveyForm({ ...surveyForm, knewCampus: e.target.value })}
                   >
@@ -841,11 +959,14 @@ function UserPage() {
                     <option value="first_time">{t('survey.q4FirstTime')}</option>
                   </select>
                 </label>
+                )}
 
                 {/* Q5 */}
-                <label>
-                  {t('survey.q5Label')}
+                {surveyField.isVisible('wantParticipate') && (
+                <label style={{ order: surveyField.order('wantParticipate', 4) }}>
+                  {surveyField.label('wantParticipate', t('survey.q5Label'))}
                   <select
+                    required={surveyField.isRequired('wantParticipate')}
                     value={surveyForm.wantParticipate}
                     onChange={(e) => setSurveyForm({ ...surveyForm, wantParticipate: e.target.value })}
                   >
@@ -855,10 +976,12 @@ function UserPage() {
                     <option value="no">{t('survey.q5No')}</option>
                   </select>
                 </label>
+                )}
 
                 {/* Q6 — checkboxes */}
-                <fieldset className="survey-full survey-checkbox-group">
-                  <legend>{t('survey.q6Label')}</legend>
+                {surveyField.isVisible('conditions') && (
+                <fieldset className="survey-full survey-checkbox-group" style={{ order: surveyField.order('conditions', 5) }}>
+                  <legend>{surveyField.label('conditions', t('survey.q6Label'))}</legend>
                   {SURVEY_Q6_OPTIONS.map((val) => (
                     <label key={val}>
                       <input
@@ -879,11 +1002,14 @@ function UserPage() {
                     />
                   )}
                 </fieldset>
+                )}
 
                 {/* Q7 */}
-                <label>
-                  {t('survey.q7Label')}
+                {surveyField.isVisible('reservation') && (
+                <label style={{ order: surveyField.order('reservation', 6) }}>
+                  {surveyField.label('reservation', t('survey.q7Label'))}
                   <select
+                    required={surveyField.isRequired('reservation')}
                     value={surveyForm.reservation}
                     onChange={(e) => setSurveyForm({ ...surveyForm, reservation: e.target.value })}
                   >
@@ -892,7 +1018,8 @@ function UserPage() {
                     <option value="no">{t('survey.q7No')}</option>
                   </select>
                 </label>
-                {surveyForm.reservation === 'now' && (
+                )}
+                {surveyField.isVisible('reservation') && surveyForm.reservation === 'now' && (
                   <p className="survey-full survey-note">
                     <a href="#register">{t('survey.q7NowNote')}</a>
                   </p>

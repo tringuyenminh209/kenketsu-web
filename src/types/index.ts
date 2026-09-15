@@ -59,3 +59,56 @@ export interface OfficialSlotCapacity {
   remaining: number
   updated_at: string
 }
+
+export interface EventItem {
+  id: string
+  year: number
+  title: string
+  date_display: string
+  time_display: string
+  location: string
+  location_detail: string
+  capacity: number
+  slot_capacity: number
+  sponsor: string
+  reservation_note: string
+  gift_note: string
+  show_pending_notice: boolean
+  is_active: boolean
+  created_at: string
+  updated_at: string
+}
+
+export interface PhotoItem {
+  url: string
+  caption: string
+}
+
+export interface EventMemory {
+  id: string
+  event_year: number
+  badge: string
+  title: string
+  summary: string
+  photos: PhotoItem[]
+  source_label?: string
+  source_link?: string
+  is_published: boolean
+  created_at: string
+  updated_at: string
+}
+
+export type FormType = "registration" | "survey"
+
+export interface FormFieldSetting {
+  id: string
+  form_type: FormType
+  field_key: string
+  label_override: string | null
+  is_visible: boolean
+  is_required: boolean
+  sort_order: number
+  created_at: string
+  updated_at: string
+}
+

@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { supabase } from '../lib/supabase'
+import { fetchAllEvents, supabase } from '../lib/supabase'
 import { EVENT_CONFIG } from '../config/event'
-
-const GOAL = EVENT_CONFIG.capacity
 
 const LOVE_MESSAGE_COUNT = 10
 
@@ -12,13 +10,6 @@ const STAGES = [
   { max: 25,       icon: '🌿', labelKey: 'tree.stage1' as const },
   { max: 40,       icon: '🌳', labelKey: 'tree.stage2' as const },
   { max: Infinity, icon: '🌸', labelKey: 'tree.stage3' as const },
-]
-
-const MILESTONES = [
-  { count: 10,   icon: '🌱' },
-  { count: 25,   icon: '🌿' },
-  { count: 40,   icon: '🌳' },
-  { count: GOAL, icon: '❤️' },
 ]
 
 function getStageIndex(count: number): -1 | 0 | 1 | 2 | 3 {
@@ -54,6 +45,7 @@ function useCountUp(target: number | null, duration = 1200): number {
 
   return display
 }
+
 
 interface LeafInfo {
   x: number
@@ -251,6 +243,8 @@ function TreeIllustration({ stage }: { stage: -1 | 0 | 1 | 2 | 3 }) {
 
 export function BloodTreeProgress() {
   const { t } = useTranslation()
+  const [activeYear, setActiveYear] = useState<number>(EVENT_CONFIG.year)
+  const [goalCapacity, setGoalCapacity] = useState<number>(EVENT_CONFIG.capacity)
   const [count, setCount] = useState<number | null>(null)
   const [visible, setVisible] = useState(false)
   const [previewStage, setPreviewStage] = useState<null | 0 | 1 | 2 | 3>(null)
@@ -267,6 +261,18 @@ export function BloodTreeProgress() {
     if (cardTimer.current) clearTimeout(cardTimer.current)
     if (shakeTimer.current) clearTimeout(shakeTimer.current)
   }, [])
+
+  // Khởi tạo thông tin sự kiện active từ database
+  useEffect(() => {
+    fetchAllEvents().then((events) => {
+      if (events && events.length > 0) {
+        const currentActive = events.find(e => e.is_active) || events[0]
+        setActiveYear(currentActive.year)
+        setGoalCapacity(currentActive.capacity || EVENT_CONFIG.capacity)
+      }
+    }).catch(() => {})
+  }, [])
+
 
   const handleTreeTap = () => {
     let idx = Math.floor(Math.random() * LOVE_MESSAGE_COUNT)
@@ -300,23 +306,25 @@ export function BloodTreeProgress() {
     return () => obs.disconnect()
   }, [])
 
+  // Load số lượng người tham gia theo năm active
   useEffect(() => {
+    setCount(null)
     void supabase
       .from('registration_counts')
       .select('count')
-      .eq('event_year', EVENT_CONFIG.year)
+      .eq('event_year', activeYear)
       .maybeSingle()
       .then(({ data }) => setCount(data?.count ?? 0))
 
     const ch = supabase
-      .channel('tree_realtime')
+      .channel(`tree_realtime_${activeYear}`)
       .on(
         'postgres_changes',
         {
           event: '*',
           schema: 'public',
           table: 'registration_counts',
-          filter: `event_year=eq.${EVENT_CONFIG.year}`,
+          filter: `event_year=eq.${activeYear}`,
         },
         (payload) => {
           const row = payload.new as { count: number }
@@ -326,15 +334,23 @@ export function BloodTreeProgress() {
       .subscribe()
 
     return () => { void supabase.removeChannel(ch) }
-  }, [])
+  }, [activeYear])
 
   const displayCount = count ?? 0
   const animatedCount = useCountUp(visible && count !== null ? count : null)
   const stage = getStageIndex(displayCount)
   const renderStage = previewStage ?? stage
+  const GOAL = goalCapacity
   const pct = Math.min((displayCount / GOAL) * 100, 100)
   const remaining = Math.max(GOAL - displayCount, 0)
   const stageInfo = renderStage >= 0 ? STAGES[renderStage] : null
+
+  const milestones = [
+    { count: 10, icon: '🌱' },
+    { count: 25, icon: '🌿' },
+    { count: 40, icon: '🌳' },
+    { count: GOAL, icon: '❤️' },
+  ]
 
   return (
     <section
@@ -362,7 +378,8 @@ export function BloodTreeProgress() {
             }
           }}
         >
-          <div key={renderStage} className="tree-illustration-inner">
+          <div key={`${activeYear}-${renderStage}`} className="tree-illustration-inner">
+
             <div className={`tree-shake-wrap ${shaking ? 'is-shaking' : ''}`}>
               <TreeIllustration stage={renderStage} />
             </div>
@@ -419,7 +436,7 @@ export function BloodTreeProgress() {
                 <div className="tree-progress-fill" style={{ width: `${pct}%` }} />
               </div>
               <div className="tree-milestone-row">
-                {MILESTONES.map((m, i) => {
+                {milestones.map((m, i) => {
                   const msStage = i as 0 | 1 | 2 | 3
                   return (
                     <div
@@ -454,8 +471,10 @@ export function BloodTreeProgress() {
               </a>
             </div>
           )}
+
         </div>
       </div>
     </section>
   )
 }
+

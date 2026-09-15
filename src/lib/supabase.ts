@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js"
-import type { Registration, RegistrationInsert, SheetData, SurveyInsert, SurveyResponse } from "../types"
+import type { EventItem, EventMemory, FormFieldSetting, FormType, Registration, RegistrationInsert, SheetData, SurveyInsert, SurveyResponse } from "../types"
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string
@@ -118,15 +118,6 @@ export async function fetchRegistrations(eventYear: number): Promise<Registratio
     .order("created_at", { ascending: true })
   if (error) throw error
   return data ?? []
-}
-
-export async function fetchAvailableYears(): Promise<number[]> {
-  const { data, error } = await supabase
-    .from("registrations")
-    .select("event_year")
-    .order("event_year", { ascending: false })
-  if (error) throw error
-  return [...new Set((data ?? []).map((r) => r.event_year))]
 }
 
 // Excel export helper — structured rows (no CSV escaping needed; the
@@ -301,3 +292,144 @@ export function surveysToRows(rows: SurveyResponse[]): SheetData {
   })
   return { headers, rows: body }
 }
+
+// ── Sự kiện (Events) ──────────────────────────────
+export async function fetchActiveEvent(): Promise<EventItem | null> {
+  const { data, error } = await supabase
+    .from("events")
+    .select("*")
+    .eq("is_active", true)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle()
+  if (error) {
+    console.warn("fetchActiveEvent error:", error)
+    return null
+  }
+  return data
+}
+
+export async function fetchAllEvents(): Promise<EventItem[]> {
+  const { data, error } = await supabase
+    .from("events")
+    .select("*")
+    .order("year", { ascending: false })
+  if (error) throw error
+  return data ?? []
+}
+
+export async function createOrUpdateEvent(event: Partial<EventItem> & { year: number }): Promise<void> {
+  const { error } = await supabase
+    .from("events")
+    .upsert({
+      ...event,
+      updated_at: new Date().toISOString(),
+    }, { onConflict: "year" })
+  if (error) throw error
+}
+
+export async function setActiveEventYear(year: number): Promise<void> {
+  // Bỏ active tất cả các event trước
+  const { error: resetErr } = await supabase
+    .from("events")
+    .update({ is_active: false })
+    .neq("year", year)
+  if (resetErr) throw resetErr
+
+  // Kích hoạt event theo năm được chọn
+  const { error: setErr } = await supabase
+    .from("events")
+    .update({ is_active: true, updated_at: new Date().toISOString() })
+    .eq("year", year)
+  if (setErr) throw setErr
+}
+
+// Xóa một đợt sự kiện (dùng khi tạo nhầm năm khi test/thao tác sai).
+// Không xóa registrations/survey_responses của năm đó — chỉ xóa dòng cấu hình.
+export async function deleteEvent(year: number): Promise<void> {
+  const { error } = await supabase.from("events").delete().eq("year", year)
+  if (error) throw error
+}
+
+// ── Kỷ niệm qua các năm (Event Memories / 昨年の記録) ────
+export async function fetchPublishedMemories(): Promise<EventMemory[]> {
+  const { data, error } = await supabase
+    .from("event_memories")
+    .select("*")
+    .eq("is_published", true)
+    .order("event_year", { ascending: false })
+  if (error) {
+    console.warn("fetchPublishedMemories error:", error)
+    return []
+  }
+  return data ?? []
+}
+
+export async function fetchAllMemories(): Promise<EventMemory[]> {
+  const { data, error } = await supabase
+    .from("event_memories")
+    .select("*")
+    .order("event_year", { ascending: false })
+  if (error) throw error
+  return data ?? []
+}
+
+export async function saveEventMemory(memory: Partial<EventMemory> & { event_year: number }): Promise<void> {
+  const { error } = await supabase
+    .from("event_memories")
+    .upsert({
+      ...memory,
+      updated_at: new Date().toISOString(),
+    }, { onConflict: "event_year" })
+  if (error) throw error
+}
+
+// ── Cấu hình tự do cho form đăng ký / khảo sát (ẩn/hiện, đổi nhãn,
+// bắt buộc, thứ tự) — không đổi cột DB, không đổi cách export ────
+export async function fetchFormFieldSettings(formType: FormType): Promise<FormFieldSetting[]> {
+  const { data, error } = await supabase
+    .from("form_field_settings")
+    .select("*")
+    .eq("form_type", formType)
+    .order("sort_order", { ascending: true })
+  if (error) {
+    console.warn("fetchFormFieldSettings error:", error)
+    return []
+  }
+  return data ?? []
+}
+
+export async function saveFormFieldSetting(
+  setting: Pick<FormFieldSetting, "form_type" | "field_key" | "label_override" | "is_visible" | "is_required" | "sort_order">
+): Promise<void> {
+  const { error } = await supabase
+    .from("form_field_settings")
+    .upsert({ ...setting, updated_at: new Date().toISOString() }, { onConflict: "form_type,field_key" })
+  if (error) throw error
+}
+
+// Xóa bài viết/ảnh kỷ niệm của một năm (dùng khi tạo/lưu nhầm năm).
+export async function deleteEventMemory(year: number): Promise<void> {
+  const { error } = await supabase.from("event_memories").delete().eq("event_year", year)
+  if (error) throw error
+}
+
+// ── Upload ảnh lên Supabase Storage (event-photos) ──
+export async function uploadEventPhoto(file: File): Promise<string> {
+  const ext = file.name.split(".").pop()?.toLowerCase() || "jpg"
+  const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`
+  const filePath = `uploads/${fileName}`
+
+  const { error: uploadError } = await supabase.storage
+    .from("event-photos")
+    .upload(filePath, file, { cacheControl: "3600", upsert: true })
+
+  if (uploadError) throw uploadError
+
+  const { data } = supabase.storage
+    .from("event-photos")
+    .getPublicUrl(filePath)
+
+  return data.publicUrl
+}
+
