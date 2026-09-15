@@ -2242,6 +2242,13 @@ th {
   flex-shrink: 0;
 }
 
+.admin-lang-note {
+  align-self: flex-end;
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
 .admin-lang-hint {
   margin: 0 0 12px;
   padding: 10px 14px;

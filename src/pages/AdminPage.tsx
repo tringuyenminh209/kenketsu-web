@@ -1499,14 +1499,14 @@ export default function AdminPage() {
                   />
                 </label>
                 <label>
-                  出典ラベル
+                  出典リンクの表示テキスト
                   <input
                     type="text"
                     value={getMemoryField('source_label')}
                     onChange={(e) => setMemoryField('source_label', e.target.value)}
                   />
                 </label>
-                {activeMemoryLang === 'ja' && (
+                {activeMemoryLang === 'ja' ? (
                   <label>
                     出典リンク（URL）
                     <input
@@ -1515,6 +1515,10 @@ export default function AdminPage() {
                       onChange={(e) => setMemoryForm({ ...memoryForm, source_link: e.target.value })}
                     />
                   </label>
+                ) : (
+                  <p className="admin-lang-note">
+                    ※ 出典リンクのURLは全言語共通のため、「日本語」タブでのみ編集できます。
+                  </p>
                 )}
               </div>
 
