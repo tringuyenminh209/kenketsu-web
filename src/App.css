@@ -103,7 +103,7 @@
   border-radius: 999px;
   background: #fff;
   color: var(--ink);
-  font: 800 13px/1 var(--sans);
+  font: 800 13px/1.5 var(--sans);
   cursor: pointer;
   box-shadow: 0 10px 24px rgba(16, 24, 40, 0.05);
   transition: border-color 150ms ease, box-shadow 150ms ease;
