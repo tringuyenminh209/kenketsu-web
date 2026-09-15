@@ -1345,3 +1345,37 @@ Nguoi dung phan hoi: bam luu ma khong thay gi thay doi (do banner thong bao nam 
 - `src/pages/AdminPage.tsx`
 - `src/components/LastYearSection.tsx`
 - `docs/nippo.md`
+
+---
+
+## Ngay: 2026-09-16 (session 42 - backfill du lieu, sua loi hien thi, ap dung redesign-skill, da ngon ngu cho Tab 4)
+
+## Noi dung da hoan thanh
+
+Gop nhieu vong sua nho lien tiep theo phan hoi truc tiep cua nguoi dung khi test:
+
+1. **Backfill ban dich 2025**: nguoi dung hoi "sao khong tu dien du lieu cu vao" — da viet `015_backfill_2025_memory_translations.sql` lay noi dung 11 ngon ngu co san tu `src/locales/*.json` (khoa `lastYear.*`) nap thang vao `event_memories.translations` cho nam 2025, khong bat giao vien go lai.
+2. **Sua loi migration 015**: nham lay noi dung tien to co dinh ("出典："/"Nguồn: ") thay vi noi dung hien thi that cua link nguon, gay lap chu "Nguồn: Nguồn:" tren web. Sua bang `016_fix_2025_translations_source_label.sql`. Doi ten o "出典ラベル" → "出典リンクの表示テキスト" cho ro nghia, them ghi chu giai thich vi sao URL chi sua duoc o tab tieng Nhat (dung chung cho moi ngon ngu).
+3. **Sua bo cuc bi cat chu**: o "見出しタイトル"/"出典リンクの表示テキスト" chuyen sang full-width (span-2); **quan trong nhat**: doi caption anh tu `<input>` 1 dong (luon cat chu du rong bao nhieu) sang `<textarea>` 3 dong tu xuong dong.
+4. **Ap dung skill thiet ke** (nguoi dung tu them `.claude/skills/redesign-existing-projects` va cac skill lien quan vao du an): doc SKILL.md, ap dung co chon loc cho Admin — tabular-nums cho so lieu thong ke, hieu ung nhan nut (`:active { scale }`), card co chieu sau nhe (box-shadow). Khong doi font (cac font "co ca tinh" nhu Geist/Outfit khong co chu Nhat, khong phu hop Admin 100% tieng Nhat) va khong lam lai layout lon de tranh rui ro.
+5. **Da ngon ngu cho Tab 4 (申込・アンケート項目設定)**: nguoi dung chi ra van de tuong tu — neu giao vien doi nhan cau hoi trong Tab 4, nhan moi chi co tieng Nhat va hien nham cho ca 12 ngon ngu, pha ban dich i18n co san. Da hoi phuong an qua AskUserQuestion; nguoi dung chon ap dung dung mo hinh tab-ngon-ngu nhu phan ky niem:
+   - Migration `017_form_field_label_translations.sql`: them cot `form_field_settings.label_translations JSONB`.
+   - `AdminPage.tsx`: them thanh tab 12 ngon ngu dung chung cho ca 2 bang (form dang ky + khao sat), nhan tuy chinh gio doc/ghi theo dung ngon ngu dang chon.
+   - `App.tsx`: `makeFieldHelper` nhan them `currentLang`; voi ngon ngu khac tieng Nhat, chi dung `label_translations[lang]` neu co, neu khong thi GIU NGUYEN ban dich mac dinh (khong bao gio hien nham tieng Nhat cho nguoi dung ngon ngu khac).
+
+## Kiem tra
+
+- `npm run build`: pass sau moi buoc.
+- Chua chay migration 015-017 tren Supabase that va chua tu test lai bang trinh duyet trong phien nay — de nghi nguoi dung paste theo dung thu tu 014 → 015 → 016 → 017, roi kiem tra lai: (a) trang chu doi ngon ngu hien dung "Nguồn:" khong lap; (b) caption anh trong Admin hien tron ven; (c) Tab 4 dan thu 1 nhan dich va xac nhan trang chu hien dung theo ngon ngu.
+
+## File da thay doi chinh
+
+- `supabase/migrations/015_backfill_2025_memory_translations.sql` (moi)
+- `supabase/migrations/016_fix_2025_translations_source_label.sql` (moi)
+- `supabase/migrations/017_form_field_label_translations.sql` (moi)
+- `src/types/index.ts`
+- `src/lib/supabase.ts`
+- `src/pages/AdminPage.tsx`
+- `src/App.tsx`
+- `src/App.css`
+- `docs/nippo.md`
