@@ -1560,12 +1560,11 @@ export default function AdminPage() {
                   {(memoryForm.photos || []).map((p, idx) => (
                     <div key={idx} className="admin-photo-card">
                       <img src={resolveLegacyPhotoUrl(p.url)} alt="memory" />
-                      <input
-                        type="text"
+                      <textarea
+                        rows={3}
                         placeholder={activeMemoryLang === 'ja' ? 'キャプション（説明）' : `キャプション（${ADMIN_LANG_LABELS[activeMemoryLang] ?? activeMemoryLang}）`}
                         value={getPhotoCaption(p.url, p.caption)}
                         onChange={(e) => setPhotoCaption(idx, p.url, e.target.value)}
-                        title={getPhotoCaption(p.url, p.caption)}
                         className="admin-photo-caption-input"
                       />
                       <button
