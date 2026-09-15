@@ -143,6 +143,24 @@ function FieldSettingsEditor({
   )
 }
 
+// Admin la giao dien tieng Nhat 100% (theo quy uoc du an) — khong dung
+// nhan ban ngu tu `LANGS` (danh cho nguoi dung cuoi chon ngon ngu) vi
+// giao vien khong doc duoc chu Myanmar/Nepal/Uzbek/Bengal/Thai/Sinhala.
+const ADMIN_LANG_LABELS: Record<string, string> = {
+  ja: '日本語',
+  vi: 'ベトナム語',
+  en: '英語',
+  my: 'ミャンマー語',
+  ne: 'ネパール語',
+  zh: '中国語',
+  uz: 'ウズベク語',
+  bn: 'ベンガル語',
+  id: 'インドネシア語',
+  ko: '韓国語',
+  th: 'タイ語',
+  si: 'シンハラ語',
+}
+
 interface ConfirmDialogState {
   title: string
   message: string
@@ -1441,7 +1459,7 @@ export default function AdminPage() {
                     className={`admin-lang-tab ${activeMemoryLang === l.code ? 'is-active' : ''}`}
                     onClick={() => setActiveMemoryLang(l.code)}
                   >
-                    {l.label}
+                    {ADMIN_LANG_LABELS[l.code] ?? l.label}
                     {isMemoryLangFilled(l.code) && <span className="admin-lang-tab-dot" aria-hidden="true" />}
                   </button>
                 ))}
@@ -1537,7 +1555,7 @@ export default function AdminPage() {
                       <img src={resolveLegacyPhotoUrl(p.url)} alt="memory" />
                       <input
                         type="text"
-                        placeholder={activeMemoryLang === 'ja' ? 'キャプション（説明）' : `キャプション（${LANGS.find((l) => l.code === activeMemoryLang)?.label}）`}
+                        placeholder={activeMemoryLang === 'ja' ? 'キャプション（説明）' : `キャプション（${ADMIN_LANG_LABELS[activeMemoryLang] ?? activeMemoryLang}）`}
                         value={getPhotoCaption(p.url, p.caption)}
                         onChange={(e) => setPhotoCaption(idx, p.url, e.target.value)}
                         className="admin-photo-caption-input"

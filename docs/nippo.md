@@ -1321,3 +1321,27 @@ Nguoi dung phan hoi: bam luu ma khong thay gi thay doi (do banner thong bao nam 
 - `src/App.css`
 - `src/components/LastYearSection.tsx`
 - `docs/nippo.md`
+
+---
+
+## Ngay: 2026-09-16 (session 41 - sua nhan tab ngon ngu trong Admin + khoi phuc ban dich san co cho nam 2025)
+
+## Noi dung da hoan thanh
+
+- Nguoi dung phat hien 2 van de qua screenshot:
+  1. Nhan cac tab ngon ngu moi them trong Admin (`活動記録・アルバム`) dung chu ban ngu (မြန်မာ, नेपाली, Oʻzbekcha, বাংলা, ภาษาไทย, සිංහල...) — giao vien tieng Nhat khong doc duoc nen khong biet tab nao la ngon ngu nao.
+  2. So sanh voi ban production that (kenketsu-web.vercel.app) khi chon tieng Viet: khoi "昨年の記録" van hien day du noi dung da dich (tu cac session dich thuat truoc day, khoa `lastYear.*` trong 12 file locale) — nhung tren localhost (code moi) lai chi hien tieng Nhat vi logic moi uu tien du lieu DB (chi co tieng Nhat) hon ban dich tinh co san.
+- **Sua (1)**: them `ADMIN_LANG_LABELS` (ten tieng Nhat cho tung ma ngon ngu, vd "ミャンマー語", "ネパール語"...) dung rieng cho giao dien Admin, khong dung lai nhan ban ngu cua `LANGS` (danh cho nguoi dung cuoi).
+- **Sua (2)**: khoi phuc dung thu tu uu tien cho `LastYearSection.tsx` — voi rieng nam 2025 (du lieu seed goc, cai da duoc dich san qua nhieu session truoc khi co he thong DB nay) va khi admin CHUA tu dan ban dich rieng vao `translations`, uu tien dung ban dich tinh co san (`t('lastYear.badge/title/summary/captions/sourceLink')`) hon la cot tieng Nhat trong DB. Cac nam khac (2026, 2027...) khong co ban dich tinh nao co san nen van theo dung luong: `translations[lang]` (admin dan) → cot tieng Nhat → i18n mac dinh chung.
+
+## Kiem tra
+
+- `npm run build`: pass.
+- `npm run lint`: pass, khong warning moi.
+- Chua tu test lai bang trinh duyet trong phien nay — de nghi nguoi dung: (1) mo localhost, doi ngon ngu sang tieng Viet/Anh, xac nhan khoi "昨年の記録" nam 2025 hien lai dung ban dich cu; (2) vao Admin, xac nhan cac tab ngon ngu gio hien ten tieng Nhat de doc duoc.
+
+## File da thay doi chinh
+
+- `src/pages/AdminPage.tsx`
+- `src/components/LastYearSection.tsx`
+- `docs/nippo.md`
