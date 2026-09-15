@@ -99,18 +99,39 @@ function FieldSettingsEditor({
   saving: boolean
 }) {
   return (
-    <div className="admin-card-panel">
-      <h3>{title}</h3>
-      <p style={{ color: 'var(--muted)', fontSize: '0.875rem', marginTop: '-0.5rem' }}>{hint}</p>
+    <div className="admin-card-panel admin-field-settings-panel">
+      <div className="admin-panel-header">
+        <h3>{title}</h3>
+        <span className="admin-panel-count">{drafts.length}項目</span>
+      </div>
+      <p className="admin-field-settings-hint">{hint}</p>
+
+      <div className="admin-field-settings-columns" aria-hidden="true">
+        <span>並び順</span>
+        <span>項目名・表示ラベル</span>
+        <span>表示設定</span>
+      </div>
+
       <div className="admin-field-settings-list">
         {drafts.map((d, i) => (
-          <div key={d.key} className="admin-field-settings-row">
+          <div key={d.key} className={`admin-field-settings-row${d.locked ? ' is-locked' : ''}`}>
             <div className="admin-field-settings-order">
-              <button type="button" onClick={() => onMove(i, -1)} disabled={i === 0} aria-label="上へ">▲</button>
-              <button type="button" onClick={() => onMove(i, 1)} disabled={i === drafts.length - 1} aria-label="下へ">▼</button>
+              <span className="admin-field-settings-index">{i + 1}</span>
+              <div className="admin-field-settings-order-btns">
+                <button type="button" onClick={() => onMove(i, -1)} disabled={i === 0} aria-label="上へ移動">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6" /></svg>
+                </button>
+                <button type="button" onClick={() => onMove(i, 1)} disabled={i === drafts.length - 1} aria-label="下へ移動">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+                </button>
+              </div>
             </div>
+
             <div className="admin-field-settings-main">
-              <div className="admin-field-settings-default">{d.defaultLabel}</div>
+              <div className="admin-field-settings-default">
+                {d.defaultLabel}
+                {d.locked && <span className="admin-badge-warning">🔒 変更不可</span>}
+              </div>
               <input
                 type="text"
                 placeholder={
@@ -122,29 +143,33 @@ function FieldSettingsEditor({
                 onChange={(e) => onUpdateLabel(d.key, e.target.value)}
               />
             </div>
-            <label className="admin-field-settings-toggle">
-              <input
-                type="checkbox"
-                checked={d.is_visible}
-                disabled={d.locked}
-                onChange={(e) => onUpdate(d.key, { is_visible: e.target.checked })}
-              />
-              表示する
-            </label>
-            <label className="admin-field-settings-toggle">
-              <input
-                type="checkbox"
-                checked={d.is_required}
-                disabled={d.locked}
-                onChange={(e) => onUpdate(d.key, { is_required: e.target.checked })}
-              />
-              必須
-            </label>
-            {d.locked && <span className="admin-field-settings-locked">必須項目のため変更不可</span>}
+
+            <div className="admin-field-settings-toggles">
+              <label className={`admin-toggle-switch${d.locked ? ' is-disabled' : ''}`}>
+                <input
+                  type="checkbox"
+                  checked={d.is_visible}
+                  disabled={d.locked}
+                  onChange={(e) => onUpdate(d.key, { is_visible: e.target.checked })}
+                />
+                <span className="admin-toggle-track" />
+                表示する
+              </label>
+              <label className={`admin-toggle-switch${d.locked ? ' is-disabled' : ''}`}>
+                <input
+                  type="checkbox"
+                  checked={d.is_required}
+                  disabled={d.locked}
+                  onChange={(e) => onUpdate(d.key, { is_required: e.target.checked })}
+                />
+                <span className="admin-toggle-track" />
+                必須
+              </label>
+            </div>
           </div>
         ))}
       </div>
-      <div style={{ marginTop: '1.25rem' }}>
+      <div className="admin-field-settings-save">
         <button type="button" className="button primary" onClick={onSave} disabled={saving}>
           {saving ? '保存中...' : '設定を保存'}
         </button>
@@ -1281,17 +1306,22 @@ export default function AdminPage() {
 
             {/* Existing Events List */}
             <div className="admin-card-panel">
-              <h3>登録済みイベント一覧</h3>
+              <div className="admin-panel-header">
+                <h3>📋 登録済みイベント一覧</h3>
+                <span className="admin-panel-count">{events.length}件</span>
+              </div>
               <div className="admin-event-list">
                 {events.map((ev) => (
                   <div key={ev.year} className="admin-event-row">
                     <div className="admin-event-row-info">
                       <strong>{ev.year}年度</strong> — {ev.title} ({ev.date_display})
-                      {ev.is_active && (
+                      {ev.is_active ? (
                         <span className="admin-active-badge">現在公開中（Active）</span>
+                      ) : (
+                        <span className="admin-draft-badge">下書き</span>
                       )}
                       {ev.is_active && ev.show_pending_notice && (
-                        <span className="admin-active-badge" style={{ background: '#b45309' }}>準備中バナー表示中</span>
+                        <span className="admin-badge-warning">⏳ 準備中バナー表示中</span>
                       )}
                     </div>
                     <div className="admin-event-row-actions">
@@ -1333,7 +1363,12 @@ export default function AdminPage() {
               ref={eventFormRef}
               className={`admin-card-panel ${eventFormFlash ? 'is-flash' : ''}`}
             >
-              <h3>イベント設定の編集（{eventForm.year}年度）</h3>
+              <div className="admin-panel-header">
+                <h3>✏️ イベント設定の編集（{eventForm.year}年度）</h3>
+                <span className={events.find((e) => e.year === eventForm.year)?.is_active ? 'admin-panel-count' : 'admin-draft-badge'}>
+                  {events.find((e) => e.year === eventForm.year)?.is_active ? '● 公開中' : '下書き'}
+                </span>
+              </div>
               <div className="admin-form-grid">
                 <label>
                   開催日表示
@@ -1422,6 +1457,7 @@ export default function AdminPage() {
                   checked={eventForm.show_pending_notice ?? false}
                   onChange={(e) => setEventForm({ ...eventForm, show_pending_notice: e.target.checked })}
                 />
+                <span className="admin-toggle-track" />
                 この年の情報はまだ確定していません（ユーザーサイトに「準備中」バナーを表示し、上記の詳細は一時的に隠します）
               </label>
 
@@ -1452,7 +1488,8 @@ export default function AdminPage() {
                       onClick={() => handleSelectMemoryYear(yr)}
                       className={`admin-year-pill ${yr === selectedMemoryYear ? 'is-active' : ''}`}
                     >
-                      {yr}年 {isPublished ? '' : '（非公開）'}
+                      {yr}年
+                      {!isPublished && <span className="admin-year-pill-badge">非公開</span>}
                     </button>
                   )
                 })}
@@ -1476,7 +1513,12 @@ export default function AdminPage() {
               ref={memoryFormRef}
               className={`admin-card-panel ${memoryFormFlash ? 'is-flash' : ''}`}
             >
-              <h3>活動記録・アルバムの編集（{selectedMemoryYear}年度）</h3>
+              <div className="admin-panel-header">
+                <h3>🖼️ 活動記録・アルバムの編集（{selectedMemoryYear}年度）</h3>
+                <span className={memoryForm.is_published ? 'admin-panel-count' : 'admin-badge-warning'}>
+                  {memoryForm.is_published ? '● 公開中' : '● 下書き'}
+                </span>
+              </div>
 
               <div className="admin-lang-tabs" role="tablist" aria-label="編集する言語">
                 {LANGS.map((l) => (
@@ -1501,6 +1543,7 @@ export default function AdminPage() {
               )}
 
               <div className="admin-form-grid">
+                <span className="admin-form-section-label">基本情報</span>
                 <label>
                   バッジテキスト
                   <input
@@ -1527,6 +1570,8 @@ export default function AdminPage() {
                     placeholder={activeMemoryLang === 'ja' ? `例: ${selectedMemoryYear}年9月、ECCコンピュータ専門学校にて開催された学内献血の様子です。学生・教職員の皆さんにご協力いただきました。` : ''}
                   />
                 </label>
+
+                <span className="admin-form-section-label">出典情報</span>
                 <label className="span-2">
                   出典リンクの表示テキスト
                   <input
@@ -1558,13 +1603,16 @@ export default function AdminPage() {
                   checked={memoryForm.is_published ?? false}
                   onChange={(e) => setMemoryForm({ ...memoryForm, is_published: e.target.checked })}
                 />
+                <span className="admin-toggle-track" />
                 この年の記録をユーザーサイトに公開する（チェックを外すと下書きのまま非公開になります）
               </label>
 
               {/* Photo Upload Section */}
               <div style={{ marginTop: '2rem', borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
                 <div className="admin-photo-toolbar">
-                  <h4 style={{ margin: 0 }}>写真ギャラリー（現在 {(memoryForm.photos || []).length} 枚）</h4>
+                  <h4 style={{ margin: 0 }}>
+                    写真ギャラリー <span className="admin-photo-count">（現在 {(memoryForm.photos || []).length} 枚）</span>
+                  </h4>
                   <label className="button primary" style={{ cursor: 'pointer', margin: 0 }}>
                     {uploadingPhoto ? 'アップロード中...' : '＋ 写真を追加する'}
                     <input
@@ -1587,7 +1635,15 @@ export default function AdminPage() {
                 <div className="admin-photo-grid">
                   {(memoryForm.photos || []).map((p, idx) => (
                     <div key={idx} className="admin-photo-card">
-                      <img src={resolveLegacyPhotoUrl(p.url)} alt="memory" />
+                      <div className="admin-photo-card-media">
+                        <img src={resolveLegacyPhotoUrl(p.url)} alt="memory" />
+                        <button
+                          type="button"
+                          onClick={() => handleDeletePhoto(idx)}
+                          className="admin-photo-delete-btn"
+                          aria-label="この写真を削除"
+                        />
+                      </div>
                       <textarea
                         rows={3}
                         placeholder={activeMemoryLang === 'ja' ? 'キャプション（説明）' : `キャプション（${ADMIN_LANG_LABELS[activeMemoryLang] ?? activeMemoryLang}）`}
@@ -1595,13 +1651,6 @@ export default function AdminPage() {
                         onChange={(e) => setPhotoCaption(idx, p.url, e.target.value)}
                         className="admin-photo-caption-input"
                       />
-                      <button
-                        type="button"
-                        onClick={() => handleDeletePhoto(idx)}
-                        className="admin-photo-delete-btn"
-                      >
-                        削除
-                      </button>
                     </div>
                   ))}
                 </div>
