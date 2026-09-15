@@ -84,6 +84,14 @@ export interface PhotoItem {
   caption: string
 }
 
+export interface MemoryTranslation {
+  badge?: string
+  title?: string
+  summary?: string
+  source_label?: string
+  photoCaptions?: Record<string, string>
+}
+
 export interface EventMemory {
   id: string
   event_year: number
@@ -93,6 +101,7 @@ export interface EventMemory {
   photos: PhotoItem[]
   source_label?: string
   source_link?: string
+  translations: Record<string, MemoryTranslation>
   is_published: boolean
   created_at: string
   updated_at: string

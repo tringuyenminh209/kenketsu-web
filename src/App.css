@@ -2202,6 +2202,57 @@ th {
   flex-shrink: 0;
 }
 
+.admin-lang-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 12px 0 4px;
+}
+
+.admin-lang-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: white;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-lang-tab:hover {
+  border-color: var(--green-dark);
+}
+
+.admin-lang-tab.is-active {
+  border-color: var(--green-dark);
+  background: rgba(0, 108, 74, 0.08);
+  color: var(--green-dark);
+}
+
+.admin-lang-tab-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green-dark);
+  flex-shrink: 0;
+}
+
+.admin-lang-hint {
+  margin: 0 0 12px;
+  padding: 10px 14px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 6px;
+  color: #1e40af;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
 .admin-danger-btn {
   color: #b91c1c;
   border-color: rgba(185, 28, 28, 0.4);

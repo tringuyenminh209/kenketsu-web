@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Icon, SiteHeader, usePageMotion } from '../lib/shared'
+import { Icon, LANGS, SiteHeader, usePageMotion } from '../lib/shared'
 import { EVENT_CONFIG, TIME_SLOTS } from '../config/event'
 import {
   createOrUpdateEvent,
@@ -262,8 +262,10 @@ export default function AdminPage() {
     photos: [],
     source_label: 'ECC社会貢献センター 活動報告',
     source_link: '',
+    translations: {},
     is_published: true,
   })
+  const [activeMemoryLang, setActiveMemoryLang] = useState('ja')
   const [uploadingPhoto, setUploadingPhoto] = useState(false)
   const [savingMemory, setSavingMemory] = useState(false)
   const [deletingMemoryYear, setDeletingMemoryYear] = useState<number | null>(null)
@@ -563,7 +565,7 @@ export default function AdminPage() {
     setSelectedMemoryYear(year)
     const mem = memories.find(m => m.event_year === year)
     if (mem) {
-      setMemoryForm(mem)
+      setMemoryForm({ ...mem, translations: mem.translations ?? {} })
     } else {
       setMemoryForm({
         event_year: year,
@@ -573,9 +575,11 @@ export default function AdminPage() {
         photos: [],
         source_label: 'ECC社会貢献センター 活動報告',
         source_link: '',
+        translations: {},
         is_published: false,
       })
     }
+    setActiveMemoryLang('ja')
     setMemoryFormFlash(true)
     window.setTimeout(() => setMemoryFormFlash(false), 900)
     memoryFormRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -611,6 +615,44 @@ export default function AdminPage() {
     const photos = [...(memoryForm.photos || [])]
     photos[index] = { ...photos[index], caption }
     setMemoryForm({ ...memoryForm, photos })
+  }
+
+  // ── Ho tro nhap noi dung theo tung ngon ngu (badge/title/summary/
+  // source_label/caption anh) — ban tieng Nhat van luu o cot chinh nhu cu,
+  // cac ngon ngu khac luu trong memoryForm.translations[lang].
+  type MemoryTextKey = 'badge' | 'title' | 'summary' | 'source_label'
+  const getMemoryField = (key: MemoryTextKey): string => {
+    if (activeMemoryLang === 'ja') return memoryForm[key] ?? ''
+    return memoryForm.translations?.[activeMemoryLang]?.[key] ?? ''
+  }
+  const setMemoryField = (key: MemoryTextKey, value: string) => {
+    if (activeMemoryLang === 'ja') {
+      setMemoryForm({ ...memoryForm, [key]: value })
+      return
+    }
+    const translations = { ...(memoryForm.translations ?? {}) }
+    translations[activeMemoryLang] = { ...(translations[activeMemoryLang] ?? {}), [key]: value }
+    setMemoryForm({ ...memoryForm, translations })
+  }
+  const getPhotoCaption = (photoUrl: string, jaCaption: string): string => {
+    if (activeMemoryLang === 'ja') return jaCaption
+    return memoryForm.translations?.[activeMemoryLang]?.photoCaptions?.[photoUrl] ?? ''
+  }
+  const setPhotoCaption = (index: number, photoUrl: string, value: string) => {
+    if (activeMemoryLang === 'ja') {
+      handleUpdateCaption(index, value)
+      return
+    }
+    const translations = { ...(memoryForm.translations ?? {}) }
+    const langEntry = { ...(translations[activeMemoryLang] ?? {}) }
+    langEntry.photoCaptions = { ...(langEntry.photoCaptions ?? {}), [photoUrl]: value }
+    translations[activeMemoryLang] = langEntry
+    setMemoryForm({ ...memoryForm, translations })
+  }
+  const isMemoryLangFilled = (lang: string): boolean => {
+    if (lang === 'ja') return !!(memoryForm.title || memoryForm.summary)
+    const t = memoryForm.translations?.[lang]
+    return !!(t?.title || t?.summary)
   }
 
   const handleDeletePhoto = (index: number) => {
@@ -1388,48 +1430,73 @@ export default function AdminPage() {
               className={`admin-card-panel ${memoryFormFlash ? 'is-flash' : ''}`}
             >
               <h3>活動記録・アルバムの編集（{selectedMemoryYear}年度）</h3>
+
+              <div className="admin-lang-tabs" role="tablist" aria-label="編集する言語">
+                {LANGS.map((l) => (
+                  <button
+                    key={l.code}
+                    type="button"
+                    role="tab"
+                    aria-selected={activeMemoryLang === l.code}
+                    className={`admin-lang-tab ${activeMemoryLang === l.code ? 'is-active' : ''}`}
+                    onClick={() => setActiveMemoryLang(l.code)}
+                  >
+                    {l.label}
+                    {isMemoryLangFilled(l.code) && <span className="admin-lang-tab-dot" aria-hidden="true" />}
+                  </button>
+                ))}
+              </div>
+
+              {activeMemoryLang !== 'ja' && (
+                <p className="admin-lang-hint">
+                  💡 上の「日本語」タブの内容を Gemini・Claude・ChatGPT などのAIツールに貼り付けて翻訳してもらい、その結果をこのタブの各欄に貼り付けてください。空欄のままの場合、ユーザーサイトには日本語の内容がそのまま表示されます。
+                </p>
+              )}
+
               <div className="admin-form-grid">
                 <label>
                   バッジテキスト
                   <input
                     type="text"
-                    value={memoryForm.badge || ''}
-                    onChange={(e) => setMemoryForm({ ...memoryForm, badge: e.target.value })}
+                    value={getMemoryField('badge')}
+                    onChange={(e) => setMemoryField('badge', e.target.value)}
                   />
                 </label>
                 <label>
                   見出しタイトル
                   <input
                     type="text"
-                    value={memoryForm.title || ''}
-                    onChange={(e) => setMemoryForm({ ...memoryForm, title: e.target.value })}
+                    value={getMemoryField('title')}
+                    onChange={(e) => setMemoryField('title', e.target.value)}
                   />
                 </label>
                 <label className="span-2">
                   概要・説明文
                   <textarea
                     rows={3}
-                    value={memoryForm.summary || ''}
-                    onChange={(e) => setMemoryForm({ ...memoryForm, summary: e.target.value })}
-                    placeholder={`例: ${selectedMemoryYear}年9月、ECCコンピュータ専門学校にて開催された学内献血の様子です。学生・教職員の皆さんにご協力いただきました。`}
+                    value={getMemoryField('summary')}
+                    onChange={(e) => setMemoryField('summary', e.target.value)}
+                    placeholder={activeMemoryLang === 'ja' ? `例: ${selectedMemoryYear}年9月、ECCコンピュータ専門学校にて開催された学内献血の様子です。学生・教職員の皆さんにご協力いただきました。` : ''}
                   />
                 </label>
                 <label>
                   出典ラベル
                   <input
                     type="text"
-                    value={memoryForm.source_label || ''}
-                    onChange={(e) => setMemoryForm({ ...memoryForm, source_label: e.target.value })}
+                    value={getMemoryField('source_label')}
+                    onChange={(e) => setMemoryField('source_label', e.target.value)}
                   />
                 </label>
-                <label>
-                  出典リンク（URL）
-                  <input
-                    type="url"
-                    value={memoryForm.source_link || ''}
-                    onChange={(e) => setMemoryForm({ ...memoryForm, source_link: e.target.value })}
-                  />
-                </label>
+                {activeMemoryLang === 'ja' && (
+                  <label>
+                    出典リンク（URL）
+                    <input
+                      type="url"
+                      value={memoryForm.source_link || ''}
+                      onChange={(e) => setMemoryForm({ ...memoryForm, source_link: e.target.value })}
+                    />
+                  </label>
+                )}
               </div>
 
               <label className="admin-publish-toggle">
@@ -1470,9 +1537,9 @@ export default function AdminPage() {
                       <img src={resolveLegacyPhotoUrl(p.url)} alt="memory" />
                       <input
                         type="text"
-                        placeholder="キャプション（説明）"
-                        value={p.caption}
-                        onChange={(e) => handleUpdateCaption(idx, e.target.value)}
+                        placeholder={activeMemoryLang === 'ja' ? 'キャプション（説明）' : `キャプション（${LANGS.find((l) => l.code === activeMemoryLang)?.label}）`}
+                        value={getPhotoCaption(p.url, p.caption)}
+                        onChange={(e) => setPhotoCaption(idx, p.url, e.target.value)}
                         className="admin-photo-caption-input"
                       />
                       <button

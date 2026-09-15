@@ -1288,3 +1288,36 @@ Nguoi dung phan hoi: bam luu ma khong thay gi thay doi (do banner thong bao nam 
 - `src/App.css`
 - `src/pages/AdminPage.tsx`
 - `docs/nippo.md`
+
+---
+
+## Ngay: 2026-09-16 (session 40 - commit local + da ngon ngu cho "活動記録・アルバム")
+
+## Noi dung da hoan thanh
+
+- **Commit local (khong push)** theo yeu cau nguoi dung: 28 file (toan bo thay doi tu session 25-39), loai tru 2 file scratch khong lien quan (`flyer.html`, `scratch_questions.json`).
+- Nguoi dung neu van de lon: noi dung Admin tu nhap (kỷ niệm, ghi chu su kien) chi co tieng Nhat, trong khi phan con lai cua site hien du 12 ngon ngu — yeu cau thiet ke lai de nguoi cap nhat noi dung phai lam duoc da ngon ngu. Da hoi phuong an qua AskUserQuestion; nguoi dung chon: **nhap tay tung ngon ngu, khong dung API dich, chi goi y giao vien dung Gemini/Claude/ChatGPT de dich roi dan vao**.
+- **Trien khai cho "活動記録・アルバム" (event_memories)**:
+  - Migration `014_event_memories_translations.sql`: them cot `translations JSONB DEFAULT '{}'` — cau truc `{ [ma_ngon_ngu]: { badge, title, summary, source_label, photoCaptions: { [url]: caption } } }`. Cot tieng Nhat hien co van la ban goc/mac dinh.
+  - `EventMemory` type them `translations` va interface `MemoryTranslation` moi.
+  - `AdminPage.tsx`: them thanh tab chon 1 trong 12 ngon ngu (dung lai `LANGS` tu `shared.tsx`) ngay tren form chinh sua memory. Chon ngon ngu khac tieng Nhat se doi cac o badge/title/summary/nguon/caption anh sang doc-ghi vao `translations[lang]` thay vi cot chinh; co dong chu huong dan "dung AI dich roi dan vao"; tab co cham xanh nho bao hieu ngon ngu da co noi dung.
+  - `LastYearSection.tsx` (web nguoi dung that): doc dung `translations[i18n.language]` truoc, fallback ve cot tieng Nhat, cuoi cung fallback ve ban dich tinh cua site — ap dung cho badge/title/summary/nguon/caption tung anh.
+
+## Kiem tra
+
+- `npm run build`: pass.
+- `npm run lint`: pass, khong warning moi.
+- Chua chay migration 014 tren Supabase that va chua tu test lai bang trinh duyet trong phien nay — de nghi nguoi dung paste migration 014 (sau 011-013), thu chon 1 ngon ngu khac trong tab moi, dan noi dung test, luu, roi doi ngon ngu tren trang chu de xac nhan hien dung.
+
+## Viec con lai / can hoi them
+
+- Cung mot han che tuong tu (chi co ban tieng Nhat) van con o: "イベント設定" (開催日/開催時間/開催場所/協賛/ご予約案内/プレゼント案内) va cac nhan field tuy chinh trong Tab "申込・アンケート項目設定" — chua ap dung co che da ngon ngu cho nhung noi nay. Can hoi nguoi dung co muon lam tiep theo cung mo hinh (tab ngon ngu + dan tay) khong.
+
+## File da thay doi chinh
+
+- `supabase/migrations/014_event_memories_translations.sql` (file moi)
+- `src/types/index.ts`
+- `src/pages/AdminPage.tsx`
+- `src/App.css`
+- `src/components/LastYearSection.tsx`
+- `docs/nippo.md`
