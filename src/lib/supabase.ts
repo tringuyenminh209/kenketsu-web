@@ -400,7 +400,7 @@ export async function fetchFormFieldSettings(formType: FormType): Promise<FormFi
 }
 
 export async function saveFormFieldSetting(
-  setting: Pick<FormFieldSetting, "form_type" | "field_key" | "label_override" | "is_visible" | "is_required" | "sort_order">
+  setting: Pick<FormFieldSetting, "form_type" | "field_key" | "label_override" | "label_translations" | "is_visible" | "is_required" | "sort_order">
 ): Promise<void> {
   const { error } = await supabase
     .from("form_field_settings")

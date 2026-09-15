@@ -69,18 +69,27 @@ function getSlotEndTime(slot: string): Date {
 const REG_CORE_FIELDS = new Set(['name', 'studentId', 'department'])
 const SURVEY_CORE_FIELDS = new Set(['donationCount'])
 
-function makeFieldHelper(settings: FormFieldSetting[], coreKeys: Set<string>) {
+function makeFieldHelper(settings: FormFieldSetting[], coreKeys: Set<string>, currentLang: string) {
   const map = new Map(settings.map((s) => [s.field_key, s]))
   return {
     isVisible: (key: string) => (coreKeys.has(key) ? true : map.get(key)?.is_visible ?? true),
     isRequired: (key: string) => (coreKeys.has(key) ? true : map.get(key)?.is_required ?? true),
-    label: (key: string, fallback: string) => map.get(key)?.label_override?.trim() || fallback,
+    // Tieng Nhat dung truc tiep label_override cua admin; cac ngon ngu khac
+    // chi dung ban dich rieng da dan (label_translations[lang]) neu co, con
+    // khong thi giu nguyen ban dich mac dinh (fallback) — khong bao gio hien
+    // nham chu tieng Nhat cho nguoi dung ngon ngu khac.
+    label: (key: string, fallback: string) => {
+      const s = map.get(key)
+      if (!s) return fallback
+      if (currentLang !== 'ja') return s.label_translations?.[currentLang]?.trim() || fallback
+      return s.label_override?.trim() || fallback
+    },
     order: (key: string, fallback: number) => map.get(key)?.sort_order ?? fallback,
   }
 }
 
 function UserPage() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [selectedKnowledge, setSelectedKnowledge] = useState(0)
   const [selectedBenefit, setSelectedBenefit] = useState(0)
   const [selectedProcessStep, setSelectedProcessStep] = useState(0)
@@ -149,8 +158,9 @@ function UserPage() {
   // ── Cấu hình tự do cho form (ẩn/hiện, đổi nhãn, bắt buộc, thứ tự) ──
   const [regFieldSettings, setRegFieldSettings] = useState<FormFieldSetting[]>([])
   const [surveyFieldSettings, setSurveyFieldSettings] = useState<FormFieldSetting[]>([])
-  const regField = useMemo(() => makeFieldHelper(regFieldSettings, REG_CORE_FIELDS), [regFieldSettings])
-  const surveyField = useMemo(() => makeFieldHelper(surveyFieldSettings, SURVEY_CORE_FIELDS), [surveyFieldSettings])
+  const currentLang = i18n.language?.slice(0, 2) || 'ja'
+  const regField = useMemo(() => makeFieldHelper(regFieldSettings, REG_CORE_FIELDS, currentLang), [regFieldSettings, currentLang])
+  const surveyField = useMemo(() => makeFieldHelper(surveyFieldSettings, SURVEY_CORE_FIELDS, currentLang), [surveyFieldSettings, currentLang])
 
   useEffect(() => {
     fetchFormFieldSettings('registration').then(setRegFieldSettings).catch(() => {})

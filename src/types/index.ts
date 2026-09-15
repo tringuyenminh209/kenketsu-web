@@ -114,6 +114,7 @@ export interface FormFieldSetting {
   form_type: FormType
   field_key: string
   label_override: string | null
+  label_translations: Record<string, string>
   is_visible: boolean
   is_required: boolean
   sort_order: number

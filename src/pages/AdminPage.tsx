@@ -79,6 +79,9 @@ function FieldSettingsEditor({
   title,
   hint,
   drafts,
+  activeLang,
+  getLabel,
+  onUpdateLabel,
   onMove,
   onUpdate,
   onSave,
@@ -87,6 +90,9 @@ function FieldSettingsEditor({
   title: string
   hint: string
   drafts: FieldDraft[]
+  activeLang: string
+  getLabel: (d: FieldDraft) => string
+  onUpdateLabel: (key: string, value: string) => void
   onMove: (index: number, dir: -1 | 1) => void
   onUpdate: (key: string, patch: Partial<FieldDraft>) => void
   onSave: () => void
@@ -107,9 +113,13 @@ function FieldSettingsEditor({
               <div className="admin-field-settings-default">{d.defaultLabel}</div>
               <input
                 type="text"
-                placeholder="表示ラベルを変更する場合はここに入力（空欄でデフォルト表示）"
-                value={d.label_override}
-                onChange={(e) => onUpdate(d.key, { label_override: e.target.value })}
+                placeholder={
+                  activeLang === 'ja'
+                    ? '表示ラベルを変更する場合はここに入力（空欄でデフォルト表示）'
+                    : '翻訳したラベルを貼り付け（空欄の場合、既存の翻訳がそのまま表示されます）'
+                }
+                value={getLabel(d)}
+                onChange={(e) => onUpdateLabel(d.key, e.target.value)}
               />
             </div>
             <label className="admin-field-settings-toggle">
@@ -179,6 +189,7 @@ interface FieldDef {
 
 interface FieldDraft extends FieldDef {
   label_override: string
+  label_translations: Record<string, string>
   is_visible: boolean
   is_required: boolean
   sort_order: number
@@ -216,6 +227,7 @@ function buildFieldDrafts(defs: FieldDef[], settings: FormFieldSetting[]): Field
       return {
         ...def,
         label_override: s?.label_override ?? '',
+        label_translations: s?.label_translations ?? {},
         is_visible: s?.is_visible ?? true,
         is_required: def.locked ? true : s?.is_required ?? def.defaultRequired,
         sort_order: s?.sort_order ?? i,
@@ -294,6 +306,7 @@ export default function AdminPage() {
   const [regFieldDrafts, setRegFieldDrafts] = useState<FieldDraft[]>(buildFieldDrafts(REGISTRATION_FIELD_DEFS, []))
   const [surveyFieldDrafts, setSurveyFieldDrafts] = useState<FieldDraft[]>(buildFieldDrafts(SURVEY_FIELD_DEFS, []))
   const [savingFieldsFor, setSavingFieldsFor] = useState<FormType | null>(null)
+  const [activeFieldLang, setActiveFieldLang] = useState('ja')
   const [fieldSaveMsg, setFieldSaveMsgRaw] = useState<Msg>(null)
 
   // Custom confirm/delete dialog (thay cho window.confirm/prompt mặc định)
@@ -755,6 +768,20 @@ export default function AdminPage() {
     setFieldDrafts(formType, drafts)
   }
 
+  // Doi nhan theo dung ngon ngu dang chon: tieng Nhat ghi vao label_override,
+  // cac ngon ngu khac ghi vao label_translations[activeFieldLang].
+  const getFieldLabel = (d: FieldDraft): string =>
+    activeFieldLang === 'ja' ? d.label_override : d.label_translations[activeFieldLang] ?? ''
+  const handleUpdateFieldLabel = (formType: FormType, key: string, value: string) => {
+    if (activeFieldLang === 'ja') {
+      handleUpdateField(formType, key, { label_override: value })
+      return
+    }
+    const draft = getFieldDrafts(formType).find((d) => d.key === key)
+    const label_translations = { ...(draft?.label_translations ?? {}), [activeFieldLang]: value }
+    handleUpdateField(formType, key, { label_translations })
+  }
+
   const handleSaveFieldSettings = async (formType: FormType) => {
     setFieldSaveMsg(null)
     setSavingFieldsFor(formType)
@@ -766,6 +793,7 @@ export default function AdminPage() {
             form_type: formType,
             field_key: d.key,
             label_override: d.label_override.trim() || null,
+            label_translations: d.label_translations,
             is_visible: d.is_visible,
             is_required: d.is_required,
             sort_order: i,
@@ -1607,10 +1635,34 @@ export default function AdminPage() {
             <p style={{ color: 'var(--muted)', marginBottom: '1.5rem' }}>
               申込フォーム・アンケートの各項目を表示／非表示、表示ラベル、必須／任意、並び順を自由に調整できます（項目の種類自体は追加できません）。ロックされた項目はデータ保存に必須のため変更できません。
             </p>
+
+            <div className="admin-lang-tabs" role="tablist" aria-label="編集する言語">
+              {LANGS.map((l) => (
+                <button
+                  key={l.code}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeFieldLang === l.code}
+                  className={`admin-lang-tab ${activeFieldLang === l.code ? 'is-active' : ''}`}
+                  onClick={() => setActiveFieldLang(l.code)}
+                >
+                  {ADMIN_LANG_LABELS[l.code] ?? l.label}
+                </button>
+              ))}
+            </div>
+            {activeFieldLang !== 'ja' && (
+              <p className="admin-lang-hint">
+                💡 「日本語」タブのラベルを Gemini・Claude・ChatGPT などのAIツールで翻訳し、その結果をこのタブの各欄に貼り付けてください。空欄のままの場合、ユーザーサイトには既存の翻訳（未カスタマイズ時のデフォルト表示）がそのまま使われます。
+              </p>
+            )}
+
             <FieldSettingsEditor
               title="📋 参加申込フォームの項目"
               hint="ユーザーサイトの「献血申し込」フォームに表示される項目です。"
               drafts={regFieldDrafts}
+              activeLang={activeFieldLang}
+              getLabel={getFieldLabel}
+              onUpdateLabel={(key, value) => handleUpdateFieldLabel('registration', key, value)}
               onMove={(i, dir) => handleMoveField('registration', i, dir)}
               onUpdate={(key, patch) => handleUpdateField('registration', key, patch)}
               onSave={() => handleSaveFieldSettings('registration')}
@@ -1620,6 +1672,9 @@ export default function AdminPage() {
               title="💬 アンケートフォームの項目"
               hint="ユーザーサイトの「学内献血アンケート」に表示される質問です。"
               drafts={surveyFieldDrafts}
+              activeLang={activeFieldLang}
+              getLabel={getFieldLabel}
+              onUpdateLabel={(key, value) => handleUpdateFieldLabel('survey', key, value)}
               onMove={(i, dir) => handleMoveField('survey', i, dir)}
               onUpdate={(key, patch) => handleUpdateField('survey', key, patch)}
               onSave={() => handleSaveFieldSettings('survey')}
