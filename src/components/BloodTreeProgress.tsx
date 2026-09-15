@@ -472,6 +472,15 @@ export function BloodTreeProgress() {
             </div>
           )}
 
+          {displayCount > 0 && displayCount < GOAL && count !== null && (
+            <div className="tree-empty-cta">
+              <p className="tree-empty-msg">{t('tree.nextLeaf')}</p>
+              <a href="#register" className="tree-empty-btn">
+                {t('tree.beFIrstBtn')} →
+              </a>
+            </div>
+          )}
+
         </div>
       </div>
     </section>

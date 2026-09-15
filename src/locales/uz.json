@@ -283,6 +283,7 @@
     "participantNum": "Ishtirokchi #{{n}}",
     "beFirst": "Birinchi barg bo'ling!",
     "beFIrstBtn": "Hozir ro'yxatdan o'ting",
+    "nextLeaf": "Keyingi barg — bu siz bo'lishingiz mumkin.",
     "loveMessage": {
       "0": "Sizning mehribonligingiz kimningdir ertangi kunini belgilaydi.",
       "1": "Qadam tashlashga jasorat ko'rsatganingiz uchun samimiy rahmat.",
