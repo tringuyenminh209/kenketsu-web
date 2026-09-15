@@ -1,6 +1,7 @@
 {
   "eventNotice": {
-    "pending": "Details for the next blood donation event are currently being finalized. We'll update this page as soon as they're confirmed."
+    "pending": "Details for the next blood donation event are currently being finalized. We'll update this page as soon as they're confirmed.",
+    "detailsPending": "Details such as the date and venue will be posted here once confirmed."
   },
   "nav": {
     "know": "Learn",

@@ -1,6 +1,7 @@
 {
   "eventNotice": {
-    "pending": "Detail acara donor darah berikutnya sedang disiapkan. Kami akan memperbarui halaman ini segera setelah dikonfirmasi."
+    "pending": "Detail acara donor darah berikutnya sedang disiapkan. Kami akan memperbarui halaman ini segera setelah dikonfirmasi.",
+    "detailsPending": "Detail seperti tanggal dan lokasi acara akan diumumkan di sini setelah dikonfirmasi."
   },
   "nav": {
     "know": "Belajar",

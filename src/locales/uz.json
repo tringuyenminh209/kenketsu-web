@@ -1,6 +1,7 @@
 {
   "eventNotice": {
-    "pending": "Keyingi qon topshirish tadbiri haqidagi batafsil maʼlumot hozircha tayyorlanmoqda. Aniqlangach, shu yerda eʼlon qilinadi."
+    "pending": "Keyingi qon topshirish tadbiri haqidagi batafsil maʼlumot hozircha tayyorlanmoqda. Aniqlangach, shu yerda eʼlon qilinadi.",
+    "detailsPending": "Tadbir sanasi, joyi kabi tafsilotlar aniqlangach shu yerda eʼlon qilinadi."
   },
   "nav": {
     "know": "O'rganish",
