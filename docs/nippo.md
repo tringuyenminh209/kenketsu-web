@@ -38,6 +38,24 @@
 
 ---
 
+## Ngay: 2026-09-18
+
+## Noi dung da hoan thanh
+
+- Căn đều chiều cao các card ảnh trong gallery để các ô cùng hàng không bị lệch do caption dài/ngắn khác nhau.
+- Cho caption tự giãn đầy phần còn lại của card, giữ chiều cao tối thiểu và bo góc nhất quán.
+
+## Kiem tra
+
+- Browser QA: kiểm tra lại gallery ở desktop 1302x820 và mobile 390x844.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `docs/nippo.md`
+
+---
+
 ## Ngay: 2026-06-27
 
 ## Noi dung da hoan thanh
@@ -1369,7 +1387,7 @@ Nguoi dung phan hoi: bam luu ma khong thay gi thay doi (do banner thong bao nam 
 - Nguoi dung phat hien 2 van de qua screenshot:
   1. Nhan cac tab ngon ngu moi them trong Admin (`活動記録・アルバム`) dung chu ban ngu (မြန်မာ, नेपाली, Oʻzbekcha, বাংলা, ภาษาไทย, සිංහල...) — giao vien tieng Nhat khong doc duoc nen khong biet tab nao la ngon ngu nao.
   2. So sanh voi ban production that (kenketsu-web.vercel.app) khi chon tieng Viet: khoi "昨年の記録" van hien day du noi dung da dich (tu cac session dich thuat truoc day, khoa `lastYear.*` trong 12 file locale) — nhung tren localhost (code moi) lai chi hien tieng Nhat vi logic moi uu tien du lieu DB (chi co tieng Nhat) hon ban dich tinh co san.
-- **Sua (1)**: them `ADMIN_LANG_LABELS` (ten tieng Nhat cho tung ma ngon ngu, vd "ミャンマー語", "ネパール語"...) dung rieng cho giao dien Admin, khong dung lai nhan ban ngu cua `LANGS` (danh cho nguoi dung cuoi).
+- **Sua (1)**: them `ADMIN_LANG_LABELS` (ten tieng Nhat cho tung ma ngon ngu, vd "ミャンマー語", "ネパ���ル語"...) dung rieng cho giao dien Admin, khong dung lai nhan ban ngu cua `LANGS` (danh cho nguoi dung cuoi).
 - **Sua (2)**: khoi phuc dung thu tu uu tien cho `LastYearSection.tsx` — voi rieng nam 2025 (du lieu seed goc, cai da duoc dich san qua nhieu session truoc khi co he thong DB nay) va khi admin CHUA tu dan ban dich rieng vao `translations`, uu tien dung ban dich tinh co san (`t('lastYear.badge/title/summary/captions/sourceLink')`) hon la cot tieng Nhat trong DB. Cac nam khac (2026, 2027...) khong co ban dich tinh nao co san nen van theo dung luong: `translations[lang]` (admin dan) → cot tieng Nhat → i18n mac dinh chung.
 
 ## Kiem tra
