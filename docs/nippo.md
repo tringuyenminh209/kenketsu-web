@@ -98,6 +98,25 @@
 
 ---
 
+## Ngay: 2026-09-18
+
+## Noi dung da hoan thanh
+
+- Thu gọn và cân lại các card “Vì sao nên hiến máu” trên mobile: bỏ khoảng trắng thừa, giảm padding, icon và typography để nội dung liền mạch, dễ quét hơn.
+- Giữ card đồng nhất chiều cao theo nội dung và cải thiện khoảng cách giữa các card ở viewport 366px.
+
+## Kiem tra
+
+- Browser QA: mobile 366x738, light mode; card hiển thị gọn và không tràn ngang.
+- `npm run lint` và `npm run build` cần chạy từ thư mục dự án `/vercel/share/v0-project`.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `docs/nippo.md`
+
+---
+
 ## Ngay: 2026-06-27
 
 ## Noi dung da hoan thanh
