@@ -5389,11 +5389,153 @@ textarea { min-height: 110px; }
   .benefit-list, .reason-grid, .process-section .step-list { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 420px) {
+  @media (max-width: 420px) {
   .site-header { padding-inline: 14px; }
   .lang-select-btn { padding-inline: 8px; }
   .lang-label { display: none; }
   .info-strip dl, .impact-row { grid-template-columns: 1fr; }
   .section-title h2 { font-size: 21px; }
+  }
+
+/* Survey form hierarchy: make each question feel like a clear, equal step. */
+.survey-form-header .section-title {
+  align-items: flex-start;
 }
+
+.survey-form-header .section-title h2 {
+  margin: 0;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.survey-grid {
+  counter-reset: survey-question;
+  align-items: stretch;
+}
+
+.survey-grid > label,
+.survey-grid > fieldset {
+  position: relative;
+  min-width: 0;
+}
+
+.survey-grid > label {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 5px 16px rgba(16, 24, 40, 0.035);
+  color: var(--ink);
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.survey-grid > label::before,
+.survey-checkbox-group > legend::before {
+  color: var(--red);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.survey-grid > label::before {
+  counter-increment: survey-question;
+  content: 'Q' counter(survey-question);
+}
+
+.survey-grid select {
+  width: 100%;
+  border-color: #d5d9e0;
+  background-color: #fbfcfe;
+  font-weight: 600;
+}
+
+.survey-grid select:focus,
+.survey-other-input:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(206, 0, 23, 0.12);
+}
+
+.survey-checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px 12px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fbfcfe;
+}
+
+.survey-checkbox-group > legend {
+  grid-column: 1 / -1;
+  width: 100%;
+  padding: 0 0 5px;
+  color: var(--ink);
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.survey-checkbox-group > legend::before {
+  counter-increment: survey-question;
+  content: 'Q' counter(survey-question) '  ';
+}
+
+.survey-checkbox-group label {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  min-height: 42px;
+  padding: 10px 11px;
+  border: 1px solid #e4e7ec;
+  border-radius: 9px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: border-color .18s ease, background-color .18s ease, transform .18s ease;
+}
+
+.survey-checkbox-group label:hover {
+  border-color: rgba(206, 0, 23, .38);
+  background: #fff8f8;
+  transform: translateY(-1px);
+}
+
+.survey-checkbox-group label:has(input:checked) {
+  border-color: rgba(206, 0, 23, .55);
+  background: #fff1f2;
+  color: #8e0718;
+}
+
+.survey-checkbox-group input {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin: 1px 0 0;
+  accent-color: var(--red);
+}
+
+.survey-checkbox-group .survey-other-input {
+  grid-column: 1 / -1;
+}
+
+.survey-note {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .survey-area { padding-inline: 16px; }
+  .survey-form { padding: 24px 16px; }
+  .survey-grid { display: flex; flex-direction: column; gap: 14px; }
+  .survey-grid > label,
+  .survey-checkbox-group { padding: 15px; }
+  .survey-checkbox-group { grid-template-columns: 1fr; }
+  .survey-checkbox-group > legend { margin-bottom: 1px; }
+}
+
 
