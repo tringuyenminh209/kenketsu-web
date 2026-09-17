@@ -1,8 +1,17 @@
 import { createClient } from "@supabase/supabase-js"
 import type { EventItem, EventMemory, FormFieldSetting, FormType, Registration, RegistrationInsert, SheetData, SurveyInsert, SurveyResponse } from "../types"
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string
+const configuredSupabaseUrl = import.meta.env.VITE_SUPABASE_URL || import.meta.env.NEXT_PUBLIC_SUPABASE_URL
+const configuredSupabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || import.meta.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+// Keep the public site renderable when preview env vars have not been injected yet.
+// Database-backed actions will fail with their normal request error until the vars are available.
+const supabaseUrl = configuredSupabaseUrl || 'https://preview-placeholder.supabase.co'
+const supabaseAnonKey = configuredSupabaseAnonKey || 'preview-placeholder-anon-key'
+
+if (!configuredSupabaseUrl || !configuredSupabaseAnonKey) {
+  console.warn('[v0] Supabase environment variables are unavailable; running in preview fallback mode')
+}
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 

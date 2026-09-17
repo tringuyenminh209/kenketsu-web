@@ -1,5 +1,24 @@
 # NIPPO
 
+## Ngay: 2026-09-18
+
+## Noi dung da hoan thanh
+
+- Sua loi runtime `supabaseUrl is required` trong `src/lib/supabase.ts` bang cach ho tro ca bien Vite va bien `NEXT_PUBLIC_`, kem fallback an toan de preview van render duoc khi env chua duoc inject.
+- Them canh bao console ro rang khi preview dang chay khong co cau hinh Supabase.
+
+## Kiem tra
+
+- `npm run build`: pass
+- Browser preview trang chinh: render thanh cong, khong con loi khoi tao Supabase.
+
+## File da thay doi chinh
+
+- `src/lib/supabase.ts`
+- `docs/nippo.md`
+
+---
+
 ## Ngay: 2026-06-27
 
 ## Noi dung da hoan thanh
@@ -306,7 +325,7 @@
 - Đồng bộ hóa các placeholder đăng ký thành dạng chữ Latinh (Romaji) và ECC email `@ecc.ac.jp`, mã số sinh viên ví dụ `2240000` trên tất cả các ngôn ngữ còn thiếu.
 - Bổ sung toàn bộ các khóa cấu hình sự kiện, 28 khóa phần `impact` và 7 khóa cấu hình ảnh hoạt động năm ngoái (`lastYear.*`, `tree.leafAriaLabel`) bị thiếu cho cả `my.json` và `ne.json` (đạt 233/233 khóa đồng bộ 100% trên 6 tệp).
 - Mở rộng chi tiết nội dung chiều sâu (`detail`) cho cả 3 thẻ trong phần `knowledge.cards` ở toàn bộ 6 tệp locales (ja, en, vi, zh, my, ne). Nội dung mới tập trung cung cấp kiến thức y học thực tế về thời hạn bảo quản máu cực ngắn (hồng cầu 21 ngày, tiểu cầu 4 ngày), quy trình ly tâm tách thành phần máu để cứu tối đa 3 người, và vấn đề già hóa dân số tại Nhật Bản.
-- Cải tiến logic hiển thị mô tả chi tiết của phần kiến thức và lợi ích (`knowledge` và `benefits` trong `src/App.tsx` & `src/App.css`): tự động cắt chuỗi `\n` và chuyển dòng bắt đầu bằng `- ` thành danh sách bullet list (`<li>`) vô cùng sinh động, chuyên nghiệp và có chiều sâu cấu trúc.
+- Cải tiến logic hiển thị m�� tả chi tiết của phần kiến thức và lợi ích (`knowledge` và `benefits` trong `src/App.tsx` & `src/App.css`): tự động cắt chuỗi `\n` và chuyển dòng bắt đầu bằng `- ` thành danh sách bullet list (`<li>`) vô cùng sinh động, chuyên nghiệp và có chiều sâu cấu trúc.
 
 
 ## Kiem tra
