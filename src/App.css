@@ -3657,6 +3657,164 @@ th {
 }
 
 /* ── Footer row ── */
+
+@media (max-width: 760px) {
+  body {
+    min-width: 0;
+  }
+
+  .site-header {
+    padding-inline: 12px;
+  }
+
+  .brand {
+    gap: 8px;
+  }
+
+  .brand small {
+    max-width: 190px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .nav-links {
+    margin-inline: -2px;
+    padding-inline: 2px;
+    overscroll-behavior-inline: contain;
+  }
+
+  .hero-copy {
+    padding: 32px 20px 18px;
+  }
+
+  .hero-media {
+    min-height: 210px;
+    height: 210px;
+    margin: 0 20px 20px;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(30px, 9vw, 36px);
+  }
+
+  .survey-area {
+    padding: 24px 12px;
+  }
+
+  .survey-form {
+    padding: 20px 14px;
+    border-radius: 12px;
+  }
+
+  .survey-form-header {
+    margin-bottom: 20px;
+    padding-bottom: 18px;
+  }
+
+  .survey-grid {
+    gap: 14px;
+  }
+
+  .survey-grid > label,
+  .survey-grid > fieldset {
+    min-width: 0;
+  }
+
+  .survey-checkbox-group {
+    gap: 8px;
+    padding: 14px 12px;
+  }
+
+  .survey-checkbox-group label {
+    min-height: 46px;
+    padding: 10px 12px;
+    gap: 10px;
+    line-height: 1.35;
+  }
+
+  .survey-checkbox-group input[type='checkbox'] {
+    width: 18px;
+    height: 18px;
+  }
+
+  .survey-grid select,
+  .survey-grid input,
+  .survey-grid textarea {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .survey-note {
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .section-title,
+  .section-heading,
+  .knowledge-lead,
+  .pledge-section {
+    min-width: 0;
+  }
+
+  .benefit-list,
+  .admin-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .final-cta {
+    margin: 0 20px 36px;
+    padding: 30px 22px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .fs-section,
+  .last-year-section {
+    padding-inline: 20px;
+  }
+
+  .fs-rules {
+    grid-template-columns: 1fr;
+  }
+
+  .fs-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 420px) {
+  .lang-label {
+    display: none;
+  }
+
+  .lang-select-btn {
+    width: 38px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .nav-links a {
+    padding-inline: 9px;
+    font-size: 10px;
+  }
+
+  .hero-media {
+    height: 190px;
+    min-height: 190px;
+  }
+
+  .survey-area {
+    padding-inline: 8px;
+  }
+
+  .survey-form {
+    padding-inline: 12px;
+  }
+}
+
 .fs-footer {
   display: grid;
   grid-template-columns: 1fr 1fr;

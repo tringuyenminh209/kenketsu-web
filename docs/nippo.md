@@ -21,6 +21,27 @@
 
 ---
 
+## Ngay: 2026-09-18
+
+## Noi dung da hoan thanh
+
+- Rà soát responsive toàn bộ trang ở mobile 366x738, không chỉ riêng phần khảo sát.
+- Tối ưu header/brand, điều hướng cuộn ngang, hero image, CTA, spacing toàn trang, card và bảng dữ liệu để không bị tràn ngang.
+- Thu gọn form khảo sát trên màn hình nhỏ, tăng vùng chạm checkbox/select và giữ các trường full-width dễ thao tác.
+
+## Kiem tra
+
+- Browser QA: mobile 366x738, light mode; trang chính và survey đều render thành công.
+- `npm run lint`: pass, chỉ còn 2 warning Fast Refresh có sẵn trong `src/lib/shared.tsx`.
+- `npm run build`: pass; còn cảnh báo bundle lớn từ Vite, không ảnh hưởng render.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `docs/nippo.md`
+
+---
+
 ## Noi dung da hoan thanh
 
 - Sua loi runtime `supabaseUrl is required` trong `src/lib/supabase.ts` bang cach ho tro ca bien Vite va bien `NEXT_PUBLIC_`, kem fallback an toan de preview van render duoc khi env chua duoc inject.
