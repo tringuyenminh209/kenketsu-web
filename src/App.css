@@ -5533,13 +5533,75 @@ textarea { min-height: 110px; }
 }
 
 @media (max-width: 640px) {
-  .survey-area { padding-inline: 16px; }
-  .survey-form { padding: 24px 16px; }
-  .survey-grid { display: flex; flex-direction: column; gap: 14px; }
-  .survey-grid > label,
-  .survey-checkbox-group { padding: 15px; }
-  .survey-checkbox-group { grid-template-columns: 1fr; }
-  .survey-checkbox-group > legend { margin-bottom: 1px; }
+  .survey-area {
+    padding: 24px 10px 40px;
+  }
+
+  .survey-form {
+    padding: 20px 12px 24px;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(16, 24, 40, 0.04);
+  }
+
+  .survey-form-header {
+    margin-bottom: 20px;
+    padding-bottom: 18px;
+  }
+
+  .survey-form-header .section-title h2 {
+    font-size: 20px;
+    line-height: 1.35;
+  }
+
+  .survey-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .survey-grid > label {
+    min-height: 0;
+    padding: 13px 14px;
+    gap: 7px;
+    border-radius: 9px;
+    font-size: 14px;
+    box-shadow: none;
+  }
+
+  .survey-grid > label select {
+    min-height: 42px;
+  }
+
+  .survey-checkbox-group {
+    grid-template-columns: 1fr;
+    gap: 7px;
+    padding: 14px;
+    border-radius: 9px;
+  }
+
+  .survey-checkbox-group > legend {
+    margin-bottom: 1px;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .survey-checkbox-group label {
+    min-height: 42px;
+    padding: 9px 10px;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .survey-checkbox-group > label input {
+    flex: 0 0 auto;
+  }
+
+  .survey-note {
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.55;
+  }
 }
 
 

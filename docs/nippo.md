@@ -56,6 +56,27 @@
 
 ---
 
+## Ngay: 2026-09-18
+
+## Noi dung da hoan thanh
+
+- Tối ưu riêng trải nghiệm mobile cho 学内献血アンケート theo hướng gọn, dễ quét và ít cảm giác nặng nề hơn bản desktop.
+- Giảm padding, khoảng cách, shadow và kích thước tiêu đề; chuyển nhóm lựa chọn nhiều đáp án thành một cột để thao tác bằng ngón tay rõ ràng hơn.
+- Giữ select/card cùng chiều rộng, tăng vùng chạm tối thiểu và bảo toàn layout desktop hai cột.
+
+## Kiem tra
+
+- Browser QA tại viewport mobile 366x738, light mode: render thành công.
+- `npm run lint`: pass.
+- `npm run build`: pass.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `docs/nippo.md`
+
+---
+
 ## Ngay: 2026-06-27
 
 ## Noi dung da hoan thanh
