@@ -1,5 +1,103 @@
 # NIPPO
 
+## Ngay: 2026-09-18
+
+## Noi dung da hoan thanh
+
+- Rà soát và cải thiện toàn bộ UX/UI trang chính: tăng hierarchy cho hero, CTA, navigation, form controls và card surfaces.
+- Tối ưu responsive desktop/tablet/mobile: header thành chip navigation cuộn ngang, hero xếp lại hợp lý, CTA full-width, thông tin và card chuyển về layout dễ đọc.
+- Bổ sung trạng thái focus/hover/active rõ hơn, bo góc và shadow nhất quán, typography cân bằng và giới hạn độ dài dòng cho khả năng đọc.
+
+## Kiem tra
+
+- `npm run lint`: pass (chỉ còn 2 warning Fast Refresh có sẵn trong `src/lib/shared.tsx`).
+- `npm run build`: pass; Vite chỉ cảnh báo bundle lớn ở mức khuyến nghị tối ưu thêm.
+- Browser QA: desktop 1302x820 và mobile 390x844 đều render thành công, không thấy lỗi runtime hoặc horizontal overflow.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `docs/nippo.md`
+
+---
+
+## Ngay: 2026-09-18
+
+## Noi dung da hoan thanh
+
+- Rà soát responsive toàn bộ trang ở mobile 366x738, không chỉ riêng phần khảo sát.
+- Tối ưu header/brand, điều hướng cuộn ngang, hero image, CTA, spacing toàn trang, card và bảng dữ liệu để không bị tràn ngang.
+- Thu gọn form khảo sát trên màn hình nhỏ, tăng vùng chạm checkbox/select và giữ các trường full-width dễ thao tác.
+
+## Kiem tra
+
+- Browser QA: mobile 366x738, light mode; trang chính và survey đều render thành công.
+- `npm run lint`: pass, chỉ còn 2 warning Fast Refresh có sẵn trong `src/lib/shared.tsx`.
+- `npm run build`: pass; còn cảnh báo bundle lớn từ Vite, không ảnh hưởng render.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `docs/nippo.md`
+
+---
+
+## Noi dung da hoan thanh
+
+- Sua loi runtime `supabaseUrl is required` trong `src/lib/supabase.ts` bang cach ho tro ca bien Vite va bien `NEXT_PUBLIC_`, kem fallback an toan de preview van render duoc khi env chua duoc inject.
+- Them canh bao console ro rang khi preview dang chay khong co cau hinh Supabase.
+
+## Kiem tra
+
+- `npm run build`: pass
+- Browser preview trang chinh: render thanh cong, khong con loi khoi tao Supabase.
+
+## File da thay doi chinh
+
+- `src/lib/supabase.ts`
+- `docs/nippo.md`
+
+---
+
+## Ngay: 2026-09-18
+
+## Noi dung da hoan thanh
+
+- Căn đều các ô trong form 学内献血アンケート: card câu hỏi dạng select cùng chiều cao theo hàng, option checkbox có chiều cao ổn định và nội dung được căn giữa để tránh cảm giác lệch.
+- Cho caption tự giãn đầy phần còn lại của card, giữ chiều cao tối thiểu và bo góc nhất quán.
+
+## Kiem tra
+
+- Browser QA: kiểm tra lại gallery ở desktop 1302x820 và mobile 390x844.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `docs/nippo.md`
+
+---
+
+## Ngay: 2026-09-18
+
+## Noi dung da hoan thanh
+
+- Tối ưu riêng trải nghiệm mobile cho 学内献血アンケート theo hướng gọn, dễ quét và ít cảm giác nặng nề hơn bản desktop.
+- Giảm padding, khoảng cách, shadow và kích thước tiêu đề; chuyển nhóm lựa chọn nhiều đáp án thành một cột để thao tác bằng ngón tay rõ ràng hơn.
+- Giữ select/card cùng chiều rộng, tăng vùng chạm tối thiểu và bảo toàn layout desktop hai cột.
+
+## Kiem tra
+
+- Browser QA tại viewport mobile 366x738, light mode: render thành công.
+- `npm run lint`: pass.
+- `npm run build`: pass.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `docs/nippo.md`
+
+---
+
 ## Ngay: 2026-06-27
 
 ## Noi dung da hoan thanh
@@ -305,8 +403,8 @@
 - Khắc phục triệt để lỗi cú pháp JSON và các ký tự bị lỗi hiển thị của tệp `my.json` và `ne.json` bằng cách khôi phục bản gốc sạch từ git (`d18a602`) và cập nhật lập trình.
 - Đồng bộ hóa các placeholder đăng ký thành dạng chữ Latinh (Romaji) và ECC email `@ecc.ac.jp`, mã số sinh viên ví dụ `2240000` trên tất cả các ngôn ngữ còn thiếu.
 - Bổ sung toàn bộ các khóa cấu hình sự kiện, 28 khóa phần `impact` và 7 khóa cấu hình ảnh hoạt động năm ngoái (`lastYear.*`, `tree.leafAriaLabel`) bị thiếu cho cả `my.json` và `ne.json` (đạt 233/233 khóa đồng bộ 100% trên 6 tệp).
-- Mở rộng chi tiết nội dung chiều sâu (`detail`) cho cả 3 thẻ trong phần `knowledge.cards` ở toàn bộ 6 tệp locales (ja, en, vi, zh, my, ne). Nội dung mới tập trung cung cấp kiến thức y học thực tế về thời hạn bảo quản máu cực ngắn (hồng cầu 21 ngày, tiểu cầu 4 ngày), quy trình ly tâm tách thành phần máu để cứu tối đa 3 người, và vấn đề già hóa dân số tại Nhật Bản.
-- Cải tiến logic hiển thị mô tả chi tiết của phần kiến thức và lợi ích (`knowledge` và `benefits` trong `src/App.tsx` & `src/App.css`): tự động cắt chuỗi `\n` và chuyển dòng bắt đầu bằng `- ` thành danh sách bullet list (`<li>`) vô cùng sinh động, chuyên nghiệp và có chiều sâu cấu trúc.
+- Mở rộng chi tiết nội dung chiều sâu (`detail`) cho cả 3 thẻ trong phần `knowledge.cards` ở toàn bộ 6 tệp locales (ja, en, vi, zh, my, ne). Nội dung mới tập trung cung cấp kiến thức y học thực tế về thời hạn bảo quản máu cực ngắn (h��ng cầu 21 ngày, tiểu cầu 4 ngày), quy trình ly tâm tách thành phần máu để cứu tối đa 3 người, và vấn đề già hóa dân số tại Nhật Bản.
+- Cải tiến logic hiển thị m�� tả chi tiết của phần kiến thức và lợi ích (`knowledge` và `benefits` trong `src/App.tsx` & `src/App.css`): tự động cắt chuỗi `\n` và chuyển dòng bắt đầu bằng `- ` thành danh sách bullet list (`<li>`) vô cùng sinh động, chuyên nghiệp và có chiều sâu cấu trúc.
 
 
 ## Kiem tra
@@ -430,7 +528,7 @@
 
 - **Đa ngôn ngữ hóa Bảng tiêu chuẩn hiến máu (eligibility)**:
   * Chuyển đổi toàn bộ nội dung của bảng tiêu chuẩn hiến máu `献血基準表` (bao gồm tiêu đề, các cột, các dòng thông số về lượng hiến, độ tuổi, cân nặng, huyết áp, nhịp tim, nhiệt độ, lượng huyết sắc tố, tiểu cầu, khoảng cách hiến giữa các lần, lượng hiến tối đa năm và các điều kiện cấm hiến chung) sang hệ thống đa ngôn ngữ.
-  * Tích hợp hàm `t()` của hook i18next và thuộc tính `dangerouslySetInnerHTML` để xử lý mượt mà các định dạng HTML (`<br />`, `<small>`) trong bảng dịch ở cả 6 ngôn ngữ (`ja`, `en`, `vi`, `zh`, `my`, `ne`).
+  * Tích hợp hàm `t()` của hook i18next và thuộc tính `dangerouslySetInnerHTML` ��ể xử lý mượt mà các định dạng HTML (`<br />`, `<small>`) trong bảng dịch ở cả 6 ngôn ngữ (`ja`, `en`, `vi`, `zh`, `my`, `ne`).
 - Đồng bộ hóa toàn diện các tệp locales: Số lượng khóa dịch của mỗi tệp ngôn ngữ hiện đã được đồng bộ chuẩn hóa lên **356 khóa** khớp nhau hoàn toàn, có cơ chế tự động loại bỏ ký tự BOM khi đọc dữ liệu.
 
 ## Kiem tra
@@ -599,7 +697,7 @@
   * Thiết kế lại hệ thống lá và trái tim dựa trên danh sách tọa độ phân bổ hữu cơ (`LEAF_DATA` gồm 88 phần tử) chia đều theo các giai đoạn.
   * Vẽ lá cây bằng hình dáng chiếc lá thật (`<path d="M12,2 C8,7 6,14 12,22 C18,14 16,7 12,2 Z" />`) kết hợp gân lá tinh tế.
   * Sử dụng dải màu gradient 3D cho thân cây (`#trunk-live` và `#trunk-dry`) để tạo chiều sâu chân thực.
-  * Thêm các cánh hoa/trái tim rơi rụng dưới gốc cây ở giai đoạn 3 (In Full Bloom) để tạo không gian nghệ thuật.
+  * Thêm các cánh hoa/trái tim rơi rụng dưới g���c cây ở giai đoạn 3 (In Full Bloom) để tạo không gian nghệ thuật.
 - **Hoạt họa (CSS Animation)**:
   * Thêm hiệu ứng `.tree-leaf-pop` và `@keyframes leafPopIn` giúp các lá và trái tim nở ra sinh động khi chuyển đổi giai đoạn với độ trễ (delay) khác nhau.
 
@@ -625,7 +723,7 @@
   * Thêm media query `@media (max-width: 768px)` để tinh chỉnh kích thước: giảm padding của overlay (`10px`), bo góc hộp thoại (`12px`), giảm kích thước chữ của bảng xuống `11px`, thu hẹp khoảng cách padding ở các ô để tối ưu hóa không gian hiển thị trên màn hình dọc nhỏ (iPad/iPhone).
 - **Sửa lỗi dịch chưa tự nhiên**:
   * Tiếng Việt: Chỉnh sửa cụm từ `"Từ cùng thứ đó sau 4/8/2 tuần"` dịch từ tiếng Nhật (`同じ曜日から`) thành cụm từ tự nhiên và chuẩn y khoa: `"Kể từ cùng ngày thứ trong tuần sau 4/8/2 tuần"`.
-  * Tiếng Thái: Hiệu chỉnh cụm từ chỉ khoảng cách sang dạng tự nhiên của tiếng Thái: `"เริ่มต้นได้ในวันเดียวกันของอีก 4/8/2 สัปดาห์ถัดไป"`.
+  * Tiếng Thái: Hiệu chỉnh cụm từ chỉ khoảng cách sang dạng tự nhiên của tiếng Thái: `"เริ่มต้นได้���นวันเดียวกันของอีก 4/8/2 สัปดาห์ถัดไป"`.
   * Tiếng Indonesia: Tối ưu hóa cụm từ dịch khoảng cách tương ứng: `"Mulai hari yang sama di 4/8/2 minggu berikutnya"`.
 
 ## Kiem tra
@@ -1331,7 +1429,7 @@ Nguoi dung phan hoi: bam luu ma khong thay gi thay doi (do banner thong bao nam 
 - Nguoi dung phat hien 2 van de qua screenshot:
   1. Nhan cac tab ngon ngu moi them trong Admin (`活動記録・アルバム`) dung chu ban ngu (မြန်မာ, नेपाली, Oʻzbekcha, বাংলা, ภาษาไทย, සිංහල...) — giao vien tieng Nhat khong doc duoc nen khong biet tab nao la ngon ngu nao.
   2. So sanh voi ban production that (kenketsu-web.vercel.app) khi chon tieng Viet: khoi "昨年の記録" van hien day du noi dung da dich (tu cac session dich thuat truoc day, khoa `lastYear.*` trong 12 file locale) — nhung tren localhost (code moi) lai chi hien tieng Nhat vi logic moi uu tien du lieu DB (chi co tieng Nhat) hon ban dich tinh co san.
-- **Sua (1)**: them `ADMIN_LANG_LABELS` (ten tieng Nhat cho tung ma ngon ngu, vd "ミャンマー語", "ネパール語"...) dung rieng cho giao dien Admin, khong dung lai nhan ban ngu cua `LANGS` (danh cho nguoi dung cuoi).
+- **Sua (1)**: them `ADMIN_LANG_LABELS` (ten tieng Nhat cho tung ma ngon ngu, vd "ミャンマー語", "ネパ���ル語"...) dung rieng cho giao dien Admin, khong dung lai nhan ban ngu cua `LANGS` (danh cho nguoi dung cuoi).
 - **Sua (2)**: khoi phuc dung thu tu uu tien cho `LastYearSection.tsx` — voi rieng nam 2025 (du lieu seed goc, cai da duoc dich san qua nhieu session truoc khi co he thong DB nay) va khi admin CHUA tu dan ban dich rieng vao `translations`, uu tien dung ban dich tinh co san (`t('lastYear.badge/title/summary/captions/sourceLink')`) hon la cot tieng Nhat trong DB. Cac nam khac (2026, 2027...) khong co ban dich tinh nao co san nen van theo dung luong: `translations[lang]` (admin dan) → cot tieng Nhat → i18n mac dinh chung.
 
 ## Kiem tra

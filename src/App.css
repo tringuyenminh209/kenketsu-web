@@ -448,13 +448,19 @@ a:focus-visible {
 .last-year-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
+  align-items: stretch;
   gap: 16px;
   max-width: 1100px;
   margin: 0 auto 24px;
 }
 .last-year-photo {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
   margin: 0;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
   background: #eee;
 }
@@ -469,9 +475,14 @@ a:focus-visible {
   transform: scale(1.04);
 }
 .last-year-photo figcaption {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  min-height: 56px;
+  box-sizing: border-box;
   font-size: 0.78rem;
   color: var(--text-sub);
-  padding: 8px 10px;
+  padding: 10px 12px;
   line-height: 1.5;
   background: white;
 }
@@ -2827,7 +2838,7 @@ th {
   box-shadow: none;
 }
 
-/* ── Impact Stats ─────────────────────────────────── */
+/* ── Impact Stats ─────────────���───────────────────── */
 .impact-stats {
   display: grid;
   grid-template-columns: 1fr 1px 1fr 1px 1fr;
@@ -3646,6 +3657,164 @@ th {
 }
 
 /* ── Footer row ── */
+
+@media (max-width: 760px) {
+  body {
+    min-width: 0;
+  }
+
+  .site-header {
+    padding-inline: 12px;
+  }
+
+  .brand {
+    gap: 8px;
+  }
+
+  .brand small {
+    max-width: 190px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .nav-links {
+    margin-inline: -2px;
+    padding-inline: 2px;
+    overscroll-behavior-inline: contain;
+  }
+
+  .hero-copy {
+    padding: 32px 20px 18px;
+  }
+
+  .hero-media {
+    min-height: 210px;
+    height: 210px;
+    margin: 0 20px 20px;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(30px, 9vw, 36px);
+  }
+
+  .survey-area {
+    padding: 24px 12px;
+  }
+
+  .survey-form {
+    padding: 20px 14px;
+    border-radius: 12px;
+  }
+
+  .survey-form-header {
+    margin-bottom: 20px;
+    padding-bottom: 18px;
+  }
+
+  .survey-grid {
+    gap: 14px;
+  }
+
+  .survey-grid > label,
+  .survey-grid > fieldset {
+    min-width: 0;
+  }
+
+  .survey-checkbox-group {
+    gap: 8px;
+    padding: 14px 12px;
+  }
+
+  .survey-checkbox-group label {
+    min-height: 46px;
+    padding: 10px 12px;
+    gap: 10px;
+    line-height: 1.35;
+  }
+
+  .survey-checkbox-group input[type='checkbox'] {
+    width: 18px;
+    height: 18px;
+  }
+
+  .survey-grid select,
+  .survey-grid input,
+  .survey-grid textarea {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .survey-note {
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .section-title,
+  .section-heading,
+  .knowledge-lead,
+  .pledge-section {
+    min-width: 0;
+  }
+
+  .benefit-list,
+  .admin-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .final-cta {
+    margin: 0 20px 36px;
+    padding: 30px 22px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .fs-section,
+  .last-year-section {
+    padding-inline: 20px;
+  }
+
+  .fs-rules {
+    grid-template-columns: 1fr;
+  }
+
+  .fs-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 420px) {
+  .lang-label {
+    display: none;
+  }
+
+  .lang-select-btn {
+    width: 38px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .nav-links a {
+    padding-inline: 9px;
+    font-size: 10px;
+  }
+
+  .hero-media {
+    height: 190px;
+    min-height: 190px;
+  }
+
+  .survey-area {
+    padding-inline: 8px;
+  }
+
+  .survey-form {
+    padding-inline: 12px;
+  }
+}
+
 .fs-footer {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -5330,4 +5499,267 @@ th {
   color: white;
   stroke-width: 2.8;
 }
+
+/* UX/UI refinement: preserve the visual hierarchy while making navigation, forms, and mobile layouts easier to scan. */
+main { max-width: 1440px; }
+.site-header { min-height: 68px; padding-inline: clamp(18px, 4vw, 56px); }
+.nav-links a { position: relative; padding-block: 22px; }
+.nav-links a::after { content: ''; position: absolute; right: 0; bottom: 14px; left: 0; height: 2px; border-radius: 999px; background: var(--red); transform: scaleX(0); transition: transform 180ms ease; }
+.nav-links a:hover::after, .nav-links a:focus-visible::after { transform: scaleX(1); }
+.hero-section { min-height: min(760px, calc(100vh - 68px)); }
+.hero-copy { padding: clamp(44px, 7vw, 88px) clamp(24px, 5vw, 72px); }
+.hero-lead { max-width: 30rem; font-size: clamp(18px, 2vw, 24px); line-height: 1.55; }
+.button { min-height: 50px; border-radius: 10px; }
+input, select, textarea { min-height: 46px; border-radius: 9px; }
+textarea { min-height: 110px; }
+.qa-card, .panel, .survey-form, .knowledge-card, .benefit-card, .reason-card, .process-detail, .last-year-photo { border-radius: 14px; box-shadow: 0 12px 32px rgba(16, 24, 40, 0.06); }
+.section-title h2, .knowledge-lead h2, .pledge-section h2 { text-wrap: balance; }
+
+@media (max-width: 980px) {
+  .site-header { gap: 16px; }
+  .nav-links { gap: 14px; }
+  .nav-links a { font-size: 12px; }
+  .hero-section { grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr); }
+}
+
+@media (max-width: 720px) {
+  .site-header { position: relative; display: flex; flex-wrap: wrap; justify-content: space-between; padding-block: 10px; }
+  .brand-mark { width: 36px; height: 36px; }
+  .nav-links { order: 3; width: 100%; justify-content: flex-start; gap: 4px; overflow-x: auto; padding: 2px 0 4px; scrollbar-width: none; }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a { flex: 0 0 auto; padding: 8px 10px; border: 1px solid var(--border); border-radius: 999px; background: #fff; }
+  .nav-links a::after { display: none; }
+  .lang-label { min-width: auto; }
+  .hero-section { display: flex; flex-direction: column-reverse; min-height: auto; }
+  .hero-media { min-height: clamp(260px, 68vw, 420px); }
+  .hero-media::before { width: 100%; height: 30%; background: linear-gradient(180deg, transparent, var(--page)); }
+  .hero-copy { padding: 34px 24px 42px; }
+  .hero-actions { display: grid; gap: 10px; margin-top: 28px; }
+  .button, .button.primary { width: 100%; }
+  .impact-row { gap: 16px; margin-top: 34px; }
+  .info-strip { grid-template-columns: 1fr; padding: 30px 24px; }
+  .info-strip dl { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 14px; }
+  .app-reservation-links { grid-column: auto; }
+  .knowledge-section, .pledge-section { grid-template-columns: 1fr; gap: 28px; padding-block: 52px; }
+  .knowledge-lead { position: static; }
+  .knowledge-detail, .benefit-detail, .process-section .process-detail { grid-template-columns: 1fr; gap: 20px; padding: 18px; }
+  .benefits-section, .process-section, .reason-grid, .work-area, .survey-area { padding-block: 48px; }
+  .benefit-list, .reason-grid, .process-section .step-list { grid-template-columns: 1fr; }
+}
+
+  @media (max-width: 420px) {
+  .site-header { padding-inline: 14px; }
+  .lang-select-btn { padding-inline: 8px; }
+  .lang-label { display: none; }
+  .info-strip dl, .impact-row { grid-template-columns: 1fr; }
+  .section-title h2 { font-size: 21px; }
+  }
+
+/* Survey form hierarchy: make each question feel like a clear, equal step. */
+.survey-form-header .section-title {
+  align-items: flex-start;
+}
+
+.survey-form-header .section-title h2 {
+  margin: 0;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.survey-grid {
+  counter-reset: survey-question;
+  align-items: stretch;
+}
+
+.survey-grid > label,
+.survey-grid > fieldset {
+  position: relative;
+  min-width: 0;
+}
+
+.survey-grid > label {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 5px 16px rgba(16, 24, 40, 0.035);
+  color: var(--ink);
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.survey-grid > label::before,
+.survey-checkbox-group > legend::before {
+  color: var(--red);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.survey-grid > label::before {
+  counter-increment: survey-question;
+  content: 'Q' counter(survey-question);
+}
+
+.survey-grid select {
+  width: 100%;
+  border-color: #d5d9e0;
+  background-color: #fbfcfe;
+  font-weight: 600;
+}
+
+.survey-grid select:focus,
+.survey-other-input:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(206, 0, 23, 0.12);
+}
+
+.survey-checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px 12px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fbfcfe;
+}
+
+.survey-checkbox-group > legend {
+  grid-column: 1 / -1;
+  width: 100%;
+  padding: 0 0 5px;
+  color: var(--ink);
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.survey-checkbox-group > legend::before {
+  counter-increment: survey-question;
+  content: 'Q' counter(survey-question) '  ';
+}
+
+.survey-checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 68px;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 12px 11px;
+  border: 1px solid #e4e7ec;
+  border-radius: 9px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: border-color .18s ease, background-color .18s ease, transform .18s ease;
+}
+
+.survey-checkbox-group label:hover {
+  border-color: rgba(206, 0, 23, .38);
+  background: #fff8f8;
+  transform: translateY(-1px);
+}
+
+.survey-checkbox-group label:has(input:checked) {
+  border-color: rgba(206, 0, 23, .55);
+  background: #fff1f2;
+  color: #8e0718;
+}
+
+.survey-checkbox-group input {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin: 1px 0 0;
+  accent-color: var(--red);
+}
+
+.survey-checkbox-group .survey-other-input {
+  grid-column: 1 / -1;
+}
+
+.survey-note {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .survey-area {
+    padding: 24px 10px 40px;
+  }
+
+  .survey-form {
+    padding: 20px 12px 24px;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(16, 24, 40, 0.04);
+  }
+
+  .survey-form-header {
+    margin-bottom: 20px;
+    padding-bottom: 18px;
+  }
+
+  .survey-form-header .section-title h2 {
+    font-size: 20px;
+    line-height: 1.35;
+  }
+
+  .survey-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .survey-grid > label {
+    min-height: 0;
+    padding: 13px 14px;
+    gap: 7px;
+    border-radius: 9px;
+    font-size: 14px;
+    box-shadow: none;
+  }
+
+  .survey-grid > label select {
+    min-height: 42px;
+  }
+
+  .survey-checkbox-group {
+    grid-template-columns: 1fr;
+    gap: 7px;
+    padding: 14px;
+    border-radius: 9px;
+  }
+
+  .survey-checkbox-group > legend {
+    margin-bottom: 1px;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .survey-checkbox-group label {
+    min-height: 42px;
+    padding: 9px 10px;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .survey-checkbox-group > label input {
+    flex: 0 0 auto;
+  }
+
+  .survey-note {
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+}
+
 
