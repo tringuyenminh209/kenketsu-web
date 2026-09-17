@@ -42,7 +42,7 @@
 
 ## Noi dung da hoan thanh
 
-- Căn đều chiều cao các card ảnh trong gallery để các ô cùng hàng không bị lệch do caption dài/ngắn khác nhau.
+- Căn đều các ô trong form 学内献血アンケート: card câu hỏi dạng select cùng chiều cao theo hàng, option checkbox có chiều cao ổn định và nội dung được căn giữa để tránh cảm giác lệch.
 - Cho caption tự giãn đầy phần còn lại của card, giữ chiều cao tối thiểu và bo góc nhất quán.
 
 ## Kiem tra
@@ -486,7 +486,7 @@
 
 - **Đa ngôn ngữ hóa Bảng tiêu chuẩn hiến máu (eligibility)**:
   * Chuyển đổi toàn bộ nội dung của bảng tiêu chuẩn hiến máu `献血基準表` (bao gồm tiêu đề, các cột, các dòng thông số về lượng hiến, độ tuổi, cân nặng, huyết áp, nhịp tim, nhiệt độ, lượng huyết sắc tố, tiểu cầu, khoảng cách hiến giữa các lần, lượng hiến tối đa năm và các điều kiện cấm hiến chung) sang hệ thống đa ngôn ngữ.
-  * Tích hợp hàm `t()` của hook i18next và thuộc tính `dangerouslySetInnerHTML` để xử lý mượt mà các định dạng HTML (`<br />`, `<small>`) trong bảng dịch ở cả 6 ngôn ngữ (`ja`, `en`, `vi`, `zh`, `my`, `ne`).
+  * Tích hợp hàm `t()` của hook i18next và thuộc tính `dangerouslySetInnerHTML` ��ể xử lý mượt mà các định dạng HTML (`<br />`, `<small>`) trong bảng dịch ở cả 6 ngôn ngữ (`ja`, `en`, `vi`, `zh`, `my`, `ne`).
 - Đồng bộ hóa toàn diện các tệp locales: Số lượng khóa dịch của mỗi tệp ngôn ngữ hiện đã được đồng bộ chuẩn hóa lên **356 khóa** khớp nhau hoàn toàn, có cơ chế tự động loại bỏ ký tự BOM khi đọc dữ liệu.
 
 ## Kiem tra
@@ -655,7 +655,7 @@
   * Thiết kế lại hệ thống lá và trái tim dựa trên danh sách tọa độ phân bổ hữu cơ (`LEAF_DATA` gồm 88 phần tử) chia đều theo các giai đoạn.
   * Vẽ lá cây bằng hình dáng chiếc lá thật (`<path d="M12,2 C8,7 6,14 12,22 C18,14 16,7 12,2 Z" />`) kết hợp gân lá tinh tế.
   * Sử dụng dải màu gradient 3D cho thân cây (`#trunk-live` và `#trunk-dry`) để tạo chiều sâu chân thực.
-  * Thêm các cánh hoa/trái tim rơi rụng dưới gốc cây ở giai đoạn 3 (In Full Bloom) để tạo không gian nghệ thuật.
+  * Thêm các cánh hoa/trái tim rơi rụng dưới g���c cây ở giai đoạn 3 (In Full Bloom) để tạo không gian nghệ thuật.
 - **Hoạt họa (CSS Animation)**:
   * Thêm hiệu ứng `.tree-leaf-pop` và `@keyframes leafPopIn` giúp các lá và trái tim nở ra sinh động khi chuyển đổi giai đoạn với độ trễ (delay) khác nhau.
 
