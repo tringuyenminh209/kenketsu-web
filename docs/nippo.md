@@ -4,6 +4,25 @@
 
 ## Noi dung da hoan thanh
 
+- Rà soát và cải thiện toàn bộ UX/UI trang chính: tăng hierarchy cho hero, CTA, navigation, form controls và card surfaces.
+- Tối ưu responsive desktop/tablet/mobile: header thành chip navigation cuộn ngang, hero xếp lại hợp lý, CTA full-width, thông tin và card chuyển về layout dễ đọc.
+- Bổ sung trạng thái focus/hover/active rõ hơn, bo góc và shadow nhất quán, typography cân bằng và giới hạn độ dài dòng cho khả năng đọc.
+
+## Kiem tra
+
+- `npm run lint`: pass (chỉ còn 2 warning Fast Refresh có sẵn trong `src/lib/shared.tsx`).
+- `npm run build`: pass; Vite chỉ cảnh báo bundle lớn ở mức khuyến nghị tối ưu thêm.
+- Browser QA: desktop 1302x820 và mobile 390x844 đều render thành công, không thấy lỗi runtime hoặc horizontal overflow.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `docs/nippo.md`
+
+---
+
+## Noi dung da hoan thanh
+
 - Sua loi runtime `supabaseUrl is required` trong `src/lib/supabase.ts` bang cach ho tro ca bien Vite va bien `NEXT_PUBLIC_`, kem fallback an toan de preview van render duoc khi env chua duoc inject.
 - Them canh bao console ro rang khi preview dang chay khong co cau hinh Supabase.
 
@@ -324,7 +343,7 @@
 - Khắc phục triệt để lỗi cú pháp JSON và các ký tự bị lỗi hiển thị của tệp `my.json` và `ne.json` bằng cách khôi phục bản gốc sạch từ git (`d18a602`) và cập nhật lập trình.
 - Đồng bộ hóa các placeholder đăng ký thành dạng chữ Latinh (Romaji) và ECC email `@ecc.ac.jp`, mã số sinh viên ví dụ `2240000` trên tất cả các ngôn ngữ còn thiếu.
 - Bổ sung toàn bộ các khóa cấu hình sự kiện, 28 khóa phần `impact` và 7 khóa cấu hình ảnh hoạt động năm ngoái (`lastYear.*`, `tree.leafAriaLabel`) bị thiếu cho cả `my.json` và `ne.json` (đạt 233/233 khóa đồng bộ 100% trên 6 tệp).
-- Mở rộng chi tiết nội dung chiều sâu (`detail`) cho cả 3 thẻ trong phần `knowledge.cards` ở toàn bộ 6 tệp locales (ja, en, vi, zh, my, ne). Nội dung mới tập trung cung cấp kiến thức y học thực tế về thời hạn bảo quản máu cực ngắn (hồng cầu 21 ngày, tiểu cầu 4 ngày), quy trình ly tâm tách thành phần máu để cứu tối đa 3 người, và vấn đề già hóa dân số tại Nhật Bản.
+- Mở rộng chi tiết nội dung chiều sâu (`detail`) cho cả 3 thẻ trong phần `knowledge.cards` ở toàn bộ 6 tệp locales (ja, en, vi, zh, my, ne). Nội dung mới tập trung cung cấp kiến thức y học thực tế về thời hạn bảo quản máu cực ngắn (h��ng cầu 21 ngày, tiểu cầu 4 ngày), quy trình ly tâm tách thành phần máu để cứu tối đa 3 người, và vấn đề già hóa dân số tại Nhật Bản.
 - Cải tiến logic hiển thị m�� tả chi tiết của phần kiến thức và lợi ích (`knowledge` và `benefits` trong `src/App.tsx` & `src/App.css`): tự động cắt chuỗi `\n` và chuyển dòng bắt đầu bằng `- ` thành danh sách bullet list (`<li>`) vô cùng sinh động, chuyên nghiệp và có chiều sâu cấu trúc.
 
 
@@ -644,7 +663,7 @@
   * Thêm media query `@media (max-width: 768px)` để tinh chỉnh kích thước: giảm padding của overlay (`10px`), bo góc hộp thoại (`12px`), giảm kích thước chữ của bảng xuống `11px`, thu hẹp khoảng cách padding ở các ô để tối ưu hóa không gian hiển thị trên màn hình dọc nhỏ (iPad/iPhone).
 - **Sửa lỗi dịch chưa tự nhiên**:
   * Tiếng Việt: Chỉnh sửa cụm từ `"Từ cùng thứ đó sau 4/8/2 tuần"` dịch từ tiếng Nhật (`同じ曜日から`) thành cụm từ tự nhiên và chuẩn y khoa: `"Kể từ cùng ngày thứ trong tuần sau 4/8/2 tuần"`.
-  * Tiếng Thái: Hiệu chỉnh cụm từ chỉ khoảng cách sang dạng tự nhiên của tiếng Thái: `"เริ่มต้นได้ในวันเดียวกันของอีก 4/8/2 สัปดาห์ถัดไป"`.
+  * Tiếng Thái: Hiệu chỉnh cụm từ chỉ khoảng cách sang dạng tự nhiên của tiếng Thái: `"เริ่มต้นได้���นวันเดียวกันของอีก 4/8/2 สัปดาห์ถัดไป"`.
   * Tiếng Indonesia: Tối ưu hóa cụm từ dịch khoảng cách tương ứng: `"Mulai hari yang sama di 4/8/2 minggu berikutnya"`.
 
 ## Kiem tra

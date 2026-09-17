@@ -2827,7 +2827,7 @@ th {
   box-shadow: none;
 }
 
-/* ── Impact Stats ─────────────────────────────────── */
+/* ── Impact Stats ─────────────��───────────────────── */
 .impact-stats {
   display: grid;
   grid-template-columns: 1fr 1px 1fr 1px 1fr;
@@ -5329,5 +5329,60 @@ th {
   height: 20px;
   color: white;
   stroke-width: 2.8;
+}
+
+/* UX/UI refinement: preserve the visual hierarchy while making navigation, forms, and mobile layouts easier to scan. */
+main { max-width: 1440px; }
+.site-header { min-height: 68px; padding-inline: clamp(18px, 4vw, 56px); }
+.nav-links a { position: relative; padding-block: 22px; }
+.nav-links a::after { content: ''; position: absolute; right: 0; bottom: 14px; left: 0; height: 2px; border-radius: 999px; background: var(--red); transform: scaleX(0); transition: transform 180ms ease; }
+.nav-links a:hover::after, .nav-links a:focus-visible::after { transform: scaleX(1); }
+.hero-section { min-height: min(760px, calc(100vh - 68px)); }
+.hero-copy { padding: clamp(44px, 7vw, 88px) clamp(24px, 5vw, 72px); }
+.hero-lead { max-width: 30rem; font-size: clamp(18px, 2vw, 24px); line-height: 1.55; }
+.button { min-height: 50px; border-radius: 10px; }
+input, select, textarea { min-height: 46px; border-radius: 9px; }
+textarea { min-height: 110px; }
+.qa-card, .panel, .survey-form, .knowledge-card, .benefit-card, .reason-card, .process-detail, .last-year-photo { border-radius: 14px; box-shadow: 0 12px 32px rgba(16, 24, 40, 0.06); }
+.section-title h2, .knowledge-lead h2, .pledge-section h2 { text-wrap: balance; }
+
+@media (max-width: 980px) {
+  .site-header { gap: 16px; }
+  .nav-links { gap: 14px; }
+  .nav-links a { font-size: 12px; }
+  .hero-section { grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr); }
+}
+
+@media (max-width: 720px) {
+  .site-header { position: relative; display: flex; flex-wrap: wrap; justify-content: space-between; padding-block: 10px; }
+  .brand-mark { width: 36px; height: 36px; }
+  .nav-links { order: 3; width: 100%; justify-content: flex-start; gap: 4px; overflow-x: auto; padding: 2px 0 4px; scrollbar-width: none; }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a { flex: 0 0 auto; padding: 8px 10px; border: 1px solid var(--border); border-radius: 999px; background: #fff; }
+  .nav-links a::after { display: none; }
+  .lang-label { min-width: auto; }
+  .hero-section { display: flex; flex-direction: column-reverse; min-height: auto; }
+  .hero-media { min-height: clamp(260px, 68vw, 420px); }
+  .hero-media::before { width: 100%; height: 30%; background: linear-gradient(180deg, transparent, var(--page)); }
+  .hero-copy { padding: 34px 24px 42px; }
+  .hero-actions { display: grid; gap: 10px; margin-top: 28px; }
+  .button, .button.primary { width: 100%; }
+  .impact-row { gap: 16px; margin-top: 34px; }
+  .info-strip { grid-template-columns: 1fr; padding: 30px 24px; }
+  .info-strip dl { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 14px; }
+  .app-reservation-links { grid-column: auto; }
+  .knowledge-section, .pledge-section { grid-template-columns: 1fr; gap: 28px; padding-block: 52px; }
+  .knowledge-lead { position: static; }
+  .knowledge-detail, .benefit-detail, .process-section .process-detail { grid-template-columns: 1fr; gap: 20px; padding: 18px; }
+  .benefits-section, .process-section, .reason-grid, .work-area, .survey-area { padding-block: 48px; }
+  .benefit-list, .reason-grid, .process-section .step-list { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 420px) {
+  .site-header { padding-inline: 14px; }
+  .lang-select-btn { padding-inline: 8px; }
+  .lang-label { display: none; }
+  .info-strip dl, .impact-row { grid-template-columns: 1fr; }
+  .section-title h2 { font-size: 21px; }
 }
 
