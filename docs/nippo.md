@@ -1,5 +1,87 @@
 # NIPPO
 
+## Ngay: 2026-09-19
+
+## Noi dung da hoan thanh
+
+- Điều chỉnh nút chuyển ngôn ngữ: desktop giữ icon và tên ngôn ngữ nhưng ẩn mũi tên; mobile chỉ giữ icon globe để tiết kiệm không gian.
+- Sửa selector CSS dư phát sinh khi override mobile và xác nhận layout responsive không bị ảnh hưởng.
+
+## Noi dung da hoan thanh
+
+- Sửa lỗi CTA đỏ cuối trang bị tràn ngang trên mobile: giới hạn chiều rộng khung, cho phép nội dung Nhật tự xuống dòng an toàn và đưa nút về full-width trong khung.
+- Khôi phục đầy đủ `src/App.css` sau lần ghi nhầm file trước đó, rồi áp dụng bản sửa overflow trên nền CSS chính xác.
+
+## Kiem tra
+
+- `npm run lint`: pass, còn 2 warning Fast Refresh có sẵn.
+- `npm run build`: pass, còn cảnh báo bundle lớn từ Vite.
+- Browser preview tạm thời không khả dụng do sandbox không lắng nghe port; cần kiểm tra lại khi dev server hoạt động.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `docs/nippo.md`
+
+---
+
+## Ngay: 2026-09-19
+
+## Noi dung da hoan thanh
+
+- Thu gọn ba reason card trên mobile để giảm khoảng trống: chuyển icon sang bên trái, tiêu đề/nội dung sang bên phải, bỏ chiều cao tối thiểu và giảm padding.
+
+## Kiem tra
+
+- `npm run lint`: pass, còn 2 warning Fast Refresh có sẵn trong `src/lib/shared.tsx`.
+- `npm run build`: pass; còn cảnh báo bundle lớn từ Vite.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `docs/nippo.md`
+
+---
+
+## Ngay: 2026-09-19
+
+## Noi dung da hoan thanh
+
+- Tinh chỉnh CTA cuối trang trên mobile: thêm khoảng cách dọc để khung không bị dính lên section khảo sát, cân lại line-height và giữ tiêu đề tiếng Nhật không bị bẻ chữ bất thường.
+- Rút gọn nút chuyển ngôn ngữ thành icon quả địa cầu, ẩn nhãn và mũi tên nhưng vẫn giữ nút có thể truy cập bằng bàn phím.
+
+## Kiem tra
+
+- Browser QA: mobile 366x738, light mode; header hiển thị icon ngôn ngữ gọn, trang render thành công.
+- `npm run lint`: pass, chỉ còn 2 warning Fast Refresh có sẵn trong `src/lib/shared.tsx`.
+- `npm run build`: pass; còn cảnh báo bundle lớn từ Vite, không ảnh hưởng render.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `docs/nippo.md`
+
+---
+
+## Ngay: 2026-09-19
+
+## Noi dung da hoan thanh
+
+- Thiết kế lại các reason card trên mobile: giảm khoảng trắng, dùng bố cục 2 cột cho hai card đầu và card cộng đồng full-width, giúp màn hình gọn và cân đối hơn.
+
+## Kiem tra
+
+- Browser QA: mobile 366x738, light mode; trang chính render thành công và card hiển thị gọn hơn.
+- `npm run lint`: chạy lại trong thư mục dự án.
+- `npm run build`: chạy lại trong thư mục dự án.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `docs/nippo.md`
+
+---
+
 ## Ngay: 2026-09-18
 
 ## Noi dung da hoan thanh
@@ -347,12 +429,12 @@
 
 - Sua dia diem su kien theo anh poster: `ECCコンピュータ専門学校 1号館 1階ラウンジ`.
 - Sua ngay gio theo anh poster: `2026年9月15日（火）`, `9:30〜11:30 / 12:30〜16:30`.
-- Them thong tin `協賛`: `大阪曾根崎ライオンズクラブ / 大阪西ライオンズクラブ`.
+- Them thong tin `協賛`: `大阪曾根崎ライオ���ズクラブ / 大阪西ライオンズクラブ`.
 - Them ghi chu: dat lich truoc se rut ngan thoi gian thu tuc hien mau.
 - Them thong tin `献血記念品`: nguoi hop tac hien mau se nhan qua ky niem tu Lions Club.
 - Them link App Store va Google Play cho ung dung Labrad de nguoi dung co the bam truc tiep thay vi quet QR.
 - Tao va gan 4 anh minh hoa rieng cho cac card `輸血が必要な人たちの現実`: cap cuu/phau thuat, ung thu/huyet hoc, sinh san/tre so sinh, benh man tinh/dieu tri dai han.
-- Cai thien section `安全で安心の献血`: bien 3 buoc `事前チェック`, `問診・検査`, `採血` thanh card co the bam, moi buoc co anh minh hoa, noi dung detail va danh sach cac muc duoc kiem tra.
+- Cai thien section `安全で安心の献血`: bien 3 buoc `事��チェック`, `問診・検査`, `採血` thanh card co the bam, moi buoc co anh minh hoa, noi dung detail va danh sach cac muc duoc kiem tra.
 - Them chu thich o footer de nguoi dung biet mot so hinh anh tren website la hinh minh hoa duoc tao bang AI, co the khac voi dia diem/nhan vat thuc te.
 - Cap nhat `src/config/event.ts` de phan event info va flyer/preview dung cung mot nguon du lieu.
 
@@ -947,7 +1029,7 @@
 
 - **Sửa lỗi hiển thị khoảng cách của phần Hoạt động năm ngoái (last-year-section) với các phần xung quanh**:
   * Phát hiện biến CSS `--page-px` sử dụng trong thuộc tính `padding: 80px var(--page-px);` chưa từng được định nghĩa ở bất kỳ đâu trong dự án, dẫn đến việc trình duyệt bỏ qua quy tắc này và làm padding của phần này bị tính là `0` trên cả desktop và mobile (làm ảnh và liên kết nguồn sát rạt phần "参加者の木").
-  * Thay thế bằng giá trị padding tường minh: đặt `padding: 80px 72px;` ở bản desktop và `padding: 48px 24px;` trong media query `@media (max-width: 768px)`.
+  * Thay thế bằng giá trị padding tường minh: đ��t `padding: 80px 72px;` ở bản desktop và `padding: 48px 24px;` trong media query `@media (max-width: 768px)`.
 
 ## Kiem tra
 
@@ -967,7 +1049,7 @@
 
 - **Tích hợp nút "Quay lại đầu trang" (Back to Top) dạng nổi để tối ưu hóa trải nghiệm người dùng**:
   * Tạo component `src/components/BackToTop.tsx` quản lý trạng thái ẩn/hiện dựa trên vị trí cuộn trang (hiển thị khi cuộn xuống > 400px) và thực hiện cuộn trang mượt mà lên đầu trang (`window.scrollTo({ top: 0, behavior: 'smooth' })`).
-  * Khai báo thêm biểu tượng `arrowUp` mới dạng SVG trong `src/lib/shared.tsx`.
+  * Khai báo thêm biểu tư��ng `arrowUp` mới dạng SVG trong `src/lib/shared.tsx`.
   * Cập nhật CSS định hình nút dạng tròn đỏ chuyên nghiệp, đổ bóng sang trọng, có chuyển động hover nhẹ và ẩn nút khi in trang (`no-print`).
   * Bổ sung khóa `"common.backToTop"` và tự động đồng bộ hóa dịch nghĩa chuẩn sang toàn bộ 12 ngôn ngữ (mỗi tệp chứa đúng 395 khóa sạch sẽ).
 
@@ -1095,7 +1177,7 @@
 Nguoi dung tiep tuc gui screenshot khi chuyen sang nam 2026 (chua co du lieu) va gop y 4 diem:
 
 1. **Loi tuong phan nut "空き枠数を保存"**: chu bi mau toi/kho doc tren nen do. Nguyen nhan goc: rule CSS cu `.admin-panel-header .button { color: var(--green-dark) }` (viet cho thiet ke admin mau xanh truoc day) de cung specificity va nam sau `.button.primary { color: white }` trong file nen ghi de mat mau trang cua nut primary. Da them `.admin-panel-header .button.primary { color: #fff }` voi specificity cao hon de luon thang.
-2. **Empty state cho thu vien anh (0 anh)**: truoc day chi la khoang trang. Da them khoi placeholder vien net dut + icon camera moi (them IconType `'camera'` vao `src/lib/shared.tsx`) + huong dan "写真がまだ登録されていません。上の「＋ 写真を追加する」ボタンから追加してください。".
+2. **Empty state cho thu vien anh (0 anh)**: truoc day chi la khoang trang. Da them khoi placeholder vien net dut + icon camera moi (them IconType `'camera'` vao `src/lib/shared.tsx`) + huong dan "写真がまだ登録されていません。上の「＋ 写真を���加する」ボタンから追加してください。".
 3. **Placeholder cho o "概要・説明文"**: them vi du dong "例: {nam}年9月、ECCコンピュータ専門学校にて開催された学内献血の様子です..." de giao vien biet can viet gi.
 4. **Mau thuan ngu nghia ten tab**: tab "昨年の記録" (nam ngoai) nhung khi chon nam hien tai (2026) lai hien "「昨年の記録」編集（2026年度）" — gay kho hieu. Da doi ten tab va tieu de form thanh trung lap "活動記録・アルバム（写真・記事編集）" / "活動記録・アルバムの編集（{nam}年度）", khong con gan voi tu "nam ngoai" cu the nua (van giu nguyen truong `badge` mac dinh "昨年の記録" trong du lieu vi day la noi dung cong khai rieng cho nam 2025, giao vien co the sua neu can).
 
@@ -1415,7 +1497,7 @@ Nguoi dung phan hoi: bam luu ma khong thay gi thay doi (do banner thong bao nam 
 - **Commit local (khong push)** theo yeu cau nguoi dung: 28 file (toan bo thay doi tu session 25-39), loai tru 2 file scratch khong lien quan (`flyer.html`, `scratch_questions.json`).
 - Nguoi dung neu van de lon: noi dung Admin tu nhap (kỷ niệm, ghi chu su kien) chi co tieng Nhat, trong khi phan con lai cua site hien du 12 ngon ngu — yeu cau thiet ke lai de nguoi cap nhat noi dung phai lam duoc da ngon ngu. Da hoi phuong an qua AskUserQuestion; nguoi dung chon: **nhap tay tung ngon ngu, khong dung API dich, chi goi y giao vien dung Gemini/Claude/ChatGPT de dich roi dan vao**.
 - **Trien khai cho "活動記録・アルバム" (event_memories)**:
-  - Migration `014_event_memories_translations.sql`: them cot `translations JSONB DEFAULT '{}'` — cau truc `{ [ma_ngon_ngu]: { badge, title, summary, source_label, photoCaptions: { [url]: caption } } }`. Cot tieng Nhat hien co van la ban goc/mac dinh.
+  - Migration `014_event_memories_translations.sql`: them cot `translations JSONB DEFAULT '{}'` ��� cau truc `{ [ma_ngon_ngu]: { badge, title, summary, source_label, photoCaptions: { [url]: caption } } }`. Cot tieng Nhat hien co van la ban goc/mac dinh.
   - `EventMemory` type them `translations` va interface `MemoryTranslation` moi.
   - `AdminPage.tsx`: them thanh tab chon 1 trong 12 ngon ngu (dung lai `LANGS` tu `shared.tsx`) ngay tren form chinh sua memory. Chon ngon ngu khac tieng Nhat se doi cac o badge/title/summary/nguon/caption anh sang doc-ghi vao `translations[lang]` thay vi cot chinh; co dong chu huong dan "dung AI dich roi dan vao"; tab co cham xanh nho bao hieu ngon ngu da co noi dung.
   - `LastYearSection.tsx` (web nguoi dung that): doc dung `translations[i18n.language]` truoc, fallback ve cot tieng Nhat, cuoi cung fallback ve ban dich tinh cua site — ap dung cho badge/title/summary/nguon/caption tung anh.
