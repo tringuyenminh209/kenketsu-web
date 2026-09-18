@@ -4,6 +4,25 @@
 
 ## Noi dung da hoan thanh
 
+- Thêm animation cho dây nối trong journey “あなたの血が届くまで”: một điểm sáng chạy tuần tự từ bước 01 đến bước 04, tạo cảm giác dòng máu đang được truyền đi.
+- Tôn trọng `prefers-reduced-motion` để tắt chuyển động với người dùng hạn chế animation.
+
+## Kiem tra
+
+- Browser QA: desktop 1302x820, light mode.
+- `npm run lint` và `npm run build` chạy sau thay đổi.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `docs/nippo.md`
+
+---
+
+## Ngay: 2026-09-19
+
+## Noi dung da hoan thanh
+
 - Điều chỉnh nút chuyển ngôn ngữ: desktop giữ icon và tên ngôn ngữ nhưng ẩn mũi tên; mobile chỉ giữ icon globe để tiết kiệm không gian.
 - Sửa selector CSS dư phát sinh khi override mobile và xác nhận layout responsive không bị ảnh hưởng.
 
@@ -1008,7 +1027,7 @@
 ## Noi dung da hoan thanh
 
 - **Sửa lỗi hiển thị khoảng cách (CSS padding-bottom) của khối Quick Access trên mobile**:
-  * Phát hiện lỗi padding ở thiết bị di động (chiều rộng màn hình <= 900px), thuộc tính `padding: 24px 24px 0;` của `.quick-access` triệt tiêu padding dưới khiến thẻ cuối cùng ("献血とは") sát rạt và chạm vào đường viền đỏ của khối `ImpactSection` bên dưới.
+  * Phát hiện lỗi padding ở thiết bị di động (chiều rộng màn hình <= 900px), thuộc tính `padding: 24px 24px 0;` của `.quick-access` triệt tiêu padding dưới khiến thẻ cuối cùng ("献血とは") sát rạt và chạm vào đường viền đỏ của khối `ImpactSection` bên dư��i.
   * Cập nhật thành `padding: 24px 24px 24px;` trong media query `@media (max-width: 900px)` để tạo khoảng cách đệm dưới cân đối và đẹp mắt trên màn hình nhỏ.
 
 ## Kiem tra

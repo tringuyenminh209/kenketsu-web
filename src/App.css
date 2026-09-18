@@ -3033,6 +3033,35 @@ th {
   height: 2px;
   background: linear-gradient(90deg, var(--red), #e85d04, #6d28d9, #0369a1);
   z-index: 0;
+  }
+
+.journey-steps::after {
+  content: '';
+  position: absolute;
+  top: 42px;
+  left: calc(12.5% + 24px);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(206, 0, 23, 0.12), 0 0 12px rgba(206, 0, 23, 0.5);
+  z-index: 2;
+  pointer-events: none;
+  animation: journeyConnectorRun 3.2s ease-in-out infinite;
+}
+
+@keyframes journeyConnectorRun {
+  0% { left: calc(12.5% + 24px); opacity: 0; }
+  10% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { left: calc(87.5% - 24px); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .journey-steps::after {
+    animation: none;
+    opacity: 0.8;
+  }
 }
 
 .journey-step {
