@@ -4,6 +4,24 @@
 
 ## Noi dung da hoan thanh
 
+- Thu gọn ba reason card trên mobile để giảm khoảng trống: chuyển icon sang bên trái, tiêu đề/nội dung sang bên phải, bỏ chiều cao tối thiểu và giảm padding.
+
+## Kiem tra
+
+- `npm run lint`: pass, còn 2 warning Fast Refresh có sẵn trong `src/lib/shared.tsx`.
+- `npm run build`: pass; còn cảnh báo bundle lớn từ Vite.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `docs/nippo.md`
+
+---
+
+## Ngay: 2026-09-19
+
+## Noi dung da hoan thanh
+
 - Tinh chỉnh CTA cuối trang trên mobile: thêm khoảng cách dọc để khung không bị dính lên section khảo sát, cân lại line-height và giữ tiêu đề tiếng Nhật không bị bẻ chữ bất thường.
 - Rút gọn nút chuyển ngôn ngữ thành icon quả địa cầu, ẩn nhãn và mũi tên nhưng vẫn giữ nút có thể truy cập bằng bàn phím.
 
