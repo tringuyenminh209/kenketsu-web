@@ -4739,23 +4739,31 @@ th {
   }
 
   .reason-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     padding: 28px 20px;
-    gap: 14px;
+    gap: 12px;
   }
 
   .reason-card {
-    min-height: 0;
-    padding: 18px 16px;
+    min-height: 112px;
+    padding: 16px 14px;
     border-radius: 12px;
+    justify-content: flex-start;
+  }
+
+  .reason-card:last-child {
+    grid-column: 1 / -1;
   }
 
   .reason-card .icon {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
   }
 
   .reason-card h2 {
-    margin: 10px 0 6px;
+    margin: 8px 0 4px;
+    font-size: 14px;
+    line-height: 1.35;
     font-size: 16px;
     line-height: 1.35;
   }

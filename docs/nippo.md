@@ -1,5 +1,24 @@
 # NIPPO
 
+## Ngay: 2026-09-19
+
+## Noi dung da hoan thanh
+
+- Thiết kế lại các reason card trên mobile: giảm khoảng trắng, dùng bố cục 2 cột cho hai card đầu và card cộng đồng full-width, giúp màn hình gọn và cân đối hơn.
+
+## Kiem tra
+
+- Browser QA: mobile 366x738, light mode; trang chính render thành công và card hiển thị gọn hơn.
+- `npm run lint`: chạy lại trong thư mục dự án.
+- `npm run build`: chạy lại trong thư mục dự án.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `docs/nippo.md`
+
+---
+
 ## Ngay: 2026-09-18
 
 ## Noi dung da hoan thanh
@@ -352,7 +371,7 @@
 - Them thong tin `献血記念品`: nguoi hop tac hien mau se nhan qua ky niem tu Lions Club.
 - Them link App Store va Google Play cho ung dung Labrad de nguoi dung co the bam truc tiep thay vi quet QR.
 - Tao va gan 4 anh minh hoa rieng cho cac card `輸血が必要な人たちの現実`: cap cuu/phau thuat, ung thu/huyet hoc, sinh san/tre so sinh, benh man tinh/dieu tri dai han.
-- Cai thien section `安全で安心の献血`: bien 3 buoc `事前チェック`, `問診・検査`, `採血` thanh card co the bam, moi buoc co anh minh hoa, noi dung detail va danh sach cac muc duoc kiem tra.
+- Cai thien section `安全で安心の献血`: bien 3 buoc `事��チェック`, `問診・検査`, `採血` thanh card co the bam, moi buoc co anh minh hoa, noi dung detail va danh sach cac muc duoc kiem tra.
 - Them chu thich o footer de nguoi dung biet mot so hinh anh tren website la hinh minh hoa duoc tao bang AI, co the khac voi dia diem/nhan vat thuc te.
 - Cap nhat `src/config/event.ts` de phan event info va flyer/preview dung cung mot nguon du lieu.
 
@@ -1415,7 +1434,7 @@ Nguoi dung phan hoi: bam luu ma khong thay gi thay doi (do banner thong bao nam 
 - **Commit local (khong push)** theo yeu cau nguoi dung: 28 file (toan bo thay doi tu session 25-39), loai tru 2 file scratch khong lien quan (`flyer.html`, `scratch_questions.json`).
 - Nguoi dung neu van de lon: noi dung Admin tu nhap (kỷ niệm, ghi chu su kien) chi co tieng Nhat, trong khi phan con lai cua site hien du 12 ngon ngu — yeu cau thiet ke lai de nguoi cap nhat noi dung phai lam duoc da ngon ngu. Da hoi phuong an qua AskUserQuestion; nguoi dung chon: **nhap tay tung ngon ngu, khong dung API dich, chi goi y giao vien dung Gemini/Claude/ChatGPT de dich roi dan vao**.
 - **Trien khai cho "活動記録・アルバム" (event_memories)**:
-  - Migration `014_event_memories_translations.sql`: them cot `translations JSONB DEFAULT '{}'` — cau truc `{ [ma_ngon_ngu]: { badge, title, summary, source_label, photoCaptions: { [url]: caption } } }`. Cot tieng Nhat hien co van la ban goc/mac dinh.
+  - Migration `014_event_memories_translations.sql`: them cot `translations JSONB DEFAULT '{}'` ��� cau truc `{ [ma_ngon_ngu]: { badge, title, summary, source_label, photoCaptions: { [url]: caption } } }`. Cot tieng Nhat hien co van la ban goc/mac dinh.
   - `EventMemory` type them `translations` va interface `MemoryTranslation` moi.
   - `AdminPage.tsx`: them thanh tab chon 1 trong 12 ngon ngu (dung lai `LANGS` tu `shared.tsx`) ngay tren form chinh sua memory. Chon ngon ngu khac tieng Nhat se doi cac o badge/title/summary/nguon/caption anh sang doc-ghi vao `translations[lang]` thay vi cot chinh; co dong chu huong dan "dung AI dich roi dan vao"; tab co cham xanh nho bao hieu ngon ngu da co noi dung.
   - `LastYearSection.tsx` (web nguoi dung that): doc dung `translations[i18n.language]` truoc, fallback ve cot tieng Nhat, cuoi cung fallback ve ban dich tinh cua site — ap dung cho badge/title/summary/nguon/caption tung anh.
