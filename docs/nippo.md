@@ -4,7 +4,7 @@
 
 ## Noi dung da hoan thanh
 
-- Tinh chỉnh CTA cuối trang trên mobile: cân lại line-height, cỡ chữ và khoảng cách để tiêu đề tiếng Nhật không bị dính hoặc ngắt dòng thiếu tự nhiên.
+- Tinh chỉnh CTA cuối trang trên mobile: thêm khoảng cách dọc để khung không bị dính lên section khảo sát, cân lại line-height và giữ tiêu đề tiếng Nhật không bị bẻ chữ bất thường.
 - Rút gọn nút chuyển ngôn ngữ thành icon quả địa cầu, ẩn nhãn và mũi tên nhưng vẫn giữ nút có thể truy cập bằng bàn phím.
 
 ## Kiem tra
@@ -1006,7 +1006,7 @@
 
 - **Tích hợp nút "Quay lại đầu trang" (Back to Top) dạng nổi để tối ưu hóa trải nghiệm người dùng**:
   * Tạo component `src/components/BackToTop.tsx` quản lý trạng thái ẩn/hiện dựa trên vị trí cuộn trang (hiển thị khi cuộn xuống > 400px) và thực hiện cuộn trang mượt mà lên đầu trang (`window.scrollTo({ top: 0, behavior: 'smooth' })`).
-  * Khai báo thêm biểu tượng `arrowUp` mới dạng SVG trong `src/lib/shared.tsx`.
+  * Khai báo thêm biểu tư��ng `arrowUp` mới dạng SVG trong `src/lib/shared.tsx`.
   * Cập nhật CSS định hình nút dạng tròn đỏ chuyên nghiệp, đổ bóng sang trọng, có chuyển động hover nhẹ và ẩn nút khi in trang (`no-print`).
   * Bổ sung khóa `"common.backToTop"` và tự động đồng bộ hóa dịch nghĩa chuẩn sang toàn bộ 12 ngôn ngữ (mỗi tệp chứa đúng 395 khóa sạch sẽ).
 

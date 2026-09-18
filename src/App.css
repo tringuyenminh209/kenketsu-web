@@ -2801,12 +2801,12 @@ th {
   }
 }
 
-.final-cta {
+  .final-cta {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 28px;
-  margin: 0 36px 56px;
+  margin: 40px 36px 56px;
   padding: 54px 58px;
   border-radius: 8px;
   background:
@@ -3796,9 +3796,15 @@ th {
   }
 
   .final-cta {
-  margin-inline: 12px;
+  margin: 28px 12px 36px;
   padding: 28px 20px 30px;
   gap: 22px;
+  }
+
+  .final-cta h2 {
+  max-width: 100%;
+  overflow-wrap: normal;
+  word-break: keep-all;
   }
 
   .final-cta h2 {
