@@ -4,6 +4,26 @@
 
 ## Noi dung da hoan thanh
 
+- Sửa lỗi CTA đỏ cuối trang bị tràn ngang trên mobile: giới hạn chiều rộng khung, cho phép nội dung Nhật tự xuống dòng an toàn và đưa nút về full-width trong khung.
+- Khôi phục đầy đủ `src/App.css` sau lần ghi nhầm file trước đó, rồi áp dụng bản sửa overflow trên nền CSS chính xác.
+
+## Kiem tra
+
+- `npm run lint`: pass, còn 2 warning Fast Refresh có sẵn.
+- `npm run build`: pass, còn cảnh báo bundle lớn từ Vite.
+- Browser preview tạm thời không khả dụng do sandbox không lắng nghe port; cần kiểm tra lại khi dev server hoạt động.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `docs/nippo.md`
+
+---
+
+## Ngay: 2026-09-19
+
+## Noi dung da hoan thanh
+
 - Thu gọn ba reason card trên mobile để giảm khoảng trống: chuyển icon sang bên trái, tiêu đề/nội dung sang bên phải, bỏ chiều cao tối thiểu và giảm padding.
 
 ## Kiem tra
@@ -1004,7 +1024,7 @@
 
 - **Sửa lỗi hiển thị khoảng cách của phần Hoạt động năm ngoái (last-year-section) với các phần xung quanh**:
   * Phát hiện biến CSS `--page-px` sử dụng trong thuộc tính `padding: 80px var(--page-px);` chưa từng được định nghĩa ở bất kỳ đâu trong dự án, dẫn đến việc trình duyệt bỏ qua quy tắc này và làm padding của phần này bị tính là `0` trên cả desktop và mobile (làm ảnh và liên kết nguồn sát rạt phần "参加者の木").
-  * Thay thế bằng giá trị padding tường minh: đặt `padding: 80px 72px;` ở bản desktop và `padding: 48px 24px;` trong media query `@media (max-width: 768px)`.
+  * Thay thế bằng giá trị padding tường minh: đ��t `padding: 80px 72px;` ở bản desktop và `padding: 48px 24px;` trong media query `@media (max-width: 768px)`.
 
 ## Kiem tra
 
