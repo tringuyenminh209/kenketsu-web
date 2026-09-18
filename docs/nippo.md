@@ -4,6 +4,11 @@
 
 ## Noi dung da hoan thanh
 
+- Điều chỉnh nút chuyển ngôn ngữ: desktop giữ icon và tên ngôn ngữ nhưng ẩn mũi tên; mobile chỉ giữ icon globe để tiết kiệm không gian.
+- Sửa selector CSS dư phát sinh khi override mobile và xác nhận layout responsive không bị ảnh hưởng.
+
+## Noi dung da hoan thanh
+
 - Sửa lỗi CTA đỏ cuối trang bị tràn ngang trên mobile: giới hạn chiều rộng khung, cho phép nội dung Nhật tự xuống dòng an toàn và đưa nút về full-width trong khung.
 - Khôi phục đầy đủ `src/App.css` sau lần ghi nhầm file trước đó, rồi áp dụng bản sửa overflow trên nền CSS chính xác.
 

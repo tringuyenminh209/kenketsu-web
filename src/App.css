@@ -97,10 +97,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0;
-  width: 38px;
+  gap: 8px;
+  width: auto;
   height: 38px;
-  padding: 0;
+  padding: 0 12px 0 10px;
   border: 1px solid var(--border);
   border-radius: 999px;
   background: #fff;
@@ -134,7 +134,9 @@
 }
 
 .lang-label {
-  display: none;
+  display: inline;
+  min-width: 64px;
+  text-align: left;
   }
   
 .lang-chevron {
@@ -3788,12 +3790,19 @@ th {
   }
 }
 
-@media (max-width: 420px) {
+  @media (max-width: 420px) {
   .lang-select-btn {
   width: 38px;
   justify-content: center;
+  gap: 0;
   padding: 0;
   }
+
+  .lang-label {
+  display: none;
+  }
+
+
 
   .final-cta {
   margin: 28px 12px 36px;
