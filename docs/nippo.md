@@ -4,6 +4,26 @@
 
 ## Noi dung da hoan thanh
 
+- Tinh chỉnh CTA cuối trang trên mobile: cân lại line-height, cỡ chữ và khoảng cách để tiêu đề tiếng Nhật không bị dính hoặc ngắt dòng thiếu tự nhiên.
+- Rút gọn nút chuyển ngôn ngữ thành icon quả địa cầu, ẩn nhãn và mũi tên nhưng vẫn giữ nút có thể truy cập bằng bàn phím.
+
+## Kiem tra
+
+- Browser QA: mobile 366x738, light mode; header hiển thị icon ngôn ngữ gọn, trang render thành công.
+- `npm run lint`: pass, chỉ còn 2 warning Fast Refresh có sẵn trong `src/lib/shared.tsx`.
+- `npm run build`: pass; còn cảnh báo bundle lớn từ Vite, không ảnh hưởng render.
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `docs/nippo.md`
+
+---
+
+## Ngay: 2026-09-19
+
+## Noi dung da hoan thanh
+
 - Thiết kế lại các reason card trên mobile: giảm khoảng trắng, dùng bố cục 2 cột cho hai card đầu và card cộng đồng full-width, giúp màn hình gọn và cân đối hơn.
 
 ## Kiem tra
@@ -366,7 +386,7 @@
 
 - Sua dia diem su kien theo anh poster: `ECCコンピュータ専門学校 1号館 1階ラウンジ`.
 - Sua ngay gio theo anh poster: `2026年9月15日（火）`, `9:30〜11:30 / 12:30〜16:30`.
-- Them thong tin `協賛`: `大阪曾根崎ライオンズクラブ / 大阪西ライオンズクラブ`.
+- Them thong tin `協賛`: `大阪曾根崎ライオ���ズクラブ / 大阪西ライオンズクラブ`.
 - Them ghi chu: dat lich truoc se rut ngan thoi gian thu tuc hien mau.
 - Them thong tin `献血記念品`: nguoi hop tac hien mau se nhan qua ky niem tu Lions Club.
 - Them link App Store va Google Play cho ung dung Labrad de nguoi dung co the bam truc tiep thay vi quet QR.
@@ -1114,7 +1134,7 @@
 Nguoi dung tiep tuc gui screenshot khi chuyen sang nam 2026 (chua co du lieu) va gop y 4 diem:
 
 1. **Loi tuong phan nut "空き枠数を保存"**: chu bi mau toi/kho doc tren nen do. Nguyen nhan goc: rule CSS cu `.admin-panel-header .button { color: var(--green-dark) }` (viet cho thiet ke admin mau xanh truoc day) de cung specificity va nam sau `.button.primary { color: white }` trong file nen ghi de mat mau trang cua nut primary. Da them `.admin-panel-header .button.primary { color: #fff }` voi specificity cao hon de luon thang.
-2. **Empty state cho thu vien anh (0 anh)**: truoc day chi la khoang trang. Da them khoi placeholder vien net dut + icon camera moi (them IconType `'camera'` vao `src/lib/shared.tsx`) + huong dan "写真がまだ登録されていません。上の「＋ 写真を追加する」ボタンから追加してください。".
+2. **Empty state cho thu vien anh (0 anh)**: truoc day chi la khoang trang. Da them khoi placeholder vien net dut + icon camera moi (them IconType `'camera'` vao `src/lib/shared.tsx`) + huong dan "写真がまだ登録されていません。上の「＋ 写真を���加する」ボタンから追加してください。".
 3. **Placeholder cho o "概要・説明文"**: them vi du dong "例: {nam}年9月、ECCコンピュータ専門学校にて開催された学内献血の様子です..." de giao vien biet can viet gi.
 4. **Mau thuan ngu nghia ten tab**: tab "昨年の記録" (nam ngoai) nhung khi chon nam hien tai (2026) lai hien "「昨年の記録」編集（2026年度）" — gay kho hieu. Da doi ten tab va tieu de form thanh trung lap "活動記録・アルバム（写真・記事編集）" / "活動記録・アルバムの編集（{nam}年度）", khong con gan voi tu "nam ngoai" cu the nua (van giu nguyen truong `badge` mac dinh "昨年の記録" trong du lieu vi day la noi dung cong khai rieng cho nam 2025, giao vien co the sua neu can).
 

@@ -96,9 +96,11 @@
 .lang-select-btn {
   display: flex;
   align-items: center;
-  gap: 7px;
+  justify-content: center;
+  gap: 0;
+  width: 38px;
   height: 38px;
-  padding: 0 12px 0 10px;
+  padding: 0;
   border: 1px solid var(--border);
   border-radius: 999px;
   background: #fff;
@@ -132,11 +134,11 @@
 }
 
 .lang-label {
-  min-width: 72px;
-  text-align: left;
-}
-
+  display: none;
+  }
+  
 .lang-chevron {
+  display: none;
   width: 14px;
   height: 14px;
   flex-shrink: 0;
@@ -2818,9 +2820,10 @@ th {
   max-width: 780px;
   margin: 0;
   font-size: clamp(28px, 3vw, 48px);
-  line-height: 1.18;
-  letter-spacing: -0.03em;
-}
+  line-height: 1.22;
+  letter-spacing: 0;
+  text-wrap: balance;
+  }
 
 .ai-image-note {
   max-width: 720px;
@@ -3786,14 +3789,27 @@ th {
 }
 
 @media (max-width: 420px) {
-  .lang-label {
-    display: none;
+  .lang-select-btn {
+  width: 38px;
+  justify-content: center;
+  padding: 0;
   }
 
-  .lang-select-btn {
-    width: 38px;
-    justify-content: center;
-    padding: 0;
+  .final-cta {
+  margin-inline: 12px;
+  padding: 28px 20px 30px;
+  gap: 22px;
+  }
+
+  .final-cta h2 {
+  font-size: clamp(25px, 7.2vw, 30px);
+  line-height: 1.24;
+  }
+
+  .final-cta .ai-image-note {
+  margin-top: 12px;
+  font-size: 12px;
+  line-height: 1.65;
   }
 
   .nav-links a {
@@ -5142,7 +5158,7 @@ th {
   }
 }
 
-/* ═══════════════════════════════════════════════════════
+/* ═════════════════════════════════════════��═════════════
    FLYER — A4 print layout  (v5: text-only on AI bg)
    ═══════════════════════════════════════════════════════ */
 .flyer-shell {
