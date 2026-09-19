@@ -4,6 +4,7 @@
 
 ## Noi dung da hoan thanh
 
+- Giữ lại và tinh chỉnh thiết kế quick-access theo ảnh tham chiếu: 4 card dọc trên mobile, icon nền hồng nhạt, tiêu đề/phụ đề phân cấp rõ và mũi tên ở mép phải.
 - Redesign visual system cho landing page Kenketsu theo hướng mobile-first: hero rõ thứ bậc, CTA đỏ nổi bật, ảnh hero có khung mềm, quick-access cards gọn và hệ màu đỏ/hồng tinh tế hơn.
 - Giảm cảm giác “AI/template” bằng spacing nhất quán, card nhẹ hơn, shadow tiết chế, typography tương phản rõ và responsive riêng cho mobile.
 - Giữ nguyên toàn bộ luồng đăng ký, survey, i18n và các section hiện có; chỉ thay đổi presentation layer trong `src/App.css`.
