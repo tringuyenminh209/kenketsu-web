@@ -6331,3 +6331,13 @@ textarea { min-height: 110px; }
     max-width: none;
   }
 }
+
+/* iOS: thanh dia chi noi de len noi dung — chua vung an toan phia tren cho header, hai ben cho man hinh tai tho khi xoay ngang */
+.site-header {
+  border-top: env(safe-area-inset-top, 0px) solid transparent;
+}
+
+body {
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
