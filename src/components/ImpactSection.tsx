@@ -5,7 +5,20 @@ import cancerTreatmentImage from '../assets/impact/impact-cancer-treatment.webp'
 import maternityNewbornImage from '../assets/impact/impact-maternity-newborn.webp'
 import longTermCareImage from '../assets/impact/impact-long-term-care.webp'
 
+// Locale my/ne/bn/th ghi so bang chu so ban dia — Number() tra ve NaN, nen
+// doi ve chu so Latin truoc khi parse.
+const NATIVE_DIGIT_ZEROS = [0x966, 0x9e6, 0xe50, 0x1040]
+function parseNativeNumber(s: string): number {
+  const latin = s.replace(/\p{Nd}/gu, (ch) => {
+    const cp = ch.codePointAt(0) ?? 0
+    const zero = NATIVE_DIGIT_ZEROS.find((z) => cp >= z && cp < z + 10)
+    return zero === undefined ? ch : String(cp - zero)
+  })
+  return Number(latin.replace(/[,\s]/g, ''))
+}
+
 function CountUp({ to, active, duration = 1400 }: { to: number; active: boolean; duration?: number }) {
+  const { i18n } = useTranslation()
   const [val, setVal] = useState(0)
   useEffect(() => {
     if (!active) return
@@ -18,7 +31,7 @@ function CountUp({ to, active, duration = 1400 }: { to: number; active: boolean;
     }
     requestAnimationFrame(tick)
   }, [to, duration, active])
-  return <>{val.toLocaleString()}</>
+  return <>{val.toLocaleString(i18n.language)}</>
 }
 
 const WHO_NEEDS_META = [
@@ -128,7 +141,7 @@ export function ImpactSection() {
         <div className="impact-stat-inner">
           <p className="impact-stat-eyebrow">{t('impact.stats.save_title')}</p>
           <div className="impact-stat-num">
-            <CountUp to={Number(t('impact.stats.save_to'))} active={statsActive} duration={900} />
+            <CountUp to={parseNativeNumber(t('impact.stats.save_to'))} active={statsActive} duration={900} />
             <span className="impact-stat-unit">{t('impact.stats.save_unit')}</span>
           </div>
           <p className="impact-stat-desc">{t('impact.stats.save_desc')}</p>
@@ -137,7 +150,7 @@ export function ImpactSection() {
         <div className="impact-stat-inner">
           <p className="impact-stat-eyebrow">{t('impact.stats.platelet_title')}</p>
           <div className="impact-stat-num">
-            <CountUp to={Number(t('impact.stats.platelet_to'))} active={statsActive} duration={700} />
+            <CountUp to={parseNativeNumber(t('impact.stats.platelet_to'))} active={statsActive} duration={700} />
             <span className="impact-stat-unit">{t('impact.stats.platelet_unit')}</span>
           </div>
           <p className="impact-stat-desc">{t('impact.stats.platelet_desc')}</p>
@@ -146,7 +159,7 @@ export function ImpactSection() {
         <div className="impact-stat-inner">
           <p className="impact-stat-eyebrow">{t('impact.stats.annual_title')}</p>
           <div className="impact-stat-num">
-            <CountUp to={Number(t('impact.stats.annual_to'))} active={statsActive} duration={1400} />
+            <CountUp to={parseNativeNumber(t('impact.stats.annual_to'))} active={statsActive} duration={1400} />
             <span className="impact-stat-unit">{t('impact.stats.annual_unit')}</span>
           </div>
           <p className="impact-stat-desc">{t('impact.stats.annual_desc')}</p>
