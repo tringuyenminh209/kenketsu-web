@@ -4,7 +4,8 @@
 
 ## Noi dung da hoan thanh
 
-- Khoi phuc `position: sticky` cho header o viewport <= 720px. Safari iOS co the khoi phuc vi tri cuon nho khi mo lai trang; header khong con bi cuon khuất phan tren trong truong hop nay.
+- Khoi phuc `position: sticky` cho header o viewport <= 720px.
+- Bo animation mo trang dich `.site-header` len tren 24px. Animation nay lam logo bi cat khi nguoi dung vao User Site tren iOS truoc khi tween ket thuc.
 
 ## Kiem tra
 
@@ -14,6 +15,7 @@
 ## File da thay doi chinh
 
 - `src/App.css`
+- `src/lib/shared.tsx`
 - `docs/nippo.md`
 
 ---

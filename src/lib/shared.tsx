@@ -211,8 +211,6 @@ export function usePageMotion(rootRef: RefObject<HTMLDivElement | null>) {
         return
       }
 
-      gsap.from('.site-header', { y: -24, autoAlpha: 0, duration: 0.7, ease: 'power3.out' })
-
       if (document.querySelector('.hero-copy')) {
         gsap.from('.hero-copy > *', { y: 34, autoAlpha: 0, duration: 0.9, stagger: 0.09, ease: 'power3.out' })
       }
