@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js"
-import type { EventItem, EventMemory, FormFieldSetting, FormType, Registration, RegistrationInsert, SheetData, SurveyInsert, SurveyResponse } from "../types"
+import type { CustomAnswers, EventItem, EventMemory, FormFieldSetting, FormType, Registration, RegistrationInsert, SheetData, SurveyInsert, SurveyResponse } from "../types"
 
 const configuredSupabaseUrl = import.meta.env.VITE_SUPABASE_URL || import.meta.env.NEXT_PUBLIC_SUPABASE_URL
 const configuredSupabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || import.meta.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -131,8 +131,25 @@ export async function fetchRegistrations(eventYear: number): Promise<Registratio
 
 // Excel export helper — structured rows (no CSV escaping needed; the
 // xlsx writer takes cell values directly).
-export function registrationsToRows(rows: Registration[]): SheetData {
-  const headers = ["学生番号", "名前", "フリガナ", "学校名", "所属", "メール", "電話番号", "生年月日", "性別", "受付希望時間", "献血経験", "申込日時"]
+export interface CustomColumn {
+  key: string
+  label: string
+}
+
+// Cot cho cau hoi tu them: cau hoi hien co truoc, sau do them cac cau hoi da
+// bi xoa nhung van co cau tra loi cu (dung nhan da luu luc tra loi).
+export function buildCustomColumns(known: CustomColumn[], rows: { custom_answers: CustomAnswers | null }[]): CustomColumn[] {
+  const cols = [...known]
+  for (const r of rows) {
+    for (const [key, v] of Object.entries(r.custom_answers ?? {})) {
+      if (!cols.some((c) => c.key === key)) cols.push({ key, label: v.q })
+    }
+  }
+  return cols
+}
+
+export function registrationsToRows(rows: Registration[], customCols: CustomColumn[] = []): SheetData {
+  const headers = ["学生番号", "名前", "フリガナ", "学校名", "所属", "メール", "電話番号", "生年月日", "性別", "受付希望時間", "献血経験", "申込日時", ...customCols.map((c) => c.label)]
   const body = rows.map((r) => {
     const genderLabel = r.gender === 'male' ? '男性' :
                         r.gender === 'female' ? '女性' :
@@ -153,6 +170,7 @@ export function registrationsToRows(rows: Registration[]): SheetData {
       r.time_slot ?? "",
       experienceLabel,
       new Date(r.created_at).toLocaleString('ja-JP'),
+      ...customCols.map((c) => r.custom_answers?.[c.key]?.a ?? ""),
     ]
   })
   return { headers, rows: body }
@@ -277,8 +295,8 @@ export function parseStructuredComment(commentStr: string | null): ParsedComment
   return result
 }
 
-export function surveysToRows(rows: SurveyResponse[]): SheetData {
-  const headers = ["回答日時", "献血経験", "印象", "印象その他", "未経験の理由", "未経験理由その他", "学内献血を知っていたか", "参加意向", "参加しやすくなる条件", "条件その他", "事前予約"]
+export function surveysToRows(rows: SurveyResponse[], customCols: CustomColumn[] = []): SheetData {
+  const headers = ["回答日時", "献血経験", "印象", "印象その他", "未経験の理由", "未経験理由その他", "学内献血を知っていたか", "参加意向", "参加しやすくなる条件", "条件その他", "事前予約", ...customCols.map((c) => c.label)]
   const body = rows.map((r) => {
     const countLabel = r.donation_count === 'once' ? 'ある（1回）' :
                         r.donation_count === 'few' ? 'ある（2〜4回）' :
@@ -297,6 +315,7 @@ export function surveysToRows(rows: SurveyResponse[]): SheetData {
       parsed.conditions,
       parsed.conditionsOther,
       parsed.reservation,
+      ...customCols.map((c) => r.custom_answers?.[c.key]?.a ?? ""),
     ]
   })
   return { headers, rows: body }
@@ -409,11 +428,22 @@ export async function fetchFormFieldSettings(formType: FormType): Promise<FormFi
 }
 
 export async function saveFormFieldSetting(
-  setting: Pick<FormFieldSetting, "form_type" | "field_key" | "label_override" | "label_translations" | "is_visible" | "is_required" | "sort_order">
+  setting: Pick<FormFieldSetting, "form_type" | "field_key" | "label_override" | "label_translations" | "is_custom" | "question_type" | "options" | "is_visible" | "is_required" | "sort_order">
 ): Promise<void> {
   const { error } = await supabase
     .from("form_field_settings")
     .upsert({ ...setting, updated_at: new Date().toISOString() }, { onConflict: "form_type,field_key" })
+  if (error) throw error
+}
+
+// Chi xoa cau hoi tu them — cau tra loi cu van con trong custom_answers.
+export async function deleteFormFieldSetting(formType: FormType, fieldKey: string): Promise<void> {
+  const { error } = await supabase
+    .from("form_field_settings")
+    .delete()
+    .eq("form_type", formType)
+    .eq("field_key", fieldKey)
+    .eq("is_custom", true)
   if (error) throw error
 }
 

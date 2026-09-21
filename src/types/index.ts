@@ -14,6 +14,7 @@ export interface Registration {
   gender: string | null
   time_slot: string | null
   donation_experience: string | null
+  custom_answers: CustomAnswers | null
   created_at: string
 }
 
@@ -31,6 +32,7 @@ export interface RegistrationInsert {
   gender?: string
   time_slot?: string
   donation_experience?: string
+  custom_answers?: CustomAnswers
 }
 
 export interface SurveyResponse {
@@ -39,6 +41,7 @@ export interface SurveyResponse {
   donation_count: string | null
   how_found: string | null
   comment: string | null
+  custom_answers: CustomAnswers | null
   created_at: string
 }
 
@@ -46,6 +49,7 @@ export interface SurveyInsert {
   event_year: number
   donation_count: string
   comment?: string
+  custom_answers?: CustomAnswers
 }
 
 export interface SheetData {
@@ -109,16 +113,27 @@ export interface EventMemory {
 
 export type FormType = "registration" | "survey"
 
+export type QuestionType = "text" | "textarea" | "select" | "checkbox"
+
+export interface QuestionOption {
+  value: string
+  translations: Record<string, string>
+}
+
+export type CustomAnswers = Record<string, { q: string; a: string }>
+
 export interface FormFieldSetting {
   id: string
   form_type: FormType
   field_key: string
   label_override: string | null
   label_translations: Record<string, string>
+  is_custom: boolean
+  question_type: QuestionType
+  options: QuestionOption[]
   is_visible: boolean
   is_required: boolean
   sort_order: number
   created_at: string
   updated_at: string
 }
-

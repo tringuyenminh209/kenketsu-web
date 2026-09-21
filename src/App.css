@@ -5856,4 +5856,105 @@ textarea { min-height: 110px; }
   }
 }
 
+/* ── Cau hoi tu them (custom questions) ── */
+.admin-field-settings-save {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 
+.admin-custom-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--green-dark);
+  background: #e6f4ee;
+  border: 1px solid #bfe3d2;
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.admin-custom-delete {
+  margin-left: auto;
+  border: 1px solid #fecaca;
+  background: #fff;
+  color: #b91c1c;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.admin-custom-delete:hover {
+  background: #fef2f2;
+}
+
+.admin-custom-editor {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f1f5f9;
+}
+
+.admin-custom-type {
+  display: grid;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.admin-custom-type select {
+  padding: 8px 10px;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: #fff;
+  font-size: 13.5px;
+}
+
+.admin-custom-options {
+  display: grid;
+  gap: 8px;
+}
+
+.admin-custom-options-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.admin-custom-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-custom-option button {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.admin-custom-option button:hover {
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+
+.admin-custom-option-ja {
+  flex: 0 0 34%;
+  font-size: 13px;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.admin-custom-add-option {
+  justify-self: start;
+}

@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom'
 import { Icon, LANGS, SiteHeader, usePageMotion } from '../lib/shared'
 import { EVENT_CONFIG, TIME_SLOTS } from '../config/event'
 import {
+  buildCustomColumns,
   createOrUpdateEvent,
   deleteEvent,
   deleteEventMemory,
+  deleteFormFieldSetting,
   fetchAllEvents,
   fetchAllMemories,
   fetchFormFieldSettings,
@@ -24,7 +26,7 @@ import {
   updateOfficialSlotCapacities,
   uploadEventPhoto,
 } from '../lib/supabase'
-import type { EventItem, EventMemory, FormFieldSetting, FormType, Registration, SurveyResponse } from '../types'
+import type { EventItem, EventMemory, FormFieldSetting, FormType, QuestionOption, QuestionType, Registration, SurveyResponse } from '../types'
 import { downloadXLSX } from '../lib/utils'
 import { resolveLegacyPhotoUrl } from '../lib/legacyPhotos'
 
@@ -84,6 +86,8 @@ function FieldSettingsEditor({
   onUpdateLabel,
   onMove,
   onUpdate,
+  onAddQuestion,
+  onDeleteQuestion,
   onSave,
   saving,
 }: {
@@ -95,6 +99,8 @@ function FieldSettingsEditor({
   onUpdateLabel: (key: string, value: string) => void
   onMove: (index: number, dir: -1 | 1) => void
   onUpdate: (key: string, patch: Partial<FieldDraft>) => void
+  onAddQuestion: () => void
+  onDeleteQuestion: (key: string) => void
   onSave: () => void
   saving: boolean
 }) {
@@ -129,19 +135,28 @@ function FieldSettingsEditor({
 
             <div className="admin-field-settings-main">
               <div className="admin-field-settings-default">
-                {d.defaultLabel}
+                {d.is_custom ? d.label_override.trim() || '（新しい質問）' : d.defaultLabel}
+                {d.is_custom && <span className="admin-custom-badge">追加した質問</span>}
                 {d.locked && <span className="admin-badge-warning">🔒 変更不可</span>}
+                {d.is_custom && (
+                  <button type="button" className="admin-custom-delete" onClick={() => onDeleteQuestion(d.key)}>削除</button>
+                )}
               </div>
               <input
                 type="text"
                 placeholder={
-                  activeLang === 'ja'
-                    ? '表示ラベルを変更する場合はここに入力（空欄でデフォルト表示）'
-                    : '翻訳したラベルを貼り付け（空欄の場合、既存の翻訳がそのまま表示されます）'
+                  d.is_custom
+                    ? activeLang === 'ja'
+                      ? '質問文を入力（必須）'
+                      : '翻訳した質問文を貼り付け（空欄の場合は日本語を表示）'
+                    : activeLang === 'ja'
+                      ? '表示ラベルを変更する場合はここに入力（空欄でデフォルト表示）'
+                      : '翻訳したラベルを貼り付け（空欄の場合、既存の翻訳がそのまま表示されます）'
                 }
                 value={getLabel(d)}
                 onChange={(e) => onUpdateLabel(d.key, e.target.value)}
               />
+              {d.is_custom && <CustomQuestionEditor d={d} activeLang={activeLang} onUpdate={onUpdate} />}
             </div>
 
             <div className="admin-field-settings-toggles">
@@ -170,6 +185,7 @@ function FieldSettingsEditor({
         ))}
       </div>
       <div className="admin-field-settings-save">
+        <button type="button" className="button outline" onClick={onAddQuestion}>＋ 質問を追加</button>
         <button type="button" className="button primary" onClick={onSave} disabled={saving}>
           {saving ? '保存中...' : '設定を保存'}
         </button>
@@ -215,6 +231,9 @@ interface FieldDef {
 interface FieldDraft extends FieldDef {
   label_override: string
   label_translations: Record<string, string>
+  is_custom: boolean
+  question_type: QuestionType
+  options: QuestionOption[]
   is_visible: boolean
   is_required: boolean
   sort_order: number
@@ -246,19 +265,109 @@ const SURVEY_FIELD_DEFS: FieldDef[] = [
 
 function buildFieldDrafts(defs: FieldDef[], settings: FormFieldSetting[]): FieldDraft[] {
   const map = new Map(settings.map((s) => [s.field_key, s]))
-  return defs
-    .map((def, i) => {
-      const s = map.get(def.key)
-      return {
-        ...def,
-        label_override: s?.label_override ?? '',
-        label_translations: s?.label_translations ?? {},
-        is_visible: s?.is_visible ?? true,
-        is_required: def.locked ? true : s?.is_required ?? def.defaultRequired,
-        sort_order: s?.sort_order ?? i,
-      }
-    })
-    .sort((a, b) => a.sort_order - b.sort_order)
+  const builtIn: FieldDraft[] = defs.map((def, i) => {
+    const s = map.get(def.key)
+    return {
+      ...def,
+      label_override: s?.label_override ?? '',
+      label_translations: s?.label_translations ?? {},
+      is_custom: false,
+      question_type: 'text',
+      options: [],
+      is_visible: s?.is_visible ?? true,
+      is_required: def.locked ? true : s?.is_required ?? def.defaultRequired,
+      sort_order: s?.sort_order ?? i,
+    }
+  })
+  const custom: FieldDraft[] = settings
+    .filter((s) => s.is_custom)
+    .map((s) => ({
+      key: s.field_key,
+      defaultLabel: '',
+      defaultRequired: false,
+      label_override: s.label_override ?? '',
+      label_translations: s.label_translations ?? {},
+      is_custom: true,
+      question_type: s.question_type,
+      options: s.options ?? [],
+      is_visible: s.is_visible,
+      is_required: s.is_required,
+      sort_order: s.sort_order,
+    }))
+  return [...builtIn, ...custom].sort((a, b) => a.sort_order - b.sort_order)
+}
+
+const QUESTION_TYPE_LABELS: Record<QuestionType, string> = {
+  text: '短い回答（1行）',
+  textarea: '長い回答（複数行）',
+  select: 'プルダウン（1つ選択）',
+  checkbox: 'チェックボックス（複数選択）',
+}
+
+function CustomQuestionEditor({
+  d,
+  activeLang,
+  onUpdate,
+}: {
+  d: FieldDraft
+  activeLang: string
+  onUpdate: (key: string, patch: Partial<FieldDraft>) => void
+}) {
+  const isJa = activeLang === 'ja'
+  const hasOptions = d.question_type === 'select' || d.question_type === 'checkbox'
+  const setOptions = (options: QuestionOption[]) => onUpdate(d.key, { options })
+  const patchOption = (i: number, patch: Partial<QuestionOption>) =>
+    setOptions(d.options.map((o, j) => (j === i ? { ...o, ...patch } : o)))
+
+  return (
+    <div className="admin-custom-editor">
+      {isJa && (
+        <label className="admin-custom-type">
+          回答形式
+          <select value={d.question_type} onChange={(e) => onUpdate(d.key, { question_type: e.target.value as QuestionType })}>
+            {(Object.keys(QUESTION_TYPE_LABELS) as QuestionType[]).map((type) => (
+              <option key={type} value={type}>{QUESTION_TYPE_LABELS[type]}</option>
+            ))}
+          </select>
+        </label>
+      )}
+      {hasOptions && (
+        <div className="admin-custom-options">
+          <span className="admin-custom-options-title">選択肢</span>
+          {d.options.map((opt, i) => (
+            <div className="admin-custom-option" key={i}>
+              {isJa ? (
+                <>
+                  <input
+                    type="text"
+                    value={opt.value}
+                    placeholder={`選択肢 ${i + 1}`}
+                    onChange={(e) => patchOption(i, { value: e.target.value })}
+                  />
+                  <button type="button" aria-label="選択肢を削除" onClick={() => setOptions(d.options.filter((_, j) => j !== i))}>✕</button>
+                </>
+              ) : (
+                <>
+                  <span className="admin-custom-option-ja">{opt.value || `選択肢 ${i + 1}`}</span>
+                  <input
+                    type="text"
+                    value={opt.translations[activeLang] ?? ''}
+                    placeholder="翻訳を貼り付け（空欄の場合は日本語を表示）"
+                    onChange={(e) => patchOption(i, { translations: { ...opt.translations, [activeLang]: e.target.value } })}
+                  />
+                </>
+              )}
+            </div>
+          ))}
+          {isJa && (
+            <button type="button" className="button outline admin-custom-add-option" onClick={() => setOptions([...d.options, { value: '', translations: {} }])}>
+              ＋ 選択肢を追加
+            </button>
+          )}
+        </div>
+      )}
+    </div>
+  )
 }
 
 const DEFAULT_EVENT_DRAFT = {
@@ -807,11 +916,64 @@ export default function AdminPage() {
     handleUpdateField(formType, key, { label_translations })
   }
 
+  const handleAddQuestion = (formType: FormType) => {
+    const drafts = getFieldDrafts(formType)
+    setActiveFieldLang('ja')
+    setFieldDrafts(formType, [
+      ...drafts,
+      {
+        key: `custom_${Math.random().toString(36).slice(2, 8)}`,
+        defaultLabel: '',
+        defaultRequired: false,
+        label_override: '',
+        label_translations: {},
+        is_custom: true,
+        question_type: 'text',
+        options: [],
+        is_visible: true,
+        is_required: false,
+        sort_order: drafts.length,
+      },
+    ])
+  }
+
+  const performDeleteQuestion = async (formType: FormType, key: string) => {
+    try {
+      await deleteFormFieldSetting(formType, key)
+      setFieldDrafts(formType, getFieldDrafts(formType).filter((d) => d.key !== key))
+      setFieldSaveMsg({ type: 'ok', text: '質問を削除しました。' })
+    } catch {
+      setFieldSaveMsg({ type: 'error', text: '削除に失敗しました。' })
+    }
+  }
+
+  const handleDeleteQuestion = (formType: FormType, key: string) => {
+    const d = getFieldDrafts(formType).find((x) => x.key === key)
+    setConfirmDialog({
+      title: '質問を削除',
+      message: `「${d?.label_override.trim() || '新しい質問'}」を削除しますか？\n過去に集まった回答データは残り、Excelエクスポートにも含まれます。`,
+      danger: true,
+      confirmLabel: '削除する',
+      onConfirm: () => void performDeleteQuestion(formType, key),
+    })
+  }
+
   const handleSaveFieldSettings = async (formType: FormType) => {
     setFieldSaveMsg(null)
+    const invalid = getFieldDrafts(formType).find(
+      (d) =>
+        d.is_custom &&
+        (!d.label_override.trim() ||
+          ((d.question_type === 'select' || d.question_type === 'checkbox') && !d.options.some((o) => o.value.trim()))),
+    )
+    if (invalid) {
+      setFieldSaveMsg({ type: 'error', text: '追加した質問には、日本語の質問文と（プルダウン／チェックボックスの場合）選択肢を1つ以上入力してください。' })
+      return
+    }
     setSavingFieldsFor(formType)
     try {
-      const drafts = getFieldDrafts(formType)
+      const drafts = getFieldDrafts(formType).map((d) => ({ ...d, options: d.options.filter((o) => o.value.trim()) }))
+      setFieldDrafts(formType, drafts)
       await Promise.all(
         drafts.map((d, i) =>
           saveFormFieldSetting({
@@ -819,6 +981,9 @@ export default function AdminPage() {
             field_key: d.key,
             label_override: d.label_override.trim() || null,
             label_translations: d.label_translations,
+            is_custom: d.is_custom,
+            question_type: d.question_type,
+            options: d.options,
             is_visible: d.is_visible,
             is_required: d.is_required,
             sort_order: i,
@@ -834,13 +999,30 @@ export default function AdminPage() {
   }
 
   // ── Exports ──
+  const regCustomCols = useMemo(
+    () =>
+      buildCustomColumns(
+        regFieldDrafts.filter((d) => d.is_custom && d.label_override.trim()).map((d) => ({ key: d.key, label: d.label_override.trim() })),
+        registrations,
+      ),
+    [regFieldDrafts, registrations],
+  )
+  const surveyCustomCols = useMemo(
+    () =>
+      buildCustomColumns(
+        surveyFieldDrafts.filter((d) => d.is_custom && d.label_override.trim()).map((d) => ({ key: d.key, label: d.label_override.trim() })),
+        surveys,
+      ),
+    [surveyFieldDrafts, surveys],
+  )
+
   const handleRegistrationsExport = () => {
-    const data = registrationsToRows(registrations)
+    const data = registrationsToRows(registrations, regCustomCols)
     downloadXLSX(data, `registrations_${selectedYear}.xlsx`, '申込データ')
   }
 
   const handleSurveyExport = () => {
-    const data = surveysToRows(surveys)
+    const data = surveysToRows(surveys, surveyCustomCols)
     downloadXLSX(data, `surveys_${selectedYear}.xlsx`, 'アンケート')
   }
 
@@ -1160,12 +1342,15 @@ export default function AdminPage() {
                         <th>性別</th>
                         <th>希望時間</th>
                         <th>献血経験</th>
+                        {regCustomCols.map((c) => (
+                          <th key={c.key}>{c.label}</th>
+                        ))}
                       </tr>
                     </thead>
                     <tbody>
                       {(selectedSlot ? selectedSlotRegistrants : registrations).length === 0 ? (
                         <tr>
-                          <td colSpan={11} style={{ textAlign: 'center', padding: '2rem' }}>
+                          <td colSpan={11 + regCustomCols.length} style={{ textAlign: 'center', padding: '2rem' }}>
                             申込データがありません
                           </td>
                         </tr>
@@ -1183,6 +1368,9 @@ export default function AdminPage() {
                             <td>{row.gender ?? '—'}</td>
                             <td>{row.time_slot?.replace('-', '～') ?? '—'}</td>
                             <td>{row.donation_experience === 'yes' ? 'ある' : row.donation_experience === 'no' ? 'ない' : '—'}</td>
+                            {regCustomCols.map((c) => (
+                              <td key={c.key}>{row.custom_answers?.[c.key]?.a ?? '—'}</td>
+                            ))}
                           </tr>
                         ))
                       )}
@@ -1233,12 +1421,15 @@ export default function AdminPage() {
                         <th>参加しやすくなる条件</th>
                         <th>条件その他</th>
                         <th>事前予約</th>
+                        {surveyCustomCols.map((c) => (
+                          <th key={c.key}>{c.label}</th>
+                        ))}
                       </tr>
                     </thead>
                     <tbody>
                       {surveys.length === 0 ? (
                         <tr>
-                          <td colSpan={11} style={{ textAlign: 'center', padding: '2rem' }}>
+                          <td colSpan={11 + surveyCustomCols.length} style={{ textAlign: 'center', padding: '2rem' }}>
                             アンケート回答データがありません
                           </td>
                         </tr>
@@ -1262,6 +1453,9 @@ export default function AdminPage() {
                               <td>{parsed.conditions}</td>
                               <td>{parsed.conditionsOther}</td>
                               <td>{parsed.reservation}</td>
+                              {surveyCustomCols.map((c) => (
+                                <td key={c.key}>{row.custom_answers?.[c.key]?.a ?? '—'}</td>
+                              ))}
                             </tr>
                           )
                         })
@@ -1682,7 +1876,7 @@ export default function AdminPage() {
           <div className="reveal">
             <Banner msg={fieldSaveMsg} />
             <p style={{ color: 'var(--muted)', marginBottom: '1.5rem' }}>
-              申込フォーム・アンケートの各項目を表示／非表示、表示ラベル、必須／任意、並び順を自由に調整できます（項目の種類自体は追加できません）。ロックされた項目はデータ保存に必須のため変更できません。
+              申込フォーム・アンケートの各項目を表示／非表示、表示ラベル、必須／任意、並び順を自由に調整でき、「＋ 質問を追加」で独自の質問（自由記述・プルダウン・チェックボックス）も追加できます。ロックされた項目はデータ保存に必須のため変更できません。
             </p>
 
             <div className="admin-lang-tabs" role="tablist" aria-label="編集する言語">
@@ -1701,7 +1895,7 @@ export default function AdminPage() {
             </div>
             {activeFieldLang !== 'ja' && (
               <p className="admin-lang-hint">
-                💡 「日本語」タブのラベルを Gemini・Claude・ChatGPT などのAIツールで翻訳し、その結果をこのタブの各欄に貼り付けてください。空欄のままの場合、ユーザーサイトには既存の翻訳（未カスタマイズ時のデフォルト表示）がそのまま使われます。
+                💡 「日本語」タブのラベルを Gemini・Claude・ChatGPT などのAIツールで翻訳し、その結果をこのタブの各欄に貼り付けてください。空欄のままの場合、既存の項目は従来の翻訳が、追加した質問・選択肢は日本語がそのまま表示されます。
               </p>
             )}
 
@@ -1714,6 +1908,8 @@ export default function AdminPage() {
               onUpdateLabel={(key, value) => handleUpdateFieldLabel('registration', key, value)}
               onMove={(i, dir) => handleMoveField('registration', i, dir)}
               onUpdate={(key, patch) => handleUpdateField('registration', key, patch)}
+              onAddQuestion={() => handleAddQuestion('registration')}
+              onDeleteQuestion={(key) => handleDeleteQuestion('registration', key)}
               onSave={() => handleSaveFieldSettings('registration')}
               saving={savingFieldsFor === 'registration'}
             />
@@ -1726,6 +1922,8 @@ export default function AdminPage() {
               onUpdateLabel={(key, value) => handleUpdateFieldLabel('survey', key, value)}
               onMove={(i, dir) => handleMoveField('survey', i, dir)}
               onUpdate={(key, patch) => handleUpdateField('survey', key, patch)}
+              onAddQuestion={() => handleAddQuestion('survey')}
+              onDeleteQuestion={(key) => handleDeleteQuestion('survey', key)}
               onSave={() => handleSaveFieldSettings('survey')}
               saving={savingFieldsFor === 'survey'}
             />

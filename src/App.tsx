@@ -15,6 +15,7 @@ import processDonationImage from './assets/process/process-donation.webp'
 import { EVENT_CONFIG, TIME_SLOTS } from './config/event'
 import { Icon, SiteHeader, usePageMotion } from './lib/shared'
 import { checkDuplicateRegistration, fetchActiveEvent, fetchFormFieldSettings, fetchOfficialSlotCapacities, fetchSlotCounts, insertRegistration, insertSurvey, sendConfirmationEmail } from './lib/supabase'
+import { CustomQuestionField, collectCustomAnswers, getCustomSettings, type CustomValues } from './components/CustomQuestionField'
 import type { EventItem, FormFieldSetting } from './types'
 import { BloodTreeProgress } from './components/BloodTreeProgress'
 import { ForeignStudentSection } from './components/ForeignStudentSection'
@@ -162,6 +163,11 @@ function UserPage() {
   const regField = useMemo(() => makeFieldHelper(regFieldSettings, REG_CORE_FIELDS, currentLang), [regFieldSettings, currentLang])
   const surveyField = useMemo(() => makeFieldHelper(surveyFieldSettings, SURVEY_CORE_FIELDS, currentLang), [surveyFieldSettings, currentLang])
 
+  const [regCustomValues, setRegCustomValues] = useState<CustomValues>({})
+  const [surveyCustomValues, setSurveyCustomValues] = useState<CustomValues>({})
+  const regCustomSettings = getCustomSettings(regFieldSettings)
+  const surveyCustomSettings = getCustomSettings(surveyFieldSettings)
+
   useEffect(() => {
     fetchFormFieldSettings('registration').then(setRegFieldSettings).catch(() => {})
     fetchFormFieldSettings('survey').then(setSurveyFieldSettings).catch(() => {})
@@ -284,6 +290,7 @@ function UserPage() {
         time_slot: regForm.timeSlot || undefined,
         donation_experience: regForm.donationExperience || undefined,
         gender: regForm.gender || undefined,
+        custom_answers: collectCustomAnswers(regFieldSettings, regCustomValues),
       })
       sendConfirmationEmail(registrationId)
       setRegSuccess(true)
@@ -319,6 +326,7 @@ function UserPage() {
         event_year: currentEventYear,
         donation_count: surveyForm.donationCount,
         comment: structuredComment || undefined,
+        custom_answers: collectCustomAnswers(surveyFieldSettings, surveyCustomValues),
       })
 
       setSurveySuccess(true)
@@ -841,6 +849,20 @@ function UserPage() {
                   </select>
                 </label>
                 )}
+                {regCustomSettings.map((s) => (
+                  <CustomQuestionField
+                    key={s.field_key}
+                    setting={s}
+                    label={regField.label(s.field_key, s.label_override ?? '')}
+                    required={regField.isRequired(s.field_key)}
+                    order={regField.order(s.field_key, 100)}
+                    lang={currentLang}
+                    values={regCustomValues}
+                    onChange={(k, v) => setRegCustomValues((prev) => ({ ...prev, [k]: v }))}
+                    requiredMark={<span>{t('register.required')}</span>}
+                    selectPlaceholder={t('register.departmentSelect')}
+                  />
+                ))}
               </div>
               {regField.isVisible('gender') && (
               <fieldset>
@@ -1034,6 +1056,20 @@ function UserPage() {
                     <a href="#register">{t('survey.q7NowNote')}</a>
                   </p>
                 )}
+                {surveyCustomSettings.map((s) => (
+                  <CustomQuestionField
+                    key={s.field_key}
+                    setting={s}
+                    label={surveyField.label(s.field_key, s.label_override ?? '')}
+                    required={surveyField.isRequired(s.field_key)}
+                    order={surveyField.order(s.field_key, 100)}
+                    lang={currentLang}
+                    values={surveyCustomValues}
+                    onChange={(k, v) => setSurveyCustomValues((prev) => ({ ...prev, [k]: v }))}
+                    selectPlaceholder={t('register.departmentSelect')}
+                    className="survey-full"
+                  />
+                ))}
               </div>
               {surveyError && <p className="error-message">{surveyError}</p>}
               <button className="button primary" type="submit" disabled={surveySubmitting}>
