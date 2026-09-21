@@ -113,11 +113,14 @@
   "precautions": {
     "title": "Những điều cần kiểm tra trước khi tham gia",
     "intro": "Đây không phải những quy định khắt khe, mà là để bảo vệ sức khỏe của chính bạn. Nếu có thắc mắc, hãy hỏi trực tiếp nhân viên vào ngày sự kiện.",
-    "eligibilityTitle": "Một số lưu ý trước khi đăng ký",
+    "eligibilityTitle": "Tiêu chuẩn hiến máu (trường hợp 400mL máu toàn phần)",
     "eligibilityItems": [
-      "Từ 16 đến 69 tuổi (từ 65 tuổi cần có kinh nghiệm hiến máu trước)",
-      "Nam từ 45kg, Nữ từ 40kg",
-      "Sức khỏe tốt và đã ngủ đủ giấc vào ngày sự kiện"
+      "Độ tuổi: nam 17–69 tuổi, nữ 18–69 tuổi (người 65–69 tuổi chỉ được hiến nếu đã từng hiến máu sau tuổi 60)",
+      "Cân nặng: cả nam và nữ từ 50kg trở lên",
+      "Huyết áp: tối đa 90–179 mmHg, tối thiểu 50–109 mmHg",
+      "Mạch: 40–100 lần/phút",
+      "Thân nhiệt: dưới 37,5℃",
+      "Sức khỏe tốt, đã ngủ đủ giấc và ăn uống đầy đủ"
     ],
     "note200mL": "* Tiêu chuẩn đối với trường hợp hiến 200mL có thể kiểm tra tại 'Xem chi tiết tiêu chuẩn hiến máu'.",
     "dayOfTitle": "Ngày sự kiện như thế này là ổn",
@@ -137,10 +140,11 @@
     ],
     "prohibited": "Không được hiến máu trong các trường hợp sau",
     "prohibitedItems": [
-      "Đang sốt hoặc có triệu chứng cảm",
-      "Uống nhiều rượu tối hôm trước",
-      "Mới phẫu thuật, truyền máu, xăm hình gần đây",
-      "Đang mang thai hoặc cho con bú"
+      "Đang sốt, có triệu chứng cảm lạnh hoặc không khỏe",
+      "Đang mang thai hoặc đã mang thai trong vòng 6 tháng gần đây",
+      "Có bệnh nền (bệnh tim mạch, bệnh về máu…) có thể nặng hơn khi lấy máu",
+      "Đã uống nhiều rượu bia vào ngày hôm trước",
+      "Vừa phẫu thuật, truyền máu hoặc xăm hình gần đây"
     ],
     "detailsBtn": "Xem chi tiết tiêu chuẩn hiến máu →"
   },
@@ -465,7 +469,7 @@
   "footerCta": {
     "title": "Cùng nhau tại campus — hãy ủng hộ hiến máu.",
     "cta": "Quay lại đăng ký",
-    "aiImageNote": "Mot so hinh anh tren website la hinh minh hoa duoc tao bang AI, co the khac voi dia diem va con nguoi thuc te."
+    "aiImageNote": "Một số hình ảnh trên website này là hình minh họa được tạo bằng AI, có thể khác với địa điểm và con người thực tế."
   },
   "impact": {
     "stats": {

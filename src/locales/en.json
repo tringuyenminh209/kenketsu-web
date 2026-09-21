@@ -113,11 +113,14 @@
   "precautions": {
     "title": "Things to Check Before Participating",
     "intro": "These are not strict rules — they're to protect your own health. If you have any concerns, feel free to ask staff on the day.",
-    "eligibilityTitle": "Eligibility Guidelines",
+    "eligibilityTitle": "Eligibility Guidelines (400 mL whole blood)",
     "eligibilityItems": [
-      "Ages 16 to 69 (65+ requires prior donation experience)",
-      "Male 45kg+, Female 40kg+",
-      "Good health and adequate sleep on the day"
+      "Age: men 17–69, women 18–69 (ages 65–69 only if you have donated after age 60)",
+      "Weight: 50 kg or more for both men and women",
+      "Blood pressure: systolic 90–179 mmHg, diastolic 50–109 mmHg",
+      "Pulse: 40–100 beats per minute",
+      "Body temperature: below 37.5 °C",
+      "In good health, with enough sleep and food"
     ],
     "note200mL": "* Criteria for 200mL can be checked from 'See details of blood donation criteria'.",
     "dayOfTitle": "On the day, this is fine",
@@ -137,10 +140,11 @@
     ],
     "prohibited": "You cannot donate blood if",
     "prohibitedItems": [
-      "You have a fever or cold symptoms",
-      "You drank heavily the night before",
-      "You recently had surgery, a transfusion, or a tattoo",
-      "You are pregnant or breastfeeding"
+      "You have a fever, cold symptoms, or feel unwell",
+      "You are pregnant, or were pregnant within the past 6 months",
+      "You have a chronic condition (e.g. cardiovascular or blood disease) that could worsen with blood collection",
+      "You drank a large amount of alcohol the day before",
+      "You recently had surgery, a blood transfusion, or a tattoo"
     ],
     "detailsBtn": "View blood donation standards in detail →"
   },

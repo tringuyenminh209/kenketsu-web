@@ -113,11 +113,14 @@
   "precautions": {
     "title": "Ishtirok etishdan oldin tekshirilishi kerak bo'lgan narsalar",
     "intro": "Bu qat'iy qoidalar emas — bular sizning sog'lig'ingizni saqlash uchundir. Agar sizda xavotirlar bo'lsa, tadbir kuni xodimlardan so'rashdan tortinmang.",
-    "eligibilityTitle": "Ishtirok etish mezonlari",
+    "eligibilityTitle": "Qon topshirish mezonlari (400 mL to'liq qon uchun)",
     "eligibilityItems": [
-      "Yosh: 16 dan 69 yoshgacha (65 yoshdan oshganlar uchun oldin qon topshirganlik tajribasi talab etiladi)",
-      "Erkaklar 45kg+, Ayollar 40kg+",
-      "Tadbir kuni sog'liq yaxshi bo'lishi va yetarli darajada uxlash"
+      "Yosh: erkaklar 17–69, ayollar 18–69 yosh (65–69 yoshdagilar 60 yoshdan keyin qon topshirgan bo'lishi kerak)",
+      "Vazn: erkak va ayollar uchun kamida 50 kg",
+      "Qon bosimi: yuqori 90–179 mmHg, pastki 50–109 mmHg",
+      "Puls: daqiqasiga 40–100 marta",
+      "Tana harorati: 37,5 ℃ dan past",
+      "O'zini yaxshi his qilishi, yetarli uxlagan va ovqatlangan bo'lishi"
     ],
     "note200mL": "* 200mL hajmdagi qon topshirish mezonlarini 'Batafsil ma'lumot' bo'limidan tekshirishingiz mumkin.",
     "dayOfTitle": "Tadbir kuni bularga amal qiling",
@@ -137,10 +140,11 @@
     ],
     "prohibited": "Quyidagi hollarda qon topshira olmaysiz",
     "prohibitedItems": [
-      "Isitma yoki shamollash alomatlari bo'lsa",
-      "O'tgan kechasi ko'p spirtli ichimlik ichilgan bo'lsa",
-      "Yaqinda jarrohlik amaliyoti, qon quyish yoki tatuirovka qilingan bo'lsa",
-      "Homiladorlik yoki emizish davrida"
+      "Isitma, shamollash alomatlari yoki o'zini yomon his qilish",
+      "Homilador bo'lish yoki so'nggi 6 oy ichida homilador bo'lgan",
+      "Qon olish natijasida yomonlashishi mumkin bo'lgan surunkali kasallik (yurak-qon tomir, qon kasalliklari va h.k.)",
+      "Oldingi kuni ko'p miqdorda spirtli ichimlik ichgan",
+      "Yaqinda jarrohlik operatsiyasi, qon quyish yoki tatuirovka qildirgan"
     ],
     "detailsBtn": "Batafsil qon topshirish standartlarini ko'rish →"
   },

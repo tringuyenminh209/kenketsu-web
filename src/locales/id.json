@@ -113,11 +113,14 @@
   "precautions": {
     "title": "Hal yang Perlu Diperiksa Sebelum Berpartisipasi",
     "intro": "Ini bukan aturan ketat — ini untuk melindungi kesehatan Anda sendiri. Jika Anda memiliki kekhawatiran, jangan ragu untuk bertanya kepada staf pada hari H.",
-    "eligibilityTitle": "Panduan Kelayakan",
+    "eligibilityTitle": "Kriteria donor darah (untuk darah lengkap 400 mL)",
     "eligibilityItems": [
-      "Usia 16 hingga 69 tahun (usia 65+ memerlukan pengalaman donor sebelumnya)",
-      "Pria 45kg+, Wanita 40kg+",
-      "Sehat dan cukup tidur pada hari H"
+      "Usia: pria 17–69 tahun, wanita 18–69 tahun (usia 65–69 tahun hanya bagi yang pernah donor setelah usia 60 tahun)",
+      "Berat badan: pria dan wanita minimal 50 kg",
+      "Tekanan darah: sistolik 90–179 mmHg, diastolik 50–109 mmHg",
+      "Denyut nadi: 40–100 kali per menit",
+      "Suhu tubuh: di bawah 37,5 ℃",
+      "Kondisi tubuh sehat, cukup tidur, dan sudah makan"
     ],
     "note200mL": "* Kriteria untuk 200mL dapat diperiksa di 'Lihat detail kriteria donor darah'.",
     "dayOfTitle": "Pada hari H, hal ini baik dilakukan",
@@ -137,10 +140,11 @@
     ],
     "prohibited": "Anda tidak dapat mendonorkan darah jika",
     "prohibitedItems": [
-      "Anda demam atau memiliki gejala pilek",
-      "Anda minum alkohol berlebihan pada malam sebelumnya",
-      "Anda baru saja menjalani operasi, transfusi, atau tato",
-      "Anda sedang hamil atau menyusui"
+      "Demam, gejala flu, atau tidak enak badan",
+      "Sedang hamil atau pernah hamil dalam 6 bulan terakhir",
+      "Memiliki penyakit kronis (jantung dan pembuluh darah, penyakit darah, dll.) yang dapat memburuk akibat pengambilan darah",
+      "Minum banyak alkohol pada hari sebelumnya",
+      "Baru-baru ini menjalani operasi, transfusi darah, atau membuat tato"
     ],
     "detailsBtn": "Lihat detail standar donor darah →"
   },
