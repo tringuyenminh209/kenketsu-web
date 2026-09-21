@@ -5588,7 +5588,7 @@ textarea { min-height: 110px; }
 }
 
 @media (max-width: 720px) {
-  .site-header { position: relative; display: flex; flex-wrap: wrap; justify-content: space-between; padding-block: 10px; }
+  .site-header { position: sticky; display: flex; flex-wrap: wrap; justify-content: space-between; padding-block: 10px; }
   .brand-mark { width: 36px; height: 36px; }
   .nav-links { order: 3; width: 100%; justify-content: flex-start; gap: 4px; overflow-x: auto; padding: 2px 0 4px; scrollbar-width: none; }
   .nav-links::-webkit-scrollbar { display: none; }

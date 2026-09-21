@@ -1,5 +1,23 @@
 # NIPPO
 
+## Ngay: 2026-09-21 (sua header iOS)
+
+## Noi dung da hoan thanh
+
+- Khoi phuc `position: sticky` cho header o viewport <= 720px. Safari iOS co the khoi phuc vi tri cuon nho khi mo lai trang; header khong con bi cuon khuất phan tren trong truong hop nay.
+
+## Kiem tra
+
+- `npm run lint`
+- `npm run build`
+
+## File da thay doi chinh
+
+- `src/App.css`
+- `docs/nippo.md`
+
+---
+
 ## Ngay: 2026-09-20
 
 ## Noi dung da hoan thanh
