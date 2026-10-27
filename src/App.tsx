@@ -13,6 +13,7 @@ import processPrecheckImage from './assets/process/process-precheck.webp'
 import processInterviewImage from './assets/process/process-interview-test.webp'
 import processDonationImage from './assets/process/process-donation.webp'
 import { EVENT_CONFIG, TIME_SLOTS } from './config/event'
+import { BUILTIN_OPTIONS } from './config/builtin-options'
 import { Icon, SiteHeader, usePageMotion } from './lib/shared'
 import { checkDuplicateRegistration, fetchActiveEvent, fetchFormFieldSettings, fetchOfficialSlotCapacities, fetchSlotCounts, insertRegistration, insertSurvey, sendConfirmationEmail } from './lib/supabase'
 import { CustomQuestionField, collectCustomAnswers, getCustomSettings, type CustomValues } from './components/CustomQuestionField'
@@ -49,10 +50,6 @@ const BENEFIT_IMAGE_POSITIONS = ['center', 'right center', 'center top', 'left c
 const KNOWLEDGE_IMAGES = [knowledgeInfrastructureImage, knowledgeMultiplePatientsImage, knowledgeYouthImage]
 const BENEFIT_IMAGES = [benefitHealthCheckImage, benefitLifeSupportImage, benefitCampusSolidarityImage, benefitSocialContributionImage]
 const PROCESS_IMAGES = [processPrecheckImage, processInterviewImage, processDonationImage]
-
-const SURVEY_Q2_OPTIONS = ['help_others', 'social_contribution', 'health_check', 'scary', 'time_consuming', 'dont_understand', 'not_interested', 'other']
-const SURVEY_Q3_OPTIONS = ['no_opportunity', 'afraid_needle', 'anxious', 'no_time', 'dont_know_conditions', 'health_reason', 'not_interested', 'other']
-const SURVEY_Q6_OPTIONS = ['easy_reservation', 'flexible_time', 'short_duration', 'clear_process', 'with_friend', 'detailed_explanation', 'other']
 
 // Admin stores a display string, so accept only dates with an explicit year.
 function parseEventDate(value: string): string | null {
@@ -92,6 +89,14 @@ function makeFieldHelper(settings: FormFieldSetting[], coreKeys: Set<string>, cu
       return s.label_override?.trim() || fallback
     },
     order: (key: string, fallback: number) => map.get(key)?.sort_order ?? fallback,
+    // Lua chon cua cau hoi co san: dung chu admin da sua (theo ngon ngu hien tai),
+    // khong thi ban dich mac dinh. `code` luon la gia tri luu DB.
+    options: (key: string, translate: (i18nKey: string) => string) =>
+      (BUILTIN_OPTIONS[key] ?? []).map(({ code, i18nKey }) => {
+        const saved = map.get(key)?.options?.find((o) => o.code === code)
+        const custom = currentLang === 'ja' ? saved?.value : saved?.translations?.[currentLang]
+        return { code, label: custom?.trim() || translate(i18nKey) }
+      }),
   }
 }
 
@@ -889,8 +894,9 @@ function UserPage() {
                     onChange={(e) => setRegForm({ ...regForm, donationExperience: e.target.value })}
                   >
                     <option value="" disabled>{t('register.departmentSelect')}</option>
-                    <option value="yes">{t('register.donationExperienceYes')}</option>
-                    <option value="no">{t('register.donationExperienceNo')}</option>
+                    {regField.options('donationExperience', t).map((o) => (
+                      <option key={o.code} value={o.code}>{o.label}</option>
+                    ))}
                   </select>
                 </label>
                 )}
@@ -912,16 +918,16 @@ function UserPage() {
               {regField.isVisible('gender') && (
               <fieldset>
                 <legend>{regField.label('gender', t('register.gender'))}</legend>
-                {(['male', 'female', 'other', 'no_answer'] as const).map((val) => (
-                  <label key={val}>
+                {regField.options('gender', t).map((o) => (
+                  <label key={o.code}>
                     <input
                       name="gender"
                       type="radio"
-                      value={val}
-                      checked={regForm.gender === val}
+                      value={o.code}
+                      checked={regForm.gender === o.code}
                       onChange={(e) => setRegForm({ ...regForm, gender: e.target.value })}
                     />
-                    {t(`register.gender${val === 'male' ? 'Male' : val === 'female' ? 'Female' : val === 'other' ? 'Other' : 'NoAnswer'}`)}
+                    {o.label}
                   </label>
                 ))}
               </fieldset>
@@ -961,10 +967,9 @@ function UserPage() {
                     onChange={(e) => setSurveyForm({ ...surveyForm, donationCount: e.target.value })}
                   >
                     <option value="">{t('register.departmentSelect')}</option>
-                    <option value="once">{t('survey.q1Once')}</option>
-                    <option value="few">{t('survey.q1Few')}</option>
-                    <option value="many">{t('survey.q1Many')}</option>
-                    <option value="none">{t('survey.q1None')}</option>
+                    {surveyField.options('donationCount', t).map((o) => (
+                      <option key={o.code} value={o.code}>{o.label}</option>
+                    ))}
                   </select>
                 </label>
                 )}
@@ -973,14 +978,14 @@ function UserPage() {
                 {surveyField.isVisible('impressions') && (
                 <fieldset className="survey-full survey-checkbox-group" style={{ order: surveyField.order('impressions', 1) }}>
                   <legend>{surveyField.label('impressions', t('survey.q2Label'))}</legend>
-                  {SURVEY_Q2_OPTIONS.map((val) => (
-                    <label key={val}>
+                  {surveyField.options('impressions', t).map((o) => (
+                    <label key={o.code}>
                       <input
                         type="checkbox"
-                        checked={surveyForm.impressions.includes(val)}
-                        onChange={() => toggleSurveyCheckbox('impressions', val)}
+                        checked={surveyForm.impressions.includes(o.code)}
+                        onChange={() => toggleSurveyCheckbox('impressions', o.code)}
                       />
-                      {t(`survey.q2_${val}`)}
+                      {o.label}
                     </label>
                   ))}
                   {surveyForm.impressions.includes('other') && (
@@ -1002,14 +1007,14 @@ function UserPage() {
                       {t('survey.q3Intro')}<br />
                       {surveyField.label('reasons', t('survey.q3Label'))}
                     </legend>
-                    {SURVEY_Q3_OPTIONS.map((val) => (
-                      <label key={val}>
+                    {surveyField.options('reasons', t).map((o) => (
+                      <label key={o.code}>
                         <input
                           type="checkbox"
-                          checked={surveyForm.reasons.includes(val)}
-                          onChange={() => toggleSurveyCheckbox('reasons', val)}
+                          checked={surveyForm.reasons.includes(o.code)}
+                          onChange={() => toggleSurveyCheckbox('reasons', o.code)}
                         />
-                        {t(`survey.q3_${val}`)}
+                        {o.label}
                       </label>
                     ))}
                     {surveyForm.reasons.includes('other') && (
@@ -1034,8 +1039,9 @@ function UserPage() {
                     onChange={(e) => setSurveyForm({ ...surveyForm, knewCampus: e.target.value })}
                   >
                     <option value="">{t('register.departmentSelect')}</option>
-                    <option value="knew">{t('survey.q4Knew')}</option>
-                    <option value="first_time">{t('survey.q4FirstTime')}</option>
+                    {surveyField.options('knewCampus', t).map((o) => (
+                      <option key={o.code} value={o.code}>{o.label}</option>
+                    ))}
                   </select>
                 </label>
                 )}
@@ -1050,10 +1056,9 @@ function UserPage() {
                     onChange={(e) => setSurveyForm({ ...surveyForm, wantParticipate: e.target.value })}
                   >
                     <option value="">{t('register.departmentSelect')}</option>
-                    <option value="yes">{t('survey.q5Yes')}</option>
-                    <option value="maybe">{t('survey.q5Maybe')}</option>
-                    <option value="unsure">{t('survey.q5Unsure')}</option>
-                    <option value="no">{t('survey.q5No')}</option>
+                    {surveyField.options('wantParticipate', t).map((o) => (
+                      <option key={o.code} value={o.code}>{o.label}</option>
+                    ))}
                   </select>
                 </label>
                 )}
@@ -1062,14 +1067,14 @@ function UserPage() {
                 {surveyField.isVisible('conditions') && (
                 <fieldset className="survey-full survey-checkbox-group" style={{ order: surveyField.order('conditions', 5) }}>
                   <legend>{surveyField.label('conditions', t('survey.q6Label'))}</legend>
-                  {SURVEY_Q6_OPTIONS.map((val) => (
-                    <label key={val}>
+                  {surveyField.options('conditions', t).map((o) => (
+                    <label key={o.code}>
                       <input
                         type="checkbox"
-                        checked={surveyForm.conditions.includes(val)}
-                        onChange={() => toggleSurveyCheckbox('conditions', val)}
+                        checked={surveyForm.conditions.includes(o.code)}
+                        onChange={() => toggleSurveyCheckbox('conditions', o.code)}
                       />
-                      {t(`survey.q6_${val}`)}
+                      {o.label}
                     </label>
                   ))}
                   {surveyForm.conditions.includes('other') && (
@@ -1094,9 +1099,9 @@ function UserPage() {
                     onChange={(e) => setSurveyForm({ ...surveyForm, reservation: e.target.value })}
                   >
                     <option value="">{t('register.departmentSelect')}</option>
-                    <option value="now">{t('survey.q7Now')}</option>
-                    <option value="later">{t('survey.q7Later')}</option>
-                    <option value="no">{t('survey.q7No')}</option>
+                    {surveyField.options('reservation', t).map((o) => (
+                      <option key={o.code} value={o.code}>{o.label}</option>
+                    ))}
                   </select>
                 </label>
                 )}

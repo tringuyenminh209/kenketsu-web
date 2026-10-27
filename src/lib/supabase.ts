@@ -74,6 +74,15 @@ export function sendConfirmationEmail(registrationId: string): void {
   })
 }
 
+// Admin only: the Edge Function rejects callers without an authenticated session.
+export async function translateTexts(texts: string[], lang: string): Promise<string[]> {
+  const { data, error } = await supabase.functions.invoke<{ translations: string[] }>("translate-admin", {
+    body: { texts, lang },
+  })
+  if (error || !data) throw error ?? new Error("translate-admin returned no data")
+  return data.translations
+}
+
 export async function checkDuplicateRegistration(
   studentId: string,
   eventYear: number

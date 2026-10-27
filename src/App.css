@@ -2543,6 +2543,36 @@ th {
   font-size: 12px;
 }
 
+.admin-field-ja-ref {
+  margin-left: 8px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.admin-builtin-options {
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.admin-builtin-options summary {
+  cursor: pointer;
+  color: var(--green-dark);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.admin-builtin-options .admin-custom-option {
+  margin-bottom: 6px;
+}
+
+.admin-builtin-options-note {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
 .admin-lang-hint {
   margin: 0 0 12px;
   padding: 10px 14px;

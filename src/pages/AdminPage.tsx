@@ -28,6 +28,9 @@ import {
 } from '../lib/supabase'
 import type { EventItem, EventMemory, FormFieldSetting, FormType, QuestionOption, QuestionType, Registration, SurveyResponse } from '../types'
 import { downloadXLSX } from '../lib/utils'
+import { autoTranslateDrafts } from '../lib/auto-translate'
+import { BUILTIN_OPTIONS } from '../config/builtin-options'
+import i18n from '../lib/i18n'
 import { resolveLegacyPhotoUrl } from '../lib/legacyPhotos'
 
 interface ChartDatum {
@@ -90,6 +93,8 @@ function FieldSettingsEditor({
   onDeleteQuestion,
   onSave,
   saving,
+  onAutoTranslate,
+  translating,
 }: {
   title: string
   hint: string
@@ -103,7 +108,16 @@ function FieldSettingsEditor({
   onDeleteQuestion: (key: string) => void
   onSave: () => void
   saving: boolean
+  onAutoTranslate: () => void
+  translating: boolean
 }) {
+  // Tab ngon ngu khac: hien chu nguoi dung dang thay (ban admin da dich, khong thi
+  // ban dich mac dinh) de admin khong phai doc tieng Nhat.
+  const headingOf = (d: FieldDraft): string => {
+    if (d.is_custom) return d.label_override.trim() || '（新しい質問）'
+    if (activeLang === 'ja') return d.defaultLabel
+    return d.label_translations[activeLang]?.trim() || String(i18n.getFixedT(activeLang)(d.labelKey))
+  }
   return (
     <div className="admin-card-panel admin-field-settings-panel">
       <div className="admin-panel-header">
@@ -135,7 +149,10 @@ function FieldSettingsEditor({
 
             <div className="admin-field-settings-main">
               <div className="admin-field-settings-default">
-                {d.is_custom ? d.label_override.trim() || '（新しい質問）' : d.defaultLabel}
+                {headingOf(d)}
+                {!d.is_custom && activeLang !== 'ja' && (
+                  <span className="admin-field-ja-ref">日本語: {d.label_override.trim() || d.defaultLabel}</span>
+                )}
                 {d.is_custom && <span className="admin-custom-badge">追加した質問</span>}
                 {d.locked && <span className="admin-badge-warning">🔒 変更不可</span>}
                 {d.is_custom && (
@@ -157,6 +174,7 @@ function FieldSettingsEditor({
                 onChange={(e) => onUpdateLabel(d.key, e.target.value)}
               />
               {d.is_custom && <CustomQuestionEditor d={d} activeLang={activeLang} onUpdate={onUpdate} />}
+              {!d.is_custom && <BuiltinOptionsEditor d={d} activeLang={activeLang} onUpdate={onUpdate} />}
             </div>
 
             <div className="admin-field-settings-toggles">
@@ -186,7 +204,10 @@ function FieldSettingsEditor({
       </div>
       <div className="admin-field-settings-save">
         <button type="button" className="button outline" onClick={onAddQuestion}>＋ 質問を追加</button>
-        <button type="button" className="button primary" onClick={onSave} disabled={saving}>
+        <button type="button" className="button outline" onClick={onAutoTranslate} disabled={translating || saving}>
+          {translating ? '翻訳中...' : activeLang === 'ja' ? '✨ 全言語を自動翻訳' : '✨ 日本語から自動翻訳'}
+        </button>
+        <button type="button" className="button primary" onClick={onSave} disabled={saving || translating}>
           {saving ? '保存中...' : '設定を保存'}
         </button>
       </div>
@@ -224,6 +245,7 @@ interface ConfirmDialogState {
 interface FieldDef {
   key: string
   defaultLabel: string
+  labelKey: string
   locked?: boolean
   defaultRequired: boolean
 }
@@ -240,27 +262,27 @@ interface FieldDraft extends FieldDef {
 }
 
 const REGISTRATION_FIELD_DEFS: FieldDef[] = [
-  { key: 'name', defaultLabel: '氏名（フルネーム）', locked: true, defaultRequired: true },
-  { key: 'furigana', defaultLabel: 'フリガナ', defaultRequired: true },
-  { key: 'email', defaultLabel: 'メールアドレス', defaultRequired: true },
-  { key: 'studentId', defaultLabel: '学生番号 / 教職員番号', locked: true, defaultRequired: true },
-  { key: 'phone', defaultLabel: '電話番号', defaultRequired: true },
-  { key: 'school', defaultLabel: '学校名', defaultRequired: true },
-  { key: 'department', defaultLabel: 'コース名（クラス）', locked: true, defaultRequired: true },
-  { key: 'birthDate', defaultLabel: '生年月日', defaultRequired: true },
-  { key: 'timeSlot', defaultLabel: '受付希望時間', defaultRequired: true },
-  { key: 'donationExperience', defaultLabel: '献血経験', defaultRequired: true },
-  { key: 'gender', defaultLabel: '性別', defaultRequired: false },
+  { key: 'name', defaultLabel: '氏名（フルネーム）', labelKey: 'register.name', locked: true, defaultRequired: true },
+  { key: 'furigana', defaultLabel: 'フリガナ', labelKey: 'register.furigana', defaultRequired: true },
+  { key: 'email', defaultLabel: 'メールアドレス', labelKey: 'register.email', defaultRequired: true },
+  { key: 'studentId', defaultLabel: '学生番号 / 教職員番号', labelKey: 'register.studentId', locked: true, defaultRequired: true },
+  { key: 'phone', defaultLabel: '電話番号', labelKey: 'register.phone', defaultRequired: true },
+  { key: 'school', defaultLabel: '学校名', labelKey: 'register.school', defaultRequired: true },
+  { key: 'department', defaultLabel: 'コース名（クラス）', labelKey: 'register.department', locked: true, defaultRequired: true },
+  { key: 'birthDate', defaultLabel: '生年月日', labelKey: 'register.birthDate', defaultRequired: true },
+  { key: 'timeSlot', defaultLabel: '受付希望時間', labelKey: 'register.timeSlot', defaultRequired: true },
+  { key: 'donationExperience', defaultLabel: '献血経験', labelKey: 'register.donationExperience', defaultRequired: true },
+  { key: 'gender', defaultLabel: '性別', labelKey: 'register.gender', defaultRequired: false },
 ]
 
 const SURVEY_FIELD_DEFS: FieldDef[] = [
-  { key: 'donationCount', defaultLabel: 'Q1. 献血経験（回数）', locked: true, defaultRequired: true },
-  { key: 'impressions', defaultLabel: 'Q2. 印象について（複数回答）', defaultRequired: false },
-  { key: 'reasons', defaultLabel: 'Q3. 未経験の理由（献血未経験者のみ表示・複数回答）', defaultRequired: false },
-  { key: 'knewCampus', defaultLabel: 'Q4. 学内献血を知っていたか', defaultRequired: false },
-  { key: 'wantParticipate', defaultLabel: 'Q5. 参加意向', defaultRequired: false },
-  { key: 'conditions', defaultLabel: 'Q6. 参加しやすくなる条件（複数回答）', defaultRequired: false },
-  { key: 'reservation', defaultLabel: 'Q7. 事前予約について', defaultRequired: false },
+  { key: 'donationCount', defaultLabel: 'Q1. 献血経験（回数）', labelKey: 'survey.q1Label', locked: true, defaultRequired: true },
+  { key: 'impressions', defaultLabel: 'Q2. 印象について（複数回答）', labelKey: 'survey.q2Label', defaultRequired: false },
+  { key: 'reasons', defaultLabel: 'Q3. 未経験の理由（献血未経験者のみ表示・複数回答）', labelKey: 'survey.q3Label', defaultRequired: false },
+  { key: 'knewCampus', defaultLabel: 'Q4. 学内献血を知っていたか', labelKey: 'survey.q4Label', defaultRequired: false },
+  { key: 'wantParticipate', defaultLabel: 'Q5. 参加意向', labelKey: 'survey.q5Label', defaultRequired: false },
+  { key: 'conditions', defaultLabel: 'Q6. 参加しやすくなる条件（複数回答）', labelKey: 'survey.q6Label', defaultRequired: false },
+  { key: 'reservation', defaultLabel: 'Q7. 事前予約について', labelKey: 'survey.q7Label', defaultRequired: false },
 ]
 
 function buildFieldDrafts(defs: FieldDef[], settings: FormFieldSetting[]): FieldDraft[] {
@@ -273,7 +295,7 @@ function buildFieldDrafts(defs: FieldDef[], settings: FormFieldSetting[]): Field
       label_translations: s?.label_translations ?? {},
       is_custom: false,
       question_type: 'text',
-      options: [],
+      options: s?.options ?? [],
       is_visible: s?.is_visible ?? true,
       is_required: def.locked ? true : s?.is_required ?? def.defaultRequired,
       sort_order: s?.sort_order ?? i,
@@ -284,6 +306,7 @@ function buildFieldDrafts(defs: FieldDef[], settings: FormFieldSetting[]): Field
     .map((s) => ({
       key: s.field_key,
       defaultLabel: '',
+      labelKey: '',
       defaultRequired: false,
       label_override: s.label_override ?? '',
       label_translations: s.label_translations ?? {},
@@ -370,6 +393,51 @@ function CustomQuestionEditor({
   )
 }
 
+// Cau hoi co san: chi sua chu hien thi cua tung lua chon, `code` (gia tri luu DB
+// va dung de thong ke) giu nguyen nen khong the them/xoa lua chon.
+function BuiltinOptionsEditor({
+  d,
+  activeLang,
+  onUpdate,
+}: {
+  d: FieldDraft
+  activeLang: string
+  onUpdate: (key: string, patch: Partial<FieldDraft>) => void
+}) {
+  const defs = BUILTIN_OPTIONS[d.key]
+  if (!defs) return null
+  const isJa = activeLang === 'ja'
+  const translate = i18n.getFixedT(activeLang)
+  const textOf = (o?: QuestionOption) => (isJa ? o?.value : o?.translations[activeLang]) ?? ''
+  const setText = (code: string, text: string) => {
+    const existing = d.options.find((o) => o.code === code)
+    const base: QuestionOption = existing ?? { code, value: '', translations: {} }
+    const next: QuestionOption = isJa
+      ? { ...base, value: text }
+      : { ...base, translations: { ...base.translations, [activeLang]: text } }
+    onUpdate(d.key, { options: existing ? d.options.map((o) => (o.code === code ? next : o)) : [...d.options, next] })
+  }
+
+  return (
+    <details className="admin-builtin-options">
+      <summary>選択肢の文言を編集（{defs.length}件）</summary>
+      {defs.map((def) => (
+        <div className="admin-custom-option" key={def.code}>
+          <input
+            type="text"
+            value={textOf(d.options.find((o) => o.code === def.code))}
+            placeholder={String(translate(def.i18nKey))}
+            onChange={(e) => setText(def.code, e.target.value)}
+          />
+        </div>
+      ))}
+      <p className="admin-builtin-options-note">
+        空欄の場合は標準の文言が表示されます。集計データを守るため、選択肢の追加・削除はできません（必要な場合は「質問を追加」で新しい質問を作成してください）。
+      </p>
+    </details>
+  )
+}
+
 const DEFAULT_EVENT_DRAFT = {
   title: '献血ボランティア活動',
   time_display: '9:30〜11:30 / 12:30〜16:30',
@@ -440,6 +508,7 @@ export default function AdminPage() {
   const [regFieldDrafts, setRegFieldDrafts] = useState<FieldDraft[]>(buildFieldDrafts(REGISTRATION_FIELD_DEFS, []))
   const [surveyFieldDrafts, setSurveyFieldDrafts] = useState<FieldDraft[]>(buildFieldDrafts(SURVEY_FIELD_DEFS, []))
   const [savingFieldsFor, setSavingFieldsFor] = useState<FormType | null>(null)
+  const [translatingFieldsFor, setTranslatingFieldsFor] = useState<FormType | null>(null)
   const [activeFieldLang, setActiveFieldLang] = useState('ja')
   const [fieldSaveMsg, setFieldSaveMsgRaw] = useState<Msg>(null)
 
@@ -924,6 +993,7 @@ export default function AdminPage() {
       {
         key: `custom_${Math.random().toString(36).slice(2, 8)}`,
         defaultLabel: '',
+        labelKey: '',
         defaultRequired: false,
         label_override: '',
         label_translations: {},
@@ -958,6 +1028,31 @@ export default function AdminPage() {
     })
   }
 
+  // Tab tieng Nhat dich sang tat ca ngon ngu; tab ngon ngu khac chi dich ngon ngu do.
+  const handleAutoTranslate = async (formType: FormType) => {
+    const langs = activeFieldLang === 'ja' ? LANGS.map((l) => l.code).filter((c) => c !== 'ja') : [activeFieldLang]
+    setFieldSaveMsg(null)
+    setTranslatingFieldsFor(formType)
+    try {
+      const { drafts, translatedCount, failedLangs } = await autoTranslateDrafts(getFieldDrafts(formType), langs)
+      if (translatedCount === 0) {
+        setFieldSaveMsg({ type: 'error', text: '翻訳する日本語の入力がありません。表示ラベルを変更した項目、または追加した質問が対象です。' })
+        return
+      }
+      setFieldDrafts(formType, drafts)
+      if (failedLangs.length === langs.length) {
+        setFieldSaveMsg({ type: 'error', text: '自動翻訳に失敗しました。時間をおいて再度お試しください。' })
+      } else if (failedLangs.length > 0) {
+        const names = failedLangs.map((c) => ADMIN_LANG_LABELS[c] ?? c).join('、')
+        setFieldSaveMsg({ type: 'error', text: `一部の言語（${names}）の翻訳に失敗しました。内容を確認して「設定を保存」を押してください。` })
+      } else {
+        setFieldSaveMsg({ type: 'ok', text: '翻訳を入力欄に反映しました。内容を確認し、「設定を保存」を押してください。' })
+      }
+    } finally {
+      setTranslatingFieldsFor(null)
+    }
+  }
+
   const handleSaveFieldSettings = async (formType: FormType) => {
     setFieldSaveMsg(null)
     const invalid = getFieldDrafts(formType).find(
@@ -972,7 +1067,11 @@ export default function AdminPage() {
     }
     setSavingFieldsFor(formType)
     try {
-      const drafts = getFieldDrafts(formType).map((d) => ({ ...d, options: d.options.filter((o) => o.value.trim()) }))
+      const hasOverride = (o: QuestionOption) => o.value.trim() || Object.values(o.translations).some((v) => v.trim())
+      const drafts = getFieldDrafts(formType).map((d) => ({
+        ...d,
+        options: d.options.filter((o) => (d.is_custom ? o.value.trim() : hasOverride(o))),
+      }))
       setFieldDrafts(formType, drafts)
       await Promise.all(
         drafts.map((d, i) =>
@@ -1895,7 +1994,12 @@ export default function AdminPage() {
             </div>
             {activeFieldLang !== 'ja' && (
               <p className="admin-lang-hint">
-                💡 「日本語」タブのラベルを Gemini・Claude・ChatGPT などのAIツールで翻訳し、その結果をこのタブの各欄に貼り付けてください。空欄のままの場合、既存の項目は従来の翻訳が、追加した質問・選択肢は日本語がそのまま表示されます。
+                💡 下の「✨ 日本語から自動翻訳」を押すと、日本語タブで入力したラベル・質問・選択肢が自然な表現でこの言語に翻訳されます（手動で修正も可能）。空欄のままの場合、既存の項目は従来の翻訳が、追加した質問・選択肢は日本語がそのまま表示されます。
+              </p>
+            )}
+            {activeFieldLang === 'ja' && (
+              <p className="admin-lang-hint">
+                💡 日本語でラベルや質問を入力したら「✨ 全言語を自動翻訳」を押すと、全ての言語に一括で翻訳されます（Claudeが場面に合った自然な表現に翻訳）。
               </p>
             )}
 
@@ -1912,6 +2016,8 @@ export default function AdminPage() {
               onDeleteQuestion={(key) => handleDeleteQuestion('registration', key)}
               onSave={() => handleSaveFieldSettings('registration')}
               saving={savingFieldsFor === 'registration'}
+              onAutoTranslate={() => void handleAutoTranslate('registration')}
+              translating={translatingFieldsFor === 'registration'}
             />
             <FieldSettingsEditor
               title="💬 アンケートフォームの項目"
@@ -1926,6 +2032,8 @@ export default function AdminPage() {
               onDeleteQuestion={(key) => handleDeleteQuestion('survey', key)}
               onSave={() => handleSaveFieldSettings('survey')}
               saving={savingFieldsFor === 'survey'}
+              onAutoTranslate={() => void handleAutoTranslate('survey')}
+              translating={translatingFieldsFor === 'survey'}
             />
           </div>
         )}

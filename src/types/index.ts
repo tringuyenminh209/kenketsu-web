@@ -116,6 +116,8 @@ export type FormType = "registration" | "survey"
 export type QuestionType = "text" | "textarea" | "select" | "checkbox"
 
 export interface QuestionOption {
+  // Chi co o cau hoi co san: ma luu DB, khong doi. Cau hoi tu them khong co code.
+  code?: string
   value: string
   translations: Record<string, string>
 }
