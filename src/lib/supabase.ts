@@ -331,8 +331,7 @@ export async function fetchActiveEvent(): Promise<EventItem | null> {
     .limit(1)
     .maybeSingle()
   if (error) {
-    console.warn("fetchActiveEvent error:", error)
-    return null
+    throw error
   }
   return data
 }

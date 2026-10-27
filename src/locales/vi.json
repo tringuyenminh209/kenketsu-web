@@ -1,7 +1,12 @@
 {
   "eventNotice": {
     "pending": "Thông tin chi tiết cho đợt hiến máu tiếp theo hiện đang được chuẩn bị. Chúng tôi sẽ cập nhật ngay khi có thông tin chính thức.",
-    "detailsPending": "Thông tin chi tiết như ngày giờ, địa điểm sẽ được đăng tại đây ngay khi được xác nhận."
+    "detailsPending": "Thông tin chi tiết như ngày giờ, địa điểm sẽ được đăng tại đây ngay khi được xác nhận.",
+    "loading": "Đang tải thông tin sự kiện…",
+    "loadError": "Không thể tải thông tin sự kiện. Hãy kiểm tra kết nối và tải lại trang.",
+    "bookingUnavailable": "Chưa thể xác nhận ngày tổ chức hoặc số chỗ trống nên tạm thời không thể đăng ký. Hãy thử lại sau hoặc liên hệ ban tổ chức.",
+    "japaneseDetails": "Thông tin sự kiện do ban tổ chức cung cấp hiện được hiển thị bằng tiếng Nhật.",
+    "noSlots": "Hiện không còn khung giờ có thể đăng ký. Hãy liên hệ ban tổ chức để biết thêm thông tin."
   },
   "nav": {
     "know": "Tìm hiểu",

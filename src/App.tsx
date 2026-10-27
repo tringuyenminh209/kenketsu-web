@@ -54,13 +54,19 @@ const SURVEY_Q2_OPTIONS = ['help_others', 'social_contribution', 'health_check',
 const SURVEY_Q3_OPTIONS = ['no_opportunity', 'afraid_needle', 'anxious', 'no_time', 'dont_know_conditions', 'health_reason', 'not_interested', 'other']
 const SURVEY_Q6_OPTIONS = ['easy_reservation', 'flexible_time', 'short_duration', 'clear_process', 'with_friend', 'detailed_explanation', 'other']
 
-// The event's calendar date (YYYY-MM-DD in JST), independent of the
-// browser's own timezone, so we can compare "is this slot already over?"
-const EVENT_DATE_JST = EVENT_CONFIG.targetDate.toLocaleDateString('en-CA', { timeZone: 'Asia/Tokyo' })
+// Admin stores a display string, so accept only dates with an explicit year.
+function parseEventDate(value: string): string | null {
+  const match = value.match(/(\d{4})\s*(?:\u5e74|[-/.])\s*(\d{1,2})\s*(?:\u6708|[-/.])\s*(\d{1,2})/)
+  if (!match) return null
+  const [, year, month, day] = match
+  const date = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day)))
+  if (date.getUTCFullYear() !== Number(year) || date.getUTCMonth() !== Number(month) - 1 || date.getUTCDate() !== Number(day)) return null
+  return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+}
 
-function getSlotEndTime(slot: string): Date {
-  const [, endStr] = slot.split('-')
-  return new Date(`${EVENT_DATE_JST}T${endStr}:00+09:00`)
+function getSlotEndTime(date: string, slot: string): Date {
+  const [, end] = slot.split('-')
+  return new Date(`${date}T${end}:00+09:00`)
 }
 
 // Cac field bat buoc phai co du lieu de khong vi pham rang buoc NOT NULL
@@ -120,13 +126,13 @@ function UserPage() {
   const [activeEvent, setActiveEvent] = useState<EventItem | null>(null)
   // Phan biet "dang tai" voi "da xac nhan khong co su kien active nao"
   // de tranh hien nham thong bao trong luc du lieu con dang fetch.
-  const [activeEventStatus, setActiveEventStatus] = useState<'loading' | 'ready' | 'none'>('loading')
+  const [activeEventStatus, setActiveEventStatus] = useState<'loading' | 'ready' | 'none' | 'error'>('loading')
   const currentEventYear = activeEvent?.year ?? EVENT_CONFIG.year
   const currentSlotCapacity = activeEvent?.slot_capacity ?? EVENT_CONFIG.slotCapacity
 
   // Admin co the chu dong ep hien banner "dang chuan bi" (vd: su kien cu
   // da qua nhung chua kich hoat nam moi) ngay ca khi van con 1 event active.
-  const showPendingNotice = activeEventStatus === 'none' || (activeEventStatus === 'ready' && !!activeEvent?.show_pending_notice)
+  const showPendingNotice = activeEventStatus !== 'ready' || (activeEventStatus === 'ready' && !!activeEvent?.show_pending_notice)
   // Khi dang hien banner "chua xac nhan", khong dung du lieu (co the da cu/
   // chua chinh thuc) cua event de hien thi chi tiet — fallback ve ban dich tinh.
   const confirmedEvent = showPendingNotice ? null : activeEvent
@@ -155,6 +161,8 @@ function UserPage() {
   })
   const [slotCounts, setSlotCounts] = useState<Record<string, number>>({})
   const [officialCapacities, setOfficialCapacities] = useState<Record<string, number>>({})
+  const [availabilityStatus, setAvailabilityStatus] = useState<'loading' | 'ready' | 'error'>('loading')
+  const [now, setNow] = useState(() => new Date())
 
   // ── Cấu hình tự do cho form (ẩn/hiện, đổi nhãn, bắt buộc, thứ tự) ──
   const [regFieldSettings, setRegFieldSettings] = useState<FormFieldSetting[]>([])
@@ -174,34 +182,48 @@ function UserPage() {
   }, [])
 
   useEffect(() => {
-    fetchActiveEvent().then((ev) => {
-      if (ev) {
-        setActiveEvent(ev)
-        setActiveEventStatus('ready')
-        fetchSlotCounts(ev.year).then(setSlotCounts).catch(() => {})
-        fetchOfficialSlotCapacities(ev.year).then(setOfficialCapacities).catch(() => {})
-      } else {
-        setActiveEventStatus('none')
-        fetchSlotCounts(EVENT_CONFIG.year).then(setSlotCounts).catch(() => {})
-        fetchOfficialSlotCapacities(EVENT_CONFIG.year).then(setOfficialCapacities).catch(() => {})
+    let cancelled = false
+    const load = async () => {
+      try {
+        const event = await fetchActiveEvent()
+        if (cancelled) return
+        setActiveEvent(event)
+        setActiveEventStatus(event ? 'ready' : 'none')
+        if (!event || event.show_pending_notice) return
+        const [counts, capacities] = await Promise.all([
+          fetchSlotCounts(event.year), fetchOfficialSlotCapacities(event.year),
+        ])
+        if (!cancelled) {
+          setSlotCounts(counts)
+          setOfficialCapacities(capacities)
+          setAvailabilityStatus('ready')
+        }
+      } catch {
+        if (!cancelled) {
+          setActiveEventStatus((status) => status === 'loading' ? 'error' : status)
+          setAvailabilityStatus('error')
+        }
       }
-    }).catch(() => {
-      setActiveEventStatus('none')
-      fetchSlotCounts(EVENT_CONFIG.year).then(setSlotCounts).catch(() => {})
-      fetchOfficialSlotCapacities(EVENT_CONFIG.year).then(setOfficialCapacities).catch(() => {})
-    })
+    }
+    void load()
+    return () => { cancelled = true }
   }, [])
 
-  const now = useRef(new Date()).current
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(new Date()), 60_000)
+    return () => window.clearInterval(timer)
+  }, [])
+
+  const eventDate = confirmedEvent ? parseEventDate(confirmedEvent.date_display) : null
   const timeSlotStatus = TIME_SLOTS.map((slot) => {
-    // Ưu tiên lấy số chỗ thực tế từ Chữ Thập Đỏ (officialCapacities).
-    // Nếu chưa cấu hình thì fallback về slotCapacity - số người đăng ký web tạm.
     const remaining = officialCapacities[slot] !== undefined
       ? officialCapacities[slot]
       : Math.max(0, currentSlotCapacity - (slotCounts[slot] ?? 0))
-    const isPast = now > getSlotEndTime(slot)
+    const isPast = eventDate ? now > getSlotEndTime(eventDate, slot) : true
     return { slot, remaining, isPast, isFull: remaining <= 0 }
   })
+  const hasAvailableSlot = timeSlotStatus.some(({ isPast, isFull }) => !isPast && !isFull)
+  const bookingReady = !!confirmedEvent && !!eventDate && availabilityStatus === 'ready' && hasAvailableSlot
 
   const [fieldTouched, setFieldTouched] = useState({ studentId: false, birthDate: false })
   const studentIdValid = regForm.studentId.trim().length >= 4
@@ -212,16 +234,16 @@ function UserPage() {
 
   // ── アンケートフォーム ────────────────────────────
   const [surveyForm, setSurveyForm] = useState({
-    donationCount: 'once',
+    donationCount: '',
     impressions: [] as string[],
     impressionsOther: '',
     reasons: [] as string[],
     reasonsOther: '',
-    knewCampus: 'knew',
-    wantParticipate: 'yes',
+    knewCampus: '',
+    wantParticipate: '',
     conditions: [] as string[],
     conditionsOther: '',
-    reservation: 'later',
+    reservation: '',
   })
   const toggleSurveyCheckbox = (field: 'impressions' | 'reasons' | 'conditions', value: string) => {
     setSurveyForm((prev) => {
@@ -235,14 +257,30 @@ function UserPage() {
   const [surveyError, setSurveyError] = useState<string | null>(null)
   const [showEligibility, setShowEligibility] = useState(false)
 
+  const eligibilityDialogRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
     if (!showEligibility) return
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setShowEligibility(false) }
+    const previousFocus = document.activeElement as HTMLElement | null
+    const dialog = eligibilityDialogRef.current
+    const previousOverflow = document.body.style.overflow
+    dialog?.querySelector<HTMLElement>('button')?.focus()
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { setShowEligibility(false); return }
+      if (e.key !== 'Tab' || !dialog) return
+      const controls = Array.from(dialog.querySelectorAll<HTMLElement>('button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'))
+      if (!controls.length) { e.preventDefault(); dialog.focus(); return }
+      const first = controls[0]
+      const last = controls[controls.length - 1]
+      if (e.shiftKey && (document.activeElement === first || !dialog.contains(document.activeElement))) { e.preventDefault(); last.focus() }
+      else if (!e.shiftKey && (document.activeElement === last || !dialog.contains(document.activeElement))) { e.preventDefault(); first.focus() }
+    }
     document.addEventListener('keydown', onKey)
     document.body.style.overflow = 'hidden'
     return () => {
       document.removeEventListener('keydown', onKey)
-      document.body.style.overflow = ''
+      document.body.style.overflow = previousOverflow
+      previousFocus?.focus()
     }
   }, [showEligibility])
 
@@ -262,8 +300,12 @@ function UserPage() {
 
   const handleRegSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setRegSubmitting(true)
     setRegError(null)
+    if (!bookingReady || (regForm.timeSlot && !timeSlotStatus.some(({ slot, isPast, isFull }) => slot === regForm.timeSlot && !isPast && !isFull))) {
+      setRegError(t('eventNotice.bookingUnavailable'))
+      return
+    }
+    setRegSubmitting(true)
     try {
       const normalizedBirthDate = normalizeBirthDateInput(regForm.birthDate)
       if (!normalizedBirthDate) {
@@ -342,7 +384,7 @@ function UserPage() {
       <SiteHeader />
       {showPendingNotice && (
         <div className="event-pending-notice" role="status">
-          {t('eventNotice.pending', '現在、次回の献血イベントの詳細情報を準備中です。決まり次第こちらでお知らせします。')}
+          {activeEventStatus === 'loading' ? t('eventNotice.loading') : activeEventStatus === 'error' ? t('eventNotice.loadError') : t('eventNotice.pending', '現在、次回の献血イベントの詳細情報を準備中です。決まり次第こちらでお知らせします。')}
         </div>
       )}
       <main id="top">
@@ -547,10 +589,11 @@ function UserPage() {
           </div>
           {showPendingNotice ? (
             <p className="info-pending-placeholder">
-              {t('eventNotice.detailsPending', '開催日・場所などの詳細は決まり次第こちらに掲載します。')}
+              {activeEventStatus === 'loading' ? t('eventNotice.loading') : activeEventStatus === 'error' ? t('eventNotice.loadError') : t('eventNotice.detailsPending', '開催日・場所などの詳細は決まり次第こちらに掲載します。')}
             </p>
           ) : (
             <>
+              {currentLang !== 'ja' && confirmedEvent && <p className="section-helper">{t('eventNotice.japaneseDetails')}</p>}
               <dl>
                 {eventInfo.map((item) => (
                   <div key={item.label}>
@@ -693,6 +736,7 @@ function UserPage() {
                 <h2>{t('register.title')}</h2>
               </div>
               <p className="register-note">{t('register.note')}</p>
+              {!bookingReady && <p className="error-message" role="status">{activeEventStatus === 'loading' || (confirmedEvent && availabilityStatus === 'loading') ? t('eventNotice.loading') : confirmedEvent && eventDate && availabilityStatus === 'ready' && !hasAvailableSlot ? t('eventNotice.noSlots') : t('eventNotice.bookingUnavailable')}</p>}
               <div className="form-grid">
                 {regField.isVisible('name') && (
                 <label style={{ order: regField.order('name', 0) }}>
@@ -820,6 +864,7 @@ function UserPage() {
                   {regField.label('timeSlot', t('register.timeSlot'))} {regField.isRequired('timeSlot') && <span>{t('register.required')}</span>}
                   <select
                     required={regField.isRequired('timeSlot')}
+                    disabled={!bookingReady}
                     value={regForm.timeSlot}
                     onChange={(e) => setRegForm({ ...regForm, timeSlot: e.target.value })}
                   >
@@ -881,8 +926,8 @@ function UserPage() {
                 ))}
               </fieldset>
               )}
-              {regError && <p className="error-message">{regError}</p>}
-              <button className="button primary wide" type="submit" disabled={regSubmitting}>
+              {regError && <p className="error-message" role="alert">{regError}</p>}
+              <button className="button primary wide" type="submit" disabled={regSubmitting || !bookingReady}>
                 {regSubmitting ? t('register.submitting') : t('register.submit')}
               </button>
             </form>
@@ -915,6 +960,7 @@ function UserPage() {
                     value={surveyForm.donationCount}
                     onChange={(e) => setSurveyForm({ ...surveyForm, donationCount: e.target.value })}
                   >
+                    <option value="">{t('register.departmentSelect')}</option>
                     <option value="once">{t('survey.q1Once')}</option>
                     <option value="few">{t('survey.q1Few')}</option>
                     <option value="many">{t('survey.q1Many')}</option>
@@ -987,6 +1033,7 @@ function UserPage() {
                     value={surveyForm.knewCampus}
                     onChange={(e) => setSurveyForm({ ...surveyForm, knewCampus: e.target.value })}
                   >
+                    <option value="">{t('register.departmentSelect')}</option>
                     <option value="knew">{t('survey.q4Knew')}</option>
                     <option value="first_time">{t('survey.q4FirstTime')}</option>
                   </select>
@@ -1002,6 +1049,7 @@ function UserPage() {
                     value={surveyForm.wantParticipate}
                     onChange={(e) => setSurveyForm({ ...surveyForm, wantParticipate: e.target.value })}
                   >
+                    <option value="">{t('register.departmentSelect')}</option>
                     <option value="yes">{t('survey.q5Yes')}</option>
                     <option value="maybe">{t('survey.q5Maybe')}</option>
                     <option value="unsure">{t('survey.q5Unsure')}</option>
@@ -1045,6 +1093,7 @@ function UserPage() {
                     value={surveyForm.reservation}
                     onChange={(e) => setSurveyForm({ ...surveyForm, reservation: e.target.value })}
                   >
+                    <option value="">{t('register.departmentSelect')}</option>
                     <option value="now">{t('survey.q7Now')}</option>
                     <option value="later">{t('survey.q7Later')}</option>
                     <option value="no">{t('survey.q7No')}</option>
@@ -1071,7 +1120,7 @@ function UserPage() {
                   />
                 ))}
               </div>
-              {surveyError && <p className="error-message">{surveyError}</p>}
+              {surveyError && <p className="error-message" role="alert">{surveyError}</p>}
               <button className="button primary" type="submit" disabled={surveySubmitting}>
                 {surveySubmitting ? t('survey.submitting') : t('survey.submit')}
               </button>
@@ -1089,7 +1138,7 @@ function UserPage() {
       </main>
         {showEligibility && (
           <div className="eligibility-overlay" role="dialog" aria-modal="true" aria-label={t('eligibility.title')} onClick={() => setShowEligibility(false)}>
-            <div className="eligibility-dialog" onClick={e => e.stopPropagation()}>
+            <div className="eligibility-dialog" ref={eligibilityDialogRef} tabIndex={-1} onClick={e => e.stopPropagation()}>
               <div className="eligibility-dialog-header">
                 <h3>{t('eligibility.title')}</h3>
                 <button className="eligibility-close" type="button" aria-label={t('eligibility.closeAria')} onClick={() => setShowEligibility(false)}>✕</button>

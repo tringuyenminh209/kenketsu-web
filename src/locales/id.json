@@ -1,7 +1,12 @@
 {
   "eventNotice": {
     "pending": "Detail acara donor darah berikutnya sedang disiapkan. Kami akan memperbarui halaman ini segera setelah dikonfirmasi.",
-    "detailsPending": "Detail seperti tanggal dan lokasi acara akan diumumkan di sini setelah dikonfirmasi."
+    "detailsPending": "Detail seperti tanggal dan lokasi acara akan diumumkan di sini setelah dikonfirmasi.",
+    "loading": "Loading event information…",
+    "loadError": "Event information could not be loaded. Please check your connection and reload the page.",
+    "bookingUnavailable": "Registration is temporarily unavailable because the event date or available places could not be confirmed. Please try again later or contact the organizer.",
+    "japaneseDetails": "Event details supplied by the organizer are currently available in Japanese.",
+    "noSlots": "There are no available time slots. Please contact the organizer for more information."
   },
   "nav": {
     "know": "Belajar",

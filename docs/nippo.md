@@ -1,5 +1,25 @@
 # NIPPO
 
+## 2026-10-27 — UX and registration improvements
+
+- Calculate slot expiry from the active event date in JST; refresh the clock and prevent booking when event or availability data cannot be verified, or no slots remain.
+- Separate event loading errors from the no-event state, announce form errors, and warn when organizer-provided event details are in Japanese.
+- Remove preselected survey answers and add keyboard focus handling to the eligibility dialog.
+- Updated `src/App.tsx`, `src/lib/supabase.ts`, `src/locales/*.json`, and `docs/nippo.md`.
+- Validation: `npm run lint` (passed with existing warnings), `npm run build` (passed; large chunk warning), date parsing and JST slot checks (passed), Impeccable detector on `src/App.tsx` (no findings).
+- Remaining: verify live Supabase data, responsive and keyboard behavior in a browser; translate new notices beyond Japanese, Vietnamese and English, and add translations for admin event content.
+
+---
+
+
+## Ngày: 2026-10-27 — review giao diện
+
+- Đánh giá UX trang chủ bằng Impeccable, lưu kết quả tại `.impeccable/critique/2026-10-27T04-49-50Z__src-app-tsx.md`.
+- Kiểm tra mã nguồn và chạy `node .agents/skills/impeccable/scripts/detect.mjs --json src`; có 7 cảnh báo mẫu CSS cần xác minh.
+- Chưa kiểm tra trực quan: trình duyệt không kết nối được tới server localhost. Cần kiểm tra desktop, mobile và dữ liệu sự kiện thực tế; chưa sửa ứng dụng.
+- File cập nhật: báo cáo critique và `docs/nippo.md`.
+
+---
 ## Ngay: 2026-09-21 (sua header iOS)
 
 ## Noi dung da hoan thanh
@@ -1619,3 +1639,4 @@ Gop nhieu vong sua nho lien tiep theo phan hoi truc tiep cua nguoi dung khi test
 - `src/App.tsx`
 - `src/App.css`
 - `docs/nippo.md`
+

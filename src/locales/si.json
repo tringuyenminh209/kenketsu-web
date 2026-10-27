@@ -1,7 +1,12 @@
 {
   "eventNotice": {
     "pending": "ඊළඟ ලේ දන් දීමේ උත්සවයේ විස්තර දැනට සකසමින් පවතී. තහවුරු වූ වහාම මෙහි දැනුම් දෙනු ලැබේ.",
-    "detailsPending": "උත්සව දිනය, ස්ථානය වැනි විස්තර තහවුරු වූ වහාම මෙහි පළ කරනු ලැබේ."
+    "detailsPending": "උත්සව දිනය, ස්ථානය වැනි විස්තර තහවුරු වූ වහාම මෙහි පළ කරනු ලැබේ.",
+    "loading": "Loading event information…",
+    "loadError": "Event information could not be loaded. Please check your connection and reload the page.",
+    "bookingUnavailable": "Registration is temporarily unavailable because the event date or available places could not be confirmed. Please try again later or contact the organizer.",
+    "japaneseDetails": "Event details supplied by the organizer are currently available in Japanese.",
+    "noSlots": "There are no available time slots. Please contact the organizer for more information."
   },
   "nav": {
     "know": "දැනගන්න",

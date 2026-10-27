@@ -1,7 +1,12 @@
 {
   "eventNotice": {
     "pending": "လာမည့်သွေးလှူဒါန်းပွဲ၏ အသေးစိတ်အချက်အလက်များကို လောလောဆယ် ပြင်ဆင်နေဆဲဖြစ်ပါသည်။ အတည်ပြုပြီးပါက ဤနေရာတွင် အသိပေးပါမည်။",
-    "detailsPending": "ကျင်းပမည့်ရက်၊ နေရာ စသည့်အသေးစိတ်အချက်အလက်များကို အတည်ပြုပြီးပါက ဤနေရာတွင် ဖော်ပြပါမည်။"
+    "detailsPending": "ကျင်းပမည့်ရက်၊ နေရာ စသည့်အသေးစိတ်အချက်အလက်များကို အတည်ပြုပြီးပါက ဤနေရာတွင် ဖော်ပြပါမည်။",
+    "loading": "Loading event information…",
+    "loadError": "Event information could not be loaded. Please check your connection and reload the page.",
+    "bookingUnavailable": "Registration is temporarily unavailable because the event date or available places could not be confirmed. Please try again later or contact the organizer.",
+    "japaneseDetails": "Event details supplied by the organizer are currently available in Japanese.",
+    "noSlots": "There are no available time slots. Please contact the organizer for more information."
   },
   "nav": {
     "know": "သွေးနှင့်ပတ်သက်သိရှိရန်",
