@@ -28,7 +28,7 @@ import {
 } from '../lib/supabase'
 import type { EventItem, EventMemory, FormFieldSetting, FormType, QuestionOption, QuestionType, Registration, SurveyResponse } from '../types'
 import { downloadXLSX } from '../lib/utils'
-import { autoTranslateDrafts } from '../lib/auto-translate'
+import { autoTranslateDrafts, autoTranslateMemory } from '../lib/auto-translate'
 import { BUILTIN_OPTIONS } from '../config/builtin-options'
 import i18n from '../lib/i18n'
 import { resolveLegacyPhotoUrl } from '../lib/legacyPhotos'
@@ -509,6 +509,7 @@ export default function AdminPage() {
   const [surveyFieldDrafts, setSurveyFieldDrafts] = useState<FieldDraft[]>(buildFieldDrafts(SURVEY_FIELD_DEFS, []))
   const [savingFieldsFor, setSavingFieldsFor] = useState<FormType | null>(null)
   const [translatingFieldsFor, setTranslatingFieldsFor] = useState<FormType | null>(null)
+  const [translatingMemory, setTranslatingMemory] = useState(false)
   const [activeFieldLang, setActiveFieldLang] = useState('ja')
   const [fieldSaveMsg, setFieldSaveMsgRaw] = useState<Msg>(null)
 
@@ -889,6 +890,31 @@ export default function AdminPage() {
     return !!(t?.title || t?.summary)
   }
 
+  // Tab tieng Nhat dich sang tat ca ngon ngu; tab ngon ngu khac chi dich ngon ngu do.
+  const handleAutoTranslateMemory = async () => {
+    const langs = activeMemoryLang === 'ja' ? LANGS.map((l) => l.code).filter((c) => c !== 'ja') : [activeMemoryLang]
+    setMemorySaveMsg(null)
+    setTranslatingMemory(true)
+    try {
+      const { value, translatedCount, failedLangs } = await autoTranslateMemory(memoryForm, langs)
+      if (translatedCount === 0) {
+        setMemorySaveMsg({ type: 'error', text: '翻訳する日本語の入力がありません。「日本語」タブに内容を入力してください。' })
+        return
+      }
+      setMemoryForm(value)
+      if (failedLangs.length === langs.length) {
+        setMemorySaveMsg({ type: 'error', text: '自動翻訳に失敗しました。時間をおいて再度お試しください。' })
+      } else if (failedLangs.length > 0) {
+        const names = failedLangs.map((c) => ADMIN_LANG_LABELS[c] ?? c).join('、')
+        setMemorySaveMsg({ type: 'error', text: `一部の言語（${names}）の翻訳に失敗しました。内容を確認して保存してください。` })
+      } else {
+        setMemorySaveMsg({ type: 'ok', text: '翻訳を入力欄に反映しました。内容を確認し、保存してください。' })
+      }
+    } finally {
+      setTranslatingMemory(false)
+    }
+  }
+
   const handleDeletePhoto = (index: number) => {
     const photos = (memoryForm.photos || []).filter((_, i) => i !== index)
     setMemoryForm({ ...memoryForm, photos })
@@ -1034,7 +1060,7 @@ export default function AdminPage() {
     setFieldSaveMsg(null)
     setTranslatingFieldsFor(formType)
     try {
-      const { drafts, translatedCount, failedLangs } = await autoTranslateDrafts(getFieldDrafts(formType), langs)
+      const { value: drafts, translatedCount, failedLangs } = await autoTranslateDrafts(getFieldDrafts(formType), langs)
       if (translatedCount === 0) {
         setFieldSaveMsg({ type: 'error', text: '翻訳する日本語の入力がありません。表示ラベルを変更した項目、または追加した質問が対象です。' })
         return
@@ -1829,11 +1855,16 @@ export default function AdminPage() {
                 ))}
               </div>
 
-              {activeMemoryLang !== 'ja' && (
-                <p className="admin-lang-hint">
-                  💡 上の「日本語」タブの内容を Gemini・Claude・ChatGPT などのAIツールに貼り付けて翻訳してもらい、その結果をこのタブの各欄に貼り付けてください。空欄のままの場合、ユーザーサイトには日本語の内容がそのまま表示されます。
-                </p>
-              )}
+              <p className="admin-lang-hint">
+                💡 {activeMemoryLang === 'ja'
+                  ? '日本語の内容を入力したら、下の「✨ 全言語を自動翻訳」で全ての言語に一括翻訳できます。'
+                  : '「✨ 日本語から自動翻訳」でこの言語に翻訳できます（手動で修正も可能）。空欄のままの場合、ユーザーサイトには日本語の内容がそのまま表示されます。'}
+              </p>
+              <div className="admin-translate-bar">
+                <button type="button" className="button outline" onClick={() => void handleAutoTranslateMemory()} disabled={translatingMemory || savingMemory}>
+                  {translatingMemory ? '翻訳中...' : activeMemoryLang === 'ja' ? '✨ 全言語を自動翻訳' : '✨ 日本語から自動翻訳'}
+                </button>
+              </div>
 
               <div className="admin-form-grid">
                 <span className="admin-form-section-label">基本情報</span>
@@ -1950,7 +1981,7 @@ export default function AdminPage() {
               </div>
 
               <div style={{ marginTop: '2rem', display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                <button type="submit" className="button primary" disabled={savingMemory}>
+                <button type="submit" className="button primary" disabled={savingMemory || translatingMemory}>
                   {savingMemory
                     ? '保存中...'
                     : memoryForm.is_published

@@ -74,13 +74,20 @@ export function sendConfirmationEmail(registrationId: string): void {
   })
 }
 
+// Nho de moi lan goi khong vuot gioi han do dai dau ra cua Claude.
+const TRANSLATE_BATCH_SIZE = 20
+
 // Admin only: the Edge Function rejects callers without an authenticated session.
 export async function translateTexts(texts: string[], lang: string): Promise<string[]> {
-  const { data, error } = await supabase.functions.invoke<{ translations: string[] }>("translate-admin", {
-    body: { texts, lang },
-  })
-  if (error || !data) throw error ?? new Error("translate-admin returned no data")
-  return data.translations
+  const results: string[] = []
+  for (let i = 0; i < texts.length; i += TRANSLATE_BATCH_SIZE) {
+    const { data, error } = await supabase.functions.invoke<{ translations: string[] }>("translate-admin", {
+      body: { texts: texts.slice(i, i + TRANSLATE_BATCH_SIZE), lang },
+    })
+    if (error || !data) throw error ?? new Error("translate-admin returned no data")
+    results.push(...data.translations)
+  }
+  return results
 }
 
 export async function checkDuplicateRegistration(

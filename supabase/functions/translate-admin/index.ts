@@ -23,7 +23,7 @@ const LANG_NAMES: Record<string, string> = {
 }
 
 const MAX_ITEMS = 60
-const MAX_ITEM_LENGTH = 500
+const MAX_ITEM_LENGTH = 2000
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), {
@@ -31,8 +31,9 @@ const json = (body: unknown, status = 200) =>
     headers: { ...corsHeaders, "Content-Type": "application/json" },
   })
 
-const SYSTEM_PROMPT = `You translate Japanese UI text for a school blood-donation volunteer event website (registration form and survey) used by Japanese and international students in Japan.
+const SYSTEM_PROMPT = `You translate Japanese text for a school blood-donation volunteer event website (registration form, survey, and event report pages) used by Japanese and international students in Japan.
 Rules:
+- Longer texts (event report summaries, photo captions) should read as natural prose in the target language, keeping dates, places and names accurate.
 - Translate the meaning and the situation, not word by word. Write what a native speaker would naturally see on a form like this.
 - Keep the polite, neutral tone of a school form. Keep labels short; keep questions as questions.
 - Keep numbering such as "Q1." and any option-style punctuation as-is.
@@ -81,7 +82,7 @@ Deno.serve(async (req) => {
     signal: AbortSignal.timeout(50_000),
     body: JSON.stringify({
       model: MODEL,
-      max_tokens: 4096,
+      max_tokens: 8192,
       system: SYSTEM_PROMPT,
       tools: [
         {

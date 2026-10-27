@@ -2543,6 +2543,10 @@ th {
   font-size: 12px;
 }
 
+.admin-translate-bar {
+  margin: 0 0 14px;
+}
+
 .admin-field-ja-ref {
   margin-left: 8px;
   font-size: 11.5px;
