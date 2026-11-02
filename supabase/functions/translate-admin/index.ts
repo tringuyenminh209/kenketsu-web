@@ -54,6 +54,10 @@ Deno.serve(async (req) => {
   const { data: userData, error: userError } = await auth.auth.getUser()
   if (userError || !userData.user) return json({ error: "Unauthorized" }, 401)
 
+  // Rieng "da dang nhap" khong du nua — phai co trong allowlist admin_users (xem migration 019).
+  const { data: isAdmin, error: isAdminError } = await auth.rpc("is_admin")
+  if (isAdminError || !isAdmin) return json({ error: "Forbidden" }, 403)
+
   let texts: string[]
   let lang: string
   try {
